@@ -1,0 +1,28 @@
+.sidebar-container {
+  @apply grid grid-cols-[200px_1fr] min-h-screen  bg-primary;
+  & .logo {
+    @apply w-[124px] h-auto;
+  }
+  & nav {
+    @apply flex flex-col pt-8 px-7 bg-transparent;
+    & ul {
+      @apply flex flex-col pt-16 gap-2;
+      & li {
+        &.active {
+          @apply text-white font-bold;
+        }
+        @apply flex items-center gap-3 text-primary-A300 text-[11px] cursor-pointer rounded p-1;
+        &:hover {
+          @apply bg-primary-A300 text-white;
+        }
+
+        & mat-icon {
+          @apply w-[20px] h-[20px] text-[20px] leading-[20px];
+        }
+      }
+    }
+  }
+  & main {
+    @apply bg-primary-A100 rounded-ss-[50px] rounded-es-[50px] p-5 md:p-10;
+  }
+}

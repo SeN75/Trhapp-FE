@@ -1,0 +1,102 @@
+.page-title {
+  @apply text-4xl text-primary font-bold;
+}
+
+.filter-card {
+  @apply rounded-lg bg-white text-secondary flex items-center gap-4 py-5 px-6 min-h-20 text-[0.875rem] font-bold;
+  &.active {
+    @apply bg-primary-A200 text-primary;
+  }
+}
+.page-content {
+  @apply pt-20 flex flex-col gap-16;
+}
+
+.table-container {
+  @apply w-full;
+  table {
+    tr th {
+      @apply text-white text-[14px] font-f1 font-bold bg-primary #{!important};
+      --mat-sort-arrow-color: white;
+      &:first-of-type {
+        @apply rounded-ss-lg;
+      }
+      &:last-of-type {
+        @apply rounded-se-lg;
+      }
+    }
+    tr {
+      td {
+        @apply border-b border-solid border-b-primary text-[14px] font-f1;
+        &:first-of-type {
+          @apply border-s border-s-primary border-solid;
+        }
+        &:last-of-type {
+          @apply border-e border-e-primary border-solid;
+        }
+      }
+    }
+    tr:last-of-type {
+      & td {
+        @apply border-solid border-b-primary border-b #{!important};
+      }
+      & td {
+        &:first-of-type {
+          @apply rounded-ee-lg;
+        }
+        &:last-of-type {
+          @apply rounded-se-lg;
+        }
+      }
+    }
+  }
+}
+//
+.g-bubble-container {
+  display: flex;
+  gap: 4px;
+}
+
+.g-bubble {
+  @apply rounded-lg w-[47px] h-[48px] flex items-center justify-center transition-all duration-300 cursor-pointer text-sm bg-primary-A200 text-primary #{!important};
+}
+
+.g-bubble:hover {
+  @apply bg-primary-A300  #{!important};
+}
+
+.g-bubble__active {
+  @apply bg-primary text-white  #{!important};
+}
+.g-dot-el {
+  @apply text-xl pt-2 ms-2 text-secondary;
+}
+/* .g-bubble__disabled {
+  cursor: default;
+  opacity: 0.5;
+  pointer-events: none;
+  color: 919191;
+} */
+
+/* TODO(mdc-migration): The following rule targets internal classes of paginator that may no longer apply for the MDC version. */
+mat-paginator {
+  background: transparent !important;
+}
+
+.mat-mdc-paginator-range-actions {
+  margin-right: 12px !important;
+}
+
+.button {
+  @apply bg-primary-A100 text-secondary font-f1 font-semibold text-sm py-4 px-6 text-center rounded-lg;
+  &-primary {
+    @apply bg-primary text-white font-f1 font-semibold text-sm py-4 px-6 text-center rounded-lg;
+    &-tint {
+      @apply bg-primary-A200 text-primary-A400  font-f1 font-semibold text-sm py-4 px-6 text-center rounded-lg;
+    }
+  }
+}
+
+.mat-mdc-tooltip-trigger[disabled="true"] {
+  display: none !important;
+}

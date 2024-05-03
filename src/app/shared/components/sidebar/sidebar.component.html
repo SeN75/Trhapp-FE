@@ -1,0 +1,18 @@
+<section class="sidebar-container">
+  <nav>
+    <div class="logo">
+      <logo />
+    </div>
+    <ul>
+      @for (item of items; track $index) {
+      <li [routerLink]="item.link" routerLinkActive="active">
+        <mat-icon [svgIcon]="item.icon"></mat-icon>
+        <span>{{ item.text }}</span>
+      </li>
+      }
+    </ul>
+  </nav>
+  <main class="">
+    <ng-content></ng-content>
+  </main>
+</section>
