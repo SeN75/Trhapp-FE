@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BusesTableComponent } from '../../ui/buses-table/buses-table.component';
 import { CommonModule } from '@angular/common';
-import { StateCardComponent } from '../../ui/state-card/state-card.component';
+import { StateCardComponent } from '../../../shared/components/state-card/state-card.component';
 
 @Component({
   selector: 'app-buses',

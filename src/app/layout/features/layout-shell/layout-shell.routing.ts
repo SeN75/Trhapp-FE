@@ -15,31 +15,37 @@ export const layoutShellRouting: Routes = [
       {
         path: 'accommodation-mina',
         loadComponent: () =>
-          import('../accommodation-mina/accommodation-mina.component').then(
-            (m) => m.AccommodationMinaComponent
-          ),
+          import(
+            '../../../accommodation-mina/features/accommodation-mina/accommodation-mina.component'
+          ).then((m) => m.AccommodationMinaComponent),
       },
       {
         path: 'accommodation-urafah',
         loadComponent: () =>
-          import('../accommodation-urafah/accommodation-urafah.component').then(
-            (m) => m.AccommodationUrafahComponent
-          ),
+          import(
+            '../../../accommodation-urafah/features/accommodation-urafah/accommodation-urafah.component'
+          ).then((m) => m.AccommodationUrafahComponent),
       },
       {
         path: 'suites',
         loadComponent: () =>
-          import('../suites/suites.component').then((m) => m.SuitesComponent),
+          import('../../../suites/features/suites/suites.component').then(
+            (m) => m.SuitesComponent
+          ),
       },
       {
         path: 'buses',
         loadComponent: () =>
-          import('../buses/buses.component').then((m) => m.BusesComponent),
+          import('../../..//buses/features/buses/buses.component').then(
+            (m) => m.BusesComponent
+          ),
       },
       {
         path: 'cards',
         loadComponent: () =>
-          import('../cards/cards.component').then((m) => m.CardsComponent),
+          import('../../../cards/features/cards/cards.component').then(
+            (m) => m.CardsComponent
+          ),
       },
     ],
   },
