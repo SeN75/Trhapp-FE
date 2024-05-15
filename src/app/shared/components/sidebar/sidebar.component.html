@@ -4,6 +4,10 @@
       <logo />
     </div>
     <ul>
+      <li (click)="uploadFile()">
+        <mat-icon>download</mat-icon>
+        <span>استخراح المعلومات</span>
+      </li>
       @for (item of items; track $index) {
       <li [routerLink]="item.link" routerLinkActive="active">
         <mat-icon [svgIcon]="item.icon"></mat-icon>

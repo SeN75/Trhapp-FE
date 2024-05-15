@@ -1,0 +1,55 @@
+<h2 mat-dialog-title>استخراج بيانات الحجاج</h2>
+<ng-container *ngIf="data$ | async as obs">
+  @if(obs.isLoading) {
+  <ng-container>
+    <div class="h-[200px] flex justify-center items-center">
+      <span class="loading loading-dots loading-lg"></span>
+    </div>
+  </ng-container>
+  } @else{
+  <mat-dialog-content>
+    @if (obs.status === 'success') {
+    <div class="flex gap-4 items-center">
+      <mat-icon class="text-success !w-10 !h-10 !text-[40px] !leading-10"
+        >check</mat-icon
+      >
+      <h3 class="py-4 text-lg font-semibold">تم استخراج بيانات الحجاج بنجاح</h3>
+    </div>
+    } @else if (obs.status === 'error') {
+    <div class="flex gap-4 items-center">
+      <mat-icon class="text-error !w-10 !h-10 !text-[40px] !leading-10"
+        >warning</mat-icon
+      >
+      <h3 class="py-4 text-lg font-semibold">فشل استخراج بيانات الحجاج</h3>
+    </div>
+    } @else{
+    <label class="form-control w-full max-w-xs">
+      <div class="label">
+        <span class="label-text">اختر ملف</span>
+      </div>
+      <input
+        type="file"
+        [formControl]="fileCtrl"
+        class="file-input file-input-bordered file-input-accent w-full max-w-xs"
+        accept=".csv"
+      />
+      <div class="label">
+        <span class="label-text-alt">CSV only</span>
+      </div>
+    </label>
+    }
+  </mat-dialog-content>
+  <mat-dialog-actions class="flex gap-1 !justify-end">
+    @if (obs.status === 'prompt') {
+    <button
+      class="btn btn-primary"
+      (click)="onClick()"
+      [disabled]="!fileCtrl.valid && fileCtrl.touched"
+    >
+      ارسال
+    </button>
+    }
+    <button class="btn btn-secondary btn-outline">اغلاق</button>
+  </mat-dialog-actions>
+  }
+</ng-container>

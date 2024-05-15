@@ -101,3 +101,5 @@ export type Auth = {
   access: string;
   refresh: string;
 };
+
+export type TPState = 'sending' | 'prompt' | 'error' | 'success';

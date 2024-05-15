@@ -37,3 +37,10 @@ $Trhapp-FE-theme: mat.define-light-theme(
 @include mat.all-component-themes($Trhapp-FE-theme);
 
 /* You can add global styles to this file, and also import other style files */
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  @apply shadow-none #{!important};
+}
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  @apply bg-transparent #{!important};
+}

@@ -12,6 +12,7 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { storeProviders } from './app.store';
 import { provideHttpClient } from '@angular/common/http';
 import { AppTranslateModule } from './app.translate';
+import { LoggerService } from './shared/service/logger.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -23,5 +24,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(AppTranslateModule),
     provideEffects(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    { provide: LoggerService, useClass: LoggerService },
   ],
 };
