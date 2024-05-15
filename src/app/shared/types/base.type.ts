@@ -96,3 +96,8 @@ export type Pilgrim = {
   mina_building_accommodation: BedBuidingMina['id']; //fk
   arafah_accommodation: BedTentArafah['id']; //fk
 };
+
+export type Auth = {
+  access: string;
+  refresh: string;
+};

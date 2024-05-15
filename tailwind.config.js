@@ -37,5 +37,27 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: [
+      {
+        trhap: {
+          primary: "#1A46cd",
+          secondary: "#242424",
+          accent: "#DDE5FF",
+          neutral: "#EFEFEF",
+          "base-100": "#F7F7FA",
+          info: "#4f46e5",
+          success: "#20862B",
+          warning: "#facc15",
+          error: "#C50000",
+        },
+      },
+    ],
+    styled: true,
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: true,
+  },
 };

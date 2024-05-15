@@ -13,4 +13,11 @@ export const routes: Routes = [
         (m) => m.layoutShellRouting
       ),
   },
+  {
+    path: 'r',
+    loadChildren: () =>
+      import('./registration/features/registration/registration.routing').then(
+        (m) => m.RegistrationRoutes
+      ),
+  },
 ];
