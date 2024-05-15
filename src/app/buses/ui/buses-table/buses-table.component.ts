@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatRipple } from '@angular/material/core';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.directive';
+import { MatDialog } from '@angular/material/dialog';
+import { BusesFormComponent } from '../../features/buses-form/buses-form.component';
 
 @Component({
   selector: 'tp-buses-table',
@@ -27,6 +29,21 @@ export class BusesTableComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+
+  private dialog = inject(MatDialog);
+
+  openDialog() {
+    this.dialog.open(BusesFormComponent, {
+      width: '90%',
+      height: 'auto',
+      maxWidth: '700px',
+      maxHeight: '90%',
+      panelClass: ['modal-box', 'p-2', 'bg-white'],
+      data: {
+        type: 'create',
+      },
+    });
+  }
 }
 
 const ELEMENT_DATA: any[] = [

@@ -46,12 +46,14 @@ export type Bus = {
   id: string;
   bus_code: string;
   bus_plate: string;
+  bus_name: string;
   max_capacity: number;
   current_capacity: number;
   start_location_id: Location['id'];
   destination_location_id: Location['id'];
   from_location_id: Location['id'];
 };
+
 export type Location = {
   id: string;
   name: string;
@@ -103,3 +105,7 @@ export type Auth = {
 };
 
 export type TPState = 'sending' | 'prompt' | 'error' | 'success';
+export type DialogData<T> = {
+  type: 'create' | 'update' | 'delete';
+  data: T;
+};

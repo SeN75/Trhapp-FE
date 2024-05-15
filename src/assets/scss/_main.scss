@@ -100,3 +100,13 @@ mat-paginator {
 .mat-mdc-tooltip-trigger[disabled="true"] {
   display: none !important;
 }
+
+.tp-control {
+  @apply flex flex-col gap-2;
+  & label:first-of-type {
+    @apply text-secondary font-f1 font-semibold text-sm;
+  }
+  & small {
+    @apply text-error font-f1 font-semibold text-xs px-2;
+  }
+}

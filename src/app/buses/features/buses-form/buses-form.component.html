@@ -1,0 +1,197 @@
+<h2 mat-dialog-title>
+  {{ data.type === "create" ? "انشاء حافلة جديدة" : "تعديل بيانات الحافلة" }}
+</h2>
+<ng-container *ngIf="data$ | async as obs">
+  @if(obs.isLoading) {
+  <ng-container>
+    <div class="h-[200px] flex justify-center items-center">
+      <span class="loading loading-dots loading-lg"></span>
+    </div>
+  </ng-container>
+  } @else{
+  <mat-dialog-content>
+    @if (obs.status === 'success') {
+    <div class="flex gap-4 items-center">
+      <mat-icon class="text-success !w-10 !h-10 !text-[40px] !leading-10"
+        >check</mat-icon
+      >
+      <h3 class="py-4 text-lg font-semibold">
+        {{
+          data.type === "create"
+            ? "تم انشاء حافلة جديدة بنجاح"
+            : "تم تعديل بيانات الحافلة بنجاح"
+        }}
+      </h3>
+    </div>
+    } @else if (obs.status === 'error') {
+    <div class="flex gap-4 items-center">
+      <mat-icon class="text-error !w-10 !h-10 !text-[40px] !leading-10"
+        >warning</mat-icon
+      >
+      <h3 class="py-4 text-lg font-semibold">
+        {{
+          data.type === "create"
+            ? "خطأ في انشاء حافلة جديدة"
+            : "خطأ في تعديل بيانات الحافلة"
+        }}
+      </h3>
+    </div>
+    } @else{
+    <div class="flex flex-col gap-3 pt-3" [formGroup]="form">
+      <div class="tp-control">
+        <label> اسم </label>
+        <label
+          class="input input-bordered flex items-center gap-2"
+          [ngClass]="{
+            'input-error': controls.bus_name.touched && controls.bus_name.errors
+          }"
+        >
+          <input
+            type="text"
+            class="w-full"
+            placeholder="حافلة 1"
+            formControlName="bus_name"
+          />
+        </label>
+        @if(controls.bus_name.touched && controls.bus_name.errors) {
+        <small> حدث خطا </small>
+        }
+      </div>
+      <div class="grid md:grid-cols-2 grid-cols-1 gap-3">
+        <div class="tp-control">
+          <label> رمز </label>
+          <label
+            class="input input-bordered flex items-center gap-2"
+            [ngClass]="{
+              'input-error':
+                controls.bus_code.touched && controls.bus_code.errors
+            }"
+          >
+            <input
+              type="text"
+              class="w-full"
+              placeholder="XXXX"
+              formControlName="bus_code"
+            />
+          </label>
+          @if(controls.bus_code.touched && controls.bus_code.errors) {
+          <small> حدث خطا </small>
+          }
+        </div>
+        <div class="tp-control">
+          <label> لوحة </label>
+          <label
+            class="input input-bordered flex items-center gap-2"
+            [ngClass]="{
+              'input-error':
+                controls.bus_plate.touched && controls.bus_plate.errors
+            }"
+          >
+            <input
+              type="text"
+              class="w-full"
+              placeholder="XXX 0000"
+              formControlName="bus_plate"
+            />
+          </label>
+          @if(controls.bus_plate.touched && controls.bus_plate.errors) {
+          <small> حدث خطا </small>
+          }
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 grid-cols-1 gap-3">
+        <div class="tp-control">
+          <label> سعة الركاب </label>
+          <label
+            class="input input-bordered flex items-center gap-2"
+            [ngClass]="{
+              'input-error':
+                controls.max_capacity.touched && controls.max_capacity.errors
+            }"
+          >
+            <input
+              type="text"
+              class="w-full"
+              placeholder="100"
+              formControlName="max_capacity"
+            />
+          </label>
+          @if(controls.max_capacity.touched && controls.max_capacity.errors) {
+          <small> حدث خطا </small>
+          }
+        </div>
+        <div class="tp-control">
+          <label> السعة الحالية </label>
+          <label
+            class="input input-bordered flex items-center gap-2"
+            [ngClass]="{
+              'input-error':
+                controls.current_capacity.touched &&
+                controls.current_capacity.errors
+            }"
+          >
+            <input
+              type="text"
+              class="w-full"
+              placeholder="XXX 0000"
+              formControlName="current_capacity"
+            />
+          </label>
+          @if(controls.current_capacity.touched &&
+          controls.current_capacity.errors) {
+          <small> حدث خطا </small>
+          }
+        </div>
+      </div>
+      <div class="flex items-end gap-3">
+        <div class="tp-control flex-1">
+          <label>المشرف</label>
+          <select class="select select-bordered w-full">
+            <option disabled selected>Who shot first?</option>
+            <option>Han Solo</option>
+            <option>Greedo</option>
+          </select>
+        </div>
+        <button class="btn btn-ghost">اضافة</button>
+      </div>
+      <div class="flex items-end gap-3">
+        <div class="tp-control flex-1">
+          <label>موقع الانطلاق</label>
+          <select class="select select-bordered w-full">
+            <option disabled selected>Who shot first?</option>
+            <option>Han Solo</option>
+            <option>Greedo</option>
+          </select>
+        </div>
+        <button class="btn btn-ghost">اضافة</button>
+      </div>
+      <div class="flex items-end gap-3">
+        <div class="tp-control flex-1">
+          <label>موقع الوصول</label>
+          <select class="select select-bordered w-full">
+            <option disabled selected>Who shot first?</option>
+            <option>Han Solo</option>
+            <option>Greedo</option>
+          </select>
+        </div>
+        <button class="btn btn-ghost">اضافة</button>
+      </div>
+    </div>
+    }
+  </mat-dialog-content>
+  <mat-dialog-actions class="flex gap-1 !justify-end pt-5">
+    @if (obs.status === 'prompt') {
+    <button
+      class="btn btn-primary"
+      (click)="action()"
+      [disabled]="!form.valid && form.touched"
+    >
+      ارسال
+    </button>
+    }
+    <button class="btn btn-secondary btn-outline" mat-dialog-close>
+      اغلاق
+    </button>
+  </mat-dialog-actions>
+  }
+</ng-container>

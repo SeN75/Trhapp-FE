@@ -8,6 +8,12 @@ import {
   UploadOpsReducer,
 } from './shared/store/upload-operation/upload-operation.reducer';
 import * as UploadOpsEffect from './shared/store/upload-operation/upload-operation.effects';
+
+import {
+  BusesFeatureKey,
+  BusesReducer,
+} from './buses/data-access/store/buses.reducer';
+import * as BusesEffect from './buses/data-access/store/buses.effects';
 // import * as carEffect from './shared/store/car/car.effects';
 // import {
 //   CarFeaturesKey,
@@ -19,9 +25,11 @@ export const storeProviders = {
     provideStore(),
     // provideState(CarFeaturesKey, CarReducer),
     provideState(UploadOpsFeatureKey, UploadOpsReducer),
+    provideState(BusesFeatureKey, BusesReducer),
     provideEffects([
       // carEffect,
       UploadOpsEffect,
+      BusesEffect,
     ]),
     provideStoreDevtools({
       maxAge: 25,
