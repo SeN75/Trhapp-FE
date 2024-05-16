@@ -14,6 +14,22 @@ import {
   BusesReducer,
 } from './buses/data-access/store/buses.reducer';
 import * as BusesEffect from './buses/data-access/store/buses.effects';
+import {
+  SupervisorFeatureKey,
+  SupervisorReducer,
+} from './supervisor/data-access/store/supervisor.reducer';
+import * as SupervisorEffect from './supervisor/data-access/store/supervisor.effects';
+import {
+  LocationFeatureKey,
+  LocationReducer,
+} from './locations/data-access/store/location.reducer';
+import * as LocationsEffect from './locations/data-access/store/location.effects';
+import {
+  CitiesFeatureKey,
+  CitiesReducer,
+} from './citites/data-access/store/cities.reducer';
+import * as CitiesEffect from './citites/data-access/store/cities.effects';
+
 // import * as carEffect from './shared/store/car/car.effects';
 // import {
 //   CarFeaturesKey,
@@ -26,10 +42,16 @@ export const storeProviders = {
     // provideState(CarFeaturesKey, CarReducer),
     provideState(UploadOpsFeatureKey, UploadOpsReducer),
     provideState(BusesFeatureKey, BusesReducer),
+    provideState(SupervisorFeatureKey, SupervisorReducer),
+    provideState(LocationFeatureKey, LocationReducer),
+    provideState(CitiesFeatureKey, CitiesReducer),
     provideEffects([
       // carEffect,
       UploadOpsEffect,
       BusesEffect,
+      SupervisorEffect,
+      LocationsEffect,
+      CitiesEffect,
     ]),
     provideStoreDevtools({
       maxAge: 25,

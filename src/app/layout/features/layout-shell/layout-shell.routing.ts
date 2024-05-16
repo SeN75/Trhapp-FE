@@ -35,10 +35,10 @@ export const layoutShellRouting: Routes = [
       },
       {
         path: 'buses',
-        loadComponent: () =>
-          import('../../..//buses/features/buses/buses.component').then(
-            (m) => m.BusesComponent
-          ),
+        loadChildren: () =>
+          import(
+            '../../../buses/features/buses-shell/buses-shell.routing'
+          ).then((m) => m.BusesShellRoutes),
       },
       {
         path: 'cards',

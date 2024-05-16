@@ -1,0 +1,78 @@
+<h2 mat-dialog-title>
+  {{ data.type === "create" ? "انشاء المشرف جديد" : "تعديل بيانات المشرف" }}
+</h2>
+<ng-container *ngIf="data$ | async as obs">
+  @if(obs.isLoading) {
+  <ng-container>
+    <div class="h-[200px] flex justify-center items-center">
+      <span class="loading loading-dots loading-lg"></span>
+    </div>
+  </ng-container>
+  } @else{
+  <mat-dialog-content>
+    @if (obs.status === 'success') {
+    <div class="flex gap-4 items-center">
+      <mat-icon class="text-success !w-10 !h-10 !text-[40px] !leading-10"
+        >check</mat-icon
+      >
+      <h3 class="py-4 text-lg font-semibold">
+        {{
+          data.type === "create"
+            ? "تم انشاء المشرف  بنجاح"
+            : "تم تعديل بيانات المشرف بنجاح"
+        }}
+      </h3>
+    </div>
+    } @else if (obs.status === 'error') {
+    <div class="flex gap-4 items-center">
+      <mat-icon class="text-error !w-10 !h-10 !text-[40px] !leading-10"
+        >warning</mat-icon
+      >
+      <h3 class="py-4 text-lg font-semibold">
+        {{
+          data.type === "create"
+            ? "خطأ في انشاء المشرف "
+            : "خطأ في تعديل بيانات المشرف"
+        }}
+      </h3>
+    </div>
+    } @else{
+    <div class="flex flex-col gap-3 pt-3" [formGroup]="form">
+      <div class="tp-control">
+        <label> اسم </label>
+        <label
+          class="input input-bordered flex items-center gap-2"
+          [ngClass]="{
+            'input-error': controls.name.touched && controls.name.errors
+          }"
+        >
+          <input
+            type="text"
+            class="w-full"
+            placeholder="المشرف 1"
+            formControlName="name"
+          />
+        </label>
+        @if(controls.name.touched && controls.name.errors) {
+        <small> حدث خطا </small>
+        }
+      </div>
+    </div>
+    }
+  </mat-dialog-content>
+  <mat-dialog-actions class="flex gap-1 !justify-end pt-5">
+    @if (obs.status === 'prompt') {
+    <button
+      class="btn btn-primary"
+      (click)="action()"
+      [disabled]="!form.valid && form.touched"
+    >
+      ارسال
+    </button>
+    }
+    <button class="btn btn-secondary btn-outline" mat-dialog-close>
+      اغلاق
+    </button>
+  </mat-dialog-actions>
+  }
+</ng-container>

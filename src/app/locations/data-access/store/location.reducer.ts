@@ -1,52 +1,52 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { SupervisorAction } from './supervisor.action';
-import { initialSupervisorState } from '../../utils/types/supervisor.type';
 import { TPState } from '../../../shared/types/base.type';
+import { initialLocationState } from '../../utils/types/location.type';
+import { LocationAction } from './location.action';
 
-export const SupervisorsFeature = createFeature({
-  name: 'supervisor',
+export const LocationsFeature = createFeature({
+  name: 'locations',
   reducer: createReducer(
-    initialSupervisorState,
-    on(SupervisorAction.get, (state) => ({
+    initialLocationState,
+    on(LocationAction.get, (state) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(SupervisorAction.getSuccess, (state, { supervisors }) => ({
+    on(LocationAction.getSuccess, (state, { locations }) => ({
       ...state,
       isLoading: false,
-      supervisors,
+      locations,
       status: 'success' as TPState,
     })),
-    on(SupervisorAction.success, (state) => ({
+    on(LocationAction.success, (state) => ({
       ...state,
       isLoading: false,
       status: 'success' as TPState,
     })),
-    on(SupervisorAction.error, (state, { error }) => ({
+    on(LocationAction.error, (state, { error }) => ({
       ...state,
       isLoading: false,
       errors: error,
       status: 'error' as TPState,
     })),
-    on(SupervisorAction.reset, (state) => ({
+    on(LocationAction.reset, (state) => ({
       ...state,
       isLoading: null,
       errors: null,
       status: 'prompt' as TPState,
     })),
-    on(SupervisorAction.create, (state, { supervisor }) => ({
+    on(LocationAction.create, (state, { location }) => ({
       ...state,
-      supervisor,
+      location,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(SupervisorAction.update, (state, { updateSupervisor }) => ({
+    on(LocationAction.update, (state, { updateLocation }) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(SupervisorAction.delete, (state, { id }) => ({
+    on(LocationAction.delete, (state, { id }) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
@@ -55,10 +55,11 @@ export const SupervisorsFeature = createFeature({
 });
 
 export const {
-  name: SupervisorFeatureKey,
-  reducer: SupervisorReducer,
-  selectSelectedSupervisor,
+  name: LocationFeatureKey,
+  reducer: LocationReducer,
+  selectSelectedLocation,
   selectIsLoading,
   selectErrors,
-  selectSelectedSupervisorIndex,
-} = SupervisorsFeature;
+  selectLocations,
+  selectSelectedLocationIndex,
+} = LocationsFeature;

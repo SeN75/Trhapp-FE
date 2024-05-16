@@ -1,29 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, switchMap, map, catchError, tap } from 'rxjs';
+import { Observable, tap, catchError, map } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
-import { Supervisor } from '../../../shared/types/base.type';
-import {
-  CreateSupervisor,
-  Supervisors,
-  UpdateSupervisor,
-} from '../../utils/types/supervisor.type';
 import { LoggerService } from '../../../shared/service/logger.service';
+import {
+  Locations,
+  UpdateLocation,
+  CreateLocation,
+} from '../../utils/types/location.type';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SupervisorService {
+export class LocationService {
   private http = inject(HttpClient);
-  private url = `${environment.apiUrl}/supervisor/`;
+  private url = `${environment.apiUrl}/location/`;
   private logger = inject(LoggerService);
 
-  get(): Observable<Supervisors> {
-    return this.http.get<Supervisors>(this.url);
+  get(): Observable<Locations> {
+    return this.http.get<Locations>(this.url);
   }
 
-  getById(id: string): Observable<Supervisor> {
-    return this.http.get<Supervisor>(`${this.url}/${id}`).pipe(
+  getById(id: string): Observable<Location> {
+    return this.http.get<Location>(`${this.url}/${id}`).pipe(
       tap((res) => this.logger.log('[getById success]', res)),
       catchError((error) => {
         this.logger.error('[getById error]', error);
@@ -31,9 +30,9 @@ export class SupervisorService {
       })
     );
   }
-  update(data: UpdateSupervisor): Observable<Supervisor> {
+  update(data: UpdateLocation): Observable<Location> {
     return this.http
-      .patch<Supervisor>(`${this.url}/${data.id}`, { data, id: data.id })
+      .patch<Location>(`${this.url}/${data.id}`, { data, id: data.id })
       .pipe(
         tap((res) => this.logger.log('[update success]', res)),
         catchError((error) => {
@@ -51,8 +50,8 @@ export class SupervisorService {
       })
     );
   }
-  create(payload: CreateSupervisor): Observable<Supervisor> {
-    return this.http.post<{ data: Supervisor }>(this.url, { ...payload }).pipe(
+  create(payload: CreateLocation): Observable<Location> {
+    return this.http.post<{ data: Location }>(this.url, { ...payload }).pipe(
       tap((res) => this.logger.log('[create success]', res.data)),
       map(({ data }) => data),
       catchError((error) => {

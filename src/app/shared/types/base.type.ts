@@ -52,6 +52,7 @@ export type Bus = {
   start_location_id: Location['id'];
   destination_location_id: Location['id'];
   from_location_id: Location['id'];
+  supervisor_id: Supervisor['id'];
 };
 
 export type Location = {

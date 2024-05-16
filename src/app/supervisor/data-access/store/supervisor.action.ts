@@ -7,6 +7,10 @@ import {
 
 export const SupervisorAction = {
   get: createAction('[Supervisor] get Supervisores'),
+  getSuccess: createAction(
+    '[Supervisor] get Supervisores success',
+    props<{ supervisors: Supervisors }>()
+  ),
   create: createAction(
     '[Supervisor] create Supervisores',
     props<{ supervisor: CreateSupervisor }>()
@@ -19,10 +23,7 @@ export const SupervisorAction = {
     '[Supervisor] delete Supervisores',
     props<{ id: string }>()
   ),
-  success: createAction(
-    '[Supervisor] success',
-    props<{ supervisors: Supervisors }>()
-  ),
+  success: createAction('[Supervisor] success'),
   error: createAction('[Supervisor] error', props<{ error: string }>()),
   reset: createAction('[Supervisor] reset'),
 };

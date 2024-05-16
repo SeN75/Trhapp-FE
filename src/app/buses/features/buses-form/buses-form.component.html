@@ -143,6 +143,8 @@
           }
         </div>
       </div>
+      @if (!addSupervisor) {
+
       <div class="flex items-end gap-3">
         <div class="tp-control flex-1">
           <label>المشرف</label>
@@ -152,8 +154,13 @@
             <option>Greedo</option>
           </select>
         </div>
-        <button class="btn btn-ghost">اضافة</button>
+        <button class="btn btn-ghost" (click)="addSupervisor = true">
+          اضافة
+        </button>
       </div>
+      } @else {
+      <ng-container *ngTemplateOutlet="supervisorTemp"></ng-container>
+      } @if (!addStartLocation) {
       <div class="flex items-end gap-3">
         <div class="tp-control flex-1">
           <label>موقع الانطلاق</label>
@@ -163,8 +170,15 @@
             <option>Greedo</option>
           </select>
         </div>
-        <button class="btn btn-ghost">اضافة</button>
+        <button class="btn btn-ghost" (click)="addStartLocation = true">
+          اضافة
+        </button>
       </div>
+      } @else {
+      <ng-container *ngTemplateOutlet="startLocationTemp"></ng-container>
+
+      } @if (!addDestinationLocation) {
+
       <div class="flex items-end gap-3">
         <div class="tp-control flex-1">
           <label>موقع الوصول</label>
@@ -174,8 +188,13 @@
             <option>Greedo</option>
           </select>
         </div>
-        <button class="btn btn-ghost">اضافة</button>
+        <button class="btn btn-ghost" (click)="addDestinationLocation = true">
+          اضافة
+        </button>
       </div>
+      } @else {
+      <ng-container *ngTemplateOutlet="destinationTemp"></ng-container>
+      }
     </div>
     }
   </mat-dialog-content>
@@ -195,3 +214,258 @@
   </mat-dialog-actions>
   }
 </ng-container>
+
+<ng-template #supervisorTemp>
+  <div
+    class="grid md:grid-cols-2 grid-cols-1 gap-3"
+    [formGroup]="form.controls.supervisor"
+  >
+    <div class="tp-control">
+      <label> اسم</label>
+      <label
+        class="input input-bordered flex items-center gap-2"
+        [ngClass]="{
+          'input-error':
+            controls.supervisor.controls.name.touched &&
+            controls.supervisor.controls.name.errors
+        }"
+      >
+        <input
+          type="text"
+          class="w-full"
+          placeholder="اسم المشرف"
+          formControlName="name"
+        />
+      </label>
+      @if(controls.supervisor.controls.name.touched &&
+      controls.supervisor.controls.name.errors) {
+      <small> حدث خطا </small>
+      }
+    </div>
+    <div class="tp-control">
+      <label> رقم الجوال</label>
+      <label
+        class="input input-bordered flex items-center gap-2"
+        [ngClass]="{
+          'input-error':
+            controls.supervisor.controls.phone_number.touched &&
+            controls.supervisor.controls.phone_number.errors
+        }"
+      >
+        <input
+          type="text"
+          class="w-full"
+          maxlength="10"
+          placeholder="05XXXXXXXX"
+          formControlName="phone_number"
+        />
+      </label>
+      @if(controls.supervisor.controls.phone_number.touched &&
+      controls.supervisor.controls.phone_number.errors) {
+      <small> حدث خطا </small>
+      }
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #startLocationTemp>
+  <div class="flex flex-col gap-3" [formGroup]="form.controls.start_location">
+    <div class="tp-control">
+      <label> اسم عنوان الانطلاق</label>
+      <label
+        class="input input-bordered flex items-center gap-2"
+        [ngClass]="{
+          'input-error':
+            controls.start_location.controls.name.touched &&
+            controls.start_location.controls.name.errors
+        }"
+      >
+        <input
+          type="text"
+          class="w-full"
+          maxlength="100"
+          placeholder="00.0000000000000000"
+          formControlName="name"
+        />
+      </label>
+      @if(controls.start_location.controls.name.touched &&
+      controls.start_location.controls.name.errors) {
+      <small> حدث خطا </small>
+      }
+    </div>
+    <div class="grid md:grid-cols-2 grid-cols-1 gap-3">
+      <div class="tp-control">
+        <label> lat</label>
+        <label
+          class="input input-bordered flex items-center gap-2"
+          [ngClass]="{
+            'input-error':
+              controls.start_location.controls.lat.touched &&
+              controls.start_location.controls.lat.errors
+          }"
+        >
+          <input
+            type="text"
+            class="w-full"
+            maxlength="200"
+            placeholder="00.0000000000000000"
+            formControlName="lat"
+          />
+        </label>
+        @if(controls.start_location.controls.lat.touched &&
+        controls.start_location.controls.lat.errors) {
+        <small> حدث خطا </small>
+        }
+      </div>
+      <div class="tp-control">
+        <label> lng</label>
+        <label
+          class="input input-bordered flex items-center gap-2"
+          [ngClass]="{
+            'input-error':
+              controls.start_location.controls.lng.touched &&
+              controls.start_location.controls.lng.errors
+          }"
+        >
+          <input
+            type="text"
+            class="w-full"
+            maxlength="200"
+            placeholder="00.0000000000000000"
+            formControlName="lng"
+          />
+        </label>
+        @if(controls.start_location.controls.lng.touched &&
+        controls.start_location.controls.lng.errors) {
+        <small> حدث خطا </small>
+        }
+      </div>
+    </div>
+    <div class="tp-control">
+      <label> المدية</label>
+      <label
+        class="input input-bordered flex items-center gap-2"
+        [ngClass]="{
+          'input-error':
+            controls.destination_location.controls.city.touched &&
+            controls.destination_location.controls.city.errors
+        }"
+      >
+        <input
+          type="text"
+          class="w-full"
+          maxlength="100"
+          placeholder="00.0000000000000000"
+          formControlName="city"
+        />
+      </label>
+      @if(controls.destination_location.controls.city.touched &&
+      controls.destination_location.controls.city.errors) {
+      <small> حدث خطا </small>
+      }
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #destinationTemp>
+  <div
+    class="flex flex-col gap-3"
+    [formGroup]="form.controls.destination_location"
+  >
+    <div class="tp-control">
+      <label> اسم عنوان الوصول</label>
+      <label
+        class="input input-bordered flex items-center gap-2"
+        [ngClass]="{
+          'input-error':
+            controls.destination_location.controls.name.touched &&
+            controls.destination_location.controls.name.errors
+        }"
+      >
+        <input
+          type="text"
+          class="w-full"
+          maxlength="100"
+          placeholder="00.0000000000000000"
+          formControlName="name"
+        />
+      </label>
+      @if(controls.destination_location.controls.name.touched &&
+      controls.destination_location.controls.name.errors) {
+      <small> حدث خطا </small>
+      }
+    </div>
+    <div class="grid md:grid-cols-2 grid-cols-1 gap-3">
+      <div class="tp-control">
+        <label> lat</label>
+        <label
+          class="input input-bordered flex items-center gap-2"
+          [ngClass]="{
+            'input-error':
+              controls.destination_location.controls.lat.touched &&
+              controls.destination_location.controls.lat.errors
+          }"
+        >
+          <input
+            type="text"
+            class="w-full"
+            maxlength="200"
+            placeholder="00.0000000000000000"
+            formControlName="lat"
+          />
+        </label>
+        @if(controls.start_location.controls.lat.touched &&
+        controls.start_location.controls.lat.errors) {
+        <small> حدث خطا </small>
+        }
+      </div>
+      <div class="tp-control">
+        <label> lng</label>
+        <label
+          class="input input-bordered flex items-center gap-2"
+          [ngClass]="{
+            'input-error':
+              controls.start_location.controls.lng.touched &&
+              controls.start_location.controls.lng.errors
+          }"
+        >
+          <input
+            type="text"
+            class="w-full"
+            maxlength="200"
+            placeholder="00.0000000000000000"
+            formControlName="lng"
+          />
+        </label>
+        @if(controls.start_location.controls.lng.touched &&
+        controls.start_location.controls.lng.errors) {
+        <small> حدث خطا </small>
+        }
+      </div>
+    </div>
+
+    <div class="tp-control">
+      <label> المدية</label>
+      <label
+        class="input input-bordered flex items-center gap-2"
+        [ngClass]="{
+          'input-error':
+            controls.destination_location.controls.city.touched &&
+            controls.destination_location.controls.city.errors
+        }"
+      >
+        <input
+          type="text"
+          class="w-full"
+          maxlength="100"
+          placeholder="00.0000000000000000"
+          formControlName="city"
+        />
+      </label>
+      @if(controls.destination_location.controls.city.touched &&
+      controls.destination_location.controls.city.errors) {
+      <small> حدث خطا </small>
+      }
+    </div>
+  </div>
+</ng-template>

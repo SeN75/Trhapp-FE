@@ -1,4 +1,4 @@
-import { Supervisor } from '../../../shared/types/base.type';
+import { Supervisor, TPState } from '../../../shared/types/base.type';
 
 export type CreateSupervisor = Omit<Supervisor, 'id'>;
 export type UpdateSupervisor = Partial<Supervisor>;
@@ -10,6 +10,7 @@ export type SupervisorState = {
   errors: string | null;
   selectedSupervisor: Supervisor | null;
   selectedSupervisorIndex: number | null;
+  status: TPState;
 };
 export const initialSupervisorState: SupervisorState = {
   supervisores: null,
@@ -17,4 +18,5 @@ export const initialSupervisorState: SupervisorState = {
   errors: null,
   selectedSupervisor: null,
   selectedSupervisorIndex: null,
+  status: 'prompt',
 };
