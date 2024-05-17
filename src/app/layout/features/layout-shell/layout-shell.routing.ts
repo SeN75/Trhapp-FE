@@ -9,15 +9,15 @@ export const layoutShellRouting: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'accommodation-mina',
+        redirectTo: 'mina',
         pathMatch: 'full',
       },
       {
-        path: 'accommodation-mina',
-        loadComponent: () =>
-          import(
-            '../../../accommodation-mina/features/accommodation-mina/accommodation-mina.component'
-          ).then((m) => m.AccommodationMinaComponent),
+        path: 'mina',
+        loadChildren: () =>
+          import('../../../mina/features/mina-shell/mina-shell.routing').then(
+            (m) => m.MinaShellRoutes
+          ),
       },
       {
         path: 'accommodation-urafah',

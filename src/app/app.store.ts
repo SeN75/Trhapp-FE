@@ -32,23 +32,23 @@ import * as CitiesEffect from './citites/data-access/store/cities.effects';
 import {
   BedBuildingMinaFeatureKey,
   BedBuildingMinaReducer,
-} from './accommodation-mina/data-access/store/beds-building-mina.reducer';
-import * as BedBuildingMinaEffect from './accommodation-mina/data-access/store/beds-building-mina.effects';
+} from './mina/data-access/store/beds-building-mina.reducer';
+import * as BedBuildingMinaEffect from './mina/data-access/store/beds-building-mina.effects';
 import {
   BedTentMinaFeatureKey,
   BedTentMinaReducer,
-} from './accommodation-mina/data-access/store/beds-tent-mina.reducer';
-import * as BedTentMinaEffect from './accommodation-mina/data-access/store/beds-tent-mina.effects';
+} from './mina/data-access/store/beds-tent-mina.reducer';
+import * as BedTentMinaEffect from './mina/data-access/store/beds-tent-mina.effects';
 import {
   LoungeMinaFeatureKey,
   LoungeMinaReducer,
-} from './accommodation-mina/data-access/store/lounge-mina.reducer';
-import * as LoungeMinaEffect from './accommodation-mina/data-access/store/lounge-mina.effects';
+} from './mina/data-access/store/lounge-mina.reducer';
+import * as LoungeMinaEffect from './mina/data-access/store/lounge-mina.effects';
 import {
   SuitesFeatureKey,
   SuitesReducer,
-} from './accommodation-mina/data-access/store/suites.reducer';
-import * as SuitesEffect from './accommodation-mina/data-access/store/suites.effects';
+} from './mina/data-access/store/suites.reducer';
+import * as SuitesEffect from './mina/data-access/store/suites.effects';
 
 import {
   BedTentArafahFeatureKey,
