@@ -1,28 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, tap, catchError, map } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { LoggerService } from '../../../shared/service/logger.service';
+import { Observable, tap, catchError, map } from 'rxjs';
+import { LoungeMina } from '../../../shared/types/base.type';
 import {
-  Locations,
-  UpdateLocation,
-  CreateLocation,
-} from '../../utils/types/location.type';
+  LoungesMina,
+  UpdateLoungeMina,
+  CreateLoungeMina,
+} from '../../utils/types/lounges-mina.type';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LocationService {
+export class LoungeMinaService {
   private http = inject(HttpClient);
-  private url = `${environment.apiUrl}location/`;
+  private url = `${environment.apiUrl}lounges_mina/`;
   private logger = inject(LoggerService);
+  constructor() {}
 
-  get(): Observable<Locations> {
-    return this.http.get<Locations>(this.url);
+  get(): Observable<LoungesMina> {
+    return this.http.get<LoungesMina>(this.url);
   }
 
-  getById(id: string): Observable<Location> {
-    return this.http.get<Location>(`${this.url}/${id}`).pipe(
+  getById(id: string): Observable<LoungeMina> {
+    return this.http.get<LoungeMina>(`${this.url}/${id}`).pipe(
       tap((res) => this.logger.log('[getById success]', res)),
       catchError((error) => {
         this.logger.error('[getById error]', error);
@@ -30,9 +32,9 @@ export class LocationService {
       })
     );
   }
-  update(data: UpdateLocation): Observable<Location> {
+  update(data: UpdateLoungeMina): Observable<LoungeMina> {
     return this.http
-      .patch<Location>(`${this.url}/${data.id}`, { data, id: data.id })
+      .patch<LoungeMina>(`${this.url}/${data.id}`, { data, id: data.id })
       .pipe(
         tap((res) => this.logger.log('[update success]', res)),
         catchError((error) => {
@@ -50,8 +52,8 @@ export class LocationService {
       })
     );
   }
-  create(payload: CreateLocation): Observable<Location> {
-    return this.http.post<{ data: Location }>(this.url, { ...payload }).pipe(
+  create(payload: CreateLoungeMina): Observable<LoungeMina> {
+    return this.http.post<{ data: LoungeMina }>(this.url, { ...payload }).pipe(
       tap((res) => this.logger.log('[create success]', res.data)),
       map(({ data }) => data),
       catchError((error) => {
