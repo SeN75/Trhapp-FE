@@ -29,29 +29,93 @@ import {
   CitiesReducer,
 } from './citites/data-access/store/cities.reducer';
 import * as CitiesEffect from './citites/data-access/store/cities.effects';
+import {
+  BedBuildingMinaFeatureKey,
+  BedBuildingMinaReducer,
+} from './accommodation-mina/data-access/store/beds-building-mina.reducer';
+import * as BedBuildingMinaEffect from './accommodation-mina/data-access/store/beds-building-mina.effects';
+import {
+  BedTentMinaFeatureKey,
+  BedTentMinaReducer,
+} from './accommodation-mina/data-access/store/beds-tent-mina.reducer';
+import * as BedTentMinaEffect from './accommodation-mina/data-access/store/beds-tent-mina.effects';
+import {
+  LoungeMinaFeatureKey,
+  LoungeMinaReducer,
+} from './accommodation-mina/data-access/store/lounge-mina.reducer';
+import * as LoungeMinaEffect from './accommodation-mina/data-access/store/lounge-mina.effects';
+import {
+  SuitesFeatureKey,
+  SuitesReducer,
+} from './accommodation-mina/data-access/store/suites.reducer';
+import * as SuitesEffect from './accommodation-mina/data-access/store/suites.effects';
 
-// import * as carEffect from './shared/store/car/car.effects';
-// import {
-//   CarFeaturesKey,
-//   CarReducer,
-// } from '../../../../wp-direct-project/wp-direct/src/app/shared/store/car/car.reducer';
+import {
+  BedTentArafahFeatureKey,
+  BedTentArafahReducer,
+} from './accommodation-urafah/data-access/store/beds-tent-arafah.reducer';
+import * as BedTentArafahEffect from './accommodation-urafah/data-access/store/beds-tent-arafah.effects';
+import {
+  LoungeArafahFeatureKey,
+  LoungeArafahReducer,
+} from './accommodation-urafah/data-access/store/lounge-arafah.reducer';
+import * as LoungeArafahEffect from './accommodation-urafah/data-access/store/lounge-arafah.effects';
+import {
+  PilgrimFeatureKey,
+  PilgrimReducer,
+} from './pilgrim/data-access/store/pilgrim.reducer';
+import * as PilgrimEffect from './pilgrim/data-access/store/pilgrim.effects';
+import {
+  BuildingFeatureKey,
+  BuildingReducer,
+} from './building/data-access/store/building.reducer';
+import * as BuildingEffect from './building/data-access/store/building.effects';
+import {
+  FloorFeatureKey,
+  FloorReducer,
+} from './building/data-access/store/floor.reducer';
+import * as FloorEffect from './building/data-access/store/floor.effects';
+import {
+  RoomFeatureKey,
+  RoomReducer,
+} from './building/data-access/store/rooms.reducer';
+import * as RoomEffect from './building/data-access/store/rooms.effects';
 
 export const storeProviders = {
   providers: [
     provideStore(),
-    // provideState(CarFeaturesKey, CarReducer),
     provideState(UploadOpsFeatureKey, UploadOpsReducer),
     provideState(BusesFeatureKey, BusesReducer),
     provideState(SupervisorFeatureKey, SupervisorReducer),
     provideState(LocationFeatureKey, LocationReducer),
     provideState(CitiesFeatureKey, CitiesReducer),
+    provideState(BedBuildingMinaFeatureKey, BedBuildingMinaReducer),
+    provideState(BedTentMinaFeatureKey, BedTentMinaReducer),
+    provideState(LoungeMinaFeatureKey, LoungeMinaReducer),
+    provideState(SuitesFeatureKey, SuitesReducer),
+    provideState(BedTentArafahFeatureKey, BedTentArafahReducer),
+    provideState(LoungeArafahFeatureKey, LoungeArafahReducer),
+    provideState(PilgrimFeatureKey, PilgrimReducer),
+    provideState(BuildingFeatureKey, BuildingReducer),
+    provideState(FloorFeatureKey, FloorReducer),
+    provideState(RoomFeatureKey, RoomReducer),
+
     provideEffects([
-      // carEffect,
       UploadOpsEffect,
       BusesEffect,
       SupervisorEffect,
       LocationsEffect,
       CitiesEffect,
+      BedBuildingMinaEffect,
+      BedTentMinaEffect,
+      LoungeMinaEffect,
+      SuitesEffect,
+      BedTentArafahEffect,
+      LoungeArafahEffect,
+      PilgrimEffect,
+      BuildingEffect,
+      FloorEffect,
+      RoomEffect,
     ]),
     provideStoreDevtools({
       maxAge: 25,

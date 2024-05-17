@@ -1,51 +1,51 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { TPState } from '../../../shared/types/base.type';
-import { initialBedTentMinaState } from '../../utils/types/beds-tent-mina.type';
-import { BedTentMinaAction } from './beds-tent-mina.action';
+import { initialPilgrimState } from '../../utils/types/pilgrim.type';
+import { PilgrimAction } from './pilgrim.action';
 
-export const BedTentMinaFeature = createFeature({
-  name: 'beds_tent_mina',
+export const PilgrimFeature = createFeature({
+  name: 'pilgrims',
   reducer: createReducer(
-    initialBedTentMinaState,
-    on(BedTentMinaAction.get, (state) => ({
+    initialPilgrimState,
+    on(PilgrimAction.get, (state) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(BedTentMinaAction.getSuccess, (state, { beds_tent_mina }) => ({
+    on(PilgrimAction.getSuccess, (state, { pilgrims }) => ({
       ...state,
       isLoading: false,
-      beds_tent_mina,
+      pilgrims,
       status: 'success' as TPState,
     })),
-    on(BedTentMinaAction.success, (state) => ({
+    on(PilgrimAction.success, (state) => ({
       ...state,
       isLoading: false,
       status: 'success' as TPState,
     })),
-    on(BedTentMinaAction.error, (state, { error }) => ({
+    on(PilgrimAction.error, (state, { error }) => ({
       ...state,
       isLoading: false,
       errors: error,
       status: 'error' as TPState,
     })),
-    on(BedTentMinaAction.reset, (state) => ({
+    on(PilgrimAction.reset, (state) => ({
       ...state,
       isLoading: null,
       errors: null,
       status: 'prompt' as TPState,
     })),
-    on(BedTentMinaAction.create, (state, { bed_tent_mina }) => ({
+    on(PilgrimAction.create, (state, { pilgrim }) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(BedTentMinaAction.update, (state, { updateBedTentMina }) => ({
+    on(PilgrimAction.update, (state, { updatePilgrim }) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(BedTentMinaAction.delete, (state, { id }) => ({
+    on(PilgrimAction.delete, (state, { id }) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
@@ -54,11 +54,12 @@ export const BedTentMinaFeature = createFeature({
 });
 
 export const {
-  name: BedTentMinaFeatureKey,
-  reducer: BedTentMinaReducer,
-  selectBeds_tent_minaState,
+  name: PilgrimFeatureKey,
+  reducer: PilgrimReducer,
+  selectPilgrims,
   selectIsLoading,
   selectErrors,
-  selectLounge_mina,
-  selectSelectedBedTentMinaIndex,
-} = BedTentMinaFeature;
+  selectSelectedPilgrim,
+  selectSelectedPilgrimIndex,
+  selectStatus,
+} = PilgrimFeature;

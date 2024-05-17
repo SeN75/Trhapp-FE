@@ -1,51 +1,51 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { TPState } from '../../../shared/types/base.type';
-import { initialBedTentMinaState } from '../../utils/types/beds-tent-mina.type';
-import { BedTentMinaAction } from './beds-tent-mina.action';
+import { initialLoungeArafahState } from '../../utils/types/lounges-arafah.type';
+import { LoungeArafahAction } from './lounge-arafah.action';
 
-export const BedTentMinaFeature = createFeature({
-  name: 'beds_tent_mina',
+export const LoungeArafahFeature = createFeature({
+  name: 'lounges_arafah',
   reducer: createReducer(
-    initialBedTentMinaState,
-    on(BedTentMinaAction.get, (state) => ({
+    initialLoungeArafahState,
+    on(LoungeArafahAction.get, (state) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(BedTentMinaAction.getSuccess, (state, { beds_tent_mina }) => ({
+    on(LoungeArafahAction.getSuccess, (state, { lounges_arafah }) => ({
       ...state,
       isLoading: false,
-      beds_tent_mina,
+      lounges_arafah,
       status: 'success' as TPState,
     })),
-    on(BedTentMinaAction.success, (state) => ({
+    on(LoungeArafahAction.success, (state) => ({
       ...state,
       isLoading: false,
       status: 'success' as TPState,
     })),
-    on(BedTentMinaAction.error, (state, { error }) => ({
+    on(LoungeArafahAction.error, (state, { error }) => ({
       ...state,
       isLoading: false,
       errors: error,
       status: 'error' as TPState,
     })),
-    on(BedTentMinaAction.reset, (state) => ({
+    on(LoungeArafahAction.reset, (state) => ({
       ...state,
       isLoading: null,
       errors: null,
       status: 'prompt' as TPState,
     })),
-    on(BedTentMinaAction.create, (state, { bed_tent_mina }) => ({
+    on(LoungeArafahAction.create, (state, { lounge_arafah }) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(BedTentMinaAction.update, (state, { updateBedTentMina }) => ({
+    on(LoungeArafahAction.update, (state, { updateLoungeArafah }) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(BedTentMinaAction.delete, (state, { id }) => ({
+    on(LoungeArafahAction.delete, (state, { id }) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
@@ -54,11 +54,11 @@ export const BedTentMinaFeature = createFeature({
 });
 
 export const {
-  name: BedTentMinaFeatureKey,
-  reducer: BedTentMinaReducer,
-  selectBeds_tent_minaState,
+  name: LoungeArafahFeatureKey,
+  reducer: LoungeArafahReducer,
+  selectSelectedLoungeArafah,
   selectIsLoading,
   selectErrors,
-  selectLounge_mina,
-  selectSelectedBedTentMinaIndex,
-} = BedTentMinaFeature;
+  selectLounge_arafah,
+  selectSelectedLoungeArafahIndex,
+} = LoungeArafahFeature;

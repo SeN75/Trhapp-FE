@@ -1,51 +1,51 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { TPState } from '../../../shared/types/base.type';
-import { initialBedTentMinaState } from '../../utils/types/beds-tent-mina.type';
-import { BedTentMinaAction } from './beds-tent-mina.action';
+import { initialRoomState } from '../../utils/types/rooms.type';
+import { RoomAction } from './rooms.action';
 
-export const BedTentMinaFeature = createFeature({
-  name: 'beds_tent_mina',
+export const RoomFeature = createFeature({
+  name: 'rooms',
   reducer: createReducer(
-    initialBedTentMinaState,
-    on(BedTentMinaAction.get, (state) => ({
+    initialRoomState,
+    on(RoomAction.get, (state) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(BedTentMinaAction.getSuccess, (state, { beds_tent_mina }) => ({
+    on(RoomAction.getSuccess, (state, { rooms }) => ({
       ...state,
       isLoading: false,
-      beds_tent_mina,
+      rooms,
       status: 'success' as TPState,
     })),
-    on(BedTentMinaAction.success, (state) => ({
+    on(RoomAction.success, (state) => ({
       ...state,
       isLoading: false,
       status: 'success' as TPState,
     })),
-    on(BedTentMinaAction.error, (state, { error }) => ({
+    on(RoomAction.error, (state, { error }) => ({
       ...state,
       isLoading: false,
       errors: error,
       status: 'error' as TPState,
     })),
-    on(BedTentMinaAction.reset, (state) => ({
+    on(RoomAction.reset, (state) => ({
       ...state,
       isLoading: null,
       errors: null,
       status: 'prompt' as TPState,
     })),
-    on(BedTentMinaAction.create, (state, { bed_tent_mina }) => ({
+    on(RoomAction.create, (state, { room }) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(BedTentMinaAction.update, (state, { updateBedTentMina }) => ({
+    on(RoomAction.update, (state, { updateRoom }) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(BedTentMinaAction.delete, (state, { id }) => ({
+    on(RoomAction.delete, (state, { id }) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
@@ -54,11 +54,12 @@ export const BedTentMinaFeature = createFeature({
 });
 
 export const {
-  name: BedTentMinaFeatureKey,
-  reducer: BedTentMinaReducer,
-  selectBeds_tent_minaState,
+  name: RoomFeatureKey,
+  reducer: RoomReducer,
+  selectRooms,
   selectIsLoading,
   selectErrors,
-  selectLounge_mina,
-  selectSelectedBedTentMinaIndex,
-} = BedTentMinaFeature;
+  selectSelectedRoom,
+  selectSelectedRoomIndex,
+  selectStatus,
+} = RoomFeature;

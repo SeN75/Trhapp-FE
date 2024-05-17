@@ -3,7 +3,7 @@ import { TPState } from '../../../shared/types/base.type';
 import { initialBedBuidingMinaState } from '../../utils/types/beds-building-mina.type';
 import { BedBulidingMinaAction } from './beds-building-mina.action';
 
-export const BeadTentMinaFeature = createFeature({
+export const BedBuildingMinaFeature = createFeature({
   name: 'beds_building_mina',
   reducer: createReducer(
     initialBedBuidingMinaState,
@@ -54,8 +54,8 @@ export const BeadTentMinaFeature = createFeature({
 });
 
 export const {
-  name: BeadTentMinaFeatureKey,
-  reducer: BeadTentMinaReducer,
+  name: BedBuildingMinaFeatureKey,
+  reducer: BedBuildingMinaReducer,
   selectBeds_building_minaState,
   selectIsLoading,
   selectErrors,
@@ -63,4 +63,4 @@ export const {
   selectStatus,
   selectSelectedBedBuidingMina,
   selectSelectedBedBuidingMinaIndex,
-} = BeadTentMinaFeature;
+} = BedBuildingMinaFeature;
