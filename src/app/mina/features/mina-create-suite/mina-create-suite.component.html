@@ -1,0 +1,85 @@
+<section class="page-content">
+  <h1 class="page-title">سكن منى - باقة 1 - جناح 4</h1>
+  <div class="grid grid-cols-4 gap-4"></div>
+
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <div class="flex gap-4" [formGroup]="form">
+        <div class="tp-control">
+          <label> عدد الصالات</label>
+          <label
+            class="input input-bordered flex items-center gap-2"
+            [ngClass]="{
+              'input-error':
+                controls.no_lounges.touched && controls.no_lounges.errors
+            }"
+          >
+            <input
+              type="text"
+              class="w-full"
+              maxlength="100"
+              placeholder="100"
+              formControlName="no_lounges"
+            />
+          </label>
+          @if(controls.no_lounges.touched && controls.no_lounges.errors) {
+          <small> حدث خطا </small>
+          }
+        </div>
+        <div class="tp-control">
+          <label> السعة</label>
+          <label
+            class="input input-bordered flex items-center gap-2"
+            [ngClass]="{
+              'input-error':
+                controls.max_capacity.touched && controls.max_capacity.errors
+            }"
+          >
+            <input
+              type="text"
+              class="w-full"
+              maxlength="100"
+              placeholder="100"
+              formControlName="max_capacity"
+            />
+          </label>
+          @if(controls.max_capacity.touched && controls.max_capacity.errors) {
+          <small> حدث خطا </small>
+          }
+        </div>
+      </div>
+
+      <div class="flex gap-4">
+        @for (form of controls.lounges.controls; track form; let i = $index) {
+        <form [formGroup]="controls.lounges.controls[i]">
+          <div class="tp-control">
+            <label
+              >{{ controls.lounges.controls[i].controls.name.value }}
+            </label>
+            <label
+              class="input input-bordered flex items-center gap-2"
+              [ngClass]="{
+                'input-error':
+                  controls.lounges.controls[i].controls.max_capacity.touched &&
+                  controls.lounges.controls[i].controls.max_capacity.errors
+              }"
+            >
+              <input
+                type="text"
+                class="w-full"
+                maxlength="100"
+                placeholder="100"
+                formControlName="max_capacity"
+              />
+            </label>
+            @if(controls.lounges.controls[i].controls.max_capacity.touched &&
+            controls.lounges.controls[i].controls.max_capacity.errors) {
+            <small> حدث خطا </small>
+            }
+          </div>
+        </form>
+        }
+      </div>
+    </div>
+  </div>
+</section>

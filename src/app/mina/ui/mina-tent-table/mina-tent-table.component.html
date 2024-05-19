@@ -1,0 +1,42 @@
+<section
+  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+>
+  @for (item of items; track $index) {
+
+  <div class="card shadow-xl" [ngClass]="{ 'bg-accent': item.isFull }">
+    <div class="card-body flex gap-8">
+      <header class="card-title text-primary">{{ item.name }}</header>
+      <ul class="list-data">
+        <li class="">
+          <span class="label">
+            <mat-icon>airline_seat_individual_suite</mat-icon>
+            عدد الاجنحة
+          </span>
+          <span class="total">100</span>
+        </li>
+        <li>
+          <span class="label">
+            <mat-icon>weekend</mat-icon>
+            عدد الصالات
+          </span>
+          <span class="total">100</span>
+        </li>
+        <li>
+          <span class="label">
+            <mat-icon>space_bar</mat-icon>
+            السعة المتاحة
+          </span>
+          <span class="total">500</span>
+        </li>
+      </ul>
+
+      <div class="flex justify-between gap-4">
+        <button class="btn btn-primary" [routerLink]="item.id + ''">
+          عرض الاجنحة
+        </button>
+        <button class="btn btn-accent">عرض الاجنحة</button>
+      </div>
+    </div>
+  </div>
+  }
+</section>

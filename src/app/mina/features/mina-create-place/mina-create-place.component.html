@@ -1,0 +1,86 @@
+<h2 mat-dialog-title>اضافة سكن جديد</h2>
+<ng-container *ngIf="data$ | async as obs">
+  @if(obs.isLoading) {
+  <ng-container>
+    <div class="h-[200px] flex justify-center items-center">
+      <span class="loading loading-dots loading-lg"></span>
+    </div>
+  </ng-container>
+  } @else{
+  <mat-dialog-content>
+    @if (obs.status === 'success') {
+    <div class="flex gap-4 items-center">
+      <mat-icon class="text-success !w-10 !h-10 !text-[40px] !leading-10"
+        >check</mat-icon
+      >
+      <h3 class="py-4 text-lg font-semibold">تم اضافة سكن جديد بنجاح</h3>
+    </div>
+    } @else if (obs.status === 'error') {
+    <div class="flex gap-4 items-center">
+      <mat-icon class="text-error !w-10 !h-10 !text-[40px] !leading-10"
+        >warning</mat-icon
+      >
+      <h3 class="py-4 text-lg font-semibold">فشل اضافة سكن جديد</h3>
+    </div>
+    } @else{
+    <div class="flex flex-col gap-3" [formGroup]="form">
+      <div class="tp-control">
+        <label> الاسم</label>
+        <label
+          class="input input-bordered flex items-center gap-2"
+          [ngClass]="{
+            'input-error': controls.name.touched && controls.name.errors
+          }"
+        >
+          <input
+            type="text"
+            class="w-full"
+            maxlength="100"
+            placeholder="سكن 1"
+            formControlName="name"
+          />
+        </label>
+        @if(controls.name.touched && controls.name.errors) {
+        <small> حدث خطا </small>
+        }
+      </div>
+      <div class="tp-control">
+        <label> عدد الاجنحة</label>
+        <label
+          class="input input-bordered flex items-center gap-2"
+          formControlName="number_of_suties"
+          [ngClass]="{
+            'input-error':
+              controls.number_of_suties.touched &&
+              controls.number_of_suties.errors
+          }"
+        >
+          <input
+            type="text"
+            class="w-full"
+            maxlength="100"
+            placeholder="1XXX"
+          />
+        </label>
+        @if(controls.number_of_suties.touched &&
+        controls.number_of_suties.errors) {
+        <small> حدث خطا </small>
+        }
+      </div>
+    </div>
+    }
+  </mat-dialog-content>
+  <mat-dialog-actions class="flex gap-1 !justify-end">
+    @if (obs.status === 'prompt') {
+    <button
+      class="btn btn-primary"
+      (click)="onClick()"
+      [disabled]="(!form.valid && form.touched) || obs.isLoading"
+    >
+      ارسال
+    </button>
+    }
+    <button class="btn btn-secondary btn-outline">اغلاق</button>
+  </mat-dialog-actions>
+  }
+</ng-container>

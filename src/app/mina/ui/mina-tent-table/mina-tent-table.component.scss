@@ -1,0 +1,11 @@
+.list-data {
+  @apply flex flex-col gap-3;
+
+  li {
+    @apply flex justify-between items-center;
+
+    .label {
+      @apply font-bold flex gap-1 items-center;
+    }
+  }
+}

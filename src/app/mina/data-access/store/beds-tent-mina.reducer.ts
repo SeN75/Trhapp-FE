@@ -61,4 +61,5 @@ export const {
   selectErrors,
   selectLounge_mina,
   selectSelectedBedTentMinaIndex,
+  selectStatus,
 } = BedTentMinaFeature;
