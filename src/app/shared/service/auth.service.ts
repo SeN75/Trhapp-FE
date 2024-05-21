@@ -32,7 +32,7 @@ export class AuthService {
     password: string;
   }) {
     return this.http
-      .post<Auth>(`${this.URL}/login`, { phone_number, password })
+      .post<Auth>(`${this.URL}login`, { phone_number, password })
       .pipe(
         tap(({ access, refresh }) => {
           localStorage.setItem('token', JSON.stringify({ access, refresh }));

@@ -1,0 +1,35 @@
+<div
+  class="card shadow-xl"
+  [ngClass]="{ 'bg-accent': data.is_male_accmidations }"
+>
+  <div class="card-body flex gap-8">
+    <header class="card-title text-primary">{{ data.name }}</header>
+    <ul class="list-data">
+      <li>
+        <span class="label">
+          <mat-icon
+            [ngClass]="{
+              'text-pink-500': !data.is_male_accmidations,
+              'text-primary': data.is_male_accmidations
+            }"
+            >{{ data.is_male_accmidations ? "man" : "woman" }}</mat-icon
+          >
+          {{ data.is_male_accmidations ? "سكن للذكور" : "سكن للاناث" }}
+        </span>
+      </li>
+      <li>
+        <span class="label">
+          <mat-icon>space_bar</mat-icon>
+          السعة المتاحة
+        </span>
+        <span class="total">{{ data.max_capacity }}</span>
+      </li>
+    </ul>
+
+    <div class="flex justify-between gap-4">
+      <button class="btn btn-primary" [routerLink]="data.id + ''">
+        عرض الاستراحة
+      </button>
+    </div>
+  </div>
+</div>

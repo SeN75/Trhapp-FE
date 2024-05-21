@@ -53,13 +53,19 @@ import * as SuitesEffect from './mina/data-access/store/suites.effects';
 import {
   BedTentArafahFeatureKey,
   BedTentArafahReducer,
-} from './accommodation-urafah/data-access/store/beds-tent-arafah.reducer';
-import * as BedTentArafahEffect from './accommodation-urafah/data-access/store/beds-tent-arafah.effects';
+} from './arafah/data-access/store/beds-tent-arafah.reducer';
+import * as BedTentArafahEffect from './arafah/data-access/store/beds-tent-arafah.effects';
 import {
   LoungeArafahFeatureKey,
   LoungeArafahReducer,
-} from './accommodation-urafah/data-access/store/lounge-arafah.reducer';
-import * as LoungeArafahEffect from './accommodation-urafah/data-access/store/lounge-arafah.effects';
+} from './arafah/data-access/store/lounge-arafah.reducer';
+import * as LoungeArafahEffect from './arafah/data-access/store/lounge-arafah.effects';
+import {
+  ArafahFeatureKey,
+  ArafahReducer,
+} from './arafah/data-access/store/arafah.reducer';
+import * as ArafahEffect from './arafah/data-access/store/arafah.effects';
+
 import {
   PilgrimFeatureKey,
   PilgrimReducer,
@@ -85,6 +91,7 @@ export const storeProviders = {
   providers: [
     provideStore(),
     provideState(UploadOpsFeatureKey, UploadOpsReducer),
+    provideState(ArafahFeatureKey, ArafahReducer),
     provideState(BusesFeatureKey, BusesReducer),
     provideState(SupervisorFeatureKey, SupervisorReducer),
     provideState(LocationFeatureKey, LocationReducer),
@@ -102,6 +109,7 @@ export const storeProviders = {
 
     provideEffects([
       UploadOpsEffect,
+      ArafahEffect,
       BusesEffect,
       SupervisorEffect,
       LocationsEffect,

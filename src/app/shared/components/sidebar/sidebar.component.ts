@@ -30,14 +30,19 @@ export class SidebarComponent {
       link: ['/', 'l', 'buses'],
     },
     {
-      text: 'تسكين منى',
+      text: 'تسكين منى باقة 1',
       icon: 'tp-bed',
-      link: ['/', 'l', 'accommodation-mina'],
+      link: ['/', 'l', 'mina', 'pack1'],
+    },
+    {
+      text: 'تسكين منى باقة 4',
+      icon: 'tp-bed',
+      link: ['/', 'l', 'mina', 'pack4'],
     },
     {
       text: 'تسكين عرفة',
       icon: 'tp-camping',
-      link: ['/', 'l', 'accommodation-urafah'],
+      link: ['/', 'l', 'arafah'],
     },
     {
       text: 'الاجنحة',

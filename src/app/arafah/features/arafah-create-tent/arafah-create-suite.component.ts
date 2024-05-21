@@ -4,13 +4,13 @@ import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { MaterialModule } from '../../../shared/module/material.module';
 
 @Component({
-  selector: 'app-mina-create-suite',
+  selector: 'app-arafah-create-suite',
   standalone: true,
   imports: [CommonModule, MaterialModule],
-  templateUrl: './mina-create-suite.component.html',
-  styleUrl: './mina-create-suite.component.scss',
+  templateUrl: './arafah-create-suite.component.html',
+  styleUrl: './arafah-create-suite.component.scss',
 })
-export class MinaCreateSuiteComponent implements OnInit {
+export class ArafahCreateSuiteComponent implements OnInit {
   ngOnInit(): void {
     this.controls.no_lounges.valueChanges.pipe().subscribe((v) => {
       if (v) {
@@ -32,15 +32,16 @@ export class MinaCreateSuiteComponent implements OnInit {
     new FormGroup({
       lounge_number: new FormControl(i),
       max_capacity: new FormControl<number>(capacity),
+      is_male_accommodation: new FormControl<boolean>(false),
     });
   form = new FormGroup({
     max_capacity: new FormControl<number>(0),
-    is_male_accommodation: new FormControl<boolean>(false),
     no_lounges: new FormControl<number>(0),
     lounges: new FormArray<
       FormGroup<{
         lounge_number: FormControl<number | null>;
         max_capacity: FormControl<number | null>;
+        is_male_accommodation: FormControl<boolean | null>;
       }>
     >([]),
   });
@@ -51,5 +52,6 @@ export class MinaCreateSuiteComponent implements OnInit {
 
   send() {
     const data = this.form.getRawValue();
+    console.log(data);
   }
 }

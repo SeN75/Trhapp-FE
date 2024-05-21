@@ -20,11 +20,11 @@ export const layoutShellRouting: Routes = [
           ),
       },
       {
-        path: 'accommodation-urafah',
-        loadComponent: () =>
+        path: 'arafah',
+        loadChildren: () =>
           import(
-            '../../../accommodation-urafah/features/accommodation-urafah/accommodation-urafah.component'
-          ).then((m) => m.AccommodationUrafahComponent),
+            '../../../arafah/features/arafah-shell/arafah-shell.routing'
+          ).then((m) => m.ArafahShellRoutes),
       },
       {
         path: 'suites',

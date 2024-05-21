@@ -14,7 +14,7 @@ export const getBusesEffects = createEffect(
     actions.pipe(
       ofType(MinaAction.get),
       switchMap(() => service.get()),
-      map((data) => MinaAction.success({ data })),
+      map((data: any) => MinaAction.getSuccess({ data })),
       catchError((error) => {
         logger.error('[getBusesEffects erorr]', error);
         return of(MinaAction.error({ error }));
@@ -22,22 +22,37 @@ export const getBusesEffects = createEffect(
     ),
   { functional: true }
 );
-// export const createBusEffects = createEffect(
-//   (
-//     actions = inject(Actions),
-//     service = inject(MinaService),
-//     logger = inject(LoggerService)
-//   ) =>
-//     actions.pipe(
-//       ofType(MinaAction.create),
-//       switchMap(({ supervisor }) => service.create(supervisor)),
-//       map((supervisors) =>
-//         MinaAction.success({ supervisors: [supervisors] })
-//       ),
-//       catchError((error) => {
-//         logger.error('[createBusEffects erorr]', error);
-//         return of(MinaAction.error({ error }));
-//       })
-//     ),
-//   { functional: true }
-// );
+export const createMinaEffects = createEffect(
+  (
+    actions = inject(Actions),
+    service = inject(MinaService),
+    logger = inject(LoggerService)
+  ) =>
+    actions.pipe(
+      ofType(MinaAction.create),
+      switchMap(({ payload, pack }) => service.create(payload, pack)),
+      map((data) => MinaAction.success()),
+      catchError((error) => {
+        logger.error('[createMinaEffects erorr]', error);
+        return of(MinaAction.error({ error }));
+      })
+    ),
+  { functional: true }
+);
+export const allocateMinaEffects = createEffect(
+  (
+    actions = inject(Actions),
+    service = inject(MinaService),
+    logger = inject(LoggerService)
+  ) =>
+    actions.pipe(
+      ofType(MinaAction.allocate),
+      switchMap(({ pack }) => service.allocate(pack)),
+      map((data) => MinaAction.success()),
+      catchError((error) => {
+        logger.error('[createMinaEffects erorr]', error);
+        return of(MinaAction.error({ error }));
+      })
+    ),
+  { functional: true }
+);

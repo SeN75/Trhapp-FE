@@ -1,6 +1,6 @@
 import { LoungeArafah, TPState } from '../../../shared/types/base.type';
 
-export type CreateLoungeArafah = Omit<LoungeArafah, 'id'>;
+export type CreateLoungeArafah = Omit<LoungeArafah, 'id' | 'name'>;
 export type UpdateLoungeArafah = Partial<LoungeArafah>;
 export type LoungesArafah = LoungeArafah[];
 

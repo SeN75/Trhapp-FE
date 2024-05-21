@@ -1,0 +1,195 @@
+<section class="page-content">
+  <h1 class="page-title">سكن منى - باقة 4</h1>
+  <div class="grid grid-cols-4 gap-4"></div>
+
+  <div class="card shadow-sm">
+    <div class="card-body flex flex-col gap-8">
+      <div class="flex gap-4" [formGroup]="form">
+        <div class="tp-control">
+          <label> رقم المبنى</label>
+          <label
+            class="input input-bordered flex items-center gap-2"
+            [ngClass]="{
+              'input-error':
+                controls.building_name.touched && controls.building_name.errors
+            }"
+          >
+            <input
+              type="text"
+              class="w-full"
+              maxlength="100"
+              placeholder="100"
+              formControlName="building_name"
+            />
+          </label>
+          @if(controls.building_name.touched && controls.building_name.errors) {
+          <small> حدث خطا </small>
+          }
+        </div>
+        <div class="tp-control">
+          <label> عدد الادوار</label>
+          <label
+            class="input input-bordered flex items-center gap-2"
+            [ngClass]="{
+              'input-error':
+                controls.no_of_floors.touched && controls.no_of_floors.errors
+            }"
+          >
+            <input
+              type="text"
+              class="w-full"
+              maxlength="100"
+              placeholder="100"
+              formControlName="no_of_floors"
+            />
+          </label>
+          @if(controls.no_of_floors.touched && controls.no_of_floors.errors) {
+          <small> حدث خطا </small>
+          }
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-4 flex-wrap">
+        @for (form of controls.floors.controls; track form; let i = $index) {
+        <form
+          [formGroup]="controls.floors.controls[i]"
+          class="flex flex-col gap-4"
+        >
+          <div class="flex gap-4">
+            <div class="tp-control">
+              <label> رقم الدور </label>
+              <label
+                class="input input-bordered flex items-center gap-2"
+                [ngClass]="{
+                  'input-error':
+                    controls.floors.controls[i].controls.floor_numbers
+                      .touched &&
+                    controls.floors.controls[i].controls.floor_numbers.errors
+                }"
+              >
+                <input
+                  type="text"
+                  class="w-full"
+                  maxlength="100"
+                  placeholder="100"
+                  formControlName="floor_numbers"
+                />
+              </label>
+              @if(controls.floors.controls[i].controls.floor_numbers.touched &&
+              controls.floors.controls[i].controls.floor_numbers.errors) {
+              <small> حدث خطا </small>
+              }
+            </div>
+            <div class="tp-control">
+              <label> عدد الغرف </label>
+              <label
+                class="input input-bordered flex items-center gap-2"
+                [ngClass]="{
+                  'input-error':
+                    controls.floors.controls[i].controls.no_of_rooms.touched &&
+                    controls.floors.controls[i].controls.no_of_rooms.errors
+                }"
+              >
+                <input
+                  type="text"
+                  class="w-full"
+                  maxlength="100"
+                  placeholder="100"
+                  formControlName="no_of_rooms"
+                />
+              </label>
+              @if(controls.floors.controls[i].controls.no_of_rooms.touched &&
+              controls.floors.controls[i].controls.no_of_rooms.errors) {
+              <small> حدث خطا </small>
+              }
+            </div>
+          </div>
+
+          <div class="bg-accent p-4 rounded-md">
+            <div class="flex gap-4">
+              @for (form of controls.floors.controls[i].controls.rooms.controls;
+              track form; let j = $index) {
+              <form
+                [formGroup]="
+                  controls.floors.controls[i].controls.rooms.controls[j]
+                "
+                class="flex flex-col gap-4"
+              >
+                <div class="tp-control">
+                  <label> رقم الغرفة </label>
+                  <label
+                    class="input input-bordered flex items-center gap-2"
+                    [ngClass]="{
+                      'input-error':
+                        controls.floors.controls[i].controls.rooms.controls[j]
+                          .controls.room_number.touched &&
+                        controls.floors.controls[i].controls.rooms.controls[j]
+                          .controls.room_number.errors
+                    }"
+                  >
+                    <input
+                      type="text"
+                      class="w-full"
+                      maxlength="100"
+                      placeholder="100"
+                      formControlName="room_number"
+                    />
+                  </label>
+                  @if(controls.floors.controls[i].controls.rooms.controls[j].controls.room_number.touched
+                  &&
+                  controls.floors.controls[i].controls.rooms.controls[j].controls.room_number.errors)
+                  {
+                  <small> حدث خطا </small>
+                  }
+                </div>
+                <div class="tp-control">
+                  <label> السعة </label>
+                  <label
+                    class="input input-bordered flex items-center gap-2"
+                    [ngClass]="{
+                      'input-error':
+                        controls.floors.controls[i].controls.rooms.controls[j]
+                          .controls.max_capacity.touched &&
+                        controls.floors.controls[i].controls.rooms.controls[j]
+                          .controls.max_capacity.errors
+                    }"
+                  >
+                    <input
+                      type="text"
+                      class="w-full"
+                      maxlength="100"
+                      placeholder="100"
+                      formControlName="max_capacity"
+                    />
+                  </label>
+                  @if(controls.floors.controls[i].controls.rooms.controls[j].controls.max_capacity.touched
+                  &&
+                  controls.floors.controls[i].controls.rooms.controls[j].controls.max_capacity.errors)
+                  {
+                  <small> حدث خطا </small>
+                  }
+                </div>
+                <div class="tp-control self-end">
+                  <label class="cursor-pointer label flex gap-2">
+                    <span class="label-text">سكن للاناث</span>
+                    <input
+                      type="checkbox"
+                      class="toggle toggle-primary"
+                      formControlName="is_male_accommodation"
+                    />
+                    <span class="label-text">سكن للذكور</span>
+                  </label>
+                </div>
+              </form>
+              }
+            </div>
+          </div>
+        </form>
+        }
+      </div>
+      <div class="flex">
+        <button class="btn btn-primary" (click)="send()">ارسال</button>
+      </div>
+    </div>
+  </div>
+</section>

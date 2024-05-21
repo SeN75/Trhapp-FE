@@ -1,45 +1,39 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { MinaAction } from './mina.action';
-import { initialMinaState } from '../../utils/types/mina.type';
+import { ArafahAction } from './arafah.action';
+import { initialArafahState } from '../../utils/types/arafah.type';
 import { TPState } from '../../../shared/types/base.type';
 
-export const MinasFeature = createFeature({
-  name: 'mina',
+export const ArafahsFeature = createFeature({
+  name: 'arafah',
   reducer: createReducer(
-    initialMinaState,
-    on(MinaAction.get, (state) => ({
+    initialArafahState,
+    on(ArafahAction.get, (state) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(MinaAction.create, (state) => ({
+    on(ArafahAction.create, (state) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(MinaAction.allocate, (state) => ({
+    on(ArafahAction.allocate, (state) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(MinaAction.getSuccess, (state, { data }) => ({
-      ...state,
-      isLoading: false,
-      data,
-      status: 'success' as TPState,
-    })),
-    on(MinaAction.success, (state) => ({
+    on(ArafahAction.success, (state) => ({
       ...state,
       isLoading: false,
       status: 'success' as TPState,
     })),
-    on(MinaAction.error, (state, { error }) => ({
+    on(ArafahAction.error, (state, { error }) => ({
       ...state,
       isLoading: false,
       errors: error,
       status: 'error' as TPState,
     })),
-    on(MinaAction.reset, (state) => ({
+    on(ArafahAction.reset, (state) => ({
       ...state,
       isLoading: null,
       errors: null,
@@ -49,8 +43,9 @@ export const MinasFeature = createFeature({
 });
 
 export const {
-  name: MinaFeatureKey,
-  reducer: MinaReducer,
+  name: ArafahFeatureKey,
+  reducer: ArafahReducer,
   selectIsLoading,
   selectErrors,
-} = MinasFeature;
+  selectStatus,
+} = ArafahsFeature;

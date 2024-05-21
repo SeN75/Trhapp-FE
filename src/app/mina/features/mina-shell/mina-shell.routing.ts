@@ -6,23 +6,37 @@ export const MinaShellRoutes: Routes = [
     path: '',
     component: MinaShellComponent,
     children: [
-      { path: '', redirectTo: 'pack1', pathMatch: 'full' },
+      // { path: '', redirectTo: 'pack1', pathMatch: 'full' },
+      // {
+      //   path: 'pack1',
+      //   loadComponent: () =>
+      //     import('../accommodation-mina/accommodation-mina.component').then(
+      //       (m) => m.AccommodationMinaComponent
+      //     ),
+      // },
       {
-        path: 'pack1',
+        path: 'pack4',
         loadComponent: () =>
-          import('../accommodation-mina/accommodation-mina.component').then(
-            (m) => m.AccommodationMinaComponent
+          import('../mina-building/mina-building.component').then(
+            (m) => m.MinaBuildingComponent
           ),
       },
       {
-        path: 'tent',
+        path: 'pack4/create',
+        loadComponent: () =>
+          import('../mina-create-building/mina-create-building.component').then(
+            (m) => m.MinaCreateBuildingComponent
+          ),
+      },
+      {
+        path: 'pack1',
         loadComponent: () =>
           import('../mina-tent/mina-tent.component').then(
             (m) => m.MinaTentComponent
           ),
       },
       {
-        path: 'tent/:id',
+        path: 'pack1/:id',
         children: [
           {
             path: '',

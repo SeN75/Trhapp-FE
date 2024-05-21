@@ -70,11 +70,16 @@ export type City = {
 export type BedTentArafah = {
   id: string;
   code: string;
+  pilgrim?: Pilgrim | null;
+  lounge?: LoungeArafah['id'];
   loungeArafahId: LoungeArafah['id']; // fk
 };
 export type LoungeArafah = {
   id: string;
   name: string;
+  lounge_number: number;
+  max_capacity: number;
+  is_male_accmidations: boolean;
 };
 
 export type Pilgrim = {

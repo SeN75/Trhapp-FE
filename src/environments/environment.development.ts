@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://trhapp-backend-waauq.ondigitalocean.app/api/',
-  authUrl: 'https://trhapp-backend-waauq.ondigitalocean.app/auth/',
-  opsUrl: 'https://trhapp-backend-waauq.ondigitalocean.app/ops/',
+  apiUrl: 'http://164.92.227.93:1080/api/',
+  authUrl: 'http://164.92.227.93:1080/auth/',
+  opsUrl: 'http://164.92.227.93:1080/ops/',
 };

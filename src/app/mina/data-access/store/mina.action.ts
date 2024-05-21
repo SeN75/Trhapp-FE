@@ -1,20 +1,21 @@
 import { createAction, props } from '@ngrx/store';
+import { CreateMinaPack1, CreateMinaPack4 } from '../../utils/types/mina.type';
 
 export const MinaAction = {
-  get: createAction('[Mina] get Supervisores'),
-  // create: createAction(
-  //   '[Mina] create Supervisores',
-  //   props<{ supervisor: CreateSupervisor }>()
-  // ),
-  // update: createAction(
-  //   '[Mina] update Supervisores',
-  //   props<{ updateSupervisor: UpdateSupervisor }>()
-  // ),
-  // delete: createAction(
-  //   '[Mina] delete Supervisores',
-  //   props<{ id: string }>()
-  // ),
-  success: createAction('[Mina] success', props<{ data: any[] }>()),
+  get: createAction('[Mina] get Mina'),
+  getSuccess: createAction('[Mina] get success', props<{ data: any[] }>()),
+  create: createAction(
+    '[Mina] create Accommodation',
+    props<{
+      payload: CreateMinaPack1 | CreateMinaPack4;
+      pack: 'package1' | 'package4';
+    }>()
+  ),
+  allocate: createAction(
+    '[Mina] allocate Accommodation',
+    props<{ pack: 'package1' | 'package4' }>()
+  ),
+  success: createAction('[Mina]  success'),
   error: createAction('[Mina] error', props<{ error: string }>()),
   reset: createAction('[Mina] reset'),
 };

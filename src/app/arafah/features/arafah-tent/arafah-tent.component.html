@@ -1,0 +1,26 @@
+<section class="page-content">
+  <h1 class="page-title">سكن عرفة - باقة 1</h1>
+  <div class="grid grid-cols-4 gap-4"></div>
+  <div class="flex w-full justify-end">
+    <div>
+      <button class="btn btn-primary" [routerLink]="['..', 'create']">
+        انشاء سكن جديد
+      </button>
+    </div>
+  </div>
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+  >
+    @for (item of obs | async; track $index) {
+    <tp-arafah-card [data]="item" />
+    }
+  </div>
+  <div class="flex justify-center">
+    <mat-paginator
+      appTpPaginator
+      [appCustomLength]="data.length"
+      [length]="dataSource.data.length"
+      [pageSize]="5"
+    />
+  </div>
+</section>

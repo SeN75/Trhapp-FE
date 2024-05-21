@@ -1,12 +1,12 @@
 <section class="page-content">
-  <h1 class="page-title">سكن منى - باقة 1 - جناح 4</h1>
+  <h1 class="page-title">سكن عرفة - باقة 1</h1>
   <div class="grid grid-cols-4 gap-4"></div>
 
   <div class="card shadow-sm">
     <div class="card-body flex flex-col gap-8">
       <div class="flex gap-4" [formGroup]="form">
         <div class="tp-control">
-          <label> عدد الصالات</label>
+          <label> عدد الغرف</label>
           <label
             class="input input-bordered flex items-center gap-2"
             [ngClass]="{
@@ -47,17 +47,6 @@
           <small> حدث خطا </small>
           }
         </div>
-        <div class="tp-control self-end">
-          <label class="cursor-pointer label flex gap-2">
-            <span class="label-text">سكن للاناث</span>
-            <input
-              type="checkbox"
-              class="toggle toggle-primary"
-              formControlName="is_male_accommodation"
-            />
-            <span class="label-text">سكن للذكور</span>
-          </label>
-        </div>
       </div>
 
       <div class="flex gap-4 flex-wrap">
@@ -65,7 +54,7 @@
         <form [formGroup]="controls.lounges.controls[i]">
           <div class="tp-control">
             <label>
-              صالة
+              غرفة
 
               {{ controls.lounges.controls[i].controls.lounge_number.value }}
             </label>
@@ -89,6 +78,17 @@
             controls.lounges.controls[i].controls.max_capacity.errors) {
             <small> حدث خطا </small>
             }
+          </div>
+          <div class="tp-control self-end">
+            <label class="cursor-pointer label flex gap-2">
+              <span class="label-text">سكن للاناث</span>
+              <input
+                type="checkbox"
+                class="toggle toggle-primary"
+                formControlName="is_male_accommodation"
+              />
+              <span class="label-text">سكن للذكور</span>
+            </label>
           </div>
         </form>
         }

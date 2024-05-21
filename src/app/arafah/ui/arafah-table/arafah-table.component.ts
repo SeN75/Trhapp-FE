@@ -7,7 +7,7 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.directive';
 
 @Component({
-  selector: 'tp-accommodation-urafah-table',
+  selector: 'tp-arafah-table',
   standalone: true,
   imports: [
     CommonModule,
@@ -17,10 +17,10 @@ import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.dir
     MatButton,
     MatRipple,
   ],
-  templateUrl: './accommodation-urafah-table.component.html',
-  styleUrl: './accommodation-urafah-table.component.scss',
+  templateUrl: './arafah-table.component.html',
+  styleUrl: './arafah-table.component.scss',
 })
-export class AccommodationUrafahTableComponent implements AfterViewInit {
+export class ArafahTableComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }

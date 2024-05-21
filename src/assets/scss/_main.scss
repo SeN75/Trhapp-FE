@@ -110,3 +110,15 @@ mat-paginator {
     @apply text-error font-f1 font-semibold text-xs px-2;
   }
 }
+
+.list-data {
+  @apply flex flex-col gap-3;
+
+  li {
+    @apply flex justify-between items-center;
+
+    .label {
+      @apply font-bold flex gap-1 items-center;
+    }
+  }
+}

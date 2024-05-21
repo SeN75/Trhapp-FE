@@ -1,31 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, switchMap, map, catchError, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
-import {
-  CreateMinaPack1,
-  CreateMinaPack4,
-  ResponsCreateMinaPack1,
-  ResponsCreateMinaPack4,
-} from '../../utils/types/mina.type';
+import { catchError, map, tap } from 'rxjs';
 import { LoggerService } from '../../../shared/service/logger.service';
+import {
+  CreateArafahPack1,
+  ResponsCreatePack1,
+} from '../../utils/types/arafah.type';
 
 @Injectable({
   providedIn: 'root',
 })
-export class MinaService {
+export class ArafahService {
   private http = inject(HttpClient);
-  private package1Url = `${environment.apiUrl}/package1/mina`;
-  private package4Url = `${environment.apiUrl}/package4/mina`;
   private logger = inject(LoggerService);
+  private package1Url = `${environment.apiUrl}/package1/arafah`;
+  private package4Url = `${environment.apiUrl}/package4/arafah`;
+
   get() {
     return ['', ''];
   }
-  create(payload: CreateMinaPack1 | CreateMinaPack4, pack = this.package1Url) {
+  create(payload: CreateArafahPack1, pack = this.package1Url) {
     return this.http
-      .post<ResponsCreateMinaPack1 | ResponsCreateMinaPack4>(`${pack}/create`, {
-        ...payload,
-      })
+      .post<ResponsCreatePack1>(`${pack}/create`, { ...payload })
       .pipe(
         tap((res) => this.logger.log('[create success]', res)),
         catchError((error) => {
