@@ -15,17 +15,20 @@ import { LoggerService } from '../../../shared/service/logger.service';
 })
 export class MinaService {
   private http = inject(HttpClient);
-  private package1Url = `${environment.apiUrl}/package1/mina`;
-  private package4Url = `${environment.apiUrl}/package4/mina`;
+  private package1Url = `${environment.apiUrl}package1/mina`;
+  private package4Url = `${environment.apiUrl}package4/mina`;
   private logger = inject(LoggerService);
   get() {
     return ['', ''];
   }
   create(payload: CreateMinaPack1 | CreateMinaPack4, pack = this.package1Url) {
     return this.http
-      .post<ResponsCreateMinaPack1 | ResponsCreateMinaPack4>(`${pack}/create`, {
-        ...payload,
-      })
+      .post<ResponsCreateMinaPack1 | ResponsCreateMinaPack4>(
+        `${pack.includes('4') ? this.package4Url : this.package1Url}/create/`,
+        {
+          ...payload,
+        }
+      )
       .pipe(
         tap((res) => this.logger.log('[create success]', res)),
         catchError((error) => {

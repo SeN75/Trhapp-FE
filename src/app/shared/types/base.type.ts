@@ -16,25 +16,29 @@ export type BedTentMina = {
 export type BedBuidingMina = {
   id: string;
   code: string;
-  roomId: Room['id']; // fx
+  room: Room['id']; // fx
+  pilgrim: Pilgrim | null;
 };
 export type Room = {
   id: string;
   number: number;
   max_capacity: number;
   current_capacity: number;
-  floorId: Floor['id'];
+  floor: Floor['id'];
+  beds: BedBuidingMina[] | null;
 };
 export type Floor = {
   id: string;
   number: number;
-  buildingId: Building['id'];
+  building: Building['id'];
+  rooms?: Room[] | null;
 };
 export type Building = {
   id: string;
-  number: number;
+  name: number;
   max_capacity: number;
   current_capacity: number;
+  floors?: Floor[] | null;
 };
 export type Supervisor = {
   id: string;

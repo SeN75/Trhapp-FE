@@ -16,6 +16,7 @@ export const getBuildingEffects = createEffect(
     actions.pipe(
       ofType(BuildingAction.get),
       switchMap(() => service.get()),
+      tap((res) => logger.log('[getBuildingEffects success]', res)),
       map((buildings) => BuildingAction.getSuccess({ buildings })),
       catchError((error) => {
         logger.error('[getBuildingEffects erorr]', error);

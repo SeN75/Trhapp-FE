@@ -32,11 +32,37 @@ export class AuthService {
     password: string;
   }) {
     return this.http
-      .post<Auth>(`${this.URL}login`, { phone_number, password })
+      .post<Auth>(`${this.URL}login/`, { phone_number, password })
       .pipe(
         tap(({ access, refresh }) => {
           localStorage.setItem('token', JSON.stringify({ access, refresh }));
           this.auth.next({ access, refresh });
+        }),
+        catchError((error) => {
+          this.logger.error(error);
+          return error;
+        })
+      );
+  }
+  signUp({
+    phone_number,
+    password,
+    registration_code,
+  }: {
+    phone_number: string;
+    password: string;
+    registration_code: string;
+  }) {
+    return this.http
+      .post<Auth>(`${this.URL}register/`, {
+        phone_number,
+        password,
+        registration_code,
+      })
+      .pipe(
+        tap(({ access, refresh }) => {
+          // localStorage.setItem('token', JSON.stringify({ access, refresh }));
+          // this.auth.next({ access, refresh });
         }),
         catchError((error) => {
           this.logger.error(error);

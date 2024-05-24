@@ -7,5 +7,19 @@
     </div>
   </div>
 
-  <!-- <tp-mina-tent-table /> -->
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+  >
+    @for (item of obs | async; track $index) {
+    <tp-mina-building-card [data]="item" />
+    }
+  </div>
+  <div class="flex justify-center">
+    <mat-paginator
+      appTpPaginator
+      [appCustomLength]="dataSource.data.length"
+      [length]="dataSource.data.length"
+      [pageSize]="4"
+    />
+  </div>
 </section>

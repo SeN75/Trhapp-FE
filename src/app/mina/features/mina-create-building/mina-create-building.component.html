@@ -62,21 +62,20 @@
                 class="input input-bordered flex items-center gap-2"
                 [ngClass]="{
                   'input-error':
-                    controls.floors.controls[i].controls.floor_numbers
-                      .touched &&
-                    controls.floors.controls[i].controls.floor_numbers.errors
+                    controls.floors.controls[i].controls.floor_number.touched &&
+                    controls.floors.controls[i].controls.floor_number.errors
                 }"
               >
                 <input
-                  type="text"
                   class="w-full"
                   maxlength="100"
                   placeholder="100"
-                  formControlName="floor_numbers"
+                  type="number"
+                  formControlName="floor_number"
                 />
               </label>
-              @if(controls.floors.controls[i].controls.floor_numbers.touched &&
-              controls.floors.controls[i].controls.floor_numbers.errors) {
+              @if(controls.floors.controls[i].controls.floor_number.touched &&
+              controls.floors.controls[i].controls.floor_number.errors) {
               <small> حدث خطا </small>
               }
             </div>
@@ -128,7 +127,7 @@
                     }"
                   >
                     <input
-                      type="text"
+                      type="number"
                       class="w-full"
                       maxlength="100"
                       placeholder="100"
@@ -155,7 +154,7 @@
                     }"
                   >
                     <input
-                      type="text"
+                      type="number"
                       class="w-full"
                       maxlength="100"
                       placeholder="100"

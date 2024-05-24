@@ -20,7 +20,9 @@ export class BuildingService {
   constructor() {}
 
   get(): Observable<Buildings> {
-    return this.http.get<Buildings>(this.url);
+    return this.http
+      .get<Buildings>(this.url)
+      .pipe(tap((res) => this.logger.log('[get success]', res)));
   }
 
   getById(id: string): Observable<Building> {

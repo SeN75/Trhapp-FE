@@ -44,7 +44,7 @@ export type CreateMinaPack4 = {
       max_capacity: number;
     }[];
   }[];
-}[];
+};
 export type ResponsCreateMinaPack4 = {};
 export const initialMinaState: MinaState = {
   isLoading: null,

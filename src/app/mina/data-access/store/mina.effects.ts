@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LoggerService } from '../../../shared/service/logger.service';
 import { MinaAction } from './mina.action';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { MinaService } from '../service/mina.service';
 
 export const getBusesEffects = createEffect(
@@ -30,6 +30,7 @@ export const createMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(MinaAction.create),
+      tap((data) => logger.log('[createMinaEffects]', data)),
       switchMap(({ payload, pack }) => service.create(payload, pack)),
       map((data) => MinaAction.success()),
       catchError((error) => {

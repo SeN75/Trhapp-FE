@@ -105,7 +105,7 @@ export class TpPaginatorDirective implements AfterViewInit {
   private changeActiveButtonStyles(previousIndex: number, newIndex: number) {
     const previouslyActive = this.buttonsRef[previousIndex];
     const currentActive = this.buttonsRef[newIndex];
-
+    console.log(this.ren);
     // remove active style from previously active button
     this.ren.removeClass(previouslyActive, 'g-bubble__active');
 

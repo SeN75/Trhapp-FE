@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MaterialModule } from '../../../shared/module/material.module';
 import { NgClass } from '@angular/common';
 import { AuthService } from '../../../shared/service/auth.service';
-import { catchError, delay, tap } from 'rxjs';
+import { catchError, delay, of, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoggerService } from '../../../shared/service/logger.service';
 
@@ -39,7 +39,7 @@ export class LoginComponent {
           tap(() => this.router.navigate(['/', 'l'])),
           catchError((error) => {
             this.isLoading = false;
-            return error;
+            return of(error);
           })
         )
         .subscribe();

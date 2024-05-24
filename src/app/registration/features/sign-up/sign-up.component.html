@@ -1,1 +1,74 @@
-<p>sign-up works!</p>
+<section>
+  <div class="card w-96 bg-base-100 shadow-xl">
+    <div class="card-body" [formGroup]="form">
+      <h2 class="card-title mb-4">تسجيل</h2>
+      @if (!isLoading ) {
+
+      <ng-container>
+        <label
+          class="input input-bordered input-secondary flex items-center gap-2"
+          [ngClass]="{
+            'input-error':
+              controls.phone_number.touched && controls.phone_number.errors
+          }"
+        >
+          <input
+            type="text"
+            class="grow"
+            placeholder="رقم الجوال"
+            formControlName="phone_number"
+          />
+          @if (controls.phone_number.touched && controls.phone_number.errors) {}
+          <small class="text-error-500"></small>
+        </label>
+        <label
+          class="input input-bordered input-secondary flex items-center gap-2"
+          [ngClass]="{
+            'input-error': controls.password.touched && controls.password.errors
+          }"
+        >
+          <input
+            type="password"
+            class="grow"
+            placeholder="كلمة السر"
+            formControlName="password"
+          />
+        </label>
+        <label
+          class="input input-bordered input-secondary flex items-center gap-2"
+          [ngClass]="{
+            'input-error':
+              controls.registration_code.touched &&
+              controls.registration_code.errors
+          }"
+        >
+          <input
+            type="text"
+            class="grow"
+            placeholder="رمز الدعوة"
+            formControlName="registration_code"
+          />
+        </label>
+        <div class="card-actions justify-end mt-4">
+          <button
+            class="btn btn-primary"
+            [disabled]="isLoading"
+            (click)="signup()"
+          >
+            تسجيل
+          </button>
+        </div>
+        <div class="" *ngIf="hasError">
+          <p class="text-error">خطأ في التسجيل</p>
+        </div>
+      </ng-container>
+      } @else {
+      <ng-container>
+        <div class="h-[200px] flex justify-center items-center">
+          <span class="loading loading-dots loading-lg"></span>
+        </div>
+      </ng-container>
+      }
+    </div>
+  </div>
+</section>

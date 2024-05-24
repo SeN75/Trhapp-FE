@@ -10,9 +10,10 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideEffects } from '@ngrx/effects';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { storeProviders } from './app.store';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AppTranslateModule } from './app.translate';
 import { LoggerService } from './shared/service/logger.service';
+import { authInterceptor } from './shared/interceptor/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     ...storeProviders.providers,
     // provideHttpClient(withInterceptors([appIdInterceptor])), // TODO: Add interceptor
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([authInterceptor])),
     importProvidersFrom(AppTranslateModule),
     provideEffects(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),

@@ -86,6 +86,11 @@ import {
   RoomReducer,
 } from './building/data-access/store/rooms.reducer';
 import * as RoomEffect from './building/data-access/store/rooms.effects';
+import {
+  MinaFeatureKey,
+  MinaReducer,
+} from './mina/data-access/store/mina.reducer';
+import * as MinaEffect from './mina/data-access/store/mina.effects';
 
 export const storeProviders = {
   providers: [
@@ -106,7 +111,7 @@ export const storeProviders = {
     provideState(BuildingFeatureKey, BuildingReducer),
     provideState(FloorFeatureKey, FloorReducer),
     provideState(RoomFeatureKey, RoomReducer),
-
+    provideState(MinaFeatureKey, MinaReducer),
     provideEffects([
       UploadOpsEffect,
       ArafahEffect,
@@ -124,6 +129,7 @@ export const storeProviders = {
       BuildingEffect,
       FloorEffect,
       RoomEffect,
+      MinaEffect,
     ]),
     provideStoreDevtools({
       maxAge: 25,

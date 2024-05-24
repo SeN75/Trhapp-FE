@@ -1,7 +1,15 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { MaterialModule } from '../../../shared/module/material.module';
+import { Store } from '@ngrx/store';
+import { BuildingState } from '../../../building/utils/types/building.type';
+import {
+  CreateMinaPack1,
+  CreateMinaPack4,
+  MinaState,
+} from '../../utils/types/mina.type';
+import { MinaAction } from '../../data-access/store/mina.action';
 
 @Component({
   selector: 'app-mina-create-building',
@@ -11,9 +19,10 @@ import { MaterialModule } from '../../../shared/module/material.module';
   styleUrl: './mina-create-building.component.scss',
 })
 export class MinaCreateBuildingComponent implements OnInit {
+  private store = inject(Store<{ mina: MinaState }>);
   initalFloor = (i = 0) =>
     new FormGroup({
-      floor_numbers: new FormControl(i),
+      floor_number: new FormControl(i),
       no_of_rooms: new FormControl(0),
       rooms: new FormArray<
         FormGroup<{
@@ -35,7 +44,7 @@ export class MinaCreateBuildingComponent implements OnInit {
     no_of_floors: new FormControl<number>(0),
     floors: new FormArray<
       FormGroup<{
-        floor_numbers: FormControl<number | null>;
+        floor_number: FormControl<number | null>;
         no_of_rooms: FormControl<number | null>;
         rooms: FormArray<
           FormGroup<{
@@ -83,7 +92,39 @@ export class MinaCreateBuildingComponent implements OnInit {
     });
   }
   send() {
-    const data = this.form.getRawValue();
-    console.log(data);
+    const data = this.form.getRawValue() as unknown as CreateMinaPack4;
+    const payload: CreateMinaPack4 = {
+      building_name: data.building_name,
+      floors: data.floors.map((v) => {
+        return {
+          floor_number: v.floor_number,
+          rooms: v.rooms.map((v2) => {
+            return {
+              room_number: v2.room_number,
+              is_male_accommodation: v2.is_male_accommodation,
+              max_capacity: v2.max_capacity,
+            };
+          }),
+        };
+      }),
+    };
+
+    // data.map((v) => {
+    //   v.building_name;
+
+    //   return {
+    //     building_name: v.building_name,
+    //     floors: v.floors.map((v2) => {
+    //       return {
+    //         floor_number: v2.floor_number,
+    //         rooms: v2.rooms,
+    //       };
+    //     }),
+    //   };
+    // });
+    console.log(payload);
+    if (this.form.valid) {
+      this.store.dispatch(MinaAction.create({ payload, pack: 'package4' }));
+    }
   }
 }

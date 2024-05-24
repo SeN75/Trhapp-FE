@@ -1,0 +1,40 @@
+<div
+  class="card shadow-xl"
+  [ngClass]="{
+    'bg-accent':
+      data.max_capacity !== 0 && data.max_capacity === data.current_capacity
+  }"
+>
+  <div class="card-body flex gap-8">
+    <header class="card-title text-primary">{{ data.name }}</header>
+    <ul class="list-data">
+      <li>
+        <span class="label">
+          <mat-icon>space_bar</mat-icon>
+          عدد الادوار
+        </span>
+        <span class="total">{{ data.floors?.length }}</span>
+      </li>
+      <li>
+        <span class="label">
+          <mat-icon>space_bar</mat-icon>
+          السعة الحالية
+        </span>
+        <span class="total">{{ data.current_capacity }}</span>
+      </li>
+      <li>
+        <span class="label">
+          <mat-icon>space_bar</mat-icon>
+          السعة المتاحة
+        </span>
+        <span class="total">{{ data.max_capacity }}</span>
+      </li>
+    </ul>
+
+    <div class="flex justify-between gap-4">
+      <button class="btn btn-primary" [routerLink]="data.id + ''">
+        عرض الاستراحة
+      </button>
+    </div>
+  </div>
+</div>
