@@ -9,7 +9,7 @@ import { LoggerService } from './logger.service';
 })
 export class UploadOpsService {
   private http = inject(HttpClient);
-  private url = `${environment.opsUrl}upload`;
+  private url = `${environment.opsUrl}upload/`;
   private logger = inject(LoggerService);
   upload(file: File) {
     const formData = new FormData();

@@ -29,9 +29,10 @@
       </div>
       <input
         type="file"
-        [formControl]="fileCtrl"
+        #file
+        (change)="onFileChange($event)"
         class="file-input file-input-bordered file-input-accent w-full max-w-xs"
-        accept=".csv"
+        accept=".csv,.xls,.xlsx"
       />
       <div class="label">
         <span class="label-text-alt">CSV only</span>

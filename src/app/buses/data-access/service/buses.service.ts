@@ -11,7 +11,7 @@ import { LoggerService } from '../../../shared/service/logger.service';
 })
 export class BusesService {
   private http = inject(HttpClient);
-  private url = `${environment.apiUrl}/buses/`;
+  private url = `${environment.apiUrl}buses/`;
   private logger = inject(LoggerService);
   get(): Observable<Buses> {
     return this.http.get<Buses>(this.url);

@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  if (req.url.includes('api')) {
+  if (req.url.includes('api') || req.url.includes('ops')) {
     let headers = req.headers;
     const token = JSON.parse(localStorage.getItem('token') as string) as {
       refresh: string;

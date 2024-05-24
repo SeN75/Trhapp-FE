@@ -30,10 +30,14 @@ export class UploadOperationsComponent {
   fileCtrl = new FormControl<File | null>(null, [Validators.required]);
 
   onClick() {
-    const file = this.fileCtrl.getRawValue();
+    const file = this.fileCtrl.value;
+    console.log({ file });
     if (file) this.store.dispatch(UploadOperationActions.upload({ file }));
   }
 
+  onFileChange(event: any) {
+    this.fileCtrl.patchValue(event.target.files[0]);
+  }
   constructor(
     public dialogRef: MatDialogRef<UploadOperationsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: unknown
