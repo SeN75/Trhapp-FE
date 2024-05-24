@@ -24,6 +24,8 @@ import { Store } from '@ngrx/store';
 import { selectLounges_arafah } from '../../data-access/store/lounge-arafah.reducer';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LoungeArafah } from '../../../shared/types/base.type';
+import { ArafahState } from '../../utils/types/arafah.type';
+import { ArafahAction } from '../../data-access/store/arafah.action';
 
 @Component({
   selector: 'app-arafah-tent',
@@ -41,14 +43,15 @@ import { LoungeArafah } from '../../../shared/types/base.type';
 })
 export class ArafahTentComponent implements AfterViewInit {
   private store = inject(Store<{ lounges_arafah: LoungeArafahState }>);
+  private arafahStore = inject(Store<{ arafah: ArafahState }>);
   lounges$ = this.store.select(selectLounges_arafah);
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
   constructor() {
     this.lounges$.pipe(takeUntilDestroyed()).subscribe((data) => {
-      console.log(data);
       this.dataSource.data = data || [];
     });
   }
@@ -56,4 +59,8 @@ export class ArafahTentComponent implements AfterViewInit {
   private dialog = inject(MatDialog);
   obs = this.dataSource.connect();
   createPlace() {}
+
+  allocate() {
+    this.arafahStore.dispatch(ArafahAction.allocate({ pack: 'package1' }));
+  }
 }
