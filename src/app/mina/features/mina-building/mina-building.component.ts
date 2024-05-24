@@ -11,6 +11,8 @@ import { BuildingState } from '../../../building/utils/types/building.type';
 import { selectBuildings } from '../../../building/data-access/store/building.reducer';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Building } from '../../../shared/types/base.type';
+import { MinaState } from '../../utils/types/mina.type';
+import { MinaAction } from '../../data-access/store/mina.action';
 @Component({
   selector: 'app-mina-building',
   standalone: true,
@@ -26,6 +28,7 @@ import { Building } from '../../../shared/types/base.type';
 })
 export class MinaBuildingComponent implements AfterViewInit {
   private store = inject(Store<{ building: BuildingState }>);
+  private minaStore = inject(Store<{ mina: MinaState }>);
   building$ = this.store.select(selectBuildings);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource = new MatTableDataSource<Building>();
@@ -37,5 +40,8 @@ export class MinaBuildingComponent implements AfterViewInit {
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+  allocate() {
+    this.minaStore.dispatch(MinaAction.allocate({ pack: 'package4' }));
   }
 }

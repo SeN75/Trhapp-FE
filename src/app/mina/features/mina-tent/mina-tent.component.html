@@ -1,7 +1,9 @@
 <section class="page-content">
   <h1 class="page-title">سكن منى - باقة 1</h1>
   <div class="grid grid-cols-4 gap-4"></div>
-  <div class="flex w-full justify-end">
+  <div class="flex w-full justify-end gap-2">
+    <button (click)="allocate()" class="btn btn-primary">تسكين الحجاج</button>
+
     <div>
       <button class="btn btn-primary" [routerLink]="['create']">
         انشاء سكن جديد

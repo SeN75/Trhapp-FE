@@ -8,6 +8,8 @@ import { LoungeMinaAction } from '../../data-access/store/lounge-mina.action';
 import { SuiteState } from '../../utils/types/suites.type';
 import { SuitesAction } from '../../data-access/store/suites.action';
 import { RouterLink } from '@angular/router';
+import { MinaState } from '../../utils/types/mina.type';
+import { MinaAction } from '../../data-access/store/mina.action';
 
 @Component({
   selector: 'app-mina-tent',
@@ -18,7 +20,8 @@ import { RouterLink } from '@angular/router';
 })
 export class MinaTentComponent implements OnInit {
   private dialog = inject(MatDialog);
-  private store = inject(Store<{ suites: SuiteState }>);
+  private store = inject(Store<{ mina: MinaState }>);
+
   createPlace() {
     this.dialog.open(MinaCreatePlaceComponent, {
       width: '90%',
@@ -30,6 +33,10 @@ export class MinaTentComponent implements OnInit {
         type: 'create',
       },
     });
+  }
+
+  allocate() {
+    this.store.dispatch(MinaAction.allocate({ pack: 'package1' }));
   }
 
   ngOnInit(): void {}

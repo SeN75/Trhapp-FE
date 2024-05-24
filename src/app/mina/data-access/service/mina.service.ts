@@ -38,12 +38,17 @@ export class MinaService {
       );
   }
   allocate(pack = this.package1Url) {
-    return this.http.post(`${pack}/allocate`, {}).pipe(
-      tap((res) => this.logger.log('[create success]', res)),
-      catchError((error) => {
-        this.logger.error('[create error]', error);
-        throw error;
-      })
-    );
+    return this.http
+      .post(
+        `${pack.includes('4') ? this.package4Url : this.package1Url}/allocate/`,
+        {}
+      )
+      .pipe(
+        tap((res) => this.logger.log('[create success]', res)),
+        catchError((error) => {
+          this.logger.error('[create error]', error);
+          throw error;
+        })
+      );
   }
 }
