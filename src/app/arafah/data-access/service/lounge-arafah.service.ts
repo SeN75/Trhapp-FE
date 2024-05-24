@@ -15,7 +15,7 @@ import {
 })
 export class LoungeArafahService {
   private http = inject(HttpClient);
-  private url = `${environment.apiUrl}lounges_arafah/`;
+  private url = `${environment.apiUrl}lounges-arafah/`;
   private logger = inject(LoggerService);
   constructor() {}
 

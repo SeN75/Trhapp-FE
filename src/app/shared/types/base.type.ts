@@ -86,6 +86,7 @@ export type LoungeArafah = {
   name: string;
   lounge_number: number;
   max_capacity: number;
+  current_capacity: number;
   is_male_accmidations: boolean;
 };
 

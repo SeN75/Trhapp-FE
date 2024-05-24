@@ -14,15 +14,18 @@ import {
 export class ArafahService {
   private http = inject(HttpClient);
   private logger = inject(LoggerService);
-  private package1Url = `${environment.apiUrl}/package1/arafah`;
-  private package4Url = `${environment.apiUrl}/package4/arafah`;
+  private package1Url = `${environment.apiUrl}package1/arafah`;
+  private package4Url = `${environment.apiUrl}package4/arafah`;
 
   get() {
     return ['', ''];
   }
   create(payload: CreateArafahPack1, pack = this.package1Url) {
     return this.http
-      .post<ResponsCreatePack1>(`${pack}/create`, { ...payload })
+      .post<ResponsCreatePack1>(
+        `${pack.includes('4') ? this.package4Url : this.package1Url}/create/`,
+        { ...payload }
+      )
       .pipe(
         tap((res) => this.logger.log('[create success]', res)),
         catchError((error) => {
@@ -32,12 +35,17 @@ export class ArafahService {
       );
   }
   allocate(pack = this.package1Url) {
-    return this.http.post(`${pack}/allocate`, {}).pipe(
-      tap((res) => this.logger.log('[create success]', res)),
-      catchError((error) => {
-        this.logger.error('[create error]', error);
-        throw error;
-      })
-    );
+    return this.http
+      .post(
+        `${pack.includes('4') ? this.package4Url : this.package1Url}/allocate/`,
+        {}
+      )
+      .pipe(
+        tap((res) => this.logger.log('[create success]', res)),
+        catchError((error) => {
+          this.logger.error('[create error]', error);
+          throw error;
+        })
+      );
   }
 }

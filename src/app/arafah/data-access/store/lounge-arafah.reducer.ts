@@ -59,6 +59,6 @@ export const {
   selectSelectedLoungeArafah,
   selectIsLoading,
   selectErrors,
-  selectLounge_arafah,
+  selectLounges_arafah,
   selectSelectedLoungeArafahIndex,
 } = LoungeArafahFeature;

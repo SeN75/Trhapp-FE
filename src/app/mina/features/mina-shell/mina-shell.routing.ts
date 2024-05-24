@@ -6,14 +6,7 @@ export const MinaShellRoutes: Routes = [
     path: '',
     component: MinaShellComponent,
     children: [
-      // { path: '', redirectTo: 'pack1', pathMatch: 'full' },
-      // {
-      //   path: 'pack1',
-      //   loadComponent: () =>
-      //     import('../accommodation-mina/accommodation-mina.component').then(
-      //       (m) => m.AccommodationMinaComponent
-      //     ),
-      // },
+      { path: '', redirectTo: 'pack1', pathMatch: 'full' },
       {
         path: 'pack4',
         loadComponent: () =>

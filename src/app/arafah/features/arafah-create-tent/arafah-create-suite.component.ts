@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { MaterialModule } from '../../../shared/module/material.module';
+import { ArafahState, CreateArafahPack1 } from '../../utils/types/arafah.type';
+import { Store } from '@ngrx/store';
+import { ArafahAction } from '../../data-access/store/arafah.action';
 
 @Component({
   selector: 'app-arafah-create-suite',
@@ -11,6 +14,7 @@ import { MaterialModule } from '../../../shared/module/material.module';
   styleUrl: './arafah-create-suite.component.scss',
 })
 export class ArafahCreateSuiteComponent implements OnInit {
+  private store = inject(Store<{ arafah: ArafahState }>);
   ngOnInit(): void {
     this.controls.no_lounges.valueChanges.pipe().subscribe((v) => {
       if (v) {
@@ -24,7 +28,9 @@ export class ArafahCreateSuiteComponent implements OnInit {
     });
     this.controls.max_capacity.valueChanges.pipe().subscribe((v) => {
       for (let i = 0; i < this.controls.lounges.controls.length; i++) {
-        this.controls.lounges.controls[i].controls.max_capacity.setValue(v);
+        this.controls.lounges.controls[i].controls.max_capacity.setValue(
+          v ? +v : 0
+        );
       }
     });
   }
@@ -51,7 +57,9 @@ export class ArafahCreateSuiteComponent implements OnInit {
   }
 
   send() {
-    const data = this.form.getRawValue();
-    console.log(data);
+    const payload = this.form.getRawValue() as unknown as CreateArafahPack1;
+    console.log(payload);
+    if (payload)
+      this.store.dispatch(ArafahAction.create({ payload, pack: 'package1' }));
   }
 }

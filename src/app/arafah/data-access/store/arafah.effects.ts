@@ -2,8 +2,11 @@ import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LoggerService } from '../../../shared/service/logger.service';
 import { ArafahAction } from './arafah.action';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { ArafahService } from '../service/arafah.service';
+import { LoungeArafahState } from '../../utils/types/lounges-arafah.type';
+import { Store } from '@ngrx/store';
+import { LoungeArafahAction } from './lounge-arafah.action';
 
 export const getArafahEffects = createEffect(
   (
@@ -55,4 +58,17 @@ export const allocateArafahEffects = createEffect(
       })
     ),
   { functional: true }
+);
+
+export const createEffectSuccess = createEffect(
+  (
+    actions = inject(Actions),
+    logger = inject(LoggerService),
+    store = inject(Store<{ lounges_arafah: LoungeArafahState }>)
+  ) =>
+    actions.pipe(
+      ofType(ArafahAction.success),
+      tap(() => store.dispatch(LoungeArafahAction.get()))
+    ),
+  { functional: true, dispatch: false }
 );

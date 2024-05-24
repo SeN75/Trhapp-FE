@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { ArafahShellComponent } from './mina-shell.component';
+import { ArafahShellComponent } from './arafah-shell.component';
 
 export const ArafahShellRoutes: Routes = [
   {

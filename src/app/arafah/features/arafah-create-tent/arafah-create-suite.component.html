@@ -53,11 +53,30 @@
         @for (form of controls.lounges.controls; track form; let i = $index) {
         <form [formGroup]="controls.lounges.controls[i]">
           <div class="tp-control">
-            <label>
-              غرفة
-
-              {{ controls.lounges.controls[i].controls.lounge_number.value }}
+            <label> الصالة </label>
+            <label
+              class="input input-bordered flex items-center gap-2"
+              [ngClass]="{
+                'input-error':
+                  controls.lounges.controls[i].controls.lounge_number.touched &&
+                  controls.lounges.controls[i].controls.lounge_number.errors
+              }"
+            >
+              <input
+                type="text"
+                class="w-full"
+                maxlength="100"
+                placeholder="100"
+                formControlName="lounge_number"
+              />
             </label>
+            @if(controls.lounges.controls[i].controls.max_capacity.touched &&
+            controls.lounges.controls[i].controls.max_capacity.errors) {
+            <small> حدث خطا </small>
+            }
+          </div>
+          <div class="tp-control">
+            <label> السعة </label>
             <label
               class="input input-bordered flex items-center gap-2"
               [ngClass]="{
@@ -67,7 +86,7 @@
               }"
             >
               <input
-                type="text"
+                type="number"
                 class="w-full"
                 maxlength="100"
                 placeholder="100"
