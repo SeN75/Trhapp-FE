@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MinaSuitesTableComponent } from '../../ui/mina-suites-table/mina-suites-table.component';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-mina-view-suites',
@@ -10,4 +10,11 @@ import { RouterLink } from '@angular/router';
   templateUrl: './mina-view-suites.component.html',
   styleUrl: './mina-view-suites.component.scss',
 })
-export class MinaViewSuitesComponent {}
+export class MinaViewSuitesComponent implements OnInit {
+  suiteId = '';
+  ngOnInit(): void {
+    this.suiteId = this.aRouter.snapshot.params['id'] || '';
+  }
+
+  private aRouter = inject(ActivatedRoute);
+}

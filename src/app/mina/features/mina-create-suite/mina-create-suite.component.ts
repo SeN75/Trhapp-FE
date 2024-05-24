@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { MaterialModule } from '../../../shared/module/material.module';
+import { Store } from '@ngrx/store';
+import { CreateMinaPack1, MinaState } from '../../utils/types/mina.type';
+import { MinaAction } from '../../data-access/store/mina.action';
 
 @Component({
   selector: 'app-mina-create-suite',
@@ -11,6 +14,7 @@ import { MaterialModule } from '../../../shared/module/material.module';
   styleUrl: './mina-create-suite.component.scss',
 })
 export class MinaCreateSuiteComponent implements OnInit {
+  private store = inject(Store<{ mina: MinaState }>);
   ngOnInit(): void {
     this.controls.no_lounges.valueChanges.pipe().subscribe((v) => {
       if (v) {
@@ -30,16 +34,17 @@ export class MinaCreateSuiteComponent implements OnInit {
   }
   initalLounge = (i = 0, capacity = 0) =>
     new FormGroup({
-      lounge_number: new FormControl(i),
+      lounge_number: new FormControl(i + ''),
       max_capacity: new FormControl<number>(capacity),
     });
   form = new FormGroup({
     max_capacity: new FormControl<number>(0),
     is_male_accommodation: new FormControl<boolean>(false),
     no_lounges: new FormControl<number>(0),
+    suite_number: new FormControl(0),
     lounges: new FormArray<
       FormGroup<{
-        lounge_number: FormControl<number | null>;
+        lounge_number: FormControl<string | null>;
         max_capacity: FormControl<number | null>;
       }>
     >([]),
@@ -50,6 +55,13 @@ export class MinaCreateSuiteComponent implements OnInit {
   }
 
   send() {
-    const data = this.form.getRawValue();
+    const data = {
+      suites: [this.form.getRawValue()],
+    } as unknown as CreateMinaPack1;
+
+    const payload = data;
+    if (payload) {
+      this.store.dispatch(MinaAction.create({ payload, pack: 'package1' }));
+    }
   }
 }

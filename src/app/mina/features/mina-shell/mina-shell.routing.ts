@@ -36,6 +36,13 @@ export const MinaShellRoutes: Routes = [
           ),
       },
       {
+        path: 'pack1/create',
+        loadComponent: () =>
+          import('../mina-create-suite/mina-create-suite.component').then(
+            (m) => m.MinaCreateSuiteComponent
+          ),
+      },
+      {
         path: 'pack1/:id',
         children: [
           {

@@ -1,11 +1,14 @@
 export type Suite = {
   id: string;
-  name: string;
+  number: string;
+  is_male_accommodation: boolean;
+  lounges: LoungeMina[] | null;
 };
 export type LoungeMina = {
   name: string;
   suiteId: Suite['id']; // fk
   id: string;
+  beds: BedTentMina[] | null;
 };
 
 export type BedTentMina = {

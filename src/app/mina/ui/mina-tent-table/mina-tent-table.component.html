@@ -1,32 +1,31 @@
 <section
   class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
 >
-  @for (item of items; track $index) {
+  @for (item of obs |async; track $index) {
 
-  <div class="card shadow-xl" [ngClass]="{ 'bg-accent': item.isFull }">
+  <div class="card shadow-xl">
     <div class="card-body flex gap-8">
-      <header class="card-title text-primary">{{ item.name }}</header>
+      <header class="card-title text-primary">{{ item.number }}</header>
       <ul class="list-data">
-        <li class="">
+        <li>
           <span class="label">
-            <mat-icon>airline_seat_individual_suite</mat-icon>
-            عدد الاجنحة
+            <mat-icon
+              [ngClass]="{
+                'text-pink-500': !item.is_male_accommodation,
+                'text-primary': item.is_male_accommodation
+              }"
+              >{{ item.is_male_accommodation ? "man" : "woman" }}</mat-icon
+            >
+            {{ item.is_male_accommodation ? "سكن للذكور" : "سكن للاناث" }}
           </span>
-          <span class="total">100</span>
         </li>
+
         <li>
           <span class="label">
             <mat-icon>weekend</mat-icon>
             عدد الصالات
           </span>
-          <span class="total">100</span>
-        </li>
-        <li>
-          <span class="label">
-            <mat-icon>space_bar</mat-icon>
-            السعة المتاحة
-          </span>
-          <span class="total">500</span>
+          <span class="total">{{ item.lounges?.length || 0 }}</span>
         </li>
       </ul>
 

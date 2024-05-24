@@ -13,10 +13,12 @@ export type MinaState = {
 };
 
 export type CreateMinaPack1 = {
-  suite_number: number;
-  is_male_accommodation: boolean;
-  lounges: Omit<LoungeMina, 'id'>[];
-}[];
+  suites: {
+    suite_number: number;
+    is_male_accommodation: boolean;
+    lounges: Omit<LoungeMina, 'id'>[];
+  }[];
+};
 
 export type ResponsCreateMinaPack1 = Suite & {
   is_male_accommodation: boolean;

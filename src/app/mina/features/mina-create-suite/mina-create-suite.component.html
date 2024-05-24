@@ -6,6 +6,27 @@
     <div class="card-body flex flex-col gap-8">
       <div class="flex gap-4" [formGroup]="form">
         <div class="tp-control">
+          <label> رقم الجناح</label>
+          <label
+            class="input input-bordered flex items-center gap-2"
+            [ngClass]="{
+              'input-error':
+                controls.suite_number.touched && controls.suite_number.errors
+            }"
+          >
+            <input
+              type="number"
+              class="w-full"
+              maxlength="100"
+              placeholder="100"
+              formControlName="suite_number"
+            />
+          </label>
+          @if(controls.no_lounges.touched && controls.no_lounges.errors) {
+          <small> حدث خطا </small>
+          }
+        </div>
+        <div class="tp-control">
           <label> عدد الصالات</label>
           <label
             class="input input-bordered flex items-center gap-2"
@@ -15,7 +36,7 @@
             }"
           >
             <input
-              type="text"
+              type="number"
               class="w-full"
               maxlength="100"
               placeholder="100"
@@ -36,7 +57,7 @@
             }"
           >
             <input
-              type="text"
+              type="number"
               class="w-full"
               maxlength="100"
               placeholder="100"
@@ -64,11 +85,30 @@
         @for (form of controls.lounges.controls; track form; let i = $index) {
         <form [formGroup]="controls.lounges.controls[i]">
           <div class="tp-control">
-            <label>
-              صالة
-
-              {{ controls.lounges.controls[i].controls.lounge_number.value }}
+            <label> الصالة </label>
+            <label
+              class="input input-bordered flex items-center gap-2"
+              [ngClass]="{
+                'input-error':
+                  controls.lounges.controls[i].controls.lounge_number.touched &&
+                  controls.lounges.controls[i].controls.lounge_number.errors
+              }"
+            >
+              <input
+                type="text"
+                class="w-full"
+                maxlength="100"
+                placeholder="100"
+                formControlName="lounge_number"
+              />
             </label>
+            @if(controls.lounges.controls[i].controls.lounge_number.touched &&
+            controls.lounges.controls[i].controls.lounge_number.errors) {
+            <small> حدث خطا </small>
+            }
+          </div>
+          <div class="tp-control">
+            <label> السعة </label>
             <label
               class="input input-bordered flex items-center gap-2"
               [ngClass]="{
@@ -78,7 +118,7 @@
               }"
             >
               <input
-                type="text"
+                type="number"
                 class="w-full"
                 maxlength="100"
                 placeholder="100"

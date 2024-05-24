@@ -6,7 +6,10 @@ import {
 } from '../../utils/types/lounges-mina.type';
 
 export const LoungeMinaAction = {
-  get: createAction('[LoungeMina] get LoungeMinaes'),
+  get: createAction(
+    '[LoungeMina] get LoungeMinaes',
+    props<{ package: '1' | '4' }>
+  ),
   getSuccess: createAction(
     '[LoungeMina] get LoungeMinaes success',
     props<{ lounges_mina: LoungesMina }>()
