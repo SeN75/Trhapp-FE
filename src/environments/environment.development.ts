@@ -3,4 +3,5 @@ export const environment = {
   apiUrl: 'https://alelyani.trhapp.net/api/',
   authUrl: 'https://alelyani.trhapp.net/auth/',
   opsUrl: 'https://alelyani.trhapp.net/ops/',
+  pilgrimUrl: 'https://alelyani.trhapp.net/pilgrim/',
 };

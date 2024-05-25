@@ -11,7 +11,7 @@ import { City } from '../../../shared/types/base.type';
 })
 export class CityService {
   private http = inject(HttpClient);
-  private url = `${environment.apiUrl}/cities/`;
+  private url = `${environment.apiUrl}cities/`;
   private logger = inject(LoggerService);
 
   get(): Observable<Cities> {

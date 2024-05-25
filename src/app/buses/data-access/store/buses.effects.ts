@@ -88,5 +88,5 @@ export const getDataEffect = createEffect(
       ofType(BusesAction.success),
       tap(() => store.dispatch(BusesAction.get()))
     ),
-  { functional: true }
+  { functional: true, dispatch: false }
 );

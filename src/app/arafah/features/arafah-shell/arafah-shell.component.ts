@@ -12,10 +12,5 @@ import { LoungeArafahAction } from '../../data-access/store/lounge-arafah.action
   standalone: true,
 })
 export class ArafahShellComponent implements OnInit {
-  ngOnInit(): void {
-    this.loungeArafahStore.dispatch(LoungeArafahAction.get());
-  }
-  private loungeArafahStore = inject(
-    Store<{ lounges_arafah: LoungeArafahState }>
-  );
+  ngOnInit(): void {}
 }

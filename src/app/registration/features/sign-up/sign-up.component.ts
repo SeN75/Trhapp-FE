@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../shared/service/auth.service';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../shared/module/material.module';
@@ -9,7 +9,7 @@ import { delay, tap, catchError, of } from 'rxjs';
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, RouterLink],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })

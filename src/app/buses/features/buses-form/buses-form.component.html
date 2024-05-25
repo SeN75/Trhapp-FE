@@ -57,6 +57,24 @@
         <small> حدث خطا </small>
         }
       </div>
+      <div class="tp-control">
+        <label> الباقة </label>
+
+        <select
+          class="select select-bordered w-full"
+          formControlName="package_name"
+          [ngClass]="{
+            'select-error':
+              controls.bus_name.touched && controls.bus_name.errors
+          }"
+        >
+          <option value="باقة (1)">باقة (1)</option>
+          <option value="باقة (4)">باقة (4)</option>
+        </select>
+        @if(controls.bus_name.touched && controls.bus_name.errors) {
+        <small> حدث خطا </small>
+        }
+      </div>
       <div class="grid md:grid-cols-2 grid-cols-1 gap-3">
         <div class="tp-control">
           <label> رمز </label>
@@ -148,11 +166,10 @@
       <div class="flex items-end gap-3">
         <div class="tp-control flex-1">
           <label>المشرف</label>
-          <select class="select select-bordered w-full">
-            <option disabled selected>Who shot first?</option>
-            <option>Han Solo</option>
-            <option>Greedo</option>
-          </select>
+          <select
+            class="select select-bordered w-full"
+            formControlName="supervisor"
+          ></select>
         </div>
         <button class="btn btn-ghost" (click)="addSupervisor = true">
           اضافة
@@ -164,11 +181,10 @@
       <div class="flex items-end gap-3">
         <div class="tp-control flex-1">
           <label>موقع الانطلاق</label>
-          <select class="select select-bordered w-full">
-            <option disabled selected>Who shot first?</option>
-            <option>Han Solo</option>
-            <option>Greedo</option>
-          </select>
+          <select
+            class="select select-bordered w-full"
+            formControlName="start_location"
+          ></select>
         </div>
         <button class="btn btn-ghost" (click)="addStartLocation = true">
           اضافة
@@ -182,10 +198,13 @@
       <div class="flex items-end gap-3">
         <div class="tp-control flex-1">
           <label>موقع الوصول</label>
-          <select class="select select-bordered w-full">
-            <option disabled selected>Who shot first?</option>
-            <option>Han Solo</option>
-            <option>Greedo</option>
+          <select
+            class="select select-bordered w-full"
+            formControlName="destination_location"
+          >
+            @for (city of cities$ | async; track $index) {
+            <option [value]="city">{{ city.name }}</option>
+            }
           </select>
         </div>
         <button class="btn btn-ghost" (click)="addDestinationLocation = true">
@@ -341,14 +360,14 @@
         }
       </div>
     </div>
-    <div class="tp-control">
+    <div class="tp-control" formGroupName="city">
       <label> المدية</label>
       <label
         class="input input-bordered flex items-center gap-2"
         [ngClass]="{
           'input-error':
-            controls.destination_location.controls.city.touched &&
-            controls.destination_location.controls.city.errors
+            controls.destination_location.controls.city.controls.name.touched &&
+            controls.destination_location.controls.city.controls.name.errors
         }"
       >
         <input
@@ -356,11 +375,11 @@
           class="w-full"
           maxlength="100"
           placeholder="00.0000000000000000"
-          formControlName="city"
+          formControlName="name"
         />
       </label>
-      @if(controls.destination_location.controls.city.touched &&
-      controls.destination_location.controls.city.errors) {
+      @if(controls.destination_location.controls.city.controls.name.touched &&
+      controls.destination_location.controls.city.controls.name.errors) {
       <small> حدث خطا </small>
       }
     </div>
@@ -444,14 +463,14 @@
       </div>
     </div>
 
-    <div class="tp-control">
+    <div class="tp-control" formGroupName="city">
       <label> المدية</label>
       <label
         class="input input-bordered flex items-center gap-2"
         [ngClass]="{
           'input-error':
-            controls.destination_location.controls.city.touched &&
-            controls.destination_location.controls.city.errors
+            controls.destination_location.controls.city.controls.name.touched &&
+            controls.destination_location.controls.city.controls.name.errors
         }"
       >
         <input
@@ -459,11 +478,11 @@
           class="w-full"
           maxlength="100"
           placeholder="00.0000000000000000"
-          formControlName="city"
+          formControlName="name"
         />
       </label>
-      @if(controls.destination_location.controls.city.touched &&
-      controls.destination_location.controls.city.errors) {
+      @if(controls.destination_location.controls.city.controls.name.touched &&
+      controls.destination_location.controls.city.controls.name.errors) {
       <small> حدث خطا </small>
       }
     </div>

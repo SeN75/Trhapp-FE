@@ -7,6 +7,9 @@ import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.directive';
 import { MatDialog } from '@angular/material/dialog';
 import { BusesFormComponent } from '../../features/buses-form/buses-form.component';
+import { Store } from '@ngrx/store';
+import { BusState } from '../../utils/types/buses.type';
+import { BusesAction } from '../../data-access/store/buses.action';
 
 @Component({
   selector: 'tp-buses-table',
@@ -23,6 +26,7 @@ import { BusesFormComponent } from '../../features/buses-form/buses-form.compone
   styleUrl: './buses-table.component.scss',
 })
 export class BusesTableComponent implements AfterViewInit {
+  private store = inject(Store<{ buses: BusState }>);
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
@@ -33,6 +37,7 @@ export class BusesTableComponent implements AfterViewInit {
   private dialog = inject(MatDialog);
 
   openDialog() {
+    this.store.dispatch(BusesAction.reset());
     this.dialog.open(BusesFormComponent, {
       width: '90%',
       height: 'auto',

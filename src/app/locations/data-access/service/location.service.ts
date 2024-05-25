@@ -14,7 +14,7 @@ import {
 })
 export class LocationService {
   private http = inject(HttpClient);
-  private url = `${environment.apiUrl}location/`;
+  private url = `${environment.apiUrl}locations/`;
   private logger = inject(LoggerService);
 
   get(): Observable<Locations> {

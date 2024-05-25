@@ -58,6 +58,7 @@ export const {
   name: SupervisorFeatureKey,
   reducer: SupervisorReducer,
   selectSelectedSupervisor,
+  selectSupervisores,
   selectIsLoading,
   selectErrors,
   selectSelectedSupervisorIndex,

@@ -20,4 +20,11 @@ export const routes: Routes = [
         (m) => m.RegistrationRoutes
       ),
   },
+  {
+    path: 'p',
+    loadChildren: () =>
+      import('./pilgrim/features/pilgrim-shell/pilgrim-shell.routing').then(
+        (m) => m.PilgrimShellRoutes
+      ),
+  },
 ];

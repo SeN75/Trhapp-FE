@@ -16,6 +16,7 @@ import {
 export class PilgrimService {
   private http = inject(HttpClient);
   private url = `${environment.apiUrl}pilgrims/`;
+  private pUrl = `${environment.pilgrimUrl}/`;
   private logger = inject(LoggerService);
   constructor() {}
 
@@ -24,7 +25,7 @@ export class PilgrimService {
   }
 
   getById(id: string): Observable<Pilgrim> {
-    return this.http.get<Pilgrim>(`${this.url}/${id}`).pipe(
+    return this.http.get<Pilgrim>(`${this.url}/${id}/`).pipe(
       tap((res) => this.logger.log('[getById success]', res)),
       catchError((error) => {
         this.logger.error('[getById error]', error);
@@ -34,7 +35,7 @@ export class PilgrimService {
   }
   update(data: UpdatePilgrim): Observable<Pilgrim> {
     return this.http
-      .patch<Pilgrim>(`${this.url}/${data.id}`, { data, id: data.id })
+      .patch<Pilgrim>(`${this.url}/${data.id}/`, { data, id: data.id })
       .pipe(
         tap((res) => this.logger.log('[update success]', res)),
         catchError((error) => {
@@ -61,5 +62,18 @@ export class PilgrimService {
         throw error;
       })
     );
+  }
+
+  login({ national_id }: { national_id: string }) {
+    return this.http
+      .post<{ data: Pilgrim }>(`${this.pUrl}login/`, { national_id })
+      .pipe(
+        tap((res) => this.logger.log('[login success]', res.data)),
+        map(({ data }) => data),
+        catchError((error) => {
+          this.logger.error('[login error]', error);
+          throw error;
+        })
+      );
   }
 }

@@ -7,6 +7,11 @@ export const RegistrationRoutes: Routes = [
     component: RegistrationComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
+      },
+      {
         path: 'login',
         loadComponent: () =>
           import('./../login/login.component').then((m) => m.LoginComponent),
@@ -16,6 +21,13 @@ export const RegistrationRoutes: Routes = [
         loadComponent: () =>
           import('./../sign-up/sign-up.component').then(
             (m) => m.SignUpComponent
+          ),
+      },
+      {
+        path: 'pilgrim',
+        loadComponent: () =>
+          import('./../pilgrim/pilgrim.component').then(
+            (m) => m.PilgrimComponent
           ),
       },
     ],

@@ -15,7 +15,7 @@ import { LoggerService } from '../../../shared/service/logger.service';
 })
 export class SupervisorService {
   private http = inject(HttpClient);
-  private url = `${environment.apiUrl}/supervisor/`;
+  private url = `${environment.apiUrl}supervisors/`;
   private logger = inject(LoggerService);
 
   get(): Observable<Supervisors> {

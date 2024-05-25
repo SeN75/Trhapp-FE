@@ -33,6 +33,7 @@ export const BusesFeature = createFeature({
       ...state,
       isLoading: null,
       errors: null,
+      status: 'prompt' as TPState,
     })),
     on(BusesAction.create, (state, { bus }) => ({
       ...state,

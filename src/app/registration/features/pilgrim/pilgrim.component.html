@@ -1,5 +1,5 @@
 <h1 class="text-center font-bold mb-8 text-primary">
-  ** هذه الواجهة مخصصة للعاملين فقط **
+  ** هذه الواجهة مخصصة للحجاج فقط **
 </h1>
 <section>
   <div class="card w-96 bg-base-100 shadow-xl">
@@ -12,34 +12,19 @@
           class="input input-bordered input-secondary flex items-center gap-2"
           [ngClass]="{
             'input-error':
-              controls.phone_number.touched && controls.phone_number.errors
+              controls.national_id.touched && controls.national_id.errors
           }"
         >
           <input
             type="text"
+            maxlength="10"
             class="grow"
-            placeholder="رقم الجوال"
-            formControlName="phone_number"
+            placeholder="رقم الهوية"
+            formControlName="national_id"
           />
-          @if (controls.phone_number.touched && controls.phone_number.errors) {}
+          @if (controls.national_id.touched && controls.national_id.errors) {}
           <small class="text-error-500"></small>
         </label>
-        <label
-          class="input input-bordered input-secondary flex items-center gap-2"
-          [ngClass]="{
-            'input-error': controls.password.touched && controls.password.errors
-          }"
-        >
-          <input
-            type="password"
-            class="grow"
-            placeholder="كلمة السر"
-            formControlName="password"
-          />
-        </label>
-        <a class="link link-primary" [routerLink]="['/', 'r', 'sign-up']">
-          تسجيل</a
-        >
 
         <div class="card-actions justify-end mt-4">
           <button
