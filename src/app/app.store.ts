@@ -91,6 +91,11 @@ import {
   MinaReducer,
 } from './mina/data-access/store/mina.reducer';
 import * as MinaEffect from './mina/data-access/store/mina.effects';
+import {
+  DistributionFeatureKey,
+  DistributionReducer,
+} from './mina/data-access/store/distribution.reducer';
+import * as DistrbutionEffect from './mina/data-access/store/distribution.effects';
 
 export const storeProviders = {
   providers: [
@@ -112,6 +117,7 @@ export const storeProviders = {
     provideState(FloorFeatureKey, FloorReducer),
     provideState(RoomFeatureKey, RoomReducer),
     provideState(MinaFeatureKey, MinaReducer),
+    provideState(DistributionFeatureKey, DistributionReducer),
     provideEffects([
       UploadOpsEffect,
       ArafahEffect,
@@ -130,6 +136,7 @@ export const storeProviders = {
       FloorEffect,
       RoomEffect,
       MinaEffect,
+      DistrbutionEffect,
     ]),
     provideStoreDevtools({
       maxAge: 25,

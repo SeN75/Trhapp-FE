@@ -15,17 +15,18 @@ import {
 })
 export class DistributeService {
   private http = inject(HttpClient);
-  private package1 = `${environment.apiUrl}package1/distributes`;
-  private package4 = `${environment.apiUrl}package4/distributes`;
+  private package1 = `${environment.apiUrl}package1/distribute`;
+  private package4 = `${environment.apiUrl}package4/distribute`;
   private logger = inject(LoggerService);
   constructor() {}
 
   read(pack: 'package1' | 'package4'): Observable<DistributeRead> {
     return this.http
-      .get<DistributeRead>(pack.includes('4') ? this.package4 : this.package1)
+      .get<DistributeRead>(
+        `${pack.includes('4') ? this.package4 : this.package1}/read/`
+      )
       .pipe();
   }
-
   update(
     data: { num_employees: number },
     pack: 'package1' | 'package4'

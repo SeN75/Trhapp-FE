@@ -4,7 +4,7 @@ import { initialDistributeState } from '../../utils/types/distribute.type';
 import { DistributionAction } from './distribution.action';
 
 export const DistributionFeature = createFeature({
-  name: 'suites',
+  name: 'distrbution',
   reducer: createReducer(
     initialDistributeState,
     on(DistributionAction.read, (state) => ({
@@ -70,7 +70,10 @@ export const DistributionFeature = createFeature({
 export const {
   name: DistributionFeatureKey,
   reducer: DistributionReducer,
-
+  selectPack1Peek,
+  selectPack1Read,
+  selectPack4Peek,
+  selectPack4Read,
   selectIsLoading,
   selectErrors,
   selectStatus,

@@ -20,7 +20,7 @@ export const DistributionAction = {
   ),
   peek: createAction(
     '[Distribution] create Distribution',
-    props<{ peek: DistributePeek; pack: 'package1' | 'package4' }>()
+    props<{ num_employees: number; pack: 'package1' | 'package4' }>()
   ),
   peekPack1Success: createAction(
     '[Distribution] peek Distribution pack1 success',

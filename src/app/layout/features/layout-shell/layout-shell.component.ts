@@ -18,6 +18,8 @@ import { LocationState } from '../../../locations/utils/types/location.type';
 import { LocationAction } from '../../../locations/data-access/store/location.action';
 import { BusState } from '../../../buses/utils/types/buses.type';
 import { BusesAction } from '../../../buses/data-access/store/buses.action';
+import { DistributeState } from '../../../mina/utils/types/distribute.type';
+import { DistributionAction } from '../../../mina/data-access/store/distribution.action';
 
 @Component({
   standalone: true,
@@ -41,6 +43,7 @@ export class LayoutShellComponent {
   private pligrmStore = inject(Store<{ pligrms: PilgrimState }>);
   private locationStore = inject(Store<{ locations: LocationState }>);
   private busStore = inject(Store<{ buses: BusState }>);
+  private distributeStore = inject(Store<{ distribute: DistributeState }>);
   ngOnInit(): void {
     this.buildingStore.dispatch(BuildingAction.get());
     this.suitesStore.dispatch(SuitesAction.get());
@@ -49,8 +52,12 @@ export class LayoutShellComponent {
     this.loungeArafahStore.dispatch(LoungeArafahAction.get());
     this.pligrmStore.dispatch(PilgrimAction.get());
     this.locationStore.dispatch(LocationAction.get());
-    this.buildingStore.dispatch(BusesAction.get());
-
-    this.busStore.dispatch(BusesAction.reset());
+    this.busStore.dispatch(BusesAction.get());
+    // this.distributeStore.dispatch(
+    //   DistributionAction.read({ pack: 'package1' })
+    // );
+    // this.distributeStore.dispatch(
+    //   DistributionAction.read({ pack: 'package4' })
+    // );
   }
 }
