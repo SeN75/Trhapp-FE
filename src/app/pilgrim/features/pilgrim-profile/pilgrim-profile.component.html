@@ -1,1 +1,95 @@
-<p>pilgrim-profile works!</p>
+<!-- @defer () {
+<section class="flex justify-center items-center">
+  <div class="card-container">
+    <div class="w-full flex flex-col items-center">
+      <header class="bg-red-400 flex items-center flex-col w-[70%]" #headline>
+        <img
+          src="../../../../assets/images/allyaniy.svg"
+          class="w-4/5 h-auto"
+        />
+        <div
+          class="w-3/5 rounded-full bg-green-400 aspect-square"
+          #imageContainer
+          [style]="'height:' + imageCtr?.nativeElement?.offsetWidth + 'px'"
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png"
+            class="w-full h-full rounded-full object-cover"
+          />
+        </div>
+      </header>
+      <div
+        class="w-[70%] h-0 border-l-transparent border-r-transparent border-t-[78px] border-t-red-400"
+        [style]="
+          'border-left-width: calc(' +
+          (h?.nativeElement?.offsetWidth || 100) / 2 +
+          'px );border-right-width: calc(' +
+          (h?.nativeElement?.offsetWidth || 100) / 2 +
+          'px );'
+        "
+      ></div>
+    </div>
+
+    <h1 class="text-neutral-600 text-center font-bold text-4xl pt-8">
+      {{ data.name }}
+    </h1>
+    <nav>
+      <dl>
+        <dt>رقم الهوية</dt>
+        <dd>{{ data.national_id }}</dd>
+      </dl>
+      <dl>
+        <dt>رقم الحاج</dt>
+        <dd>{{ data.code }}</dd>
+      </dl>
+      <dl>
+        <dt>البرنامـج</dt>
+        <dd>{{ data.package_number }}</dd>
+      </dl>
+      <dl>
+        <dt>البرنامـج</dt>
+        <dd>{{ data.package_number }}</dd>
+      </dl>
+    </nav>
+
+    <div class="w-[70%] bg-red-400 text-center p-4">
+      <h1 class="text-5xl text-white">{{ data.package_number }}</h1>
+    </div>
+  </div>
+</section>
+} -->
+
+<div class="card">
+  <div class="card-header">
+    <img src="../../../../assets/images/allyaniy.svg" alt="Logo" />
+    <div class="background-pattern"></div>
+    <div class="image"></div>
+  </div>
+
+  <div class="card-content">
+    <p id="name_1">{{ data.name }}</p>
+    <p>
+      <strong>رقم الهوية:</strong>
+      <span id="national_id_1">{{ data.national_id }}</span>
+    </p>
+    <p>
+      <strong>رقم الحاج:</strong>
+      <span id="pilgrim_number_1">{{ data.code }}</span>
+    </p>
+    <p>
+      <strong>البرنامج:</strong>
+      <span id="program_1">{{ data.package_number }} مخيم (7127)</span>
+    </p>
+    <p>
+      <strong>سكن منى:</strong>
+      <span id="mina_accommodation_1">جناح (1) صالة (2) سرير (3)</span>
+    </p>
+    <p>
+      <strong>سكن عرفة:</strong>
+      <span id="arafah_accommodation_1">صالة (4) مقعد (5)</span>
+    </p>
+  </div>
+  <div class="card-footer">
+    <p>{{ data.package_number }}</p>
+  </div>
+</div>

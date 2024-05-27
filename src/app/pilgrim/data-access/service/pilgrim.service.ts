@@ -16,7 +16,7 @@ import {
 export class PilgrimService {
   private http = inject(HttpClient);
   private url = `${environment.apiUrl}pilgrims/`;
-  private pUrl = `${environment.pilgrimUrl}/`;
+  private pUrl = `${environment.pilgrimUrl}`;
   private logger = inject(LoggerService);
   constructor() {}
 
