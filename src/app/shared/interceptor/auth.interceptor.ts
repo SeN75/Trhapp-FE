@@ -9,7 +9,7 @@ import { catchError, of, switchMap } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(AuthService);
-  if (req.url.includes('api') || req.url.includes('ops')) {
+  if (req.url.includes('/api/') || req.url.includes('/ops/')) {
     let headers = req.headers;
     const token = auth.token;
     if (!token || !token.access) return next(req);
