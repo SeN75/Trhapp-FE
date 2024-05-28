@@ -14,6 +14,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AppTranslateModule } from './app.translate';
 import { LoggerService } from './shared/service/logger.service';
 import { authInterceptor } from './shared/interceptor/auth.interceptor';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,6 +26,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(AppTranslateModule),
     provideEffects(),
     provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),
+    provideCharts(withDefaultRegisterables()),
     { provide: LoggerService, useClass: LoggerService },
   ],
 };
