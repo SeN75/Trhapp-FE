@@ -1,45 +1,56 @@
 <section class="table-container">
-  <table mat-table [dataSource]="dataSource">
+  <table matSort mat-table [dataSource]="dataSource">
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
 
-    <!-- Id Column -->
     <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef>التسلسل</th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>التسلسل</th>
       <td mat-cell *matCellDef="let element">{{ element.id }}</td>
     </ng-container>
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>الاسم</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>الاسم</th>
+      <td mat-cell *matCellDef="let element">
+        <span class="flex items-center">
+          <mat-icon
+            [ngClass]="{
+              'text-pink-500': !element.is_male,
+              'text-primary': element.is_male
+            }"
+            >{{ element.is_male ? "man" : "woman" }}</mat-icon
+          >
+
+          {{ element.name }}
+        </span>
+      </td>
     </ng-container>
 
     <!-- Phone number Column -->
     <ng-container matColumnDef="phone_number">
-      <th mat-header-cell *matHeaderCellDef>رقم الجوال</th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>رقم الجوال</th>
       <td mat-cell *matCellDef="let element">{{ element.phone_number }}</td>
     </ng-container>
 
     <!-- Package name Column -->
     <ng-container matColumnDef="package_name">
-      <th mat-header-cell *matHeaderCellDef>اسم الباقة</th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>اسم الباقة</th>
       <td mat-cell *matCellDef="let element">{{ element.package_name }}</td>
     </ng-container>
 
     <!-- Package number Column -->
     <ng-container matColumnDef="package_number">
-      <th mat-header-cell *matHeaderCellDef>رقم الباقة</th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>رقم الباقة</th>
       <td mat-cell *matCellDef="let element">{{ element.package_number }}</td>
     </ng-container>
     <ng-container matColumnDef="national_id">
-      <th mat-header-cell *matHeaderCellDef>رقم الهوية</th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>رقم الهوية</th>
       <td mat-cell *matCellDef="let element">{{ element.national_id }}</td>
     </ng-container>
 
     <!-- Arafah accommodation Column -->
     <ng-container matColumnDef="arafah_accommodation">
-      <th mat-header-cell *matHeaderCellDef>تسكين عرفة</th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>تسكين عرفة</th>
       <td mat-cell *matCellDef="let element">
         {{ element.arafah_accommodation }}
       </td>

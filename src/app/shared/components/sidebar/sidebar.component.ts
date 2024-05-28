@@ -49,13 +49,13 @@ export class SidebarComponent {
       icon: 'tp-door-side',
       link: ['/', 'l', 'suites'],
     },
+    // {
+    //   text: 'بطاقة الحاج',
+    //   icon: 'tp-card',
+    //   link: ['/', 'l', 'cards'],
+    // },
     {
-      text: 'بطاقة الحاج',
-      icon: 'tp-card',
-      link: ['/', 'l', 'cards'],
-    },
-    {
-      text: 'معلومات الحاج',
+      text: 'معلومات الحجاج',
       icon: 'tp-card',
       link: ['/', 'l', 'pilgrims'],
     },

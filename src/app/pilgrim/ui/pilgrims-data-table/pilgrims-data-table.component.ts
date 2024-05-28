@@ -14,24 +14,28 @@ import { Store } from '@ngrx/store';
 import { PilgrimState } from '../../utils/types/pilgrim.type';
 import { selectPilgrims } from '../../data-access/store/pilgrim.reducer';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { NgClass } from '@angular/common';
+import { MaterialModule } from '../../../shared/module/material.module';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'tp-pilgrims-data-table',
   standalone: true,
-  imports: [MatPaginatorModule, MatTableModule, TpPaginatorDirective],
+  imports: [TpPaginatorDirective, NgClass, MaterialModule],
   templateUrl: './pilgrims-data-table.component.html',
   styleUrl: './pilgrims-data-table.component.scss',
 })
 export class PilgrimsDataTableComponent implements AfterViewInit, OnInit {
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   ngOnInit(): void {}
   private store = inject(Store<{ pilgrims: PilgrimState }>);
   pilgrims$ = this.store.select(selectPilgrims);
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
   // dataSource!: MatTableDataSource<any>;
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   displayedColumns: string[] = [
     'id',
