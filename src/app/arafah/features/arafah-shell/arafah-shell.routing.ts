@@ -6,16 +6,16 @@ export const ArafahShellRoutes: Routes = [
     path: '',
     component: ArafahShellComponent,
     children: [
-      { path: '', redirectTo: 'tent', pathMatch: 'full' },
+      { path: '', redirectTo: 'pack1', pathMatch: 'full' },
       {
-        path: 'tent',
+        path: 'pack1',
         loadComponent: () =>
           import('../arafah-tent/arafah-tent.component').then(
             (m) => m.ArafahTentComponent
           ),
       },
       {
-        path: 'create',
+        path: 'pack1/create',
         loadComponent: () =>
           import('../arafah-create-tent/arafah-create-suite.component').then(
             (m) => m.ArafahCreateSuiteComponent
