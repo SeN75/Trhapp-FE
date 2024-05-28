@@ -22,6 +22,13 @@ export const MinaShellRoutes: Routes = [
           ),
       },
       {
+        path: 'distribute/:pack',
+        loadComponent: () =>
+          import('../mina-distribute/mina-distribute.component').then(
+            (m) => m.MinaDistributeComponent
+          ),
+      },
+      {
         path: 'pack1',
         loadComponent: () =>
           import('../mina-tent/mina-tent.component').then(
@@ -33,6 +40,13 @@ export const MinaShellRoutes: Routes = [
         loadComponent: () =>
           import('../mina-create-suite/mina-create-suite.component').then(
             (m) => m.MinaCreateSuiteComponent
+          ),
+      },
+      {
+        path: 'pack1/distribute',
+        loadComponent: () =>
+          import('../mina-distribute/mina-distribute.component').then(
+            (m) => m.MinaDistributeComponent
           ),
       },
       {

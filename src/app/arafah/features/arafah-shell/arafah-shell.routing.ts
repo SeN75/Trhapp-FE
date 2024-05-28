@@ -14,6 +14,7 @@ export const ArafahShellRoutes: Routes = [
             (m) => m.ArafahTentComponent
           ),
       },
+
       {
         path: 'pack1/create',
         loadComponent: () =>
