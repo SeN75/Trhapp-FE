@@ -24,3 +24,25 @@ export const PilgrimShellRoutes: Routes = [
     ],
   },
 ];
+
+export const PilgrimAdminShellRoutes: Routes = [
+  {
+    path: '',
+    loadComponent: () =>
+      import('./pilgrim-shell.component').then((m) => m.PilgrimShellComponent),
+    children: [
+      {
+        path: '',
+        redirectTo: 'data',
+        pathMatch: 'full',
+      },
+      {
+        path: 'data',
+        loadComponent: () =>
+          import('../pilgrim-data/pilgrim-data.component').then(
+            (m) => m.PilgrimDataComponent
+          ),
+      },
+    ],
+  },
+];

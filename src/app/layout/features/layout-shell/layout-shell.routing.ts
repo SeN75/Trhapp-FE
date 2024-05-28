@@ -47,6 +47,13 @@ export const layoutShellRouting: Routes = [
             (m) => m.CardsComponent
           ),
       },
+      {
+        path: 'pilgrims',
+        loadChildren: () =>
+          import(
+            '../../../pilgrim/features/pilgrim-shell/pilgrim-shell.routing'
+          ).then((m) => m.PilgrimAdminShellRoutes),
+      },
     ],
   },
 ];

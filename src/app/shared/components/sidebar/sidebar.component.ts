@@ -54,6 +54,11 @@ export class SidebarComponent {
       icon: 'tp-card',
       link: ['/', 'l', 'cards'],
     },
+    {
+      text: 'معلومات الحاج',
+      icon: 'tp-card',
+      link: ['/', 'l', 'pilgrims'],
+    },
   ];
 
   uploadFile() {
