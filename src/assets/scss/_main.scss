@@ -55,6 +55,7 @@
 .g-bubble-container {
   display: flex;
   gap: 4px;
+  flex-wrap: wrap;
 }
 
 .g-bubble {

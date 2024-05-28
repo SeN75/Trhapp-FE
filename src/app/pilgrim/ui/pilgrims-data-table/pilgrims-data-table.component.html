@@ -32,6 +32,10 @@
       <th mat-header-cell *matHeaderCellDef>رقم الباقة</th>
       <td mat-cell *matCellDef="let element">{{ element.package_number }}</td>
     </ng-container>
+    <ng-container matColumnDef="national_id">
+      <th mat-header-cell *matHeaderCellDef>رقم الهوية</th>
+      <td mat-cell *matCellDef="let element">{{ element.national_id }}</td>
+    </ng-container>
 
     <!-- Arafah accommodation Column -->
     <ng-container matColumnDef="arafah_accommodation">
@@ -47,10 +51,11 @@
   <div class="flex justify-between items-center pt-4">
     <button matRipple class="button-primary">تسكين الكل</button>
     <mat-paginator
+      class="flex flex-wrap"
       appTpPaginator
       [length]="dataSource.data.length"
       [appCustomLength]="dataSource.data.length"
-      [pageSize]="10"
+      [pageSize]="20"
     ></mat-paginator>
     <button matRipple class="button-primary-tint">تصدير ملف CSV</button>
   </div>

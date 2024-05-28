@@ -16,6 +16,7 @@ export const getPilgrimEffects = createEffect(
     actions.pipe(
       ofType(PilgrimAction.get),
       switchMap(() => service.get()),
+      map((pilgrims) => pilgrims.sort((a, b) => +a.id - +b.id)),
       map((pilgrims) => PilgrimAction.getSuccess({ pilgrims })),
       catchError((error) => {
         logger.error('[getPilgrimEffects erorr]', error);
