@@ -1,12 +1,17 @@
-import { HttpInterceptorFn } from '@angular/common/http';
+import {
+  HttpHandlerFn,
+  HttpInterceptorFn,
+  HttpRequest,
+} from '@angular/common/http';
+import { inject } from '@angular/core';
+import { AuthService } from '../service/auth.service';
+import { catchError, of, switchMap } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  if (req.url.includes('api') || req.url.includes('ops')) {
+  const auth = inject(AuthService);
+  if (req.url.includes('/api/') || req.url.includes('/ops/')) {
     let headers = req.headers;
-    const token = JSON.parse(localStorage.getItem('token') as string) as {
-      refresh: string;
-      access: string;
-    };
+    const token = auth.token;
     if (!token || !token.access) return next(req);
     console.log(token.access);
     const newHeader = headers.append(
@@ -14,8 +19,31 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
       'Bearer ' + token.access.trim()
     );
     req = req.clone({ headers: newHeader });
-    console.log(req.headers);
-    return next(req);
+
+    return next(req).pipe(
+      catchError((error) => {
+        if (error.status === 401) return handle401Error(req, next);
+        throw error;
+      })
+    );
   }
   return next(req);
+};
+
+const handle401Error = (req: HttpRequest<any>, next: HttpHandlerFn) => {
+  const servcie = inject(AuthService);
+  return servcie.refreshToken().pipe(
+    switchMap(({ access }) => {
+      const newHeader = req.headers.append(
+        'Authorization',
+        'Bearer ' + access.trim()
+      );
+      req = req.clone({ headers: newHeader });
+      return next(req);
+    }),
+    catchError((error) => {
+      servcie.logout();
+      throw of(error);
+    })
+  );
 };

@@ -1,0 +1,171 @@
+@use "sass:map";
+@use "@angular/material" as mat;
+@include mat.core();
+
+// Note: Color palettes are generated from primary: #1A46cd, secondary: #20862B
+$_palettes: (
+  primary: (
+    0: #000000,
+    10: #001454,
+    20: #002585,
+    25: #002e9f,
+    30: #0037ba,
+    35: #1543cb,
+    40: #2951d7,
+    50: #486cf1,
+    60: #6b89ff,
+    70: #92a6ff,
+    80: #b8c4ff,
+    90: #dde1ff,
+    95: #efefff,
+    98: #fbf8ff,
+    99: #fefbff,
+    100: #ffffff,
+  ),
+  secondary: (
+    0: #000000,
+    10: #002203,
+    20: #003909,
+    25: #00460d,
+    30: #005311,
+    35: #006015,
+    40: #006e19,
+    50: #24892e,
+    60: #42a445,
+    70: #5ec05d,
+    80: #79dc75,
+    90: #95f98f,
+    95: #c9ffbf,
+    98: #ecffe4,
+    99: #f6ffef,
+    100: #ffffff,
+  ),
+  tertiary: (
+    0: #000000,
+    10: #2c1229,
+    20: #43273f,
+    25: #50314a,
+    30: #5c3d56,
+    35: #694862,
+    40: #75546e,
+    50: #906c88,
+    60: #ab85a2,
+    70: #c79fbd,
+    80: #e4bad9,
+    90: #ffd7f4,
+    95: #ffebf7,
+    98: #fff7f9,
+    99: #fffbff,
+    100: #ffffff,
+  ),
+  neutral: (
+    0: #000000,
+    10: #1b1b1f,
+    20: #303034,
+    25: #3b3b3f,
+    30: #47464a,
+    35: #525256,
+    40: #5e5e62,
+    50: #77767a,
+    60: #919094,
+    70: #acaaaf,
+    80: #c8c6ca,
+    90: #e4e1e6,
+    95: #f2f0f4,
+    98: #fbf8fd,
+    99: #fefbff,
+    100: #ffffff,
+    4: #0e0e11,
+    6: #131316,
+    12: #1f1f23,
+    17: #2a2a2d,
+    22: #343438,
+    24: #39393c,
+    87: #dbd9de,
+    92: #eae7ec,
+    94: #f0edf1,
+    96: #f5f3f7,
+  ),
+  neutral-variant: (
+    0: #000000,
+    10: #1a1b23,
+    20: #2f3038,
+    25: #3a3b43,
+    30: #45464f,
+    35: #51525b,
+    40: #5d5e67,
+    50: #767680,
+    60: #90909a,
+    70: #abaab4,
+    80: #c6c5d0,
+    90: #e2e1ec,
+    95: #f1f0fa,
+    98: #fbf8ff,
+    99: #fefbff,
+    100: #ffffff,
+  ),
+  error: (
+    0: #000000,
+    10: #410002,
+    20: #690005,
+    25: #7e0007,
+    30: #93000a,
+    35: #a80710,
+    40: #ba1a1a,
+    50: #de3730,
+    60: #ff5449,
+    70: #ff897d,
+    80: #ffb4ab,
+    90: #ffdad6,
+    95: #ffedea,
+    98: #fff8f7,
+    99: #fffbff,
+    100: #ffffff,
+  ),
+);
+
+$_rest: (
+  secondary: map.get($_palettes, secondary),
+  neutral: map.get($_palettes, neutral),
+  neutral-variant: map.get($_palettes, neutral-variant),
+  error: map.get($_palettes, error),
+);
+$_primary: map.merge(map.get($_palettes, primary), $_rest);
+$_tertiary: map.merge(map.get($_palettes, tertiary), $_rest);
+
+$light-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: $_primary,
+      tertiary: $_tertiary,
+      use-system-variables: true,
+    ),
+    typography: (
+      use-system-variables: true,
+    ),
+  )
+);
+$dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+      primary: $_primary,
+      tertiary: $_tertiary,
+      use-system-variables: true,
+    ),
+    typography: (
+      use-system-variables: true,
+    ),
+  )
+);
+
+html {
+  @include mat.all-component-themes($light-theme);
+  @media (prefers-color-scheme: dark) {
+    // Use the `-color` mixins to only apply color styles without reapplying the same
+    // typography and density styles.
+    @include mat.core-color($dark-theme);
+    @include mat.button-color($dark-theme);
+  }
+}

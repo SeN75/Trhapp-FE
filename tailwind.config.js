@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,ts,scss}"],
+  darkMode: ["@media (prefers-color-scheme: dark) { &:not(.light *) }"],
   theme: {
     extend: {
       colors: {

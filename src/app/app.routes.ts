@@ -1,9 +1,10 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './shared/guard/auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'r',
+    redirectTo: 'l',
     pathMatch: 'full',
   },
   {
@@ -12,6 +13,7 @@ export const routes: Routes = [
       import('./layout/features/layout-shell/layout-shell.routing').then(
         (m) => m.layoutShellRouting
       ),
+    canActivate: [authGuard],
   },
   {
     path: 'r',

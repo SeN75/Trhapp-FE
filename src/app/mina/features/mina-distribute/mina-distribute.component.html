@@ -1,0 +1,12 @@
+<section class="page-content">
+  <h1 class="page-title">
+    توزيعات منى - باقة {{ pack === "pack1" ? "1" : "4" }}
+  </h1>
+  <div class="grid grid-cols-4 gap-4"></div>
+  <div class="flex w-full justify-end gap-2">
+    <button class="btn btn-primary">تسكين الحجاج</button>
+    <div [routerLink]="['create']">
+      <button class="btn btn-primary">انشاء سكن جديد</button>
+    </div>
+  </div>
+</section>
