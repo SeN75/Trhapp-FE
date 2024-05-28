@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://alelyani.trhapp.net/api/',
-  authUrl: 'https://alelyani.trhapp.net/auth/',
-  opsUrl: 'https://alelyani.trhapp.net/ops/',
-  pilgrimUrl: 'https://alelyani.trhapp.net/pilgrim/',
+  apiUrl: 'https://api-alelyani.trhapp.net/api/',
+  authUrl: 'https://api-alelyani.trhapp.net/auth/',
+  opsUrl: 'https://api-alelyani.trhapp.net/ops/',
+  pilgrimUrl: 'https://api-alelyani.trhapp.net/pilgrim/',
 };
