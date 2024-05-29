@@ -59,6 +59,8 @@ export class ArafahCreateSuiteComponent implements OnInit {
   send() {
     const payload = this.form.getRawValue() as unknown as CreateArafahPack1;
     console.log(payload);
+    delete (payload as any).max_capacity;
+    delete (payload as any).no_lounge;
     if (payload)
       this.store.dispatch(ArafahAction.create({ payload, pack: 'package1' }));
   }

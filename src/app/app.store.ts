@@ -101,6 +101,11 @@ import {
   AvailabilityReducer,
 } from './shared/store/availavilty/availavilty.reducer';
 import * as AvailabilityEffect from './shared/store/availavilty/availavilty.effects';
+import {
+  AllocationFeatureKey,
+  AllocationReducer,
+} from './pilgrim/data-access/store/allocation.reducer';
+import * as AllocationEffect from './pilgrim/data-access/store/allocation.effects';
 
 export const storeProviders = {
   providers: [
@@ -124,6 +129,7 @@ export const storeProviders = {
     provideState(MinaFeatureKey, MinaReducer),
     provideState(DistributionFeatureKey, DistributionReducer),
     provideState(AvailabilityFeatureKey, AvailabilityReducer),
+    provideState(AllocationFeatureKey, AllocationReducer),
     provideEffects([
       UploadOpsEffect,
       ArafahEffect,
@@ -144,6 +150,7 @@ export const storeProviders = {
       MinaEffect,
       DistrbutionEffect,
       AvailabilityEffect,
+      AllocationEffect,
     ]),
     provideStoreDevtools({
       maxAge: 25,
