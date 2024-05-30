@@ -12,7 +12,7 @@ import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.dir
 import { MaterialModule } from '../../../shared/module/material.module';
 import { SuiteState } from '../../utils/types/suites.type';
 import { Store } from '@ngrx/store';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { selectSuites } from '../../data-access/store/suites.reducer';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LoungeMina } from '../../../shared/types/base.type';
@@ -20,7 +20,7 @@ import { LoungeMina } from '../../../shared/types/base.type';
 @Component({
   selector: 'tp-mina-suites-table',
   standalone: true,
-  imports: [CommonModule, TpPaginatorDirective, MaterialModule],
+  imports: [CommonModule, TpPaginatorDirective, MaterialModule, RouterLink],
   templateUrl: './mina-suites-table.component.html',
   styleUrl: './mina-suites-table.component.scss',
 })

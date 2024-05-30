@@ -5,17 +5,31 @@ import { MaterialModule } from '../../../shared/module/material.module';
 import { Store } from '@ngrx/store';
 import { CreateMinaPack1, MinaState } from '../../utils/types/mina.type';
 import { MinaAction } from '../../data-access/store/mina.action';
+import { combineLatest } from 'rxjs';
+import {
+  selectStatus,
+  selectErrors,
+  selectIsLoading,
+} from '../../data-access/store/mina.reducer';
+import { MinaAllocationStatusComponent } from '../../ui/mina-allocation-status/mina-allocation-status.component';
 
 @Component({
   selector: 'app-mina-create-suite',
   standalone: true,
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, MinaAllocationStatusComponent],
   templateUrl: './mina-create-suite.component.html',
   styleUrl: './mina-create-suite.component.scss',
 })
 export class MinaCreateSuiteComponent implements OnInit {
   private store = inject(Store<{ mina: MinaState }>);
+  data$ = combineLatest({
+    status: this.store.select(selectStatus),
+    error: this.store.select(selectErrors),
+    isLoading: this.store.select(selectIsLoading),
+  });
+
   ngOnInit(): void {
+    this.store.dispatch(MinaAction.reset());
     this.controls.no_lounges.valueChanges.pipe().subscribe((v) => {
       if (v) {
         for (let i = 0; i < this.controls.lounges.controls.length; i++) {

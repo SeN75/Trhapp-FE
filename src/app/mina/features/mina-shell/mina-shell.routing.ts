@@ -65,6 +65,13 @@ export const MinaShellRoutes: Routes = [
               ),
           },
           {
+            path: 'view/:loungeId/beds',
+            loadComponent: () =>
+              import('../mina-beds/mina-beds.component').then(
+                (m) => m.MinaBedsComponent
+              ),
+          },
+          {
             path: 'create',
             loadComponent: () =>
               import('../mina-create-suite/mina-create-suite.component').then(

@@ -15,6 +15,14 @@ export type BedTentMina = {
   id: string;
   code: string;
   loungeMinaId: LoungeMina['id']; // fk
+  pilgrim?: Pilgrim | null;
+  info?: {
+    place: string;
+    gender: string;
+    suite_number: number;
+    lounge_number: number;
+    bed_number: number;
+  };
 };
 export type BedBuidingMina = {
   id: string;

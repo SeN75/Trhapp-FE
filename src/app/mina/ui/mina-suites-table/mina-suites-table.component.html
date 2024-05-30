@@ -8,7 +8,7 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>اسم الجناح</th>
+      <th mat-header-cell *matHeaderCellDef>اسم الصالة</th>
       <td mat-cell *matCellDef="let element">
         {{ element.name || element.number }}
       </td>
@@ -29,7 +29,12 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <button class="btn btn-accent btn-sm">اضافة غرفة</button>
+        <button
+          class="btn btn-accent btn-xs"
+          [routerLink]="[element.id, 'beds']"
+        >
+          عرض غرفة
+        </button>
       </td>
     </ng-container>
 

@@ -52,5 +52,6 @@ export const {
   name: MinaFeatureKey,
   reducer: MinaReducer,
   selectIsLoading,
+  selectStatus,
   selectErrors,
 } = MinasFeature;

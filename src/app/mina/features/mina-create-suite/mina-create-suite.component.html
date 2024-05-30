@@ -1,120 +1,71 @@
 <section class="page-content">
-  <h1 class="page-title">سكن منى - باقة 1 - جناح 4</h1>
-  <div class="grid grid-cols-4 gap-4"></div>
+  <h1 class="page-title">سكن منى - باقة 1 - جديد</h1>
 
-  <div class="card shadow-sm">
+  <tp-mina-allocation-status pack="package1" />
+
+  <div class="card shadow-sm relative bg-white">
     <div class="card-body flex flex-col gap-8">
-      <div class="flex gap-4" [formGroup]="form">
-        <div class="tp-control">
-          <label> رقم الجناح</label>
-          <label
-            class="input input-bordered flex items-center gap-2"
-            [ngClass]="{
-              'input-error':
-                controls.suite_number.touched && controls.suite_number.errors
-            }"
-          >
-            <input
-              type="number"
-              class="w-full"
-              maxlength="100"
-              placeholder="100"
-              formControlName="suite_number"
-            />
-          </label>
-          @if(controls.no_lounges.touched && controls.no_lounges.errors) {
-          <small> حدث خطا </small>
-          }
-        </div>
-        <div class="tp-control">
-          <label> عدد الصالات</label>
-          <label
-            class="input input-bordered flex items-center gap-2"
-            [ngClass]="{
-              'input-error':
-                controls.no_lounges.touched && controls.no_lounges.errors
-            }"
-          >
-            <input
-              type="number"
-              class="w-full"
-              maxlength="100"
-              placeholder="100"
-              formControlName="no_lounges"
-            />
-          </label>
-          @if(controls.no_lounges.touched && controls.no_lounges.errors) {
-          <small> حدث خطا </small>
-          }
-        </div>
-        <div class="tp-control">
-          <label> السعة</label>
-          <label
-            class="input input-bordered flex items-center gap-2"
-            [ngClass]="{
-              'input-error':
-                controls.max_capacity.touched && controls.max_capacity.errors
-            }"
-          >
-            <input
-              type="number"
-              class="w-full"
-              maxlength="100"
-              placeholder="100"
-              formControlName="max_capacity"
-            />
-          </label>
-          @if(controls.max_capacity.touched && controls.max_capacity.errors) {
-          <small> حدث خطا </small>
-          }
-        </div>
-        <div class="tp-control self-end">
-          <label class="cursor-pointer label flex gap-2">
-            <span class="label-text">سكن للاناث</span>
-            <input
-              type="checkbox"
-              class="toggle toggle-primary"
-              formControlName="is_male_accommodation"
-            />
-            <span class="label-text">سكن للذكور</span>
-          </label>
-        </div>
-      </div>
+      <ng-container *ngIf="data$ | async as obs">
+        @if(obs.isLoading) {
+        <ng-container>
+          <div class="h-[200px] flex justify-center items-center">
+            <span class="loading loading-dots loading-lg"></span>
+          </div>
+        </ng-container>
+        } @else if(obs.status !=='prompt') {
+        <ng-container *ngTemplateOutlet="stateTemp"></ng-container>
+        } @else {
 
-      <div class="flex gap-4 flex-wrap">
-        @for (form of controls.lounges.controls; track form; let i = $index) {
-        <form [formGroup]="controls.lounges.controls[i]">
+        <div class="flex gap-4" [formGroup]="form">
           <div class="tp-control">
-            <label> الصالة </label>
+            <label> رقم الجناح</label>
             <label
               class="input input-bordered flex items-center gap-2"
               [ngClass]="{
                 'input-error':
-                  controls.lounges.controls[i].controls.lounge_number.touched &&
-                  controls.lounges.controls[i].controls.lounge_number.errors
+                  controls.suite_number.touched && controls.suite_number.errors
               }"
             >
               <input
-                type="text"
+                type="number"
                 class="w-full"
                 maxlength="100"
                 placeholder="100"
-                formControlName="lounge_number"
+                formControlName="suite_number"
               />
             </label>
-            @if(controls.lounges.controls[i].controls.lounge_number.touched &&
-            controls.lounges.controls[i].controls.lounge_number.errors) {
+            @if(controls.no_lounges.touched && controls.no_lounges.errors) {
             <small> حدث خطا </small>
             }
           </div>
           <div class="tp-control">
-            <label> السعة </label>
+            <label> عدد الصالات</label>
             <label
               class="input input-bordered flex items-center gap-2"
               [ngClass]="{
                 'input-error':
-                  controls.lounges.controls[i].controls.max_capacity.touched &&
-                  controls.lounges.controls[i].controls.max_capacity.errors
+                  controls.no_lounges.touched && controls.no_lounges.errors
+              }"
+            >
+              <input
+                type="number"
+                class="w-full"
+                maxlength="100"
+                placeholder="100"
+                formControlName="no_lounges"
+              />
+            </label>
+            @if(controls.no_lounges.touched && controls.no_lounges.errors) {
+            <small> حدث خطا </small>
+            }
+          </div>
+          <div class="tp-control">
+            <label> السعة</label>
+            <label
+              class="input input-bordered flex items-center gap-2"
+              [ngClass]="{
+                'input-error':
+                  controls.max_capacity.touched && controls.max_capacity.errors
               }"
             >
               <input
@@ -125,17 +76,103 @@
                 formControlName="max_capacity"
               />
             </label>
-            @if(controls.lounges.controls[i].controls.max_capacity.touched &&
-            controls.lounges.controls[i].controls.max_capacity.errors) {
+            @if(controls.max_capacity.touched && controls.max_capacity.errors) {
             <small> حدث خطا </small>
             }
           </div>
-        </form>
+          <div class="tp-control self-end">
+            <label class="cursor-pointer label flex gap-2">
+              <span class="label-text">سكن للاناث</span>
+              <input
+                type="checkbox"
+                class="toggle toggle-primary"
+                formControlName="is_male_accommodation"
+              />
+              <span class="label-text">سكن للذكور</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="flex gap-4 flex-wrap">
+          @for (form of controls.lounges.controls; track form; let i = $index) {
+          <form [formGroup]="controls.lounges.controls[i]">
+            <div class="tp-control">
+              <label> الصالة </label>
+              <label
+                class="input input-bordered flex items-center gap-2"
+                [ngClass]="{
+                  'input-error':
+                    controls.lounges.controls[i].controls.lounge_number
+                      .touched &&
+                    controls.lounges.controls[i].controls.lounge_number.errors
+                }"
+              >
+                <input
+                  type="text"
+                  class="w-full"
+                  maxlength="100"
+                  placeholder="100"
+                  formControlName="lounge_number"
+                />
+              </label>
+              @if(controls.lounges.controls[i].controls.lounge_number.touched &&
+              controls.lounges.controls[i].controls.lounge_number.errors) {
+              <small> حدث خطا </small>
+              }
+            </div>
+            <div class="tp-control">
+              <label> السعة </label>
+              <label
+                class="input input-bordered flex items-center gap-2"
+                [ngClass]="{
+                  'input-error':
+                    controls.lounges.controls[i].controls.max_capacity
+                      .touched &&
+                    controls.lounges.controls[i].controls.max_capacity.errors
+                }"
+              >
+                <input
+                  type="number"
+                  class="w-full"
+                  maxlength="100"
+                  placeholder="100"
+                  formControlName="max_capacity"
+                />
+              </label>
+              @if(controls.lounges.controls[i].controls.max_capacity.touched &&
+              controls.lounges.controls[i].controls.max_capacity.errors) {
+              <small> حدث خطا </small>
+              }
+            </div>
+          </form>
+          }
+        </div>
+        <div class="flex">
+          <button class="btn btn-primary" (click)="send()">ارسال</button>
+        </div>
         }
-      </div>
-      <div class="flex">
-        <button class="btn btn-primary" (click)="send()">ارسال</button>
-      </div>
+        <ng-template #stateTemp>
+          @if (obs.status === 'success') {
+          <div class="flex gap-4 items-center">
+            <mat-icon class="text-success !w-10 !h-10 !text-[40px] !leading-10"
+              >check</mat-icon
+            >
+            <h3 class="py-4 text-lg font-semibold">
+              {{ "تم الارسال بنجاح" }}
+            </h3>
+          </div>
+          } @else if (obs.status === 'error') {
+          <div class="flex gap-4 items-center">
+            <mat-icon class="text-error !w-10 !h-10 !text-[40px] !leading-10"
+              >warning</mat-icon
+            >
+            <h3 class="py-4 text-lg font-semibold">
+              {{ "خطأ في الارسال" }}
+            </h3>
+          </div>
+          }
+        </ng-template>
+      </ng-container>
     </div>
   </div>
 </section>
