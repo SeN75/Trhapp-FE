@@ -25,6 +25,11 @@ export class SidebarComponent {
   private status$ = this.store.select(selectStatus);
   items: Item[] = [
     {
+      text: 'صفحة الحجاج',
+      icon: 'tp-card',
+      link: ['/', 'l', 'pilgrims'],
+    },
+    {
       text: 'تسكين الباصات',
       icon: 'tp-bus',
       link: ['/', 'l', 'buses'],
@@ -54,11 +59,6 @@ export class SidebarComponent {
     //   icon: 'tp-card',
     //   link: ['/', 'l', 'cards'],
     // },
-    {
-      text: 'معلومات الحجاج',
-      icon: 'tp-card',
-      link: ['/', 'l', 'pilgrims'],
-    },
   ];
 
   uploadFile() {

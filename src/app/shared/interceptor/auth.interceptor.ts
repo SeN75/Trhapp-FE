@@ -13,7 +13,6 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     let headers = req.headers;
     const token = auth.token;
     if (!token || !token.access) return next(req);
-    console.log(token.access);
     const newHeader = headers.append(
       'Authorization',
       'Bearer ' + token.access.trim()
@@ -22,6 +21,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
     return next(req).pipe(
       catchError((error) => {
+        console.log(error);
         if (error.status === 401) return handle401Error(req, next);
         throw error;
       })

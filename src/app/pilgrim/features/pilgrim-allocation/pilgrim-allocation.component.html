@@ -1,0 +1,169 @@
+<h2 mat-dialog-title>
+  {{
+    data.type === "switch"
+      ? "تبديل سكن"
+      : data.type === "delete"
+      ? "حذف سكن"
+      : ""
+  }}
+  - {{ data.pilgrim.name }}
+</h2>
+
+<ng-container *ngIf="data$ | async as obs">
+  <section mat-dialog-content>
+    @if(obs.isLoading) {
+    <ng-container>
+      <div class="h-[200px] flex justify-center items-center">
+        <span class="loading loading-dots loading-lg"></span>
+      </div>
+    </ng-container>
+    }@else if(obs.status !== 'prompt') {
+    <ng-container *ngTemplateOutlet="stateTemp"></ng-container>
+    }@else {
+    <ng-container *ngTemplateOutlet="formTemp"></ng-container>
+
+    }
+  </section>
+  <mat-dialog-actions class="flex gap-1 !justify-end pt-5">
+    @if (obs.status === 'prompt') {
+    <button class="btn btn-primary" (click)="action()">ارسال</button>
+    }
+    <button class="btn btn-secondary btn-outline" mat-dialog-close>
+      اغلاق
+    </button>
+  </mat-dialog-actions>
+  <ng-template #formTemp>
+    <div class="flex flex-col gap-3 pt-3" [formGroup]="form">
+      @if(data.type === 'switch') {
+      <div class="tp-control">
+        <label> هوية الحاج 1</label>
+        <label
+          class="input input-bordered input-disabled flex items-center gap-2"
+          [ngClass]="{
+            'input-error':
+              controls.national_id?.touched && controls.national_id?.errors
+          }"
+        >
+          <input
+            [disabled]="true"
+            type="text"
+            class="w-full"
+            placeholder="هوية الحاج 1"
+            formControlName="national_id1"
+          />
+          @if(controls.national_id?.touched && controls.national_id?.errors) {
+          <small> حدث خطا </small>
+          }
+        </label>
+      </div>
+      <div class="tp-control">
+        <label> هوية الحاج 2</label>
+        <label
+          class="input input-bordered flex items-center gap-2"
+          [ngClass]="{
+            'input-error':
+              controls.national_id?.touched && controls.national_id?.errors
+          }"
+        >
+          <input
+            [disabled]="true"
+            type="text"
+            class="w-full"
+            placeholder="هوية الحاج 2"
+            formControlName="national_id2"
+          />
+          @if(controls.national_id?.touched && controls.national_id?.errors) {
+          <small> حدث خطا </small>
+          }
+        </label>
+      </div>
+      } @else if (data.type === 'delete') {
+      <div class="tp-control">
+        <label> هوية الحاج</label>
+        <label
+          class="input input-bordered flex items-center gap-2"
+          [ngClass]="{
+            'input-error':
+              controls.national_id?.touched && controls.national_id?.errors
+          }"
+        >
+          <input
+            [disabled]="true"
+            type="text"
+            class="w-full"
+            placeholder="هوية الحاج"
+            formControlName="national_id"
+          />
+          @if(controls.national_id?.touched && controls.national_id?.errors) {
+          <small> حدث خطا </small>
+          }
+        </label>
+      </div>
+      }
+      <div class="tp-control">
+        <label> نوع السكن </label>
+        <select
+          class="select select-bordered w-full"
+          formControlName="location_type"
+          [ngClass]="{
+            'select-error':
+              controls.location_type.touched && controls.location_type.errors
+          }"
+        >
+          <option disabled selected>نوع السكن</option>
+          <option value="منى">منى</option>
+          <option value="عرفة">عرفة</option>
+        </select>
+
+        @if(controls.location_type.touched && controls.location_type.errors) {
+        <small> حدث خطا </small>
+        }
+      </div>
+      <div class="tp-control">
+        <label> الباقة </label>
+
+        <select
+          class="select select-bordered w-full"
+          formControlName="package_name"
+          [ngClass]="{
+            'select-error':
+              controls.package_name.touched && controls.package_name.errors
+          }"
+        >
+          <option disabled selected>الباقة</option>
+          <option value="باقة (1)">باقة (1)</option>
+          <option value="باقة (4)">باقة (4)</option>
+        </select>
+        @if(controls.package_name.touched && controls.package_name.errors) {
+        <small> حدث خطا </small>
+        }
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #stateTemp>
+    @if (obs.status === 'success') {
+    <div class="flex gap-4 items-center">
+      <mat-icon class="text-success !w-10 !h-10 !text-[40px] !leading-10"
+        >check</mat-icon
+      >
+      <h3 class="py-4 text-lg font-semibold">
+        {{
+          data.type === "switch" ? "تم تبديل السكن بنجاح" : "تم حذف السكن بنجاح"
+        }}
+      </h3>
+    </div>
+    } @else if (obs.status === 'error') {
+    <div class="flex gap-4 items-center">
+      <mat-icon class="text-error !w-10 !h-10 !text-[40px] !leading-10"
+        >warning</mat-icon
+      >
+      <h3 class="py-4 text-lg font-semibold">
+        {{
+          data.type === "switch" ? "خطأ في تبديل السكن" : "خطأ في حذف السكن"
+        }}
+      </h3>
+    </div>
+    }
+  </ng-template>
+</ng-container>

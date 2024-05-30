@@ -52,6 +52,7 @@ module.exports = {
           success: "#20862B",
           warning: "#facc15",
           error: "#C50000",
+          "error-A200": "#FFDDDD",
         },
       },
     ],

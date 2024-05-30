@@ -123,3 +123,23 @@ mat-paginator {
     }
   }
 }
+
+.label-search-icon {
+  @apply flex items-center gap-1;
+  mat-icon {
+    @apply text-primary;
+  }
+  &:hover mat-icon {
+    @apply cursor-pointer transition-colors text-primary-A200;
+  }
+  & input {
+    @apply input input-bordered input-sm bg-primary-A200 text-primary;
+  }
+}
+
+.mat-mdc-menu-content {
+  @apply bg-primary-A100 shadow-xl;
+}
+.mat-mdc-menu-panel {
+  @apply shadow-xl;
+}
