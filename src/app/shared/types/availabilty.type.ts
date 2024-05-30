@@ -2,40 +2,62 @@ import { TPState } from './base.type';
 
 export type Availabilty = {
   package1: {
-    arafah: AvailabiltyInfo;
+    arafah: AvailabiltyInfo & { last_created_lounge: number };
     bus: AvailabiltyInfoBus;
-    mina: AvailabiltyInfo;
+    mina: AvailabiltyInfo & {
+      last_created_suite: number;
+      last_created_lounge: number;
+    };
     total_pilgrims: number;
   };
   package4: {
     arafah: AvailabiltyInfo;
     bus: AvailabiltyInfoBus;
-    mina: AvailabiltyInfo;
+    mina: AvailabiltyInfo & {
+      last_created_floor: number;
+      last_created_room: number;
+    };
     total_pilgrims: number;
   };
 };
 
 type AvailabiltyInfo = {
-  allocated_female_pilgrims: number;
-  allocated_male_pilgrims: number;
-  available_female_beds: number;
-  available_male_beds: number;
-  created_female_beds: number;
-  created_male_beds: number;
-  required_female_beds: number;
-  required_male_beds: number;
-  total_female_pilgrims: number;
-  total_male_pilgrims: number;
+  males: {
+    total: number;
+    beds: {
+      required: number;
+      available: number;
+      created: number;
+      allocated: number;
+    };
+  };
+  females: {
+    total: number;
+    beds: {
+      required: number;
+      available: number;
+      created: number;
+      allocated: number;
+    };
+  };
 };
 
 type AvailabiltyInfoBus = {
   [k: string]: {
-    allocated_buses: number;
-    allocated_pilgrims: number;
-    created_buses: number;
-    last_bus_count: number;
-    required_buses: number;
-    required_supervisors: number;
+    pilgrims: {
+      total: number;
+      allocated: number;
+    };
+    bus: {
+      required: number;
+      allocated: number;
+      created: number;
+      last_bus_pilgrims_count: number;
+    };
+    supervisor: {
+      required: number;
+      allocated: number;
+    };
     total_pilgrims: number;
   };
 };
