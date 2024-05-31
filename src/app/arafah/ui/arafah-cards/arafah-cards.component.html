@@ -1,6 +1,6 @@
 <div
   class="card shadow-xl"
-  [ngClass]="{ 'bg-accent': data.is_male_accmidations }"
+  [ngClass]="{ 'bg-accent': data.current_capacity === data.max_capacity }"
 >
   <div class="card-body flex gap-8">
     <header class="card-title text-primary">{{ data.name }}</header>

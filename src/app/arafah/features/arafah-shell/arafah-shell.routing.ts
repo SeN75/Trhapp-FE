@@ -10,9 +10,16 @@ export const ArafahShellRoutes: Routes = [
       {
         path: 'pack1',
         loadComponent: () =>
-          import('../arafah-tent/arafah-tent.component').then(
+          import('@/arafah/features/arafah-tent/arafah-tent.component').then(
             (m) => m.ArafahTentComponent
           ),
+      },
+      {
+        path: 'pack1/:id',
+        loadComponent: () =>
+          import(
+            '@/arafah/features/arafah-tent-beds/arafah-tent-beds.component'
+          ).then((m) => m.ArafahTentBedsComponent),
       },
 
       {

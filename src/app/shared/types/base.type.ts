@@ -93,8 +93,15 @@ export type BedTentArafah = {
   id: string;
   code: string;
   pilgrim?: Pilgrim | null;
-  lounge?: LoungeArafah['id'];
+  lounge?: LoungeArafah[];
   loungeArafahId: LoungeArafah['id']; // fk
+  info?: {
+    place: string;
+    gender: string;
+    suite_number: number;
+    lounge_number: number;
+    bed_number: number;
+  };
 };
 export type LoungeArafah = {
   id: string;
@@ -103,6 +110,7 @@ export type LoungeArafah = {
   max_capacity: number;
   current_capacity: number;
   is_male_accmidations: boolean;
+  beds: BedTentArafah[] | null;
 };
 
 export type Pilgrim = {

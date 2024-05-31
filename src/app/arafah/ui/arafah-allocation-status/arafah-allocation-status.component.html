@@ -1,0 +1,40 @@
+<ng-container *ngIf="data$ | async as obs">
+  <section class="">
+    <div class="stats shadow bg-white w-full">
+      <div class="stat">
+        <div class="stat-figure text-primary">
+          <mat-icon>man</mat-icon>
+        </div>
+        <div class="stat-title">الحجاج الرجال</div>
+        <div class="stat-value">
+          {{ obs.arafah.males.total }}
+        </div>
+        <div class="stat-desc"></div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-figure text-primary">
+          <mat-icon>man</mat-icon><mat-icon>home</mat-icon>
+        </div>
+        <div class="stat-title">الحجاج الرجال</div>
+        <div class="stat-value">
+          المنشىء{{ obs.arafah.males.beds.created }} /
+          {{ obs.arafah.males.beds.required }} المطلوب
+        </div>
+        <div class="stat-desc">
+          مسكننين {{ obs.arafah.males.beds.allocated }} /
+          {{ obs.arafah.males.beds.available }} متاح
+        </div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-figure text-secondary">
+          <mat-icon>download</mat-icon>
+        </div>
+        <div class="stat-title">New Users</div>
+        <div class="stat-value">4,200</div>
+        <div class="stat-desc">↗︎ 400 (22%)</div>
+      </div>
+    </div>
+  </section>
+</ng-container>

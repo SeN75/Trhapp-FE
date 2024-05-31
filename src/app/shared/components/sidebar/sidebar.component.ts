@@ -45,9 +45,9 @@ export class SidebarComponent {
       link: ['/', 'l', 'mina', 'pack4'],
     },
     {
-      text: 'تسكين عرفة',
+      text: 'تسكين عرفة باقة 1',
       icon: 'tp-camping',
-      link: ['/', 'l', 'arafah'],
+      link: ['/', 'l', 'arafah', 'pack1'],
     },
     {
       text: 'الاجنحة',

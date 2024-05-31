@@ -26,6 +26,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LoungeArafah } from '@/shared/types/base.type';
 import { ArafahState } from '@/arafah/utils/types/arafah.type';
 import { ArafahAction } from '../../data-access/store/arafah.action';
+import { ArafahAllocationStatusComponent } from '@/arafah/ui/arafah-allocation-status/arafah-allocation-status.component';
 
 @Component({
   selector: 'app-arafah-tent',
@@ -37,6 +38,7 @@ import { ArafahAction } from '../../data-access/store/arafah.action';
     TpPaginatorDirective,
     AsyncPipe,
     MaterialModule,
+    ArafahAllocationStatusComponent,
   ],
   templateUrl: './arafah-tent.component.html',
   styleUrl: './arafah-tent.component.scss',

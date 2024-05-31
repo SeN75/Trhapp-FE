@@ -8,17 +8,30 @@ import {
 } from '@/arafah/utils/types/arafah.type';
 import { Store } from '@ngrx/store';
 import { ArafahAction } from '../../data-access/store/arafah.action';
+import { combineLatest } from 'rxjs';
+import {
+  selectErrors,
+  selectIsLoading,
+  selectStatus,
+} from '@/arafah/data-access/store/arafah.reducer';
+import { ArafahAllocationStatusComponent } from '@/arafah/ui/arafah-allocation-status/arafah-allocation-status.component';
 
 @Component({
   selector: 'app-arafah-create-suite',
   standalone: true,
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, ArafahAllocationStatusComponent],
   templateUrl: './arafah-create-suite.component.html',
   styleUrl: './arafah-create-suite.component.scss',
 })
 export class ArafahCreateSuiteComponent implements OnInit {
   private store = inject(Store<{ arafah: ArafahState }>);
+  data$ = combineLatest({
+    status: this.store.select(selectStatus),
+    isLoading: this.store.select(selectIsLoading),
+    error: this.store.select(selectErrors),
+  });
   ngOnInit(): void {
+    this.store.dispatch(ArafahAction.reset());
     this.controls.no_lounges.valueChanges.pipe().subscribe((v) => {
       if (v) {
         for (let i = 0; i < this.controls.lounges.controls.length; i++) {
@@ -61,9 +74,8 @@ export class ArafahCreateSuiteComponent implements OnInit {
 
   send() {
     const payload = this.form.getRawValue() as unknown as CreateArafahPack1;
-    console.log(payload);
     delete (payload as any).max_capacity;
-    delete (payload as any).no_lounge;
+    delete (payload as any).no_lounges;
     if (payload)
       this.store.dispatch(ArafahAction.create({ payload, pack: 'package1' }));
   }

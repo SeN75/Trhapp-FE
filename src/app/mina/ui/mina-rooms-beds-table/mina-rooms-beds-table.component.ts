@@ -47,18 +47,6 @@ export class MinaRoomsBedsTableComponent implements AfterViewInit {
         if (!building) {
           // this.router.navigate(['..']);
         }
-        console.log(
-          'tes',
-          building?.floors
-            ?.find((f) => +f.id === +floorId)
-            ?.rooms?.find((r) => +r.id === +roomId)
-            ?.beds?.map((r, i) => ({
-              ...r,
-              ...r.pilgrim,
-              ...r.info,
-              position: i + 1,
-            }))
-        );
         this.dataSource.data =
           building?.floors
             ?.find((f) => +f.id === +floorId)
