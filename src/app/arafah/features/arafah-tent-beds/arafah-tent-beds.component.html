@@ -1,5 +1,9 @@
 <section class="page-content">
-  <h1 class="page-title">سكن عرفة - باقة 1 - صالة {{ loungeId }}</h1>
-  <tp-arafah-allocation-status pack="package1" />
+  <h1 class="page-title">
+    سكن عرفة - باقة{{ pack === "package1" ? " 1" : " 4" }} - صالة {{ loungeId }}
+  </h1>
+  <tp-arafah-allocation-status
+    [pack]="pack === 'package1' ? 'package1' : 'package4'"
+  />
   <tp-arafa-tent-beds-table />
 </section>

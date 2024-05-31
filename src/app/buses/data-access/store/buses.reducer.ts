@@ -57,6 +57,7 @@ export const {
   name: BusesFeatureKey,
   reducer: BusesReducer,
   selectBusesState,
+  selectBuses,
   selectIsLoading,
   selectErrors,
   selectSelectedBus,

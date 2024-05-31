@@ -6,28 +6,27 @@ export const ArafahShellRoutes: Routes = [
     path: '',
     component: ArafahShellComponent,
     children: [
-      { path: '', redirectTo: 'pack1', pathMatch: 'full' },
+      { path: '', redirectTo: 'package1', pathMatch: 'full' },
       {
-        path: 'pack1',
+        path: ':pack',
         loadComponent: () =>
           import('@/arafah/features/arafah-tent/arafah-tent.component').then(
             (m) => m.ArafahTentComponent
           ),
       },
       {
-        path: 'pack1/:id',
-        loadComponent: () =>
-          import(
-            '@/arafah/features/arafah-tent-beds/arafah-tent-beds.component'
-          ).then((m) => m.ArafahTentBedsComponent),
-      },
-
-      {
-        path: 'pack1/create',
+        path: ':pack/create',
         loadComponent: () =>
           import('../arafah-create-tent/arafah-create-suite.component').then(
             (m) => m.ArafahCreateSuiteComponent
           ),
+      },
+      {
+        path: ':pack/:id',
+        loadComponent: () =>
+          import(
+            '@/arafah/features/arafah-tent-beds/arafah-tent-beds.component'
+          ).then((m) => m.ArafahTentBedsComponent),
       },
     ],
   },

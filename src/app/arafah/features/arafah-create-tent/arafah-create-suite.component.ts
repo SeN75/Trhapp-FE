@@ -15,6 +15,7 @@ import {
   selectStatus,
 } from '@/arafah/data-access/store/arafah.reducer';
 import { ArafahAllocationStatusComponent } from '@/arafah/ui/arafah-allocation-status/arafah-allocation-status.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-arafah-create-suite',
@@ -25,6 +26,9 @@ import { ArafahAllocationStatusComponent } from '@/arafah/ui/arafah-allocation-s
 })
 export class ArafahCreateSuiteComponent implements OnInit {
   private store = inject(Store<{ arafah: ArafahState }>);
+  private aRouter = inject(ActivatedRoute);
+  pack = this.aRouter.snapshot.params['pack'] || 'package1';
+
   data$ = combineLatest({
     status: this.store.select(selectStatus),
     isLoading: this.store.select(selectIsLoading),
@@ -48,6 +52,10 @@ export class ArafahCreateSuiteComponent implements OnInit {
           v ? +v : 0
         );
       }
+    });
+
+    this.aRouter.params.subscribe((params) => {
+      this.pack = params['pack'] || 'package1';
     });
   }
   initalLounge = (i = 0, capacity = 0) =>
@@ -77,6 +85,11 @@ export class ArafahCreateSuiteComponent implements OnInit {
     delete (payload as any).max_capacity;
     delete (payload as any).no_lounges;
     if (payload)
-      this.store.dispatch(ArafahAction.create({ payload, pack: 'package1' }));
+      this.store.dispatch(
+        ArafahAction.create({
+          payload,
+          pack: this.pack === 'package4' ? 'package4' : 'package1',
+        })
+      );
   }
 }

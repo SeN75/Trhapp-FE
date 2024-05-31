@@ -45,6 +45,8 @@ export class ArafaTentBedsTableComponent implements AfterViewInit {
   ngOnInit(): void {
     const loungeId = this.aRouter.snapshot.params['id'];
     if (!loungeId) this.router.navigate(['..']);
+
+    // this.aRouter.paramMap.pipe(switchMap((params) => {}));
     this.lounges$.subscribe((loungeArafah) => {
       this.dataSource.data =
         loungeArafah

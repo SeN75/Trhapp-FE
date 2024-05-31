@@ -47,13 +47,14 @@ export class SidebarComponent {
     {
       text: 'تسكين عرفة باقة 1',
       icon: 'tp-camping',
-      link: ['/', 'l', 'arafah', 'pack1'],
+      link: ['/', 'l', 'arafah', 'package1'],
     },
     {
-      text: 'الاجنحة',
-      icon: 'tp-door-side',
-      link: ['/', 'l', 'suites'],
+      text: 'تسكين عرفة باقة 4',
+      icon: 'tp-camping',
+      link: ['/', 'l', 'arafah', 'package4'],
     },
+
     // {
     //   text: 'بطاقة الحاج',
     //   icon: 'tp-card',

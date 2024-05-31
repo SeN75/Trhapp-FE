@@ -14,7 +14,7 @@ import {
   LoungeArafahState,
   LoungesArafah,
 } from '@/arafah/utils/types/lounges-arafah.type';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -46,11 +46,18 @@ import { ArafahAllocationStatusComponent } from '@/arafah/ui/arafah-allocation-s
 export class ArafahTentComponent implements AfterViewInit {
   private store = inject(Store<{ lounges_arafah: LoungeArafahState }>);
   private arafahStore = inject(Store<{ arafah: ArafahState }>);
+  private aRouter = inject(ActivatedRoute);
   lounges$ = this.store.select(selectLounges_arafah);
+  pack = this.aRouter.snapshot.params['pack'] || 'package1';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+  ngOnInit(): void {
+    this.aRouter.params.subscribe((params) => {
+      this.pack = params['pack'] || 'package1';
+    });
   }
   constructor() {
     this.lounges$.pipe(takeUntilDestroyed()).subscribe((data) => {

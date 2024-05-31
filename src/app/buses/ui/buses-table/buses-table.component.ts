@@ -1,15 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { MatRipple } from '@angular/material/core';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
 import { MatDialog } from '@angular/material/dialog';
-import { BusesFormComponent } from '../../features/buses-form/buses-form.component';
+import { BusesFormComponent } from '@/buses/features/buses-form/buses-form.component';
 import { Store } from '@ngrx/store';
 import { BusState } from '@/buses/utils/types/buses.type';
-import { BusesAction } from '../../data-access/store/buses.action';
+import { BusesAction } from '@/buses/data-access/store/buses.action';
+import { Bus } from '@/shared/types/base.type';
+import { selectBuses } from '@/buses/data-access/store/buses.reducer';
 
 @Component({
   selector: 'tp-buses-table',
@@ -25,17 +33,27 @@ import { BusesAction } from '../../data-access/store/buses.action';
   templateUrl: './buses-table.component.html',
   styleUrl: './buses-table.component.scss',
 })
-export class BusesTableComponent implements AfterViewInit {
+export class BusesTableComponent implements AfterViewInit, OnInit {
   private store = inject(Store<{ buses: BusState }>);
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
   }
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-
+  dataSource = new MatTableDataSource<Bus>();
+  displayedColumns: string[] = [
+    'position',
+    'bus_name',
+    'supervisor',
+    'max_capacity',
+    'bus_plate',
+    'bus_code',
+    'package_name',
+  ];
+  buses$ = this.store.select(selectBuses);
   private dialog = inject(MatDialog);
-
+  ngOnInit(): void {
+    this.dataSource;
+  }
   openDialog() {
     this.store.dispatch(BusesAction.reset());
     this.dialog.open(BusesFormComponent, {
