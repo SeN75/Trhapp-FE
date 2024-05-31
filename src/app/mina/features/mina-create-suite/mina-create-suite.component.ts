@@ -3,15 +3,15 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { MaterialModule } from '@/shared/module/material.module';
 import { Store } from '@ngrx/store';
-import { CreateMinaPack1, MinaState } from '@/mina/utils/types/mina.type';
-import { MinaAction } from '../../data-access/store/mina.action';
+import { CreateMinaPack1, MinaState } from '../../utils/types/mina.type';
+import { MinaAction } from '@/mina/data-access/store/mina.action';
 import { combineLatest } from 'rxjs';
 import {
   selectStatus,
   selectErrors,
   selectIsLoading,
-} from '../../data-access/store/mina.reducer';
-import { MinaAllocationStatusComponent } from '../../ui/mina-allocation-status/mina-allocation-status.component';
+} from '@/mina/data-access/store/mina.reducer';
+import { MinaAllocationStatusComponent } from '@/mina/ui/mina-allocation-status/mina-allocation-status.component';
 
 @Component({
   selector: 'app-mina-create-suite',

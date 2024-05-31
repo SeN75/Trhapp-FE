@@ -29,6 +29,13 @@ export type BedBuidingMina = {
   code: string;
   room: Room['id']; // fx
   pilgrim: Pilgrim | null;
+  info?: {
+    place: string;
+    gender: string;
+    suite_number: number;
+    lounge_number: number;
+    bed_number: number;
+  };
 };
 export type Room = {
   id: string;

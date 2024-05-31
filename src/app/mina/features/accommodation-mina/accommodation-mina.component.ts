@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { StateCardComponent } from '@/shared/components/state-card/state-card.component';
-import { AccommodationMinaTableComponent } from '../../ui/accommodation-mina-table/accommodation-mina-table.component';
+import { AccommodationMinaTableComponent } from '@/mina/ui/accommodation-mina-table/accommodation-mina-table.component';
 
 @Component({
   selector: 'app-accommodation-mina',

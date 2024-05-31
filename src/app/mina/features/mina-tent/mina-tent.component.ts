@@ -1,12 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MinaCreatePlaceComponent } from '../mina-create-place/mina-create-place.component';
-import { MinaTentTableComponent } from '../../ui/mina-tent-table/mina-tent-table.component';
+import { MinaCreatePlaceComponent } from '@/mina/features/mina-create-place/mina-create-place.component';
+import { MinaTentTableComponent } from '@/mina/ui/mina-tent-table/mina-tent-table.component';
 import { Store } from '@ngrx/store';
 import { RouterLink } from '@angular/router';
 import { MinaState } from '@/mina/utils/types/mina.type';
-import { MinaAction } from '../../data-access/store/mina.action';
-import { MinaAllocationStatusComponent } from '../../ui/mina-allocation-status/mina-allocation-status.component';
+import { MinaAction } from '@/mina/data-access/store/mina.action';
+import { MinaAllocationStatusComponent } from '@/mina/ui/mina-allocation-status/mina-allocation-status.component';
 
 @Component({
   selector: 'app-mina-tent',

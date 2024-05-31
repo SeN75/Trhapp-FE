@@ -31,8 +31,8 @@ export const MinaShellRoutes: Routes = [
       {
         path: 'pack4/:id/view/:floorId/rooms/:roomId/beds',
         loadComponent: () =>
-          import('../mina-rooms/mina-rooms.component').then(
-            (m) => m.MinaRoomsComponent
+          import('../mina-rooms-beds/mina-rooms-beds.component').then(
+            (m) => m.MinaRoomsBedsComponent
           ),
       },
       {

@@ -9,7 +9,13 @@ import {
   CreateMinaPack4,
   MinaState,
 } from '@/mina/utils/types/mina.type';
-import { MinaAction } from '../../data-access/store/mina.action';
+import { MinaAction } from '@/mina/data-access/store/mina.action';
+import { combineLatest } from 'rxjs';
+import {
+  selectStatus,
+  selectErrors,
+  selectIsLoading,
+} from '@/mina/data-access/store/mina.reducer';
 
 @Component({
   selector: 'app-mina-create-building',
@@ -20,6 +26,12 @@ import { MinaAction } from '../../data-access/store/mina.action';
 })
 export class MinaCreateBuildingComponent implements OnInit {
   private store = inject(Store<{ mina: MinaState }>);
+  data$ = combineLatest({
+    status: this.store.select(selectStatus),
+    error: this.store.select(selectErrors),
+    isLoading: this.store.select(selectIsLoading),
+  });
+
   initalFloor = (i = 0) =>
     new FormGroup({
       floor_number: new FormControl(i),

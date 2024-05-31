@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MaterialModule } from '@/shared/module/material.module';
 import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
-import { MinaBuildingCardComponent } from '../../ui/mina-building-card/mina-building-card.component';
+import { MinaBuildingCardComponent } from '@/mina/ui/mina-building-card/mina-building-card.component';
 import { AsyncPipe } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -12,7 +12,7 @@ import { selectBuildings } from '@/building//data-access/store/building.reducer'
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Building } from '@/shared/types/base.type';
 import { MinaState } from '@/mina/utils/types/mina.type';
-import { MinaAction } from '../../data-access/store/mina.action';
+import { MinaAction } from '@/mina/data-access/store/mina.action';
 @Component({
   selector: 'app-mina-building',
   standalone: true,

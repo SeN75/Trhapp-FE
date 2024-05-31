@@ -9,6 +9,8 @@ import { Store } from '@ngrx/store';
 import { SuiteState } from '@/mina/utils/types/suites.type';
 import { SuitesAction } from './suites.action';
 import { Suite } from '@/shared/types/base.type';
+import { BuildingState } from '@/building/utils/types/building.type';
+import { BuildingAction } from '@/building/data-access/store/building.action';
 
 export const getBusesEffects = createEffect(
   (
@@ -36,8 +38,10 @@ export const createMinaEffects = createEffect(
     actions.pipe(
       ofType(MinaAction.create),
       tap((data) => logger.log('[createMinaEffects]', data)),
-      switchMap(({ payload, pack }) => service.create(payload, pack)),
-      map((data) => MinaAction.success()),
+      switchMap(({ payload, pack }) =>
+        service.create(payload, pack).pipe(map(() => pack))
+      ),
+      map((pack) => MinaAction.success({ pack })),
       catchError((error) => {
         logger.error('[createMinaEffects erorr]', error);
         return of(MinaAction.error({ error }));
@@ -53,8 +57,8 @@ export const allocateMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(MinaAction.allocate),
-      switchMap(({ pack }) => service.allocate(pack)),
-      map((data) => MinaAction.success()),
+      switchMap(({ pack }) => service.allocate(pack).pipe(map(() => pack))),
+      map((pack) => MinaAction.success({ pack })),
       catchError((error) => {
         logger.error('[createMinaEffects erorr]', error);
         return of(MinaAction.error({ error }));
@@ -67,11 +71,16 @@ export const createEffectSuccess = createEffect(
   (
     actions = inject(Actions),
     logger = inject(LoggerService),
-    store = inject(Store<{ suites: SuiteState }>)
+    store = inject(Store<{ suites: SuiteState }>),
+    storeBuilding = inject(Store<{ buildings: BuildingState }>)
   ) =>
     actions.pipe(
       ofType(MinaAction.success),
-      tap(() => store.dispatch(SuitesAction.get()))
+      tap(({ pack }) =>
+        pack === 'package1'
+          ? store.dispatch(SuitesAction.get())
+          : storeBuilding.dispatch(BuildingAction.get())
+      )
     ),
   { functional: true, dispatch: false }
 );

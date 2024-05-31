@@ -15,7 +15,10 @@ export const MinaAction = {
     '[Mina] allocate Accommodation',
     props<{ pack: 'package1' | 'package4' }>()
   ),
-  success: createAction('[Mina]  success'),
+  success: createAction(
+    '[Mina]  success',
+    props<{ pack: 'package1' | 'package4' }>()
+  ),
   error: createAction('[Mina] error', props<{ error: string }>()),
   reset: createAction('[Mina] reset'),
 };

@@ -13,7 +13,7 @@ import { MaterialModule } from '@/shared/module/material.module';
 import { SuiteState } from '@/mina/utils/types/suites.type';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { selectSuites } from '../../data-access/store/suites.reducer';
+import { selectSuites } from '@/mina/data-access/store/suites.reducer';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LoungeMina } from '@/shared/types/base.type';
 

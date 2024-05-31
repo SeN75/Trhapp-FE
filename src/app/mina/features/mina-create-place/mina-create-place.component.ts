@@ -10,7 +10,7 @@ import {
   selectStatus,
   selectErrors,
   selectIsLoading,
-} from '../../data-access/store/beds-tent-mina.reducer';
+} from '@/mina/data-access/store/beds-tent-mina.reducer';
 import { combineLatest } from 'rxjs';
 
 @Component({

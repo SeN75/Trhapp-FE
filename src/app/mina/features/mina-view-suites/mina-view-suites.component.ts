@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { MinaSuitesTableComponent } from '../../ui/mina-suites-table/mina-suites-table.component';
+import { MinaSuitesTableComponent } from '@/mina/ui/mina-suites-table/mina-suites-table.component';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { MinaAllocationStatusComponent } from '../../ui/mina-allocation-status/mina-allocation-status.component';
+import { MinaAllocationStatusComponent } from '@/mina/ui/mina-allocation-status/mina-allocation-status.component';
 
 @Component({
   selector: 'app-mina-view-suites',

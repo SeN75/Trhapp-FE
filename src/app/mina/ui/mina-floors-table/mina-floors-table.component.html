@@ -8,32 +8,31 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>اسم الصالة</th>
+      <th mat-header-cell *matHeaderCellDef>الدور</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.name || element.number }}
+        {{ element.number }}
       </td>
     </ng-container>
     <!-- Name Column -->
-    <ng-container matColumnDef="max_capacity">
-      <th mat-header-cell *matHeaderCellDef>السعة</th>
-      <td mat-cell *matCellDef="let element">{{ element.max_capacity }}</td>
+    <ng-container matColumnDef="building">
+      <th mat-header-cell *matHeaderCellDef>المبنى</th>
+      <td mat-cell *matCellDef="let element">مبنى {{ element.building }}</td>
     </ng-container>
-    <ng-container matColumnDef="current_capacity">
-      <th mat-header-cell *matHeaderCellDef>السعة الحالية</th>
-      <td mat-cell *matCellDef="let element">{{ element.current_capacity }}</td>
-    </ng-container>
-    <ng-container matColumnDef="beds">
-      <th mat-header-cell *matHeaderCellDef>عدد الاسرة</th>
-      <td mat-cell *matCellDef="let element">{{ element.beds.length }}</td>
+
+    <ng-container matColumnDef="rooms">
+      <th mat-header-cell *matHeaderCellDef>عدد الغرف</th>
+      <td mat-cell *matCellDef="let element">
+        {{ (element.rooms || []).length }}
+      </td>
     </ng-container>
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
         <button
           class="btn btn-accent btn-xs"
-          [routerLink]="[element.id, 'beds']"
+          [routerLink]="[element.id, 'rooms']"
         >
-          عرض الغرفة
+          عدد الغرف
         </button>
       </td>
     </ng-container>

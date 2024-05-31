@@ -5,8 +5,8 @@ import { DistributeState } from '@/mina/utils/types/distribute.type';
 import {
   selectPack1Read,
   selectPack4Read,
-} from '../../data-access/store/distribution.reducer';
-import { DistributionAction } from '../../data-access/store/distribution.action';
+} from '@/mina/data-access/store/distribution.reducer';
+import { DistributionAction } from '@/mina/data-access/store/distribution.action';
 
 @Component({
   selector: 'app-mina-distribute',

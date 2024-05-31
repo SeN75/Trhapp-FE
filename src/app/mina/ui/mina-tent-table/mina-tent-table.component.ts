@@ -17,7 +17,7 @@ import { Store } from '@ngrx/store';
 import { LoungeMinaState } from '@/mina/utils/types/lounges-mina.type';
 import { LoungeMina, Suite } from '@/shared/types/base.type';
 import { SuiteState, Suites } from '@/mina/utils/types/suites.type';
-import { selectSuites } from '../../data-access/store/suites.reducer';
+import { selectSuites } from '@/mina/data-access/store/suites.reducer';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
