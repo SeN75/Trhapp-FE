@@ -184,7 +184,11 @@
           <select
             class="select select-bordered w-full"
             formControlName="start_location"
-          ></select>
+          >
+            @for (location of locations$ | async; track $index) {
+            <option [value]="location">{{ location.name }}</option>
+            }
+          </select>
         </div>
         <button class="btn btn-ghost" (click)="addStartLocation = true">
           اضافة
@@ -202,8 +206,8 @@
             class="select select-bordered w-full"
             formControlName="destination_location"
           >
-            @for (city of cities$ | async; track $index) {
-            <option [value]="city">{{ city.name }}</option>
+            @for (location of locations$ | async; track $index) {
+            <option [value]="location">{{ location.name }}</option>
             }
           </select>
         </div>

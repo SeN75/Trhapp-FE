@@ -51,7 +51,7 @@ export class LayoutShellComponent {
     this.buildingStore.dispatch(BuildingAction.get());
     this.suitesStore.dispatch(SuitesAction.get());
     this.cityStore.dispatch(CityAction.get());
-    this.supervisorStore.dispatch(SupervisorAction.get());
+    // this.supervisorStore.dispatch(SupervisorAction.get());
     this.loungeArafahStore.dispatch(LoungeArafahAction.get());
     this.pligrmStore.dispatch(PilgrimAction.get());
     this.locationStore.dispatch(LocationAction.get());

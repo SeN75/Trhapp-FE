@@ -18,6 +18,7 @@ import { BusState } from '@/buses/utils/types/buses.type';
 import { BusesAction } from '@/buses/data-access/store/buses.action';
 import { Bus } from '@/shared/types/base.type';
 import { selectBuses } from '@/buses/data-access/store/buses.reducer';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'tp-buses-table',
@@ -39,20 +40,40 @@ export class BusesTableComponent implements AfterViewInit, OnInit {
     this.dataSource.paginator = this.paginator;
   }
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  dataSource = new MatTableDataSource<Bus>();
+  dataSource = new MatTableDataSource<
+    Bus & {
+      supervisor_name: string;
+      start_location_name: string;
+      destination_location_name: string;
+    }
+  >();
   displayedColumns: string[] = [
     'position',
     'bus_name',
-    'supervisor',
-    'max_capacity',
-    'bus_plate',
     'bus_code',
-    'package_name',
+    'max_capacity',
+    'supervisor_info',
+    'start_location_name',
+    'destination_location_name',
   ];
   buses$ = this.store.select(selectBuses);
   private dialog = inject(MatDialog);
+  constructor() {
+    this.buses$.pipe(takeUntilDestroyed()).subscribe((buess) => {
+      this.dataSource.data =
+        buess?.map((bus, i) => {
+          return {
+            ...bus,
+            postions: i + 1,
+            supervisor_name: bus.supervisor?.name,
+            start_location_name: bus.start_location?.name,
+            destination_location_name: bus.destination_location?.name,
+          };
+        }) || [];
+    });
+  }
   ngOnInit(): void {
-    this.dataSource;
+    // this.dataSource;
   }
   openDialog() {
     this.store.dispatch(BusesAction.reset());

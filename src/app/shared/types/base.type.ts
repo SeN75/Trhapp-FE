@@ -72,9 +72,11 @@ export type Bus = {
   max_capacity: number;
   current_capacity: number;
   start_location_id: Location['id'];
+  start_location: Location;
   destination_location_id: Location['id'];
-  from_location_id: Location['id'];
+  destination_location: Location;
   supervisor_id: Supervisor['id'];
+  supervisor: Supervisor;
 };
 
 export type Location = {
@@ -82,7 +84,8 @@ export type Location = {
   name: string;
   lat: number;
   lng: number;
-  cityId: City['id'];
+  city: City;
+  package_name: string;
 };
 export type City = {
   id: string;

@@ -1,3 +1,4 @@
+@defer{
 <div class="flex gap-2 pb-4">
   <button class="btn btn-primary btn-sm">تسكين الكل</button>
   <button class="btn btn-accent btn-sm">تصدير ملف CSV</button>
@@ -5,7 +6,7 @@
 <section class="table-container shadow-xl" [formGroup]="filterCtrl">
   <table matSort mat-table [dataSource]="dataSource">
     <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
+            The actual rendered columns are set as a property on the row definition" -->
 
     <ng-container matColumnDef="id">
       <th mat-header-cell mat-sort-header *matHeaderCellDef>التسلسل</th>
@@ -222,9 +223,10 @@
   </table>
   <div class="bg-bg border-solid border border-primary border-t-0 rounded-b-xl">
     <mat-paginator
-      class=""
       [length]="dataSource.data.length"
       [pageSize]="20"
     ></mat-paginator>
   </div>
 </section>
+
+}

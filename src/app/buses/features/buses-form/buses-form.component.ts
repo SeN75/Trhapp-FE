@@ -17,6 +17,8 @@ import { CityState } from '../../../citites/utils/types/cities.type';
 import { SupervisorState } from '../../../supervisor/utils/types/supervisor.type';
 import { selectCities } from '../../../citites/data-access/store/cities.reducer';
 import { selectSupervisores } from '../../../supervisor/data-access/store/supervisor.reducer';
+import { LocationState } from '@/locations/utils/types/location.type';
+import { selectLocations } from '@/locations/data-access/store/location.reducer';
 
 @Component({
   selector: 'app-buses-form',
@@ -29,15 +31,17 @@ export class BusesFormComponent implements OnInit {
   private store = inject(Store<{ buses: BusState }>);
   private cityStore = inject(Store<{ cities: CityState }>);
   private supervisorStore = inject(Store<{ supervisors: SupervisorState }>);
-
+  private locationStore = inject(Store<{ locations: LocationState }>);
   cities$ = this.cityStore.select(selectCities);
+
   supervisors$ = this.supervisorStore.select(selectSupervisores);
+  locations$ = this.locationStore.select(selectLocations);
   data$ = combineLatest({
     status: this.store.select(selectStatus),
     error: this.store.select(selectErrors),
     isLoading: this.store.select(selectIsLoading),
   });
-  locationForm = () =>
+  locationForm = (is_start: boolean) =>
     new FormGroup({
       name: new FormControl<string>('', [Validators.maxLength(100)]),
       lat: new FormControl<number>(0, [Validators.max(922337203685477)]),
@@ -45,6 +49,8 @@ export class BusesFormComponent implements OnInit {
       city: new FormGroup({
         name: new FormControl<string>('', [Validators.maxLength(100)]),
       }),
+      package_name: new FormControl(),
+      is_start: new FormControl<boolean>(is_start),
     });
 
   supervisorForm = () =>
@@ -72,9 +78,9 @@ export class BusesFormComponent implements OnInit {
     ]),
 
     start_location_id: new FormControl<string>(''),
-    start_location: this.locationForm(),
+    start_location: this.locationForm(true),
     destination_location_id: new FormControl<string>(''),
-    destination_location: this.locationForm(),
+    destination_location: this.locationForm(false),
     supervisor_id: new FormControl(''),
     supervisor: this.supervisorForm(),
   });
@@ -97,13 +103,16 @@ export class BusesFormComponent implements OnInit {
   action() {
     if (this.data.type === 'create') {
       const bus = this.form.getRawValue() as unknown as CreateBus;
+      bus.start_location.package_name = bus.package_name;
+      bus.destination_location.package_name = bus.package_name;
       if (bus.start_location_id) delete (bus as any).start_location;
       if (bus.destination_location_id)
         delete (bus as any).destination_location_id;
       if (bus.supervisor_id) delete (bus as any).supervisor;
+
       this.store.dispatch(BusesAction.create({ bus }));
     } else {
-      const updateBus = this.form.getRawValue() as UpdateBus;
+      const updateBus = this.form.getRawValue() as unknown as UpdateBus;
       this.store.dispatch(BusesAction.update({ updateBus }));
     }
     this.data$.pipe(map((res) => res.status)).subscribe((res) => {

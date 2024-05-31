@@ -1,6 +1,6 @@
 import { Bus, TPState } from '@/shared/types/base.type';
 
-export type CreateBus = Omit<Bus, 'id'>;
+export type CreateBus = Omit<Bus, 'id'> & { package_name: string };
 export type UpdateBus = Partial<Bus>;
 export type Buses = Bus[];
 

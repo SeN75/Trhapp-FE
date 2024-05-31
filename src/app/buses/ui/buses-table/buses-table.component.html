@@ -3,9 +3,9 @@
     انشاء حافلة جديدة
   </button>
 </div>
+
 <section class="table-container">
   <table mat-table [dataSource]="dataSource">
-    <!-- Position Column -->
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef>#</th>
       <td mat-cell *matCellDef="let element">{{ element.position }}</td>
@@ -13,19 +13,39 @@
 
     <ng-container matColumnDef="bus_name">
       <th mat-header-cell *matHeaderCellDef>اسم الحافلة</th>
-      <td mat-cell *matCellDef="let element">{{ element.bus_name }}</td>
+      <td mat-cell *matCellDef="let element">
+        {{ element.bus_name + " " + element.bus_plate }}
+      </td>
     </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <th mat-header-cell *matHeaderCellDef>Weight</th>
-      <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+    <ng-container matColumnDef="bus_code">
+      <th mat-header-cell *matHeaderCellDef>رمز الحالفة</th>
+      <td mat-cell *matCellDef="let element">{{ element.bus_code }}</td>
     </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <th mat-header-cell *matHeaderCellDef>Symbol</th>
-      <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+    <ng-container matColumnDef="max_capacity">
+      <th mat-header-cell *matHeaderCellDef>السعة</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.max_capacity }} / {{ element.current_capacity }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="supervisor_info">
+      <th mat-header-cell *matHeaderCellDef>المشرف</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.supervisor.name }} - {{ element.supervisor.phone_number }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="start_location_name">
+      <th mat-header-cell *matHeaderCellDef>عنوان الانطلاق</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.start_location_name }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="destination_location_name">
+      <th mat-header-cell *matHeaderCellDef>عنوان الوصول</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.destination_location_name }}
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
