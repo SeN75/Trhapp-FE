@@ -14,6 +14,8 @@ export class AuthService {
   private auth = new BehaviorSubject<Auth>({} as Auth);
   private router = inject(Router);
   private cookie = inject(CookieService);
+  refreshSubject = new BehaviorSubject<Auth | null>({} as Auth);
+  isRefersh = false;
   get auth$() {
     return this.auth.asObservable();
   }
