@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '@env/environment.development';
 import { catchError, map, tap } from 'rxjs';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import {
   CreateArafahPack1,
   ResponsCreatePack1,
-} from '../../utils/types/arafah.type';
+} from '@/arafah/utils/types/arafah.type';
 
 @Injectable({
   providedIn: 'root',

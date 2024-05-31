@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { TPState } from '../../../shared/types/base.type';
-import { initialFloorState } from '../../utils/types/floor.type';
+import { TPState } from '@/shared/types/base.type';
+import { initialFloorState } from '@/building/utils/types/floor.type';
 import { FloorAction } from './floor.action';
 
 export const FloorFeature = createFeature({

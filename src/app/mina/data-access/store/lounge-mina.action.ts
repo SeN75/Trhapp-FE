@@ -3,7 +3,7 @@ import {
   CreateLoungeMina,
   LoungesMina,
   UpdateLoungeMina,
-} from '../../utils/types/lounges-mina.type';
+} from '@/mina/utils/types/lounges-mina.type';
 
 export const LoungeMinaAction = {
   get: createAction(

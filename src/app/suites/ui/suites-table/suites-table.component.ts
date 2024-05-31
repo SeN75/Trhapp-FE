@@ -4,7 +4,7 @@ import { MatButton } from '@angular/material/button';
 import { MatRipple } from '@angular/material/core';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.directive';
+import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
 
 @Component({
   selector: 'tp-suites-table',

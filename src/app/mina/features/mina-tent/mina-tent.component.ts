@@ -4,7 +4,7 @@ import { MinaCreatePlaceComponent } from '../mina-create-place/mina-create-place
 import { MinaTentTableComponent } from '../../ui/mina-tent-table/mina-tent-table.component';
 import { Store } from '@ngrx/store';
 import { RouterLink } from '@angular/router';
-import { MinaState } from '../../utils/types/mina.type';
+import { MinaState } from '@/mina/utils/types/mina.type';
 import { MinaAction } from '../../data-access/store/mina.action';
 import { MinaAllocationStatusComponent } from '../../ui/mina-allocation-status/mina-allocation-status.component';
 

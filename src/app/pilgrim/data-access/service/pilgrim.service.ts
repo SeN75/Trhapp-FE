@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../../../../environments/environment.development';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { environment } from '@env/environment.development';
+import { LoggerService } from '@/shared/service/logger.service';
 import { Observable, tap, catchError, map } from 'rxjs';
-import { Pilgrim } from '../../../shared/types/base.type';
+import { Pilgrim } from '@/shared/types/base.type';
 import {
   Pilgrims,
   UpdatePilgrim,
   CreatePilgrim,
-} from '../../utils/types/pilgrim.type';
+} from '@/pilgrim/utils/types/pilgrim.type';
 
 @Injectable({
   providedIn: 'root',

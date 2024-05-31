@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { TPState } from '../../../shared/types/base.type';
-import { initialDistributeState } from '../../utils/types/distribute.type';
+import { TPState } from '@/shared/types/base.type';
+import { initialDistributeState } from '@/mina/utils/types/distribute.type';
 import { DistributionAction } from './distribution.action';
 
 export const DistributionFeature = createFeature({

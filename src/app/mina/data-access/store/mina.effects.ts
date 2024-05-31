@@ -1,14 +1,14 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { MinaAction } from './mina.action';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { MinaService } from '../service/mina.service';
 import { SuiteService } from '../service/suites.service';
 import { Store } from '@ngrx/store';
-import { SuiteState } from '../../utils/types/suites.type';
+import { SuiteState } from '@/mina/utils/types/suites.type';
 import { SuitesAction } from './suites.action';
-import { Suite } from '../../../shared/types/base.type';
+import { Suite } from '@/shared/types/base.type';
 
 export const getBusesEffects = createEffect(
   (

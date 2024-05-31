@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.directive';
+import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
 import { MatButton } from '@angular/material/button';
 import { MatRipple } from '@angular/material/core';
 

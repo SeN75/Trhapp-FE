@@ -1,4 +1,4 @@
-import { City, TPState } from '../../../shared/types/base.type';
+import { City, TPState } from '@/shared/types/base.type';
 
 export type CreateCity = Omit<City, 'id'>;
 export type UpdateCity = Partial<City>;

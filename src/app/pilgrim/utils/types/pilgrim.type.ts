@@ -1,4 +1,4 @@
-import { Pilgrim, TPState } from '../../../shared/types/base.type';
+import { Pilgrim, TPState } from '@/shared/types/base.type';
 
 export type CreatePilgrim = Omit<Pilgrim, 'id'>;
 export type UpdatePilgrim = Partial<Pilgrim>;

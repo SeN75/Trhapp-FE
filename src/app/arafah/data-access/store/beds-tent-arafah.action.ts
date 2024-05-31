@@ -3,7 +3,7 @@ import {
   CreateBedTentArafah,
   BedsTentArafah,
   UpdateBedTentArafah,
-} from '../../utils/types/beds-tent-arafah.type';
+} from '@/arafah/utils/types/beds-tent-arafah.type';
 
 export const BedTentArafahAction = {
   get: createAction('[BedTentArafah] get BedTentArafah'),

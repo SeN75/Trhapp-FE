@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, switchMap, map, catchError, tap } from 'rxjs';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '@env/environment.development';
 import {
   CreateMinaPack1,
   CreateMinaPack4,
   ResponsCreateMinaPack1,
   ResponsCreateMinaPack4,
-} from '../../utils/types/mina.type';
-import { LoggerService } from '../../../shared/service/logger.service';
+} from '@/mina/utils/types/mina.type';
+import { LoggerService } from '@/shared/service/logger.service';
 
 @Injectable({
   providedIn: 'root',

@@ -3,7 +3,7 @@ import {
   CreateSupervisor,
   Supervisors,
   UpdateSupervisor,
-} from '../../utils/types/supervisor.type';
+} from '@/supervisor/utils/types/supervisor.type';
 
 export const SupervisorAction = {
   get: createAction('[Supervisor] get Supervisores'),

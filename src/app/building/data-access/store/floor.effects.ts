@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { FloorService } from '../service/floor.service';
-import { FloorState } from '../../utils/types/floor.type';
+import { FloorState } from '@/building/utils/types/floor.type';
 import { FloorAction } from './floor.action';
 
 export const getFloorEffects = createEffect(

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { DistributeState } from '../../utils/types/distribute.type';
+import { DistributeState } from '@/mina/utils/types/distribute.type';
 import {
   selectPack1Read,
   selectPack4Read,

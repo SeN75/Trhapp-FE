@@ -1,4 +1,4 @@
-import { Building, TPState } from '../../../shared/types/base.type';
+import { Building, TPState } from '@/shared/types/base.type';
 
 export type CreateBuilding = Omit<Building, 'id'>;
 export type UpdateBuilding = Partial<Building>;

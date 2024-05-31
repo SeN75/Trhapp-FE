@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { TPState } from '../../../shared/types/base.type';
-import { initialLoungeArafahState } from '../../utils/types/lounges-arafah.type';
+import { TPState } from '@/shared/types/base.type';
+import { initialLoungeArafahState } from '@/arafah/utils/types/lounges-arafah.type';
 import { LoungeArafahAction } from './lounge-arafah.action';
 
 export const LoungeArafahFeature = createFeature({

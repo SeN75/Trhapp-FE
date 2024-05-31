@@ -1,4 +1,4 @@
-import { BedBuidingMina, TPState } from '../../../shared/types/base.type';
+import { BedBuidingMina, TPState } from '@/shared/types/base.type';
 
 export type CreateBedBuidingMina = Omit<BedBuidingMina, 'id'>;
 export type UpdateBedBuidingMina = Partial<BedBuidingMina>;

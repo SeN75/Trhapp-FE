@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { TPState } from '../../../shared/types/base.type';
-import { initialRoomState } from '../../utils/types/rooms.type';
+import { TPState } from '@/shared/types/base.type';
+import { initialRoomState } from '@/building/utils/types/rooms.type';
 import { RoomAction } from './rooms.action';
 
 export const RoomFeature = createFeature({

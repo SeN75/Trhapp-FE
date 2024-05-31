@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '@env/environment.development';
 import { Observable, catchError, map, switchMap, take, tap } from 'rxjs';
-import { Buses, CreateBus, UpdateBus } from '../../utils/types/buses.type';
-import { Bus } from '../../../shared/types/base.type';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { Buses, CreateBus, UpdateBus } from '@/buses/utils/types/buses.type';
+import { Bus } from '@/shared/types/base.type';
+import { LoggerService } from '@/shared/service/logger.service';
 
 @Injectable({
   providedIn: 'root',

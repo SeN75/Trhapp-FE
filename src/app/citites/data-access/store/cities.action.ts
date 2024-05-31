@@ -1,5 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateCity, Cities, UpdateCity } from '../../utils/types/cities.type';
+import {
+  CreateCity,
+  Cities,
+  UpdateCity,
+} from '@/citites/utils/types/cities.type';
 
 export const CityAction = {
   get: createAction('[City] get Cityes'),

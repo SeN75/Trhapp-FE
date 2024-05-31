@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { catchError, combineLatest, map, of, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { DistributeService } from '../service/distribution.service';
-import { LoungeMinaState } from '../../utils/types/lounges-mina.type';
+import { LoungeMinaState } from '@/mina/utils/types/lounges-mina.type';
 import { DistributionAction } from './distribution.action';
 
 export const readDistributionEffects = createEffect(

@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AllocationService } from '../service/allocation.service';
-import { AllocationState } from '../../utils/types/allocation.type';
+import { AllocationState } from '@/pilgrim/utils/types/allocation.type';
 import { AllocationAction } from './allocation.action';
 
 export const deleteAllocationEffects = createEffect(

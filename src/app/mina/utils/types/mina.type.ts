@@ -4,7 +4,7 @@ import {
   Pilgrim,
   Suite,
   TPState,
-} from '../../../shared/types/base.type';
+} from '@/shared/types/base.type';
 
 export type MinaState = {
   isLoading: boolean | null;

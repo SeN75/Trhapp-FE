@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { initialBusState } from '../../utils/types/buses.type';
+import { initialBusState } from '@/buses/utils/types/buses.type';
 import { BusesAction } from './buses.action';
-import { TPState } from '../../../shared/types/base.type';
+import { TPState } from '@/shared/types/base.type';
 
 export const BusesFeature = createFeature({
   name: 'buses',

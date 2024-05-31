@@ -1,10 +1,10 @@
 import { Component, Input, inject } from '@angular/core';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 import { Store } from '@ngrx/store';
-import { AvailabiltyState } from '../../../shared/types/availabilty.type';
-import { selectData } from '../../../shared/store/availavilty/availavilty.reducer';
+import { AvailabiltyState } from '@/shared/types/availabilty.type';
+import { selectData } from '@/shared/store/availavilty/availavilty.reducer';
 import { map } from 'rxjs';
-import { StateCardComponent } from '../../../shared/components/state-card/state-card.component';
+import { StateCardComponent } from '@/shared/components/state-card/state-card.component';
 
 @Component({
   selector: 'tp-mina-allocation-status',

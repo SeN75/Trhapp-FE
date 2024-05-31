@@ -1,4 +1,4 @@
-import { Room, TPState } from '../../../shared/types/base.type';
+import { Room, TPState } from '@/shared/types/base.type';
 
 export type CreateRoom = Omit<Room, 'id'>;
 export type UpdateRoom = Partial<Room>;

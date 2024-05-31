@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject, inject } from '@angular/core';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -8,14 +8,14 @@ import {
   CreateSupervisor,
   SupervisorState,
   UpdateSupervisor,
-} from '../../utils/types/supervisor.type';
-import { selectStatus } from '../../../shared/store/upload-operation/upload-operation.reducer';
+} from '@/supervisor/utils/types/supervisor.type';
+import { selectStatus } from '@/shared/store/upload-operation/upload-operation.reducer';
 import {
   selectIsLoading,
   selectErrors,
 } from '../../data-access/store/supervisor.reducer';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData, Supervisor } from '../../../shared/types/base.type';
+import { DialogData, Supervisor } from '@/shared/types/base.type';
 import { SupervisorAction } from '../../data-access/store/supervisor.action';
 
 @Component({

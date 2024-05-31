@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { ArafahAction } from './arafah.action';
-import { initialArafahState } from '../../utils/types/arafah.type';
-import { TPState } from '../../../shared/types/base.type';
+import { initialArafahState } from '@/arafah/utils/types/arafah.type';
+import { TPState } from '@/shared/types/base.type';
 
 export const ArafahsFeature = createFeature({
   name: 'arafah',

@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 import { Store } from '@ngrx/store';
-import { BuildingState } from '../../../building/utils/types/building.type';
+import { BuildingState } from '@/building//utils/types/building.type';
 import {
   CreateMinaPack1,
   CreateMinaPack4,
   MinaState,
-} from '../../utils/types/mina.type';
+} from '@/mina/utils/types/mina.type';
 import { MinaAction } from '../../data-access/store/mina.action';
 
 @Component({

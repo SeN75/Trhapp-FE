@@ -1,4 +1,4 @@
-import { Floor, TPState } from '../../../shared/types/base.type';
+import { Floor, TPState } from '@/shared/types/base.type';
 
 export type CreateFloor = Omit<Floor, 'id'>;
 export type UpdateFloor = Partial<Floor>;

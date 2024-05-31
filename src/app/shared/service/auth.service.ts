@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, tap } from 'rxjs';
 import { Auth } from '../types/base.type';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '@env/environment.development';
 import { LoggerService } from './logger.service';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';

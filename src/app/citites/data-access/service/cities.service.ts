@@ -1,10 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, tap, catchError, map } from 'rxjs';
-import { environment } from '../../../../environments/environment.development';
-import { LoggerService } from '../../../shared/service/logger.service';
-import { Cities, UpdateCity, CreateCity } from '../../utils/types/cities.type';
-import { City } from '../../../shared/types/base.type';
+import { environment } from '@env/environment.development';
+import { LoggerService } from '@/shared/service/logger.service';
+import {
+  Cities,
+  UpdateCity,
+  CreateCity,
+} from '@/citites/utils/types/cities.type';
+import { City } from '@/shared/types/base.type';
 
 @Injectable({
   providedIn: 'root',

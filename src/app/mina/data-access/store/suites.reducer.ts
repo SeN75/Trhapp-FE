@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { TPState } from '../../../shared/types/base.type';
-import { initialSuiteState } from '../../utils/types/suites.type';
+import { TPState } from '@/shared/types/base.type';
+import { initialSuiteState } from '@/mina/utils/types/suites.type';
 import { SuitesAction } from './suites.action';
 
 export const SuitesFeature = createFeature({

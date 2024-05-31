@@ -1,11 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { MaterialModule } from '@shared/module/material.module';
-import { TpPaginatorDirective } from '@shared/directive/tp-paginator.directive';
-import { BuildingState } from '../../../building/utils/types/building.type';
+import { MaterialModule } from '@/shared/module/material.module';
+import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
+import { BuildingState } from '@/building//utils/types/building.type';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectBuildings } from '../../../building/data-access/store/building.reducer';
-import { Floor } from '../../../shared/types/base.type';
+import { selectBuildings } from '@/building//data-access/store/building.reducer';
+import { Floor } from '@/shared/types/base.type';
 import { MatTableDataSource } from '@angular/material/table';
 
 @Component({

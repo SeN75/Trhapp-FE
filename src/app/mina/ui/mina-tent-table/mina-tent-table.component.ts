@@ -10,13 +10,13 @@ import { MatButton } from '@angular/material/button';
 import { MatRipple } from '@angular/material/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.directive';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
+import { MaterialModule } from '@/shared/module/material.module';
 import { RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { LoungeMinaState } from '../../utils/types/lounges-mina.type';
-import { LoungeMina, Suite } from '../../../shared/types/base.type';
-import { SuiteState, Suites } from '../../utils/types/suites.type';
+import { LoungeMinaState } from '@/mina/utils/types/lounges-mina.type';
+import { LoungeMina, Suite } from '@/shared/types/base.type';
+import { SuiteState, Suites } from '@/mina/utils/types/suites.type';
 import { selectSuites } from '../../data-access/store/suites.reducer';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 

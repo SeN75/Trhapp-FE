@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { TPState } from '../../../shared/types/base.type';
-import { initialPilgrimState } from '../../utils/types/pilgrim.type';
+import { TPState } from '@/shared/types/base.type';
+import { initialPilgrimState } from '@/pilgrim/utils/types/pilgrim.type';
 import { PilgrimAction } from './pilgrim.action';
 
 export const PilgrimFeature = createFeature({

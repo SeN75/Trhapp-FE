@@ -1,12 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { MaterialModule } from '../../../shared/module/material.module';
-import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.directive';
+import { MaterialModule } from '@/shared/module/material.module';
+import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import { selectBuildings } from '../../../building/data-access/store/building.reducer';
-import { BuildingState } from '../../../building/utils/types/building.type';
-import { BedBuidingMina, Room } from '../../../shared/types/base.type';
+import { selectBuildings } from '@/building//data-access/store/building.reducer';
+import { BuildingState } from '@/building//utils/types/building.type';
+import { BedBuidingMina, Room } from '@/shared/types/base.type';
 
 @Component({
   selector: 'tp-mina-rooms-table',

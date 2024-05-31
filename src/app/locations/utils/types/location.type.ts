@@ -1,4 +1,4 @@
-import { Location, TPState } from '../../../shared/types/base.type';
+import { Location, TPState } from '@/shared/types/base.type';
 
 export type CreateLocation = Omit<Location, 'id'>;
 export type UpdateLocation = Partial<Location>;

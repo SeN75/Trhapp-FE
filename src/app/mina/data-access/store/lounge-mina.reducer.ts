@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { TPState } from '../../../shared/types/base.type';
-import { initialLoungeMinaState } from '../../utils/types/lounges-mina.type';
+import { TPState } from '@/shared/types/base.type';
+import { initialLoungeMinaState } from '@/mina/utils/types/lounges-mina.type';
 import { LoungeMinaAction } from './lounge-mina.action';
 
 export const LoungeMinaFeature = createFeature({

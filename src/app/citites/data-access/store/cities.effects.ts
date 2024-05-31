@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { CityService } from '../service/cities.service';
-import { CityState } from '../../utils/types/cities.type';
+import { CityState } from '@/citites/utils/types/cities.type';
 import { CityAction } from './cities.action';
 
 export const getcityEffects = createEffect(

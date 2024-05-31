@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { TPState } from '../../../shared/types/base.type';
-import { initialBedTentArafahState } from '../../utils/types/beds-tent-arafah.type';
+import { TPState } from '@/shared/types/base.type';
+import { initialBedTentArafahState } from '@/arafah/utils/types/beds-tent-arafah.type';
 import { BedTentArafahAction } from './beds-tent-arafah.action';
 
 export const BedTentArafahFeature = createFeature({

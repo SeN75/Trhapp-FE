@@ -1,4 +1,4 @@
-import { LoungeMina, TPState } from '../../../shared/types/base.type';
+import { LoungeMina, TPState } from '@/shared/types/base.type';
 
 export type CreateLoungeMina = Omit<LoungeMina, 'id'>;
 export type UpdateLoungeMina = Partial<LoungeMina>;

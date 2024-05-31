@@ -3,7 +3,7 @@ import {
   CreateBedTentMina,
   BedsTentMina,
   UpdateBedTentMina,
-} from '../../utils/types/beds-tent-mina.type';
+} from '@/mina/utils/types/beds-tent-mina.type';
 
 export const BedTentMinaAction = {
   get: createAction('[BedTentMina] get BedTentMina'),

@@ -3,7 +3,7 @@ import {
   CreatePilgrim,
   Pilgrims,
   UpdatePilgrim,
-} from '../../utils/types/pilgrim.type';
+} from '@/pilgrim/utils/types/pilgrim.type';
 
 export const PilgrimAction = {
   get: createAction('[Pilgrim] get Pilgrim'),

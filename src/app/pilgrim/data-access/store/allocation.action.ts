@@ -3,7 +3,7 @@ import {
   DeleteAllocation,
   ManualAllocation,
   SwitchAllocation,
-} from '../../utils/types/allocation.type';
+} from '@/pilgrim/utils/types/allocation.type';
 
 export const AllocationAction = {
   switch: createAction(

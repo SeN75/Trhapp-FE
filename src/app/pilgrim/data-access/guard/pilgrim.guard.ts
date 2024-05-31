@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
-import { ToasterService } from '../../../shared/service/toaster.service';
+import { ToasterService } from '@/shared/service/toaster.service';
 
 export const pilgrimGuard: CanActivateFn = (route, state) => {
   // remove it when login pushed

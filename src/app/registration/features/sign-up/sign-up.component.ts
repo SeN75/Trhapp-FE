@@ -1,11 +1,11 @@
 import { Component, OnInit, inject, isDevMode } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../../shared/service/auth.service';
+import { AuthService } from '@/shared/service/auth.service';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 import { delay, tap, catchError, of } from 'rxjs';
-import { environment } from '../../../../environments/environment.development';
+import { environment } from '@env/environment.development';
 
 @Component({
   selector: 'app-sign-up',

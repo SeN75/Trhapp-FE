@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { RoomService } from '../service/rooms.service';
-import { RoomState } from '../../utils/types/rooms.type';
+import { RoomState } from '@/building/utils/types/rooms.type';
 import { RoomAction } from './rooms.action';
 
 export const getRoomEffects = createEffect(

@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { TPState } from '../../../shared/types/base.type';
-import { initialBedTentMinaState } from '../../utils/types/beds-tent-mina.type';
+import { TPState } from '@/shared/types/base.type';
+import { initialBedTentMinaState } from '@/mina/utils/types/beds-tent-mina.type';
 import { BedTentMinaAction } from './beds-tent-mina.action';
 
 export const BedTentMinaFeature = createFeature({

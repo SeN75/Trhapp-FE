@@ -1,4 +1,4 @@
-import { Suite, TPState } from '../../../shared/types/base.type';
+import { Suite, TPState } from '@/shared/types/base.type';
 
 export type CreateSuite = Omit<Suite, 'id'>;
 export type UpdateSuite = Partial<Suite>;

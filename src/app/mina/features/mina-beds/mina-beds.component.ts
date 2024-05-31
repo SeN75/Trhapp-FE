@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 import { MinaAllocationStatusComponent } from '../../ui/mina-allocation-status/mina-allocation-status.component';
 import { MinaBedsTableComponent } from '../../ui/mina-beds-table/mina-beds-table.component';
 import { ActivatedRoute } from '@angular/router';

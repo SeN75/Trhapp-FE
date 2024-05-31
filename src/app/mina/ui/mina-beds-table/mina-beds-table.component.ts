@@ -1,13 +1,13 @@
 import { Component, ViewChild, inject } from '@angular/core';
-import { BedTentMina } from '../../../shared/types/base.type';
+import { BedTentMina } from '@/shared/types/base.type';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { selectSuites } from '../../data-access/store/suites.reducer';
-import { SuiteState } from '../../utils/types/suites.type';
-import { MaterialModule } from '../../../shared/module/material.module';
-import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.directive';
+import { SuiteState } from '@/mina/utils/types/suites.type';
+import { MaterialModule } from '@/shared/module/material.module';
+import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
 
 @Component({
   selector: 'tp-mina-beds-table',

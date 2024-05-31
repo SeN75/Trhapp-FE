@@ -13,18 +13,18 @@ import { ArafahCardsComponent } from '../../ui/arafah-cards/arafah-cards.compone
 import {
   LoungeArafahState,
   LoungesArafah,
-} from '../../utils/types/lounges-arafah.type';
+} from '@/arafah/utils/types/lounges-arafah.type';
 import { RouterLink } from '@angular/router';
-import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.directive';
+import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { AsyncPipe } from '@angular/common';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 import { Store } from '@ngrx/store';
 import { selectLounges_arafah } from '../../data-access/store/lounge-arafah.reducer';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { LoungeArafah } from '../../../shared/types/base.type';
-import { ArafahState } from '../../utils/types/arafah.type';
+import { LoungeArafah } from '@/shared/types/base.type';
+import { ArafahState } from '@/arafah/utils/types/arafah.type';
 import { ArafahAction } from '../../data-access/store/arafah.action';
 
 @Component({

@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { SupervisorAction } from './supervisor.action';
-import { initialSupervisorState } from '../../utils/types/supervisor.type';
-import { TPState } from '../../../shared/types/base.type';
+import { initialSupervisorState } from '@/supervisor/utils/types/supervisor.type';
+import { TPState } from '@/shared/types/base.type';
 
 export const SupervisorsFeature = createFeature({
   name: 'supervisor',

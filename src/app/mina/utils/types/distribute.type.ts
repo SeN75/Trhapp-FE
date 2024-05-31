@@ -1,5 +1,5 @@
 import { Pilgrims } from '../../../pilgrim/utils/types/pilgrim.type';
-import { TPState } from '../../../shared/types/base.type';
+import { TPState } from '@/shared/types/base.type';
 
 export type Distribute = {
   identifier: 'A1';

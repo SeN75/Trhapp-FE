@@ -4,7 +4,7 @@ import {
   AllocationState,
   DeleteAllocation,
   SwitchAllocation,
-} from '../../utils/types/allocation.type';
+} from '@/pilgrim/utils/types/allocation.type';
 import { combineLatest } from 'rxjs';
 import { selectPilgrims } from '../../data-access/store/pilgrim.reducer';
 import {
@@ -12,10 +12,10 @@ import {
   selectIsLoading,
   selectStatus,
 } from '../../data-access/store/allocation.reducer';
-import { PilgrimState } from '../../utils/types/pilgrim.type';
+import { PilgrimState } from '@/pilgrim/utils/types/pilgrim.type';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData, Pilgrim } from '../../../shared/types/base.type';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { DialogData, Pilgrim } from '@/shared/types/base.type';
+import { MaterialModule } from '@/shared/module/material.module';
 import { AsyncPipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PilgrimAction } from '../../data-access/store/pilgrim.action';

@@ -1,4 +1,4 @@
-import { Supervisor, TPState } from '../../../shared/types/base.type';
+import { Supervisor, TPState } from '@/shared/types/base.type';
 
 export type CreateSupervisor = Omit<Supervisor, 'id'>;
 export type UpdateSupervisor = Partial<Supervisor>;

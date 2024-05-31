@@ -1,5 +1,9 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateRoom, Rooms, UpdateRoom } from '../../utils/types/rooms.type';
+import {
+  CreateRoom,
+  Rooms,
+  UpdateRoom,
+} from '@/building/utils/types/rooms.type';
 
 export const RoomAction = {
   get: createAction('[Room] get Room'),

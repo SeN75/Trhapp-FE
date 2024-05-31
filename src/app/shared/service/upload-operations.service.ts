@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '@env/environment.development';
 import { catchError, tap } from 'rxjs';
 import { LoggerService } from './logger.service';
 

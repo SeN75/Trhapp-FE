@@ -3,7 +3,7 @@ import {
   CreateSuite,
   Suites,
   UpdateSuite,
-} from '../../utils/types/suites.type';
+} from '@/mina/utils/types/suites.type';
 
 export const SuitesAction = {
   get: createAction('[Suites] get Suites'),

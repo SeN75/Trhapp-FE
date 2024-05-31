@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../../../../environments/environment.development';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { environment } from '@env/environment.development';
+import { LoggerService } from '@/shared/service/logger.service';
 import { Observable, tap, catchError, map } from 'rxjs';
-import { LoungeArafah } from '../../../shared/types/base.type';
+import { LoungeArafah } from '@/shared/types/base.type';
 import {
   LoungesArafah,
   UpdateLoungeArafah,
   CreateLoungeArafah,
-} from '../../utils/types/lounges-arafah.type';
+} from '@/arafah/utils/types/lounges-arafah.type';
 
 @Injectable({
   providedIn: 'root',

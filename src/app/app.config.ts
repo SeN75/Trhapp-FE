@@ -12,8 +12,8 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { storeProviders } from './app.store';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AppTranslateModule } from './app.translate';
-import { LoggerService } from './shared/service/logger.service';
-import { authInterceptor } from './shared/interceptor/auth.interceptor';
+import { LoggerService } from '@/shared/service/logger.service';
+import { authInterceptor } from '@/shared/interceptor/auth.interceptor';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 export const appConfig: ApplicationConfig = {

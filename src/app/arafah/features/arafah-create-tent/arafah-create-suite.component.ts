@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { MaterialModule } from '../../../shared/module/material.module';
-import { ArafahState, CreateArafahPack1 } from '../../utils/types/arafah.type';
+import { MaterialModule } from '@/shared/module/material.module';
+import {
+  ArafahState,
+  CreateArafahPack1,
+} from '@/arafah/utils/types/arafah.type';
 import { Store } from '@ngrx/store';
 import { ArafahAction } from '../../data-access/store/arafah.action';
 

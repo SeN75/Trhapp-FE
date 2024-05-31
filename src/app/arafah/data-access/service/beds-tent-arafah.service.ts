@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../../../../environments/environment.development';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { environment } from '@env/environment.development';
+import { LoggerService } from '@/shared/service/logger.service';
 import { Observable, tap, catchError, map } from 'rxjs';
-import { BedTentArafah } from '../../../shared/types/base.type';
+import { BedTentArafah } from '@/shared/types/base.type';
 import {
   BedsTentArafah,
   UpdateBedTentArafah,
   CreateBedTentArafah,
-} from '../../utils/types/beds-tent-arafah.type';
+} from '@/arafah/utils/types/beds-tent-arafah.type';
 
 @Injectable({
   providedIn: 'root',

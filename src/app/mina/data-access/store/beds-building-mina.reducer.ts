@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { TPState } from '../../../shared/types/base.type';
-import { initialBedBuidingMinaState } from '../../utils/types/beds-building-mina.type';
+import { TPState } from '@/shared/types/base.type';
+import { initialBedBuidingMinaState } from '@/mina/utils/types/beds-building-mina.type';
 import { BedBulidingMinaAction } from './beds-building-mina.action';
 
 export const BedBuildingMinaFeature = createFeature({

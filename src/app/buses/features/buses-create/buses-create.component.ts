@@ -7,9 +7,9 @@ import {
   selectErrors,
   selectIsLoading,
 } from '../../data-access/store/buses.reducer';
-import { BusState } from '../../utils/types/buses.type';
+import { BusState } from '@/buses/utils/types/buses.type';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 
 @Component({
   selector: 'app-buses-create',

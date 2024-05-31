@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { MinaAction } from './mina.action';
-import { initialMinaState } from '../../utils/types/mina.type';
-import { TPState } from '../../../shared/types/base.type';
+import { initialMinaState } from '@/mina/utils/types/mina.type';
+import { TPState } from '@/shared/types/base.type';
 
 export const MinasFeature = createFeature({
   name: 'mina',

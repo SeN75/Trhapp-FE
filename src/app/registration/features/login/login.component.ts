@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 import { NgClass, NgIf } from '@angular/common';
-import { AuthService } from '../../../shared/service/auth.service';
+import { AuthService } from '@/shared/service/auth.service';
 import { catchError, delay, of, tap } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 
 @Component({
   selector: 'app-login',

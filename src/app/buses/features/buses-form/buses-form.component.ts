@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Bus, DialogData } from '../../../shared/types/base.type';
+import { Bus, DialogData } from '@/shared/types/base.type';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { BusState, CreateBus, UpdateBus } from '../../utils/types/buses.type';
+import { BusState, CreateBus, UpdateBus } from '@/buses/utils/types/buses.type';
 import { Store } from '@ngrx/store';
 import { combineLatest, from, map } from 'rxjs';
 import {
@@ -12,7 +12,7 @@ import {
 } from '../../data-access/store/buses.reducer';
 import { BusesAction } from '../../data-access/store/buses.action';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 import { CityState } from '../../../citites/utils/types/cities.type';
 import { SupervisorState } from '../../../supervisor/utils/types/supervisor.type';
 import { selectCities } from '../../../citites/data-access/store/cities.reducer';

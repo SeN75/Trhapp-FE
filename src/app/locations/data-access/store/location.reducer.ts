@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { TPState } from '../../../shared/types/base.type';
-import { initialLocationState } from '../../utils/types/location.type';
+import { TPState } from '@/shared/types/base.type';
+import { initialLocationState } from '@/locations/utils/types/location.type';
 import { LocationAction } from './location.action';
 
 export const LocationsFeature = createFeature({

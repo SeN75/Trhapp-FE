@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { SupervisorAction } from './supervisor.action';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { SupervisorService } from '../service/supervisor.service';
 import { Store } from '@ngrx/store';
-import { SupervisorState } from '../../utils/types/supervisor.type';
+import { SupervisorState } from '@/supervisor/utils/types/supervisor.type';
 
 export const getsupervisorEffects = createEffect(
   (

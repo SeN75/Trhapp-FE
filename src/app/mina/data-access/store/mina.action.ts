@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateMinaPack1, CreateMinaPack4 } from '../../utils/types/mina.type';
+import { CreateMinaPack1, CreateMinaPack4 } from '@/mina/utils/types/mina.type';
 
 export const MinaAction = {
   get: createAction('[Mina] get Mina'),

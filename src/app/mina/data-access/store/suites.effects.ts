@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { SuiteService } from '../service/suites.service';
-import { LoungeMinaState } from '../../utils/types/lounges-mina.type';
+import { LoungeMinaState } from '@/mina/utils/types/lounges-mina.type';
 import { SuitesAction } from './suites.action';
 
 export const getSuiteEffects = createEffect(

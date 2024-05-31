@@ -1,4 +1,4 @@
-import { BedTentArafah, TPState } from '../../../shared/types/base.type';
+import { BedTentArafah, TPState } from '@/shared/types/base.type';
 
 export type CreateBedTentArafah = Omit<BedTentArafah, 'id'>;
 export type UpdateBedTentArafah = Partial<BedTentArafah>;

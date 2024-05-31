@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { LoggerService } from './logger.service';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '@env/environment.development';
 import { catchError, tap } from 'rxjs';
 import { Availabilty } from '../types/availabilty.type';
 

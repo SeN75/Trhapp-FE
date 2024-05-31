@@ -1,4 +1,4 @@
-import { BedTentMina, TPState } from '../../../shared/types/base.type';
+import { BedTentMina, TPState } from '@/shared/types/base.type';
 
 export type CreateBedTentMina = Omit<BedTentMina, 'id'>;
 export type UpdateBedTentMina = Partial<BedTentMina>;

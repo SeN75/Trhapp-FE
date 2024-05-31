@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { LoggerService } from '../../../shared/service/logger.service';
-import { environment } from '../../../../environments/environment.development';
+import { LoggerService } from '@/shared/service/logger.service';
+import { environment } from '@env/environment.development';
 import {
   DeleteAllocation,
   ManualAllocation,
   SwitchAllocation,
-} from '../../utils/types/allocation.type';
+} from '@/pilgrim/utils/types/allocation.type';
 import { catchError, tap } from 'rxjs';
 
 @Injectable({

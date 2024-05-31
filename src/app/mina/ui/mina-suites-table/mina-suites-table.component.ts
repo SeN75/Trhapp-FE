@@ -8,14 +8,14 @@ import {
 } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.directive';
-import { MaterialModule } from '../../../shared/module/material.module';
-import { SuiteState } from '../../utils/types/suites.type';
+import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
+import { MaterialModule } from '@/shared/module/material.module';
+import { SuiteState } from '@/mina/utils/types/suites.type';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { selectSuites } from '../../data-access/store/suites.reducer';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { LoungeMina } from '../../../shared/types/base.type';
+import { LoungeMina } from '@/shared/types/base.type';
 
 @Component({
   selector: 'tp-mina-suites-table',

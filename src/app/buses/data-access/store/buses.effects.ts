@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { BusesAction } from './buses.action';
 import { BusesService } from '../service/buses.service';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
-import { BusState } from '../../utils/types/buses.type';
+import { BusState } from '@/buses/utils/types/buses.type';
 import { Store } from '@ngrx/store';
 
 export const getBusesEffects = createEffect(

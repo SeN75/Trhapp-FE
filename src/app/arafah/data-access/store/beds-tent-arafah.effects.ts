@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { BedTentArafahService } from '../service/beds-tent-arafah.service';
-import { BedTentArafahState } from '../../utils/types/beds-tent-arafah.type';
+import { BedTentArafahState } from '@/arafah/utils/types/beds-tent-arafah.type';
 import { BedTentArafahAction } from './beds-tent-arafah.action';
 
 export const getBedTentArafahEffects = createEffect(

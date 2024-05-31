@@ -1,4 +1,4 @@
-import { LoungeArafah, TPState } from '../../../shared/types/base.type';
+import { LoungeArafah, TPState } from '@/shared/types/base.type';
 import { BedsTentArafah } from './beds-tent-arafah.type';
 import { LoungesArafah } from './lounges-arafah.type';
 

@@ -3,8 +3,8 @@ import { Component, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { delay, tap, catchError, of } from 'rxjs';
-import { MaterialModule } from '../../../shared/module/material.module';
-import { AuthService } from '../../../shared/service/auth.service';
+import { MaterialModule } from '@/shared/module/material.module';
+import { AuthService } from '@/shared/service/auth.service';
 import { PilgrimService } from '../../../pilgrim/data-access/service/pilgrim.service';
 
 @Component({

@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { BedBuildingMinaService } from '../service/beds-building-mina.service';
-import { BedBuidingMinaState } from '../../utils/types/beds-building-mina.type';
+import { BedBuidingMinaState } from '@/mina/utils/types/beds-building-mina.type';
 import { BedBulidingMinaAction } from './beds-building-mina.action';
 
 export const getBedBuildingMinaEffects = createEffect(

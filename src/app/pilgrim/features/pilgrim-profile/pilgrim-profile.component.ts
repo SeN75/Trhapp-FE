@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { Pilgrim } from '../../../shared/types/base.type';
+import { Pilgrim } from '@/shared/types/base.type';
 
 @Component({
   selector: 'app-pilgrim-profile',

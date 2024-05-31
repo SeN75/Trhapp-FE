@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../../../../environments/environment.development';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { environment } from '@env/environment.development';
+import { LoggerService } from '@/shared/service/logger.service';
 import { Observable, tap, catchError, map } from 'rxjs';
-import { Building } from '../../../shared/types/base.type';
+import { Building } from '@/shared/types/base.type';
 import {
   Buildings,
   UpdateBuilding,
   CreateBuilding,
-} from '../../utils/types/building.type';
+} from '@/building/utils/types/building.type';
 
 @Injectable({
   providedIn: 'root',

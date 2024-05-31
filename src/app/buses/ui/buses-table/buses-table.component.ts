@@ -4,11 +4,11 @@ import { MatButton } from '@angular/material/button';
 import { MatRipple } from '@angular/material/core';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
-import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.directive';
+import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
 import { MatDialog } from '@angular/material/dialog';
 import { BusesFormComponent } from '../../features/buses-form/buses-form.component';
 import { Store } from '@ngrx/store';
-import { BusState } from '../../utils/types/buses.type';
+import { BusState } from '@/buses/utils/types/buses.type';
 import { BusesAction } from '../../data-access/store/buses.action';
 
 @Component({

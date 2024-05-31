@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../../../../environments/environment.development';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { environment } from '@env/environment.development';
+import { LoggerService } from '@/shared/service/logger.service';
 import { Observable, tap, catchError, map } from 'rxjs';
-import { LoungeMina } from '../../../shared/types/base.type';
+import { LoungeMina } from '@/shared/types/base.type';
 import {
   LoungesMina,
   UpdateLoungeMina,
   CreateLoungeMina,
-} from '../../utils/types/lounges-mina.type';
+} from '@/mina/utils/types/lounges-mina.type';
 
 @Injectable({
   providedIn: 'root',

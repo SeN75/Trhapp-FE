@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { TPState } from '../../../shared/types/base.type';
-import { initialAllocationState } from '../../utils/types/allocation.type';
+import { TPState } from '@/shared/types/base.type';
+import { initialAllocationState } from '@/pilgrim/utils/types/allocation.type';
 import { PilgrimAction } from './pilgrim.action';
 import { AllocationAction } from './allocation.action';
 

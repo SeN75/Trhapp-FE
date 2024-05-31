@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 import { NgClass } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { LoungeArafah } from '../../../shared/types/base.type';
+import { LoungeArafah } from '@/shared/types/base.type';
 
 @Component({
   selector: 'tp-arafah-card',

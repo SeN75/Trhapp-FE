@@ -3,7 +3,7 @@ import {
   CreateBuilding,
   Buildings,
   UpdateBuilding,
-} from '../../utils/types/building.type';
+} from '@/building/utils/types/building.type';
 
 export const BuildingAction = {
   get: createAction('[Building] get Building'),

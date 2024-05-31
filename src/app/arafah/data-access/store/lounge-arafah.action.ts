@@ -3,7 +3,7 @@ import {
   CreateLoungeArafah,
   LoungesArafah,
   UpdateLoungeArafah,
-} from '../../utils/types/lounges-arafah.type';
+} from '@/arafah/utils/types/lounges-arafah.type';
 
 export const LoungeArafahAction = {
   get: createAction('[LoungeArafah] get LoungeArafahes'),

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { IconsService } from './shared/service/icons.service';
+import { IconsService } from '@/shared/service/icons.service';
 
 @Component({
   selector: 'app-root',

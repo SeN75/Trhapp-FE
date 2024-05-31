@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Building } from '../../../shared/types/base.type';
+import { Building } from '@/shared/types/base.type';
 import { NgClass } from '@angular/common';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 import { RouterLink } from '@angular/router';
 
 @Component({

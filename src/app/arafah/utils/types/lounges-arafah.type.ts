@@ -1,4 +1,4 @@
-import { LoungeArafah, TPState } from '../../../shared/types/base.type';
+import { LoungeArafah, TPState } from '@/shared/types/base.type';
 
 export type CreateLoungeArafah = Omit<LoungeArafah, 'id' | 'name'>;
 export type UpdateLoungeArafah = Partial<LoungeArafah>;

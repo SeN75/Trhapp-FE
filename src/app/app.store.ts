@@ -6,8 +6,8 @@ import { provideStoreDevtools } from '@ngrx/store-devtools';
 import {
   UploadOpsFeatureKey,
   UploadOpsReducer,
-} from './shared/store/upload-operation/upload-operation.reducer';
-import * as UploadOpsEffect from './shared/store/upload-operation/upload-operation.effects';
+} from '@/shared/store/upload-operation/upload-operation.reducer';
+import * as UploadOpsEffect from '@/shared/store/upload-operation/upload-operation.effects';
 
 import {
   BusesFeatureKey,
@@ -99,8 +99,8 @@ import * as DistrbutionEffect from './mina/data-access/store/distribution.effect
 import {
   AvailabilityFeatureKey,
   AvailabilityReducer,
-} from './shared/store/availavilty/availavilty.reducer';
-import * as AvailabilityEffect from './shared/store/availavilty/availavilty.effects';
+} from '@/shared/store/availavilty/availavilty.reducer';
+import * as AvailabilityEffect from '@/shared/store/availavilty/availavilty.effects';
 import {
   AllocationFeatureKey,
   AllocationReducer,

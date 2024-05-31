@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { StateCardComponent } from '../../../shared/components/state-card/state-card.component';
+import { StateCardComponent } from '@/shared/components/state-card/state-card.component';
 import { ArafahTableComponent } from '../../ui/arafah-table/arafah-table.component';
 
 @Component({

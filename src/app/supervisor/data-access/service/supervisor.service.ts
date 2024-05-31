@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, switchMap, map, catchError, tap } from 'rxjs';
-import { environment } from '../../../../environments/environment.development';
-import { Supervisor } from '../../../shared/types/base.type';
+import { environment } from '@env/environment.development';
+import { Supervisor } from '@/shared/types/base.type';
 import {
   CreateSupervisor,
   Supervisors,
   UpdateSupervisor,
-} from '../../utils/types/supervisor.type';
-import { LoggerService } from '../../../shared/service/logger.service';
+} from '@/supervisor/utils/types/supervisor.type';
+import { LoggerService } from '@/shared/service/logger.service';
 
 @Injectable({
   providedIn: 'root',

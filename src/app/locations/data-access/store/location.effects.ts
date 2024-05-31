@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { LocationService } from '../service/location.service';
-import { LocationState } from '../../utils/types/location.type';
+import { LocationState } from '@/locations/utils/types/location.type';
 import { LocationAction } from './location.action';
 
 export const getlocationEffects = createEffect(

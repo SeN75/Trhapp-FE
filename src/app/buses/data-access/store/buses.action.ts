@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Buses, CreateBus, UpdateBus } from '../../utils/types/buses.type';
+import { Buses, CreateBus, UpdateBus } from '@/buses/utils/types/buses.type';
 
 export const BusesAction = {
   get: createAction('[Buses] get buses'),

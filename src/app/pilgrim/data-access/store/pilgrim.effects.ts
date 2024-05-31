@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { PilgrimService } from '../service/pilgrim.service';
-import { PilgrimState } from '../../utils/types/pilgrim.type';
+import { PilgrimState } from '@/pilgrim/utils/types/pilgrim.type';
 import { PilgrimAction } from './pilgrim.action';
 
 export const getPilgrimEffects = createEffect(

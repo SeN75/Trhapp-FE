@@ -1,4 +1,4 @@
-import { TPState } from '../../../shared/types/base.type';
+import { TPState } from '@/shared/types/base.type';
 
 export type DeleteAllocation = {
   national_id: string;

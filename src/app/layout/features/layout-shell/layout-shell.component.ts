@@ -1,27 +1,27 @@
 import { Component, inject } from '@angular/core';
-import { SidebarComponent } from '../../../shared/components/sidebar/sidebar.component';
+import { SidebarComponent } from '@/shared/components/sidebar/sidebar.component';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { CityState } from '../../../citites/utils/types/cities.type';
-import { SupervisorState } from '../../../supervisor/utils/types/supervisor.type';
-import { BuildingAction } from '../../../building/data-access/store/building.action';
-import { BuildingState } from '../../../building/utils/types/building.type';
-import { SuitesAction } from '../../../mina/data-access/store/suites.action';
-import { SuiteState } from '../../../mina/utils/types/suites.type';
-import { CityAction } from '../../../citites/data-access/store/cities.action';
-import { SupervisorAction } from '../../../supervisor/data-access/store/supervisor.action';
-import { LoungeArafahAction } from '../../../arafah/data-access/store/lounge-arafah.action';
-import { LoungeArafahState } from '../../../arafah/utils/types/lounges-arafah.type';
-import { PilgrimState } from '../../../pilgrim/utils/types/pilgrim.type';
-import { PilgrimAction } from '../../../pilgrim/data-access/store/pilgrim.action';
-import { LocationState } from '../../../locations/utils/types/location.type';
-import { LocationAction } from '../../../locations/data-access/store/location.action';
-import { BusState } from '../../../buses/utils/types/buses.type';
-import { BusesAction } from '../../../buses/data-access/store/buses.action';
-import { DistributeState } from '../../../mina/utils/types/distribute.type';
-import { DistributionAction } from '../../../mina/data-access/store/distribution.action';
-import { AvailabiltyState } from '../../../shared/types/availabilty.type';
-import { AvailabiltyActions } from '../../../shared/store/availavilty/availavilty.action';
+import { CityState } from '@/citites/utils/types/cities.type';
+import { SupervisorState } from '@/supervisor/utils/types/supervisor.type';
+import { BuildingAction } from '@/building/data-access/store/building.action';
+import { BuildingState } from '@/building/utils/types/building.type';
+import { SuitesAction } from '@/mina/data-access/store/suites.action';
+import { SuiteState } from '@/mina/utils/types/suites.type';
+import { CityAction } from '@/citites/data-access/store/cities.action';
+import { SupervisorAction } from '@/supervisor/data-access/store/supervisor.action';
+import { LoungeArafahAction } from '@/arafah/data-access/store/lounge-arafah.action';
+import { LoungeArafahState } from '@/arafah/utils/types/lounges-arafah.type';
+import { PilgrimState } from '@/pilgrim/utils/types/pilgrim.type';
+import { PilgrimAction } from '@/pilgrim/data-access/store/pilgrim.action';
+import { LocationState } from '@/locations/utils/types/location.type';
+import { LocationAction } from '@/locations/data-access/store/location.action';
+import { BusState } from '@/buses/utils/types/buses.type';
+import { BusesAction } from '@/buses/data-access/store/buses.action';
+import { DistributeState } from '@/mina/utils/types/distribute.type';
+import { DistributionAction } from '@/mina/data-access/store/distribution.action';
+import { AvailabiltyState } from '@/shared/types/availabilty.type';
+import { AvailabiltyActions } from '@/shared/store/availavilty/availavilty.action';
 
 @Component({
   standalone: true,

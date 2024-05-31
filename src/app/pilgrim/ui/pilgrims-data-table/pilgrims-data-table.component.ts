@@ -8,21 +8,21 @@ import {
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.directive';
-import { Pilgrim } from '../../../shared/types/base.type';
+import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
+import { Pilgrim } from '@/shared/types/base.type';
 import { Store } from '@ngrx/store';
-import { PilgrimState } from '../../utils/types/pilgrim.type';
+import { PilgrimState } from '@/pilgrim/utils/types/pilgrim.type';
 import { selectPilgrims } from '../../data-access/store/pilgrim.reducer';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AsyncPipe, NgClass } from '@angular/common';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 import { MatSort } from '@angular/material/sort';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CityState } from '../../../citites/utils/types/cities.type';
 import { selectCities } from '../../../citites/data-access/store/cities.reducer';
 import { MatDialog } from '@angular/material/dialog';
 import { PilgrimAllocationComponent } from '../../features/pilgrim-allocation/pilgrim-allocation.component';
-import { AllocationState } from '../../utils/types/allocation.type';
+import { AllocationState } from '@/pilgrim/utils/types/allocation.type';
 import { AllocationAction } from '../../data-access/store/allocation.action';
 
 @Component({

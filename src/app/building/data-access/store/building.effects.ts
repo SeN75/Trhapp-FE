@@ -1,10 +1,10 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LoggerService } from '../../../shared/service/logger.service';
+import { LoggerService } from '@/shared/service/logger.service';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { BuildingService } from '../service/building.service';
-import { BuildingState } from '../../utils/types/building.type';
+import { BuildingState } from '@/building/utils/types/building.type';
 import { BuildingAction } from './building.action';
 
 export const getBuildingEffects = createEffect(

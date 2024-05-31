@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 import { Store } from '@ngrx/store';
-import { CreateMinaPack1, MinaState } from '../../utils/types/mina.type';
+import { CreateMinaPack1, MinaState } from '@/mina/utils/types/mina.type';
 import { MinaAction } from '../../data-access/store/mina.action';
 import { combineLatest } from 'rxjs';
 import {

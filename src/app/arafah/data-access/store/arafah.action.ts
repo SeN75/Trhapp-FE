@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateArafahPack1 } from '../../utils/types/arafah.type';
+import { CreateArafahPack1 } from '@/arafah/utils/types/arafah.type';
 
 export const ArafahAction = {
   get: createAction('[Arafah] get accommodations data'),

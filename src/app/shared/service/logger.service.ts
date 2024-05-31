@@ -1,4 +1,4 @@
-import { environment } from '../../../environments/environment.development';
+import { environment } from '@env/environment.development';
 
 export class LoggerService {
   log(title = ' =>', value?: unknown) {

@@ -1,11 +1,11 @@
 import { Component, Inject, inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from '../../../shared/types/base.type';
+import { DialogData } from '@/shared/types/base.type';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@/shared/module/material.module';
 import { Store } from '@ngrx/store';
-import { BedTentMinaState } from '../../utils/types/beds-tent-mina.type';
+import { BedTentMinaState } from '@/mina/utils/types/beds-tent-mina.type';
 import {
   selectStatus,
   selectErrors,

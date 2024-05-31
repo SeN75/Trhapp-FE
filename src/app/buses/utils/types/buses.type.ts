@@ -1,4 +1,4 @@
-import { Bus, TPState } from '../../../shared/types/base.type';
+import { Bus, TPState } from '@/shared/types/base.type';
 
 export type CreateBus = Omit<Bus, 'id'>;
 export type UpdateBus = Partial<Bus>;
