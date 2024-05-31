@@ -13,6 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Building } from '@/shared/types/base.type';
 import { MinaState } from '@/mina/utils/types/mina.type';
 import { MinaAction } from '@/mina/data-access/store/mina.action';
+import { MinaAllocationStatusComponent } from '@/mina/ui/mina-allocation-status/mina-allocation-status.component';
 @Component({
   selector: 'app-mina-building',
   standalone: true,
@@ -22,6 +23,7 @@ import { MinaAction } from '@/mina/data-access/store/mina.action';
     TpPaginatorDirective,
     MinaBuildingCardComponent,
     AsyncPipe,
+    MinaAllocationStatusComponent,
   ],
   templateUrl: './mina-building.component.html',
   styleUrl: './mina-building.component.scss',

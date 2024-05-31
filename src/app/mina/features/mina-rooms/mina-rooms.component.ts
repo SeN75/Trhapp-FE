@@ -1,3 +1,4 @@
+import { MinaAllocationStatusComponent } from '@/mina/ui/mina-allocation-status/mina-allocation-status.component';
 import { MinaRoomsTableComponent } from '@/mina/ui/mina-rooms-table/mina-rooms-table.component';
 import { MaterialModule } from '@/shared/module/material.module';
 import { Component, OnInit, inject } from '@angular/core';
@@ -6,7 +7,11 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'tp-mina-rooms',
   standalone: true,
-  imports: [MaterialModule, MinaRoomsTableComponent],
+  imports: [
+    MaterialModule,
+    MinaRoomsTableComponent,
+    MinaAllocationStatusComponent,
+  ],
   templateUrl: './mina-rooms.component.html',
   styleUrl: './mina-rooms.component.scss',
 })

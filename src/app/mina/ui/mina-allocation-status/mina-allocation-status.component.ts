@@ -5,11 +5,12 @@ import { AvailabiltyState } from '@/shared/types/availabilty.type';
 import { selectData } from '@/shared/store/availavilty/availavilty.reducer';
 import { map } from 'rxjs';
 import { StateCardComponent } from '@/shared/components/state-card/state-card.component';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'tp-mina-allocation-status',
   standalone: true,
-  imports: [MaterialModule, StateCardComponent],
+  imports: [MaterialModule, StateCardComponent, NgIf, AsyncPipe],
   templateUrl: './mina-allocation-status.component.html',
   styleUrl: './mina-allocation-status.component.scss',
 })

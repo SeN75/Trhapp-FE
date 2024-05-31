@@ -1,3 +1,4 @@
+import { MinaAllocationStatusComponent } from '@/mina/ui/mina-allocation-status/mina-allocation-status.component';
 import { MinaRoomsBedsTableComponent } from '@/mina/ui/mina-rooms-beds-table/mina-rooms-beds-table.component';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -5,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'tp-mina-rooms-beds',
   standalone: true,
-  imports: [MinaRoomsBedsTableComponent],
+  imports: [MinaRoomsBedsTableComponent, MinaAllocationStatusComponent],
   templateUrl: './mina-rooms-beds.component.html',
   styleUrl: './mina-rooms-beds.component.scss',
 })
