@@ -15,9 +15,9 @@ export class ArafahTentBedsComponent implements OnInit {
   loungeId = this.aRouter.snapshot.params['id'] || 0;
   pack = this.aRouter.snapshot.params['pack'] || 'package1';
   ngOnInit(): void {
-    this.aRouter.params.subscribe((params) => {
-      this.pack = params['pack'] || 'package1';
-      this.loungeId = +params['id'] || 0;
-    });
+    // this.aRouter.params.subscribe((params) => {
+    //   this.pack = params['pack'] || 'package1';
+    //   this.loungeId = +params['id'] || 0;
+    // });
   }
 }

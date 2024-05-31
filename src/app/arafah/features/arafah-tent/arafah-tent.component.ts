@@ -55,9 +55,9 @@ export class ArafahTentComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
   ngOnInit(): void {
-    this.aRouter.params.subscribe((params) => {
-      this.pack = params['pack'] || 'package1';
-    });
+    // this.aRouter.params.subscribe((params) => {
+    //   this.pack = params['pack'] || 'package1';
+    // });
   }
   constructor() {
     this.lounges$.pipe(takeUntilDestroyed()).subscribe((data) => {

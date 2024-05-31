@@ -54,9 +54,9 @@ export class ArafahCreateSuiteComponent implements OnInit {
       }
     });
 
-    this.aRouter.params.subscribe((params) => {
-      this.pack = params['pack'] || 'package1';
-    });
+    // this.aRouter.params.subscribe((params) => {
+    //   this.pack = params['pack'] || 'package1';
+    // });
   }
   initalLounge = (i = 0, capacity = 0) =>
     new FormGroup({
