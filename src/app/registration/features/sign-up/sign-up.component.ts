@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject, isDevMode } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../shared/service/auth.service';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '../../../shared/module/material.module';
 import { delay, tap, catchError, of } from 'rxjs';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'app-sign-up',
@@ -13,7 +14,13 @@ import { delay, tap, catchError, of } from 'rxjs';
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss',
 })
-export class SignUpComponent {
+export class SignUpComponent implements OnInit {
+  ngOnInit(): void {
+    if (isDevMode())
+      this.form.controls.registration_code.setValue(
+        environment.registration_code
+      );
+  }
   form = new FormGroup({
     phone_number: new FormControl<string>('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
@@ -21,6 +28,7 @@ export class SignUpComponent {
   });
   isLoading = false;
   hasError = false;
+
   get controls() {
     return this.form.controls;
   }

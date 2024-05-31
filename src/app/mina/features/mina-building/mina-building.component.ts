@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { MaterialModule } from '../../../shared/module/material.module';
+import { MaterialModule } from '@shared/module/material.module';
 import { TpPaginatorDirective } from '../../../shared/directive/tp-paginator.directive';
 import { MinaBuildingCardComponent } from '../../ui/mina-building-card/mina-building-card.component';
 import { AsyncPipe } from '@angular/common';

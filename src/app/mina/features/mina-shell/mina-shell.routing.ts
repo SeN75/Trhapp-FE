@@ -15,6 +15,27 @@ export const MinaShellRoutes: Routes = [
           ),
       },
       {
+        path: 'pack4/:id/view',
+        loadComponent: () =>
+          import('../mina-floors/mina-floors.component').then(
+            (m) => m.MinaFloorsComponent
+          ),
+      },
+      {
+        path: 'pack4/:id/view/:floorId/rooms',
+        loadComponent: () =>
+          import('../mina-rooms/mina-rooms.component').then(
+            (m) => m.MinaRoomsComponent
+          ),
+      },
+      {
+        path: 'pack4/:id/view/:floorId/rooms/:roomId/beds',
+        loadComponent: () =>
+          import('../mina-rooms/mina-rooms.component').then(
+            (m) => m.MinaRoomsComponent
+          ),
+      },
+      {
         path: 'pack4/create',
         loadComponent: () =>
           import('../mina-create-building/mina-create-building.component').then(
