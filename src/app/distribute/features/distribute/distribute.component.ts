@@ -21,6 +21,12 @@ export class DistributeComponent {
       width: '500px',
       height: 'auto',
       panelClass: ['modal-box', 'p-2', 'bg-white'],
+      data: {
+        type: 'create',
+        data: {
+          package_name: this.aRouter.snapshot.params['pack'],
+        },
+      },
     });
   }
 }

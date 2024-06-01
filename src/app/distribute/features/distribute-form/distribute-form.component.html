@@ -4,7 +4,7 @@
 
 <!-- -->
 
-<section mat-dialog-content>
+<ng-container>
   <ng-container *ngIf="data$ | async as obs">
     @if(obs.isLoading) {
     <ng-container>
@@ -13,34 +13,48 @@
       </div>
     </ng-container>
     }@else if(obs.status !=='prompt') {
+
     <ng-container *ngTemplateOutlet="stateTemp"></ng-container>
     } @else {
-    <div class="" [formGroup]="form">
-      <!-- <div class="tp-control">
-        <label> رقم المبنى</label>
-        <label
-          class="input input-bordered flex items-center gap-2"
-          [ngClass]="{
-            'input-error':
-              controls.building_name.touched &&
-              controls.building_name.errors
-          }"
-        >
-          <input
-            type="text"
-            class="w-full"
-            maxlength="100"
-            placeholder="100"
-            formControlName="building_name"
-          />
-        </label>
-        @if(controls.building_name.touched && controls.building_name.errors)
-        {
-        <small> حدث خطا </small>
-        }
-      </div> -->
+    <div class="" mat-dialog-content>
+      <div class="" [formGroup]="form">
+        <div class="tp-control">
+          <label> عدد الموظفين</label>
+          <label
+            class="input input-bordered flex items-center gap-2"
+            [ngClass]="{
+              'input-error':
+                controls.num_employees.touched && controls.num_employees.errors
+            }"
+          >
+            <input
+              type="text"
+              class="w-full"
+              maxlength="100"
+              placeholder="100"
+              formControlName="num_employees"
+            />
+          </label>
+          @if(controls.num_employees.touched && controls.num_employees.errors) {
+          <small> حدث خطا </small>
+          }
+        </div>
+      </div>
     </div>
-
+    <mat-dialog-actions class="flex gap-1 !justify-end pt-5">
+      @if (obs.status === 'prompt') {
+      <button
+        class="btn btn-primary"
+        (click)="action()"
+        [disabled]="!form.valid && form.touched"
+      >
+        ارسال
+      </button>
+      }
+      <button class="btn btn-secondary btn-outline" mat-dialog-close>
+        اغلاق
+      </button>
+    </mat-dialog-actions>
     }
 
     <ng-template #stateTemp>
@@ -65,4 +79,4 @@
       }
     </ng-template>
   </ng-container>
-</section>
+</ng-container>

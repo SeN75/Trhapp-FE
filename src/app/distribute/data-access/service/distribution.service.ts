@@ -51,9 +51,7 @@ export class DistributeService {
   ): Observable<DistributePeek> {
     return this.http
       .post<{ data: DistributePeek }>(
-        `${
-          pack.includes('4') ? this.package4 : this.package1
-        }/peak/${payload.num_employees.toString()}`,
+        `${pack.includes('4') ? this.package4 : this.package1}/peak/`,
         { ...payload }
       )
       .pipe(
