@@ -54,6 +54,13 @@ export const layoutShellRouting: Routes = [
             (m) => m.PilgrimAdminShellRoutes
           ),
       },
+      {
+        path: 'distribute',
+        loadChildren: () =>
+          import(
+            '@/distribute/features/distribute-shell/distribute-shell.routing'
+          ).then((m) => m.DistributeShellRouting),
+      },
     ],
   },
 ];

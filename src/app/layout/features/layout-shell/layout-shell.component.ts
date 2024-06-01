@@ -18,8 +18,8 @@ import { LocationState } from '@/locations/utils/types/location.type';
 import { LocationAction } from '@/locations/data-access/store/location.action';
 import { BusState } from '@/buses/utils/types/buses.type';
 import { BusesAction } from '@/buses/data-access/store/buses.action';
-import { DistributeState } from '@/mina/utils/types/distribute.type';
-import { DistributionAction } from '@/mina/data-access/store/distribution.action';
+import { DistributeState } from '@/distribute/utils/types/distribute.type';
+import { DistributionAction } from '@/distribute/data-access/store/distribution.action';
 import { AvailabiltyState } from '@/shared/types/availabilty.type';
 import { AvailabiltyActions } from '@/shared/store/availavilty/availavilty.action';
 

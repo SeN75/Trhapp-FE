@@ -3,7 +3,7 @@ import {
   DistributeRead,
   DistributePeek,
   DistributeUpdate,
-} from '@/mina/utils/types/distribute.type';
+} from '@/distribute/utils/types/distribute.type';
 
 export const DistributionAction = {
   read: createAction(

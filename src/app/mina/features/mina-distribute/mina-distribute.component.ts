@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { DistributeState } from '@/mina/utils/types/distribute.type';
+import { DistributeState } from '@/distribute/utils/types/distribute.type';
 import {
   selectPack1Read,
   selectPack4Read,
-} from '@/mina/data-access/store/distribution.reducer';
-import { DistributionAction } from '@/mina/data-access/store/distribution.action';
+} from '@/distribute/data-access/store/distribution.reducer';
+import { DistributionAction } from '@/distribute/data-access/store/distribution.action';
 
 @Component({
   selector: 'app-mina-distribute',

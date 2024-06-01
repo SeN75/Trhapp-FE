@@ -29,11 +29,7 @@ export class SidebarComponent {
       icon: 'tp-card',
       link: ['/', 'l', 'pilgrims'],
     },
-    {
-      text: 'تسكين الباصات',
-      icon: 'tp-bus',
-      link: ['/', 'l', 'buses'],
-    },
+
     {
       text: 'تسكين منى باقة 1',
       icon: 'tp-bed',
@@ -53,6 +49,21 @@ export class SidebarComponent {
       text: 'تسكين عرفة باقة 4',
       icon: 'tp-camping',
       link: ['/', 'l', 'arafah', 'package4'],
+    },
+    {
+      text: 'توزيعات باقة 1',
+      icon: 'tp-camping',
+      link: ['/', 'l', 'distribute', 'package1'],
+    },
+    {
+      text: 'توزيعات باقة 4',
+      icon: 'tp-camping',
+      link: ['/', 'l', 'distribute', 'package4'],
+    },
+    {
+      text: 'تسكين الباصات',
+      icon: 'tp-bus',
+      link: ['/', 'l', 'buses'],
     },
 
     // {

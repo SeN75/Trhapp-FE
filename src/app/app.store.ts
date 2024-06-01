@@ -94,8 +94,8 @@ import * as MinaEffect from './mina/data-access/store/mina.effects';
 import {
   DistributionFeatureKey,
   DistributionReducer,
-} from './mina/data-access/store/distribution.reducer';
-import * as DistrbutionEffect from './mina/data-access/store/distribution.effects';
+} from './distribute/data-access/store/distribution.reducer';
+import * as DistrbutionEffect from './distribute/data-access/store/distribution.effects';
 import {
   AvailabilityFeatureKey,
   AvailabilityReducer,

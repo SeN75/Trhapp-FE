@@ -1,0 +1,68 @@
+<h2 mat-dialog-title>
+  {{ data.type === "create" ? "انشاء" : "تعديل" }}
+</h2>
+
+<!-- -->
+
+<section mat-dialog-content>
+  <ng-container *ngIf="data$ | async as obs">
+    @if(obs.isLoading) {
+    <ng-container>
+      <div class="h-[200px] flex justify-center items-center">
+        <span class="loading loading-dots loading-lg"></span>
+      </div>
+    </ng-container>
+    }@else if(obs.status !=='prompt') {
+    <ng-container *ngTemplateOutlet="stateTemp"></ng-container>
+    } @else {
+    <div class="" [formGroup]="form">
+      <!-- <div class="tp-control">
+        <label> رقم المبنى</label>
+        <label
+          class="input input-bordered flex items-center gap-2"
+          [ngClass]="{
+            'input-error':
+              controls.building_name.touched &&
+              controls.building_name.errors
+          }"
+        >
+          <input
+            type="text"
+            class="w-full"
+            maxlength="100"
+            placeholder="100"
+            formControlName="building_name"
+          />
+        </label>
+        @if(controls.building_name.touched && controls.building_name.errors)
+        {
+        <small> حدث خطا </small>
+        }
+      </div> -->
+    </div>
+
+    }
+
+    <ng-template #stateTemp>
+      @if (obs.status === 'success') {
+      <div class="flex gap-4 items-center">
+        <mat-icon class="text-success !w-10 !h-10 !text-[40px] !leading-10"
+          >check</mat-icon
+        >
+        <h3 class="py-4 text-lg font-semibold">
+          {{ "تم الارسال بنجاح" }}
+        </h3>
+      </div>
+      } @else if (obs.status === 'error') {
+      <div class="flex gap-4 items-center">
+        <mat-icon class="text-error !w-10 !h-10 !text-[40px] !leading-10"
+          >warning</mat-icon
+        >
+        <h3 class="py-4 text-lg font-semibold">
+          {{ "خطأ في الارسال" }}
+        </h3>
+      </div>
+      }
+    </ng-template>
+  </ng-container>
+</section>
