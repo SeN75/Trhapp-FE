@@ -5,36 +5,60 @@
         <div class="stat-figure text-primary">
           <mat-icon>man</mat-icon>
         </div>
-        <div class="stat-title">الحجاج الرجال</div>
-        <div class="stat-value">
-          {{ obs.mina.males.total }}
+        <div class="stat-title">الاسرة</div>
+        <div class="stat-value text-black">
+          {{ obs.mina.males.beds.created }}
+          <span class="text-xl text-gray-400"> / {{ obs.mina.males.total }} عدد الرجال </span>
         </div>
         <div class="stat-desc"></div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5">
+          <div class="bg-blue-600 h-2.5 rounded-full" [style.width.%]="(obs.mina.males.total / 1000) * 100"></div>
+        </div>
       </div>
-
+    
       <div class="stat">
         <div class="stat-figure text-primary">
           <mat-icon>man</mat-icon><mat-icon>home</mat-icon>
         </div>
-        <div class="stat-title">الحجاج الرجال</div>
-        <div class="stat-value">
-          المنشىء{{ obs.mina.males.beds.created }} /
-          {{ obs.mina.males.beds.required }} المطلوب
+        <div class="stat-title">التسكين</div>
+        <div class="stat-value text-black">
+          {{ obs.mina.males.beds.created }}
+          <span class="text-xl text-gray-400"> / {{ obs.mina.males.total }} عدد الأسرة </span>
         </div>
-        <div class="stat-desc">
-          مسكننين {{ obs.mina.males.beds.allocated }} /
-          {{ obs.mina.males.beds.available }} متاح
+        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5">
+          <div class="bg-blue-600 h-2.5 rounded-full" [style.width.%]="(obs.mina.males.beds.created / 1000) * 100"></div>
         </div>
       </div>
-
+    
       <div class="stat">
-        <div class="stat-figure text-secondary">
-          <mat-icon>download</mat-icon>
+        <div class="stat-figure text-primary">
+          <mat-icon class="text-pink-600">woman</mat-icon>
         </div>
-        <div class="stat-title">New Users</div>
-        <div class="stat-value">4,200</div>
-        <div class="stat-desc">↗︎ 400 (22%)</div>
+        <div class="stat-title">الاسرة</div>
+        <div class="stat-value text-black">
+          {{ obs.mina.females.beds.created }}
+          <span class="text-xl text-gray-400"> / {{ obs.mina.females.total }} عدد النساء </span>
+        </div>
+        <div class="stat-desc"></div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5">
+          <div class="bg-blue-600 h-2.5 rounded-full" [style.width.%]="(obs.mina.females.total / 1000) * 100"></div>
+        </div>
+      </div>
+    
+      <div class="stat">
+        <div class="stat-figure text-pink-600">
+          <mat-icon>woman</mat-icon><mat-icon>home</mat-icon>
+        </div>
+        <div class="stat-title">التسكين</div>
+        <div class="stat-value text-black">
+          {{ obs.mina.females.beds.created }}
+          <span class="text-xl text-gray-400"> / {{ obs.mina.females.total }} عدد الأسرة </span>
+        </div>
+        <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5">
+          <div class="bg-blue-600 h-2.5 rounded-full" [style.width.%]="(obs.mina.females.beds.created / 1000) * 100"></div>
+        </div>
       </div>
     </div>
+    
   </section>
 </ng-container>
