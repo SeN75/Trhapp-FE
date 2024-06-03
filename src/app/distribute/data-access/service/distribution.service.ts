@@ -10,6 +10,7 @@ import {
   DistributePeek,
   DistributeUpdate,
 } from '@/distribute/utils/types/distribute.type';
+import { City } from '@/shared/types/base.type';
 @Injectable({
   providedIn: 'root',
 })
@@ -28,7 +29,7 @@ export class DistributeService {
       .pipe();
   }
   update(
-    data: { num_employees: number },
+    data: { num_employees: number; city: Omit<City, 'id'> },
     pack: 'package1' | 'package4'
   ): Observable<DistributeUpdate> {
     return this.http
@@ -46,17 +47,17 @@ export class DistributeService {
   }
 
   peak(
-    payload: { num_employees: number },
+    payload: { num_employees: number; city: Omit<City, 'id'> },
     pack: 'package1' | 'package4'
   ): Observable<DistributePeek> {
     return this.http
-      .post<{ data: DistributePeek }>(
+      .post<DistributePeek>(
         `${pack.includes('4') ? this.package4 : this.package1}/peak/`,
         { ...payload }
       )
       .pipe(
-        tap((res) => this.logger.log('[peak success]', res.data)),
-        map(({ data }) => data),
+        tap((res) => this.logger.log('[peak success]', res)),
+        map((data) => ({ ...data })),
         catchError((error) => {
           this.logger.error('[peak error]', error);
           throw error;

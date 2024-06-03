@@ -12,7 +12,7 @@
         <span class="loading loading-dots loading-lg"></span>
       </div>
     </ng-container>
-    }@else if(obs.status !=='prompt') {
+    }@else if(obs.status ==='success' && data.type !=='create') {
 
     <ng-container *ngTemplateOutlet="stateTemp"></ng-container>
     } @else {
@@ -28,7 +28,7 @@
             }"
           >
             <input
-              type="text"
+              type="number"
               class="w-full"
               maxlength="100"
               placeholder="100"
@@ -39,6 +39,49 @@
           <small> حدث خطا </small>
           }
         </div>
+        <div class="tp-control">
+          <label> العنوان </label>
+
+          <select
+            class="select select-bordered w-full"
+            formControlName="city"
+            [ngClass]="{
+              'select-error': controls.city.touched && controls.city.errors
+            }"
+          >
+            @for (l of locations$ | async; track $index) {
+            <option [value]="l.city.name">{{ l.name }}</option>
+            }
+          </select>
+          @if(controls.city.touched && controls.city.errors) {
+          <small> حدث خطا </small>
+          }
+        </div>
+
+        @if(obs.status === 'success') {
+        <ng-container *ngIf="peek$ | async as peek">
+          <div class="flex flex-col gap-2">
+            <div>
+              <strong>المجموعات</strong>
+              <span>{{ peek.total_groups }}</span>
+            </div>
+            <div>
+              <strong>الحجاج</strong>
+              <span>{{ peek.total_pilgrims }}</span>
+            </div>
+
+            <div class="flex flex-wrap gap-4">
+              @for (item of peek.distribution; track $index) {
+              <tp-distribute-group-card
+                [id]="item.identifiers"
+                [total]="item.total_groups"
+              />
+              }
+            </div>
+            <button class="btn btn-primary" (click)="send()">تطبيق</button>
+          </div>
+        </ng-container>
+        }
       </div>
     </div>
     <mat-dialog-actions class="flex gap-1 !justify-end pt-5">
@@ -59,6 +102,7 @@
 
     <ng-template #stateTemp>
       @if (obs.status === 'success') {
+
       <div class="flex gap-4 items-center">
         <mat-icon class="text-success !w-10 !h-10 !text-[40px] !leading-10"
           >check</mat-icon

@@ -2,14 +2,14 @@ import { Pilgrims } from '../../../pilgrim/utils/types/pilgrim.type';
 import { TPState } from '@/shared/types/base.type';
 
 export type Distribute = {
-  identifier: 'A1';
+  identifiers: 'A1';
 };
 
 export type DistributePeek = {
   total_groups: number;
+  total_pilgrims: number;
   distribution: (Distribute & {
     total_groups: number;
-    booking_references: string[];
   })[];
 };
 

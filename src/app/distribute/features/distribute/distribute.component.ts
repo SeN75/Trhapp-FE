@@ -18,7 +18,7 @@ export class DistributeComponent {
 
   openDialog() {
     this.dialog.open(DistributeFormComponent, {
-      width: '500px',
+      width: '1200px',
       height: 'auto',
       panelClass: ['modal-box', 'p-2', 'bg-white'],
       data: {

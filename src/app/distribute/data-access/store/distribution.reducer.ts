@@ -59,7 +59,7 @@ export const DistributionFeature = createFeature({
       status: 'prompt' as TPState,
     })),
 
-    on(DistributionAction.update, (state, { peek }) => ({
+    on(DistributionAction.update, (state, {}) => ({
       ...state,
       isLoading: true,
       status: 'sending' as TPState,

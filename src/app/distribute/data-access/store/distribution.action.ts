@@ -4,6 +4,7 @@ import {
   DistributePeek,
   DistributeUpdate,
 } from '@/distribute/utils/types/distribute.type';
+import { City } from '@/shared/types/base.type';
 
 export const DistributionAction = {
   read: createAction(
@@ -20,7 +21,11 @@ export const DistributionAction = {
   ),
   peek: createAction(
     '[Distribution] create Distribution',
-    props<{ num_employees: number; pack: 'package1' | 'package4' }>()
+    props<{
+      num_employees: number;
+      city: { name: string };
+      pack: 'package1' | 'package4';
+    }>()
   ),
   peekPack1Success: createAction(
     '[Distribution] peek Distribution pack1 success',
@@ -32,7 +37,11 @@ export const DistributionAction = {
   ),
   update: createAction(
     '[Distribution] update Distribution',
-    props<{ peek: DistributeUpdate; pack: 'package1' | 'package4' }>()
+    props<{
+      num_employees: number;
+      city: { name: string };
+      pack: 'package1' | 'package4';
+    }>()
   ),
   success: createAction(
     '[Distribution] success',

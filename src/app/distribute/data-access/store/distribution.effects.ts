@@ -4,6 +4,8 @@ import { LoggerService } from '@/shared/service/logger.service';
 import { catchError, combineLatest, map, of, switchMap, tap } from 'rxjs';
 import { DistributeService } from '../service/distribution.service';
 import { DistributionAction } from './distribution.action';
+import { Store } from '@ngrx/store';
+import { DistributeState } from '@/distribute/utils/types/distribute.type';
 
 export const readDistributionEffects = createEffect(
   (
@@ -28,6 +30,7 @@ export const readDistributionEffects = createEffect(
     ),
   { functional: true }
 );
+
 export const peekDistributionEffects = createEffect(
   (
     actions = inject(Actions),
@@ -36,9 +39,13 @@ export const peekDistributionEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(DistributionAction.peek),
-      switchMap(({ pack, num_employees }) =>
-        combineLatest({ data: service.peak({ num_employees }, pack), pack })
+      switchMap(({ pack, num_employees, city }) =>
+        combineLatest({
+          data: service.peak({ num_employees, city }, pack),
+          pack,
+        })
       ),
+      tap((res) => console.log(res)),
       map(({ data, pack }) =>
         pack.includes('1')
           ? DistributionAction.peekPack1Success({ pack1Peek: data })
@@ -51,16 +58,40 @@ export const peekDistributionEffects = createEffect(
     ),
   { functional: true }
 );
+export const updateDistributionEffects = createEffect(
+  (
+    actions = inject(Actions),
+    service = inject(DistributeService),
+    logger = inject(LoggerService)
+  ) =>
+    actions.pipe(
+      ofType(DistributionAction.update),
+      switchMap(({ pack, num_employees, city }) =>
+        combineLatest({
+          data: service.update({ num_employees, city }, pack),
+          pack,
+        })
+      ),
+      tap((res) => console.log(res)),
+      map(({ data, pack }) =>
+        DistributionAction.success({ pack: pack as 'package1' | 'package4' })
+      ),
+      catchError((error) => {
+        logger.error('[updateDistributionEffects erorr]', error);
+        return of(DistributionAction.error({ error }));
+      })
+    ),
+  { functional: true }
+);
 
-// export const getDataEffect = createEffect(
-//   (
-//     actions = inject(Actions),
-//     logger = inject(LoggerService),
-//     store = inject(Store<{ suite: LoungeMinaState }>)
-//   ) =>
-//     actions.pipe(
-//       ofType(DistributionAction.success),
-//       tap(() => store.dispatch(DistributionAction.get()))
-//     ),
-//   { functional: true }
-// );
+export const successEffect = createEffect(
+  (
+    actions = inject(Actions),
+    store = inject(Store<{ distribution: DistributeState }>)
+  ) =>
+    actions.pipe(
+      ofType(DistributionAction.success),
+      tap((pack) => store.dispatch(DistributionAction.read(pack)))
+    ),
+  { functional: true, dispatch: false }
+);

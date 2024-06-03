@@ -86,6 +86,7 @@ export type Location = {
   lng: number;
   city: City;
   package_name: string;
+  is_start?: boolean;
 };
 export type City = {
   id: string;
