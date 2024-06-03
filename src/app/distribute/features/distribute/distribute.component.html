@@ -4,4 +4,31 @@
   <div class="flex justify-end">
     <button class="btn btn-primary" (click)="openDialog()">انشاط توزيع</button>
   </div>
+  <div class="block">
+    <div role="tablist" class="tabs tabs-boxed bg-white shadow-lg">
+      <ng-container *ngIf="list$ | async as list">
+        @for (item of list; track $index) {
+        <input
+          type="radio"
+          name="dist"
+          role="tab"
+          class="tab"
+          attr.aria-label="{{ item.city }}"
+        />
+        <div role="tabpanel" class="tab-content p-10">
+          <div class="flex flex-wrap gap-4">
+            @for (i of item.groups; track $index) {
+            <tp-distribute-group-card
+              class="hover:scale-125 hover:transition-all hover:duration-300 hover:m-4 cursor-pointer duration-300 transition-all"
+              [id]="i.identifier"
+              [total]="i.identifier.length"
+            ></tp-distribute-group-card>
+
+            }
+          </div>
+        </div>
+        }
+      </ng-container>
+    </div>
+  </div>
 </section>

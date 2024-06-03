@@ -85,7 +85,7 @@
       </div>
     </div>
     <mat-dialog-actions class="flex gap-1 !justify-end pt-5">
-      @if (obs.status === 'prompt') {
+      @if (data.type === 'create') {
       <button
         class="btn btn-primary"
         (click)="action()"

@@ -1,5 +1,5 @@
 import { Pilgrims } from '../../../pilgrim/utils/types/pilgrim.type';
-import { TPState } from '@/shared/types/base.type';
+import { TPState, Pilgrim } from '@/shared/types/base.type';
 
 export type Distribute = {
   identifiers: 'A1';
@@ -22,10 +22,17 @@ export type DistributeUpdate = {
   })[];
 };
 
-export type DistributeRead = (Distribute & {
-  pilgrims: Pilgrims;
-})[];
-
+export type DistributeRead = {
+  total_groups: number;
+  total_pilgrims: number;
+  city: string;
+  groups: [
+    {
+      identifier: string;
+      pilgrims: Pilgrim[];
+    }
+  ];
+}[];
 export type DistributeState = {
   pack1Peek: DistributePeek | null;
   pack4Peek: DistributePeek | null;
