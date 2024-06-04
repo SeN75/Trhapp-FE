@@ -61,6 +61,13 @@ export const layoutShellRouting: Routes = [
             '@/distribute/features/distribute-shell/distribute-shell.routing'
           ).then((m) => m.DistributeShellRouting),
       },
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import(
+            '@/dashboard/features/dashboard-shell/dashboard-shell.routing'
+          ).then((m) => m.DashboardShellRouters),
+      },
     ],
   },
 ];
