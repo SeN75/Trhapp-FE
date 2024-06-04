@@ -1,0 +1,9 @@
+<div>
+  <canvas
+    baseChart
+    [data]="barChartData"
+    [type]="barChartType"
+    [options]="barChartOptions"
+  ></canvas>
+</div>
+<ng-container *ngIf="availavilty$ | async as data"></ng-container>
