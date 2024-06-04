@@ -65,6 +65,11 @@ export class SidebarComponent {
       icon: 'tp-bus',
       link: ['/', 'l', 'buses'],
     },
+    {
+      text: 'لوحة التحكم',
+      icon: 'tp-bus',
+      link: ['/', 'l', 'dashboard'],
+    },
 
     // {
     //   text: 'بطاقة الحاج',
