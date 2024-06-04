@@ -138,6 +138,7 @@ export type Pilgrim = {
   code: string;
   mina_building_accommodation: BedBuidingMina['id']; //fk
   arafah_accommodation: BedTentArafah['id']; //fk
+  distribution_identifier?: string;
 };
 
 export type Auth = {

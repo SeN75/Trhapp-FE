@@ -37,7 +37,10 @@ export class PilgrimComponent {
           .pipe(
             delay(2000),
             tap(() => (this.isLoading = false)),
-            tap(() => this.router.navigate(['/', 'l'])),
+            tap(
+              (data) => (localStorage['TPPilgrim'] = JSON.stringify(data || {}))
+            ),
+            tap(() => this.router.navigate(['/', 'p'])),
             catchError((error) => {
               this.isLoading = false;
               this.hasError = true;

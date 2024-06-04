@@ -58,16 +58,26 @@
   </div>
 </section>
 } -->
-
-<div class="card">
+<!--
+<div
+  class="card font-f1"
+  [ngStyle]="{
+    '--color': data.package_name === 'باقة (1)' ? '#7f3119' : '#d2ad78'
+  }"
+>
   <div class="card-header">
     <img src="../../../../assets/images/allyaniy.svg" alt="Logo" />
     <div class="background-pattern"></div>
     <div class="image"></div>
   </div>
 
+  <p
+    id="name_1 "
+    class="mt-auto text-neutral-700 text-5xl font-bold text-center mb-5"
+  >
+    {{ data.name }}
+  </p>
   <div class="card-content">
-    <p id="name_1">{{ data.name }}</p>
     <p>
       <strong>رقم الهوية:</strong>
       <span id="national_id_1">{{ data.national_id }}</span>
@@ -75,6 +85,10 @@
     <p>
       <strong>رقم الحاج:</strong>
       <span id="pilgrim_number_1">{{ data.code }}</span>
+    </p>
+    <p>
+      <strong>رمز التوزيع:</strong>
+      <span id="pilgrim_number_1">{{ data.distribution_identifier }}</span>
     </p>
     <p>
       <strong>البرنامج:</strong>
@@ -90,6 +104,53 @@
     </p>
   </div>
   <div class="card-footer">
-    <p>{{ data.package_number }}</p>
+    @if (data.package_name === 'باقة (1)' || data.package_name === 'باقة (4)') {
+
+    <p>حجاج - {{ data.package_name }}</p>
+    }
+  </div>
+</div> -->
+
+<div class="card">
+  <div
+    class="card-header"
+    style="background: url('../../../../assets/images/{{
+      data.package_name === 'باقة (1)' ? 'package1.svg' : 'package4.svg'
+    }}') no-repeat center 100% / 60%"
+  >
+    <img class="logo" src="../../../../assets/images/allyaniy.svg" alt="Logo" />
+    <div
+      class="image"
+      style="
+        background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png');
+      "
+    ></div>
+  </div>
+
+  <div class="card-content">
+    <p id="name_1">{{ data.name }}</p>
+    <p>
+      <strong>رقم الهوية</strong>
+      <span id="national_id_1">{{ data.national_id }}</span>
+    </p>
+    <p>
+      <strong>رقم الحـــاج</strong>
+      <span id="pilgrim_number_1">{{ data.booking_reference }}</span>
+    </p>
+    <p>
+      <strong>البرنــامــــــج</strong>
+      <span id="program_1">{{ data.package_number }} مخيم (7127)</span>
+    </p>
+    <p>
+      <strong>سكن منـى</strong>
+      <span id="mina_accommodation_1">{{ "جناح (1) صالة (2) سرير (3)" }}</span>
+    </p>
+    <p>
+      <strong>سكن عرفة</strong>
+      <span id="arafah_accommodation_1">{{ "صالة (4) مقعد (5)" }}</span>
+    </p>
+  </div>
+  <div class="card-footer">
+    <p>حاج - باقة (1)</p>
   </div>
 </div>

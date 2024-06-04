@@ -65,15 +65,13 @@ export class PilgrimService {
   }
 
   login({ national_id }: { national_id: string }) {
-    return this.http
-      .post<{ data: Pilgrim }>(`${this.pUrl}login/`, { national_id })
-      .pipe(
-        tap((res) => this.logger.log('[login success]', res.data)),
-        map(({ data }) => data),
-        catchError((error) => {
-          this.logger.error('[login error]', error);
-          throw error;
-        })
-      );
+    return this.http.post<Pilgrim>(`${this.pUrl}login/`, { national_id }).pipe(
+      tap((res) => this.logger.log('[login success]', res)),
+      map((data) => data),
+      catchError((error) => {
+        this.logger.error('[login error]', error);
+        throw error;
+      })
+    );
   }
 }

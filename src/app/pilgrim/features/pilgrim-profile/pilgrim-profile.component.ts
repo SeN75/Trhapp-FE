@@ -1,14 +1,24 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Pilgrim } from '@/shared/types/base.type';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-pilgrim-profile',
   standalone: true,
-  imports: [],
+  imports: [NgStyle],
   templateUrl: './pilgrim-profile.component.html',
   styleUrl: './pilgrim-profile.component.scss',
 })
-export class PilgrimProfileComponent implements AfterViewInit {
+export class PilgrimProfileComponent
+  implements AfterViewInit, OnInit, OnDestroy
+{
   ngAfterViewInit(): void {}
   @ViewChild('headline') h?: ElementRef<HTMLElement>;
   @ViewChild('imageContainer') imageCtr?: ElementRef<HTMLElement>;
@@ -35,4 +45,15 @@ export class PilgrimProfileComponent implements AfterViewInit {
     mina_building_accommodation: 'minaBuilding123', // Foreign key reference to BedBuidingMina
     arafah_accommodation: '', // Foreign key reference to BedTentArafah
   };
+  ngOnInit(): void {
+    const data = JSON.parse(
+      localStorage['TPPilgrim'] ? localStorage['TPPilgrim'] : '{}'
+    );
+    if (data && Object.keys(data).length > 0) {
+      this.data = data;
+    }
+  }
+  ngOnDestroy(): void {
+    localStorage.removeItem('TPPilgrim');
+  }
 }
