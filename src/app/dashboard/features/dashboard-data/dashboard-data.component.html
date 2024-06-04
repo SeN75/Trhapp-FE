@@ -1,0 +1,36 @@
+<section class="grid grid-cols-2 gap-8">
+  <div
+    class="flex flex-col justify-center gap-4"
+    *ngIf="availavilty$ | async as data"
+  >
+    <tp-dashboard-data-card
+      [data]="{
+        data_name: 'عدد مجموع الرجال منى',
+        total: data.package1.mina.males.total
+      }"
+    ></tp-dashboard-data-card>
+    <tp-dashboard-data-card
+      [data]="{
+        data_name: 'عدد مجموع النساء منى',
+        total: data.package1.mina.females.total
+      }"
+    ></tp-dashboard-data-card>
+    <tp-dashboard-data-card
+      [data]="{
+        data_name: 'عدد مجموع الرجال عرفة',
+        total: data.package1.arafah.males.total
+      }"
+    ></tp-dashboard-data-card>
+    <tp-dashboard-data-card
+      [data]="{
+        data_name: 'عدد مجموع النساء عرفة',
+        total: data.package1.arafah.females.total
+      }"
+    ></tp-dashboard-data-card>
+  </div>
+
+  <div class="flex flex-col gap-8">
+    <tp-dashboard-data-bar></tp-dashboard-data-bar>
+    <tp-dashboard-data-line></tp-dashboard-data-line>
+  </div>
+</section>
