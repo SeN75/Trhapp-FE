@@ -19,9 +19,10 @@
           <div class="flex flex-wrap gap-4">
             @for (i of item.groups; track $index) {
             <tp-distribute-group-card
-              class="hover:scale-125 hover:transition-all hover:duration-300 hover:m-4 cursor-pointer duration-300 transition-all"
+              class=""
               [id]="i.identifier"
-              [total]="i.identifier.length"
+              [total]="i.pilgrims.length"
+              span="عدد الحجاج"
             ></tp-distribute-group-card>
 
             }

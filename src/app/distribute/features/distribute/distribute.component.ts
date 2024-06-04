@@ -46,7 +46,8 @@ export class DistributeComponent implements OnInit {
   openDialog() {
     this.store.dispatch(DistributionAction.reset());
     this.dialog.open(DistributeFormComponent, {
-      width: '1200px',
+      width: '800px',
+      maxWidth: '100%',
       height: 'auto',
       panelClass: ['modal-box', 'p-2', 'bg-white'],
       data: {

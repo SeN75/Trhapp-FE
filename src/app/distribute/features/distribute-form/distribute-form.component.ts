@@ -39,7 +39,6 @@ import { DistributeGroupCardComponent } from '@/distribute/ui/distribute-group-c
     NgClass,
     NgTemplateOutlet,
     JsonPipe,
-    DistributeFormComponent,
     DistributeGroupCardComponent,
   ],
   templateUrl: './distribute-form.component.html',

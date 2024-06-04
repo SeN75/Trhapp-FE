@@ -42,10 +42,7 @@ export class PilgrimsDataTableComponent implements AfterViewInit, OnInit {
   cities$ = this.citiesStore.select(selectCities);
   pilgrims$ = this.store.select(selectPilgrims);
 
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+  ngAfterViewInit(): void {}
   // dataSource!: MatTableDataSource<any>;
 
   displayedColumns: string[] = [
@@ -83,9 +80,11 @@ export class PilgrimsDataTableComponent implements AfterViewInit, OnInit {
     this.searchActive[key] = !!value;
   }
   constructor() {
-    this.pilgrims$
-      .pipe(takeUntilDestroyed())
-      .subscribe((data) => (this.dataSource.data = data || []));
+    this.pilgrims$.pipe(takeUntilDestroyed()).subscribe((data) => {
+      this.dataSource.data = data || [];
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
   ngOnInit(): void {
     Object.keys(this.filterCtrl.controls).forEach((key) => {

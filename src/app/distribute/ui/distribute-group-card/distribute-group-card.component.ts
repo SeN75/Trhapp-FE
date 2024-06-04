@@ -9,5 +9,6 @@ import { Component, Input } from '@angular/core';
 })
 export class DistributeGroupCardComponent {
   @Input() id = '';
-  @Input() total = 0;
+  @Input() total: string | number = 0;
+  @Input() span = '';
 }
