@@ -1,230 +1,236 @@
-@defer{
+@defer (when true ){
 <div class="flex gap-2 pb-4">
   <button class="btn btn-primary btn-sm">تسكين الكل</button>
-  <button class="btn btn-accent btn-sm">تصدير ملف CSV</button>
+  <button class="btn btn-accent btn-sm" (click)="exportData()">
+    تصدير ملف CSV
+  </button>
 </div>
-<section class="table-container shadow-xl" [formGroup]="filterCtrl">
+<section class="table-container shadow-xl">
   <table matSort mat-table [dataSource]="dataSource">
-    <!--- Note that these columns can be defined in any order.
+    <ng-container [formGroup]="filterCtrl">
+      <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
 
-    <ng-container matColumnDef="id">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>التسلسل</th>
-      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-    </ng-container>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>التسلسل</th>
+        <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+      </ng-container>
 
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>
-        @if (!searchActive['name']) {
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          @if (!searchActive['name']) {
 
-        <span
-          class="label-search-icon"
-          (click)="searchActive['name'] = !searchActive['name']"
-        >
-          <mat-icon>search</mat-icon>
-          الاسم
-        </span>
-        } @else {
-        <span class="label-search-icon">
-          <input
-            (click)="$event.stopPropagation()"
-            formControlName="name"
-            placeholder="الاسم"
-          />
-        </span>
-        }
-      </th>
-      <td mat-cell *matCellDef="let element">
-        <span class="flex items-center">
-          <mat-icon
-            [ngClass]="{
-              'text-pink-500': !element.is_male,
-              'text-primary': element.is_male
-            }"
-            >{{ element.is_male ? "man" : "woman" }}</mat-icon
+          <span
+            class="label-search-icon"
+            (click)="searchActive['name'] = !searchActive['name']"
           >
-
-          {{ element.name }}
-        </span>
-      </td>
-    </ng-container>
-
-    <!-- Phone number Column -->
-    <ng-container matColumnDef="phone_number">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>
-        @if (!searchActive['phone_number']) {
-
-        <span
-          class="label-search-icon"
-          (click)="searchActive['phone_number'] = !searchActive['phone_number']"
-        >
-          <mat-icon>search</mat-icon>
-          رقم الجوال
-        </span>
-        } @else {
-        <span class="label-search-icon">
-          <input
-            (click)="$event.stopPropagation()"
-            formControlName="phone_number"
-            placeholder="رقم الجوال"
-          />
-        </span>
-        }
-      </th>
-      <td mat-cell *matCellDef="let element">{{ element.phone_number }}</td>
-    </ng-container>
-
-    <!-- Package name Column -->
-    <ng-container matColumnDef="package_name">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>
-        <button
-          mat-button
-          [matMenuTriggerFor]="packageMenu"
-          class="label-search-icon"
-        >
-          اسم الباقة <mat-icon>filter_list</mat-icon>
-        </button>
-        <mat-menu #packageMenu="matMenu" class="bg-primary-A100">
-          <button mat-menu-item (click)="filter('', 'package_name')">
-            الكل
-          </button>
-          <button mat-menu-item (click)="filter('باقة (1)', 'package_name')">
-            باقة (1)
-          </button>
-          <button mat-menu-item (click)="filter('باقة (4)', 'package_name')">
-            باقة (4)
-          </button>
-        </mat-menu>
-      </th>
-      <td mat-cell *matCellDef="let element">{{ element.package_name }}</td>
-    </ng-container>
-
-    <!-- Package number Column -->
-    <ng-container matColumnDef="city">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>
-        <button
-          mat-button
-          [matMenuTriggerFor]="cityMenu"
-          class="label-search-icon"
-        >
-          المدينة<mat-icon>filter_list</mat-icon>
-        </button>
-        <mat-menu #cityMenu="matMenu" class="bg-primary-A100">
-          <button mat-menu-item (click)="filter('', 'city')">الكل</button>
-          @for (city of cities$ | async; track $index) {
-          <button mat-menu-item (click)="filter(city.id, 'city.id')">
-            {{ city.name }}
-          </button>
+            <mat-icon>search</mat-icon>
+            الاسم
+          </span>
+          } @else {
+          <span class="label-search-icon">
+            <input
+              (click)="$event.stopPropagation()"
+              formControlName="name"
+              placeholder="الاسم"
+            />
+          </span>
           }
-        </mat-menu>
-      </th>
-      <td mat-cell *matCellDef="let element">{{ element.city.name }}</td>
-    </ng-container>
-    <ng-container matColumnDef="nationality">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>
-        @if (!searchActive['nationality']) {
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <span class="flex items-center">
+            <mat-icon
+              [ngClass]="{
+                'text-pink-500': !element.is_male,
+                'text-primary': element.is_male
+              }"
+              >{{ element.is_male ? "man" : "woman" }}</mat-icon
+            >
 
-        <span
-          class="label-search-icon"
-          (click)="searchActive['nationality'] = !searchActive['nationality']"
-        >
-          <mat-icon>search</mat-icon>
-          الجنسية
-        </span>
-        } @else {
-        <span class="label-search-icon">
-          <input
-            (click)="$event.stopPropagation()"
-            formControlName="nationality"
-            placeholder="الجنسية"
-          />
-        </span>
-        }
-      </th>
-      <td mat-cell *matCellDef="let element">{{ element.nationality }}</td>
-    </ng-container>
-    <ng-container matColumnDef="national_id">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>
-        @if (!searchActive['national_id']) {
+            {{ element.name }}
+          </span>
+        </td>
+      </ng-container>
 
-        <span
-          class="label-search-icon"
-          (click)="searchActive['national_id'] = !searchActive['national_id']"
-        >
-          <mat-icon>search</mat-icon>
-          الهوية
-        </span>
-        } @else {
-        <span class="label-search-icon">
-          <input
-            (click)="$event.stopPropagation()"
-            formControlName="national_id"
-            placeholder="الهوية"
-          />
-        </span>
-        }
-      </th>
-      <td mat-cell *matCellDef="let element">{{ element.national_id }}</td>
-    </ng-container>
-    <ng-container matColumnDef="booking_reference">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef>
-        @if (!searchActive['booking_reference']) {
+      <!-- Phone number Column -->
+      <ng-container matColumnDef="phone_number">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          @if (!searchActive['phone_number']) {
 
-        <span
-          class="label-search-icon"
-          (click)="
-            searchActive['booking_reference'] =
-              !searchActive['booking_reference']
-          "
-        >
-          <mat-icon>search</mat-icon>
-          رقم الحجز
-        </span>
-        } @else {
-        <span class="label-search-icon">
-          <input
-            (click)="$event.stopPropagation()"
-            formControlName="booking_reference"
-            placeholder="رقم الحجز"
-          />
-        </span>
-        }
-      </th>
-      <td mat-cell *matCellDef="let element">
-        {{ element.booking_reference }}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element">
-        <span class="flex gap-2">
-          <button class="btn btn-xs btn-neutral">تسكين يدوي</button>
-          <button
-            class="btn btn-xs bg-blue-100 text-primary hover:bg-primary hover:text-blue-200"
-            (click)="openAllocation(element, 'switch')"
+          <span
+            class="label-search-icon"
+            (click)="
+              searchActive['phone_number'] = !searchActive['phone_number']
+            "
           >
-            تبديل تسكين
-          </button>
+            <mat-icon>search</mat-icon>
+            رقم الجوال
+          </span>
+          } @else {
+          <span class="label-search-icon">
+            <input
+              (click)="$event.stopPropagation()"
+              formControlName="phone_number"
+              placeholder="رقم الجوال"
+            />
+          </span>
+          }
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.phone_number }}</td>
+      </ng-container>
+
+      <!-- Package name Column -->
+      <ng-container matColumnDef="package_name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
           <button
-            class="btn btn-xs bg-error-A200 text-error hover:bg-error hover:text-error-A200"
-            (click)="openAllocation(element, 'delete')"
+            mat-button
+            [matMenuTriggerFor]="packageMenu"
+            class="label-search-icon"
           >
-            حذف تسكين
+            اسم الباقة <mat-icon>filter_list</mat-icon>
           </button>
-        </span>
-      </td>
+          <mat-menu #packageMenu="matMenu" class="bg-primary-A100">
+            <button mat-menu-item (click)="filter('', 'package_name')">
+              الكل
+            </button>
+            <button mat-menu-item (click)="filter('باقة (1)', 'package_name')">
+              باقة (1)
+            </button>
+            <button mat-menu-item (click)="filter('باقة (4)', 'package_name')">
+              باقة (4)
+            </button>
+          </mat-menu>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.package_name }}</td>
+      </ng-container>
+
+      <!-- Package number Column -->
+      <ng-container matColumnDef="city">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          <button
+            mat-button
+            [matMenuTriggerFor]="cityMenu"
+            class="label-search-icon"
+          >
+            المدينة<mat-icon>filter_list</mat-icon>
+          </button>
+          <mat-menu #cityMenu="matMenu" class="bg-primary-A100">
+            <button mat-menu-item (click)="filter('', 'city')">الكل</button>
+            @for (city of cities$ | async; track $index) {
+            <button mat-menu-item (click)="filter(city.id, 'city.id')">
+              {{ city.name }}
+            </button>
+            }
+          </mat-menu>
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.city.name }}</td>
+      </ng-container>
+      <ng-container matColumnDef="nationality">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          @if (!searchActive['nationality']) {
+
+          <span
+            class="label-search-icon"
+            (click)="searchActive['nationality'] = !searchActive['nationality']"
+          >
+            <mat-icon>search</mat-icon>
+            الجنسية
+          </span>
+          } @else {
+          <span class="label-search-icon">
+            <input
+              (click)="$event.stopPropagation()"
+              formControlName="nationality"
+              placeholder="الجنسية"
+            />
+          </span>
+          }
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.nationality }}</td>
+      </ng-container>
+      <ng-container matColumnDef="national_id">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          @if (!searchActive['national_id']) {
+
+          <span
+            class="label-search-icon"
+            (click)="searchActive['national_id'] = !searchActive['national_id']"
+          >
+            <mat-icon>search</mat-icon>
+            الهوية
+          </span>
+          } @else {
+          <span class="label-search-icon">
+            <input
+              (click)="$event.stopPropagation()"
+              formControlName="national_id"
+              placeholder="الهوية"
+            />
+          </span>
+          }
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.national_id }}</td>
+      </ng-container>
+      <ng-container matColumnDef="booking_reference">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>
+          @if (!searchActive['booking_reference']) {
+
+          <span
+            class="label-search-icon"
+            (click)="
+              searchActive['booking_reference'] =
+                !searchActive['booking_reference']
+            "
+          >
+            <mat-icon>search</mat-icon>
+            رقم الحجز
+          </span>
+          } @else {
+          <span class="label-search-icon">
+            <input
+              (click)="$event.stopPropagation()"
+              formControlName="booking_reference"
+              placeholder="رقم الحجز"
+            />
+          </span>
+          }
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.booking_reference }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <span class="flex gap-2">
+            <button class="btn btn-xs btn-neutral">تسكين يدوي</button>
+            <button
+              class="btn btn-xs bg-blue-100 text-primary hover:bg-primary hover:text-blue-200"
+              (click)="openAllocation(element, 'switch')"
+            >
+              تبديل تسكين
+            </button>
+            <button
+              class="btn btn-xs bg-error-A200 text-error hover:bg-error hover:text-error-A200"
+              (click)="openAllocation(element, 'delete')"
+            >
+              حذف تسكين
+            </button>
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Arafah accommodation Column -->
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </ng-container>
-
-    <!-- Arafah accommodation Column -->
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
   <div class="bg-bg border-solid border border-primary border-t-0 rounded-b-xl">
     <mat-paginator
       [length]="dataSource.data.length"
-      [pageSize]="20"
+      [pageSize]="[20, 50, 100]"
     ></mat-paginator>
   </div>
 </section>

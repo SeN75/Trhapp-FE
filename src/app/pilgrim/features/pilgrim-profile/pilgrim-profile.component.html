@@ -120,9 +120,10 @@
   >
     <img class="logo" src="../../../../assets/images/allyaniy.svg" alt="Logo" />
     <div
-      class="image"
+      (click)="openDialog()"
+      class="image cursor-pointer"
       style="
-        background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png');
+        background-image: url('{{ data.image || no_image }}');
       "
     ></div>
   </div>

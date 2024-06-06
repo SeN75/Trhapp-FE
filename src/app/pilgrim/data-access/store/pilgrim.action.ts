@@ -22,5 +22,9 @@ export const PilgrimAction = {
   delete: createAction('[Pilgrim] delete Pilgrim', props<{ id: string }>()),
   success: createAction('[Pilgrim] success'),
   error: createAction('[Pilgrim] error', props<{ error: string }>()),
+  updateImage: createAction(
+    '[Pilgrim] updateImage',
+    props<{ id: string; file: File }>()
+  ),
   reset: createAction('[Pilgrim] reset'),
 };

@@ -16,7 +16,8 @@ export const getPilgrimEffects = createEffect(
     actions.pipe(
       ofType(PilgrimAction.get),
       switchMap(() => service.get()),
-      map((pilgrims) => pilgrims.sort((a, b) => +a.id - +b.id)),
+      // map((pilgrims) => pilgrims.sort((a, b) => +a.id - +b.id)),
+      tap((pilgrims) => console.log(pilgrims)),
       map((pilgrims) => PilgrimAction.getSuccess({ pilgrims })),
       catchError((error) => {
         logger.error('[getPilgrimEffects erorr]', error);
@@ -73,6 +74,23 @@ export const deletePilgrimEffects = createEffect(
       map((Pilgrim) => PilgrimAction.success()),
       catchError((error) => {
         logger.error('[deletePilgrimEffects erorr]', error);
+        return of(PilgrimAction.error({ error }));
+      })
+    ),
+  { functional: true }
+);
+export const updateProfilePilgrimEffects = createEffect(
+  (
+    actions = inject(Actions),
+    service = inject(PilgrimService),
+    logger = inject(LoggerService)
+  ) =>
+    actions.pipe(
+      ofType(PilgrimAction.updateImage),
+      switchMap(({ id, file }) => service.uploadImage(id, file)),
+      map((Pilgrim) => PilgrimAction.success()),
+      catchError((error) => {
+        logger.error('[updateProfilePilgrimEffects erorr]', error);
         return of(PilgrimAction.error({ error }));
       })
     ),

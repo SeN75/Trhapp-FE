@@ -24,6 +24,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PilgrimAllocationComponent } from '../../features/pilgrim-allocation/pilgrim-allocation.component';
 import { AllocationState } from '@/pilgrim/utils/types/allocation.type';
 import { AllocationAction } from '../../data-access/store/allocation.action';
+import { GeneratePdfService } from '@/shared/service/generate-pdf.service';
 
 @Component({
   selector: 'tp-pilgrims-data-table',
@@ -35,6 +36,7 @@ import { AllocationAction } from '../../data-access/store/allocation.action';
 export class PilgrimsDataTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  private gPdf = inject(GeneratePdfService);
   private dialog = inject(MatDialog);
   private store = inject(Store<{ pilgrims: PilgrimState }>);
   private citiesStore = inject(Store<{ cities: CityState }>);
@@ -42,7 +44,10 @@ export class PilgrimsDataTableComponent implements AfterViewInit, OnInit {
   cities$ = this.citiesStore.select(selectCities);
   pilgrims$ = this.store.select(selectPilgrims);
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
   // dataSource!: MatTableDataSource<any>;
 
   displayedColumns: string[] = [
@@ -91,6 +96,30 @@ export class PilgrimsDataTableComponent implements AfterViewInit, OnInit {
       (this.filterCtrl.controls as any)[key].valueChanges.subscribe(
         (v: string) => this.filter(v || '', key)
       );
+    });
+  }
+  exportData() {
+    const cols = [
+      'name',
+      'booking_reference',
+      'phone_number',
+      'national_id',
+      'nationality',
+      'package_name',
+      'permit_status',
+    ];
+    const row = this.dataSource.data as unknown as { [k: string]: string }[];
+
+    const data = row.map((v) => {
+      return cols
+        .map((k) => {
+          return { [k]: v[k] };
+        })
+        .reduce((a, b) => ({ ...a, ...b }), {});
+    });
+    this.gPdf.generatePdf({
+      file_name: 'pilgrims-' + new Date().getTime(),
+      data,
     });
   }
   openAllocation(pilgrim: Pilgrim, type: 'switch' | 'delete' | 'manul') {

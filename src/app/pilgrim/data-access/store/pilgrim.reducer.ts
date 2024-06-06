@@ -12,6 +12,11 @@ export const PilgrimFeature = createFeature({
       isLoading: true,
       status: 'sending' as TPState,
     })),
+    on(PilgrimAction.updateImage, (state) => ({
+      ...state,
+      isLoading: true,
+      status: 'sending' as TPState,
+    })),
     on(PilgrimAction.getSuccess, (state, { pilgrims }) => ({
       ...state,
       isLoading: false,

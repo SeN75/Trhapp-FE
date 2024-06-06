@@ -139,6 +139,7 @@ export type Pilgrim = {
   mina_building_accommodation: BedBuidingMina['id']; //fk
   arafah_accommodation: BedTentArafah['id']; //fk
   distribution_identifier?: string;
+  image?: null | string;
 };
 
 export type Auth = {
