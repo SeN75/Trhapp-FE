@@ -119,8 +119,8 @@ export type LoungeArafah = {
 
 export type Pilgrim = {
   id: string;
-  mina_tent_accommodation: BedTentMina['id']; //fk
-  bus_accommodation: Bus['id']; //fk
+  mina_tent_accommodation?: BedTentMina; //fk
+  bus_accommodation: Bus; //fk
   national_id: string;
   permit_status: string;
   name: string;
@@ -136,8 +136,9 @@ export type Pilgrim = {
   date_of_birth_hijri: string;
   city: string;
   code: string;
-  mina_building_accommodation: BedBuidingMina['id']; //fk
-  arafah_accommodation: BedTentArafah['id']; //fk
+  mina_building_accommodation?: BedBuidingMina; //fk
+  arafah_accommodation?: BedTentArafah['id']; //fk
+  arafah_tent_accommodation?: BedTentArafah; //fk
   distribution_identifier?: string;
   image?: null | string;
 };

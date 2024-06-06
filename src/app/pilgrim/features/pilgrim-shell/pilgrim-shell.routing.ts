@@ -21,6 +21,13 @@ export const PilgrimShellRoutes: Routes = [
 
         canActivate: [pilgrimGuard],
       },
+      {
+        path: 'assmbly',
+        loadComponent: () =>
+          import(
+            '@/pilgrim/features/pilgrim-assembly-point/pilgrim-assembly-point.component'
+          ).then((m) => m.PilgrimAssemblyPointComponent),
+      },
     ],
   },
 ];

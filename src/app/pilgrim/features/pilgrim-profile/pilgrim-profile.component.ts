@@ -1,41 +1,21 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  inject,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Pilgrim } from '@/shared/types/base.type';
 import { NgStyle } from '@angular/common';
-import { MatDialog } from '@angular/material/dialog';
-import { PilgrimUploadImageComponent } from '../pilgrim-upload-image/pilgrim-upload-image.component';
-import { Store } from '@ngrx/store';
-import { PilgrimState } from '@/pilgrim/utils/types/pilgrim.type';
-import { PilgrimAction } from '@/pilgrim/data-access/store/pilgrim.action';
+import { PilgrimsCardComponent } from '@/pilgrim/ui/pilgrims-card/pilgrims-card.component';
 
 @Component({
   selector: 'app-pilgrim-profile',
   standalone: true,
-  imports: [NgStyle],
+  imports: [NgStyle, PilgrimsCardComponent],
   templateUrl: './pilgrim-profile.component.html',
   styleUrl: './pilgrim-profile.component.scss',
 })
-export class PilgrimProfileComponent
-  implements AfterViewInit, OnInit, OnDestroy
-{
-  private dialog = inject(MatDialog);
-  ngAfterViewInit(): void {}
-  @ViewChild('headline') h?: ElementRef<HTMLElement>;
-  @ViewChild('imageContainer') imageCtr?: ElementRef<HTMLElement>;
-  private store = inject(Store<{ pilgrims: PilgrimState }>);
+export class PilgrimProfileComponent implements OnInit, OnDestroy {
   no_image =
     'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png';
   data: Pilgrim = {
     id: '123456',
-    mina_tent_accommodation: 'minaTent123', // Foreign key reference to BedTentMina
-    bus_accommodation: 'bus123', // Foreign key reference to Bus
+    bus_accommodation: 'bus123' as any, // Foreign key reference to Bus
     national_id: '9876543210',
     permit_status: 'approved',
     name: 'محمد بن أحمد بن عبدالله',
@@ -51,8 +31,6 @@ export class PilgrimProfileComponent
     date_of_birth_hijri: '1410-05-06', // Example Hijri date string
     city: 'Mecca',
     code: 'MEC123',
-    mina_building_accommodation: 'minaBuilding123', // Foreign key reference to BedBuidingMina
-    arafah_accommodation: '', // Foreign key reference to BedTentArafah
   };
   ngOnInit(): void {
     const data = JSON.parse(
@@ -63,12 +41,7 @@ export class PilgrimProfileComponent
     }
     console.log(this.data);
   }
-  openDialog() {
-    this.store.dispatch(PilgrimAction.reset());
-    this.dialog.open(PilgrimUploadImageComponent, {
-      data: this.data,
-    });
-  }
+
   ngOnDestroy(): void {
     localStorage.removeItem('TPPilgrim');
   }

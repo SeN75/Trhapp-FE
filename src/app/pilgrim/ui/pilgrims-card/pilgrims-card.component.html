@@ -1,0 +1,102 @@
+<div class="card">
+  <div
+    class="card-header"
+    style="background: url('../../../../assets/images/{{
+      data.package_name === 'باقة (1)' ? 'package1.svg' : 'package4.svg'
+    }}') no-repeat center 100% / 60%"
+  >
+    <img class="logo" src="../../../../assets/images/allyaniy.svg" alt="Logo" />
+    <div
+      (click)="isEditMode ? openDialog() : ''"
+      [ngClass]="{
+        'cursor-pointer': isEditMode
+      }"
+      class="image"
+      style="
+        background-image: url('{{ data.image || no_image }}');
+      "
+    ></div>
+  </div>
+
+  <div class="card-content">
+    <p id="name_1">{{ data.name }}</p>
+    <p>
+      <strong>رقم الهوية</strong>
+      <span id="national_id_1">{{ data.national_id }}</span>
+    </p>
+    <p>
+      <strong>رقم الحـــاج</strong>
+      <span id="pilgrim_number_1">{{ data.booking_reference }}</span>
+    </p>
+    <p>
+      <strong>البرنــامــــــج</strong>
+      <span id="program_1"
+        >{{ data.package_number }}
+        {{
+          data.distribution_identifier
+            ? "رمز الظرف (" + data.distribution_identifier + ")"
+            : ""
+        }}</span
+      >
+    </p>
+    @if (data.bus_accommodation) {
+    <p>
+      <strong>البــــــــــــاص</strong>
+      <span id="bus_1">
+        الرمز ({{ data.bus_accommodation.bus_code }})، اللوحة ({{
+          data.bus_accommodation.bus_plate
+        }})
+      </span>
+    </p>
+    } @if (data.bus_accommodation && data.bus_accommodation.start_location) {
+    <p>
+      <strong>نقطة التجمع</strong>
+      <span id="start_location_1">
+        {{ data.bus_accommodation.start_location.name }}
+      </span>
+    </p>
+    } @if (data.bus_accommodation &&
+    data.bus_accommodation.destination_location) {
+    <p>
+      <strong>نقطة الوصول</strong>
+      <span id="destination_location_1">
+        {{ data.bus_accommodation.destination_location.name }}
+      </span>
+    </p>
+    } @if (data.bus_accommodation && data.bus_accommodation.supervisor) {
+    <p>
+      <strong>المشــــرف</strong>
+      <span id="destination_location_1">
+        {{ data.bus_accommodation.supervisor.name }} -
+        {{ data.bus_accommodation.supervisor.phone_number }}
+      </span>
+    </p>
+    }
+
+    <p>
+      <strong>سكن منـى</strong>
+      @if (data.mina_tent_accommodation) {
+      <span id="mina_accommodation_1"
+        >جناح ({{ data.mina_tent_accommodation.info?.suite_number }}) صالة ({{
+          data.mina_tent_accommodation.info?.lounge_number
+        }}) سرير ({{ data.mina_tent_accommodation.info?.bed_number }})</span
+      >
+      } @else if (data.mina_building_accommodation) {
+      <!-- <span id="mina_accommodation_1" >مبنى منى ({{data.mina_building_accommodation}}) سرير ({{data.mina_building_accommodation.info?.bed_number}})</span> -->
+      }
+    </p>
+    <p>
+      <strong>سكن عرفة</strong>
+      @if (data.arafah_tent_accommodation) {
+      <span id="mina_accommodation_1"
+        >صالة ({{ data.arafah_tent_accommodation.info?.lounge_number }}) مقعد
+        ({{ data.arafah_tent_accommodation.info?.bed_number }})</span
+      >
+
+      }
+    </p>
+  </div>
+  <div class="card-footer">
+    <p>حاج - {{ data.package_name || "لا يوجد" }}</p>
+  </div>
+</div>

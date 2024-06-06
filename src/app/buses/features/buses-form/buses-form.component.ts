@@ -77,7 +77,21 @@ export class BusesFormComponent implements OnInit {
       Validators.required,
     ]),
 
-    start_location_id: new FormControl<string>(''),
+    start_location_id: new FormControl<{
+      name: string;
+      lat: number;
+      lng: number;
+      city: { name: string };
+      package_name: string;
+      is_start: boolean;
+    }>({
+      name: '',
+      lat: 0,
+      lng: 0,
+      city: { name: '' },
+      package_name: '',
+      is_start: true,
+    }),
     start_location: this.locationForm(true),
     destination_location_id: new FormControl<string>(''),
     destination_location: this.locationForm(false),
@@ -96,7 +110,7 @@ export class BusesFormComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     if (this.data.type === 'update') {
-      this.form.patchValue(this.data.data);
+      this.form.patchValue(this.data.data as any);
     }
   }
 
@@ -105,10 +119,21 @@ export class BusesFormComponent implements OnInit {
       const bus = this.form.getRawValue() as unknown as CreateBus;
       bus.start_location.package_name = bus.package_name;
       bus.destination_location.package_name = bus.package_name;
-      if (bus.start_location_id) delete (bus as any).start_location;
-      if (bus.destination_location_id)
+      if (bus.start_location_id) {
+        const start = JSON.parse(bus.start_location_id);
+        bus.start_location = start;
+        delete (bus as any).start_location_id;
+      }
+      if (bus.destination_location_id) {
+        const destination = JSON.parse(bus.destination_location_id);
+        bus.destination_location = destination;
         delete (bus as any).destination_location_id;
-      if (bus.supervisor_id) delete (bus as any).supervisor;
+      }
+      if (bus.supervisor_id) {
+        const supervisor = JSON.parse(bus.supervisor_id);
+        bus.supervisor = supervisor;
+        delete (bus as any).superviso_id;
+      }
 
       this.store.dispatch(BusesAction.create({ bus }));
     } else {

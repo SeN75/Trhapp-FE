@@ -169,7 +169,11 @@
           <select
             class="select select-bordered w-full"
             formControlName="supervisor"
-          ></select>
+          >
+            @for (supervisor of supervisors$ | async; track $index) {
+            <option [value]="supervisor | json">{{ supervisor.name }}</option>
+            }
+          </select>
         </div>
         <button class="btn btn-ghost" (click)="addSupervisor = true">
           اضافة
@@ -183,10 +187,12 @@
           <label>موقع الانطلاق</label>
           <select
             class="select select-bordered w-full"
-            formControlName="start_location"
+            formControlName="start_location_id"
           >
             @for (location of locations$ | async; track $index) {
-            <option [value]="location">{{ location.name }}</option>
+            <option [value]="location | json">
+              {{ location.name }}
+            </option>
             }
           </select>
         </div>
@@ -204,10 +210,10 @@
           <label>موقع الوصول</label>
           <select
             class="select select-bordered w-full"
-            formControlName="destination_location"
+            formControlName="destination_location_id"
           >
             @for (location of locations$ | async; track $index) {
-            <option [value]="location">{{ location.name }}</option>
+            <option [value]="location | json">{{ location.name }}</option>
             }
           </select>
         </div>

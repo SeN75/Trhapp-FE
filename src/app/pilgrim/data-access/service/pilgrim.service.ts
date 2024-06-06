@@ -85,4 +85,18 @@ export class PilgrimService {
       })
     );
   }
+  assembly({ national_id }: { national_id: string }) {
+    return this.http
+      .post<Pilgrim>(`${this.pUrl.replace('pilgrim', 'hajj')}?query=welcome`, {
+        national_id,
+      })
+      .pipe(
+        tap((res) => this.logger.log('[hajj success]', res)),
+        map((data) => data),
+        catchError((error) => {
+          this.logger.error('[hajj error]', error);
+          throw error;
+        })
+      );
+  }
 }

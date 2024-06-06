@@ -111,47 +111,4 @@
   </div>
 </div> -->
 
-<div class="card">
-  <div
-    class="card-header"
-    style="background: url('../../../../assets/images/{{
-      data.package_name === 'باقة (1)' ? 'package1.svg' : 'package4.svg'
-    }}') no-repeat center 100% / 60%"
-  >
-    <img class="logo" src="../../../../assets/images/allyaniy.svg" alt="Logo" />
-    <div
-      (click)="openDialog()"
-      class="image cursor-pointer"
-      style="
-        background-image: url('{{ data.image || no_image }}');
-      "
-    ></div>
-  </div>
-
-  <div class="card-content">
-    <p id="name_1">{{ data.name }}</p>
-    <p>
-      <strong>رقم الهوية</strong>
-      <span id="national_id_1">{{ data.national_id }}</span>
-    </p>
-    <p>
-      <strong>رقم الحـــاج</strong>
-      <span id="pilgrim_number_1">{{ data.booking_reference }}</span>
-    </p>
-    <p>
-      <strong>البرنــامــــــج</strong>
-      <span id="program_1">{{ data.package_number }} مخيم (7127)</span>
-    </p>
-    <p>
-      <strong>سكن منـى</strong>
-      <span id="mina_accommodation_1">{{ "جناح (1) صالة (2) سرير (3)" }}</span>
-    </p>
-    <p>
-      <strong>سكن عرفة</strong>
-      <span id="arafah_accommodation_1">{{ "صالة (4) مقعد (5)" }}</span>
-    </p>
-  </div>
-  <div class="card-footer">
-    <p>حاج - باقة (1)</p>
-  </div>
-</div>
+<tp-pilgrims-card [data]="data" />
