@@ -51,7 +51,7 @@
     <ng-template matStepLabel>{{
       selectedBed ? "السرير " + selectedBed.id : "اختيار السرير"
     }}</ng-template>
-    <div class="grid grid-cols-4 gap-4">
+    <div class="grid grid-cols-3 gap-4">
       @for (bed of bedObs | async; track $index) {
       <div
         class="card shadow-md"

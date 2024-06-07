@@ -25,6 +25,7 @@ import { PilgrimAllocationComponent } from '../../features/pilgrim-allocation/pi
 import { AllocationState } from '@/pilgrim/utils/types/allocation.type';
 import { AllocationAction } from '../../data-access/store/allocation.action';
 import { GeneratePdfService } from '@/shared/service/generate-pdf.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'tp-pilgrims-data-table',
@@ -59,6 +60,8 @@ export class PilgrimsDataTableComponent implements AfterViewInit, OnInit {
     'city',
     'nationality',
     'booking_reference',
+    'mina',
+    'arafah',
     'actions',
   ];
   dataSource = new MatTableDataSource<Pilgrim>([]);
@@ -122,12 +125,12 @@ export class PilgrimsDataTableComponent implements AfterViewInit, OnInit {
       data,
     });
   }
-  openAllocation(pilgrim: Pilgrim, type: 'switch' | 'delete' | 'manul') {
+  openAllocation(pilgrim: Pilgrim, type: 'switch' | 'delete' | 'manual') {
     this.alloctionStore.dispatch(AllocationAction.reset());
     this.dialog.open(PilgrimAllocationComponent, {
       width: '90%',
       height: 'auto',
-      maxWidth: '500px',
+      maxWidth: type !== 'manual' ? '500px' : '900px',
       maxHeight: '90%',
       panelClass: ['modal-box', 'p-2', 'bg-white'],
       data: {

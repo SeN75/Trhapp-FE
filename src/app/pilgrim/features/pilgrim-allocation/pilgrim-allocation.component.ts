@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import {
   AllocationState,
   DeleteAllocation,
+  ManualAllocation,
   SwitchAllocation,
 } from '@/pilgrim/utils/types/allocation.type';
 import { combineLatest } from 'rxjs';
@@ -18,13 +19,24 @@ import { DialogData, Pilgrim } from '@/shared/types/base.type';
 import { MaterialModule } from '@/shared/module/material.module';
 import { AsyncPipe, NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PilgrimAction } from '../../data-access/store/pilgrim.action';
 import { AllocationAction } from '../../data-access/store/allocation.action';
+import { MinaPack1StepperComponent } from '@/mina/ui/mina-pack1-stepper/mina-pack1-stepper.component';
+import { MinaPack4StepperComponent } from '@/mina/ui/mina-pack4-stepper/mina-pack4-stepper.component';
+import { ArafaPack1StepperComponent } from '@/arafah/ui/arafa-pack1-stepper/arafa-pack1-stepper.component';
 
 @Component({
   selector: 'app-pilgrim-allocation',
   standalone: true,
-  imports: [MaterialModule, AsyncPipe, NgTemplateOutlet, NgIf, NgClass],
+  imports: [
+    MaterialModule,
+    AsyncPipe,
+    NgTemplateOutlet,
+    NgIf,
+    NgClass,
+    MinaPack1StepperComponent,
+    MinaPack4StepperComponent,
+    ArafaPack1StepperComponent,
+  ],
   templateUrl: './pilgrim-allocation.component.html',
   styleUrl: './pilgrim-allocation.component.scss',
 })
@@ -44,6 +56,7 @@ export class PilgrimAllocationComponent implements OnInit {
     national_id?: FormControl;
     national_id1?: FormControl;
     national_id2?: FormControl;
+    bed_id?: FormControl;
   }>({
     location_type: new FormControl('', [Validators.required]),
     package_name: new FormControl('', [Validators.required]),
@@ -55,7 +68,7 @@ export class PilgrimAllocationComponent implements OnInit {
     public dialogRef: MatDialogRef<PilgrimAllocationComponent>,
     @Inject(MAT_DIALOG_DATA)
     public data: {
-      type: 'switch' | 'delete';
+      type: 'switch' | 'delete' | 'manual';
       pilgrim: Pilgrim;
     }
   ) {}
@@ -64,6 +77,7 @@ export class PilgrimAllocationComponent implements OnInit {
       this.controls.package_name.patchValue(
         this.data.pilgrim.package_name.trim()
       );
+      this.controls.package_name.disable();
     }
     if (this.data.type === 'switch') {
       this.form.addControl(
@@ -86,6 +100,18 @@ export class PilgrimAllocationComponent implements OnInit {
           [Validators.required]
         )
       );
+    } else {
+      this.form.addControl(
+        'national_id',
+        new FormControl(
+          { value: this.data.pilgrim.national_id, disabled: true },
+          [Validators.required]
+        )
+      );
+      this.form.addControl(
+        'bed_id',
+        new FormControl(null, [Validators.required])
+      );
     }
   }
   action() {
@@ -101,6 +127,14 @@ export class PilgrimAllocationComponent implements OnInit {
       delete _switch.national_id;
       this.store.dispatch(
         AllocationAction.switch({ _switch: _switch as SwitchAllocation })
+      );
+    } else if (this.data.type === 'manual') {
+      const _manual = this.form.getRawValue();
+      delete _manual.national_id1;
+      delete _manual.national_id2;
+      console.log(_manual);
+      this.store.dispatch(
+        AllocationAction.manual({ _manual: _manual as ManualAllocation })
       );
     } else {
       this.dialogRef.close(this.form.value);

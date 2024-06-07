@@ -4,6 +4,8 @@
       ? "تبديل سكن"
       : data.type === "delete"
       ? "حذف سكن"
+      : data.type === "manual"
+      ? "تسكين يدوي"
       : ""
   }}
   - {{ data.pilgrim.name }}
@@ -77,7 +79,7 @@
           }
         </label>
       </div>
-      } @else if (data.type === 'delete') {
+      } @else if (data.type === 'delete' || data.type === 'manual') {
       <div class="tp-control">
         <label> هوية الحاج</label>
         <label
@@ -111,8 +113,8 @@
           }"
         >
           <option disabled selected>نوع السكن</option>
-          <option value="منى">منى</option>
-          <option value="عرفة">عرفة</option>
+          <option value="mina">منى</option>
+          <option value="arafah">عرفة</option>
         </select>
 
         @if(controls.location_type.touched && controls.location_type.errors) {
@@ -138,6 +140,21 @@
         <small> حدث خطا </small>
         }
       </div>
+
+      @if(data.type === 'manual') { @if(controls.location_type.value === 'mina'
+      && controls.package_name.value === 'باقة (1)') {
+      <tp-mina-pack1-stepper (value)="controls.bed_id?.setValue($event.id)" />
+      } @else if(controls.location_type.value === 'mina' &&
+      controls.package_name.value === 'باقة (4)') {
+      <tp-mina-pack4-stepper (value)="controls.bed_id?.setValue($event.id)" />
+      } @if(controls.location_type.value === 'arafah' &&
+      controls.package_name.value === 'باقة (1)') {
+      <tp-arafa-pack1-stepper (value)="controls.bed_id?.setValue($event.id)" />
+      } @else if(controls.location_type.value === 'arafah' &&
+      controls.package_name.value === 'باقة (4)') {
+      <tp-arafa-pack1-stepper (value)="controls.bed_id?.setValue($event.id)" />
+
+      } }
     </div>
   </ng-template>
 
@@ -149,7 +166,11 @@
       >
       <h3 class="py-4 text-lg font-semibold">
         {{
-          data.type === "switch" ? "تم تبديل السكن بنجاح" : "تم حذف السكن بنجاح"
+          data.type === "switch"
+            ? "تم تبديل السكن بنجاح"
+            : data.type === "delete"
+            ? "تم حذف السكن بنجاح"
+            : "تم التسكين بنجاح"
         }}
       </h3>
     </div>
@@ -160,7 +181,11 @@
       >
       <h3 class="py-4 text-lg font-semibold">
         {{
-          data.type === "switch" ? "خطأ في تبديل السكن" : "خطأ في حذف السكن"
+          data.type === "switch"
+            ? "خطأ في تبديل السكن"
+            : data.type === "delete"
+            ? "خطأ في حذف السكن"
+            : "خطا في التسكين"
         }}
       </h3>
     </div>

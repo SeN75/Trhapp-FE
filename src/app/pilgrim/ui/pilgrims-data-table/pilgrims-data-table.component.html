@@ -200,11 +200,44 @@
           {{ element.booking_reference }}
         </td>
       </ng-container>
+      <ng-container matColumnDef="mina">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>تسكين منى</th>
+        <td mat-cell *matCellDef="let element">
+          @if ( element.mina_building_accommodation !== null ||
+          element.mina_tent_accommodation !== null) {
+          <div class="badge bg-success-A200 text-success">تم</div>
+
+          } @else {
+          <button
+            class="btn btn-xs btn-neutral"
+            (click)="openAllocation(element, 'manual')"
+          >
+            تسكين يدوي
+          </button>
+          }
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="arafah">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>تسكين عرفة</th>
+        <td mat-cell *matCellDef="let element">
+          @if ( element.arafah_accommodation !== null ||
+          element.arafah_tent_accommodation !== null) {
+          <div class="badge bg-success-A200 text-success">تم</div>
+
+          } @else {
+          <button
+            class="btn btn-xs btn-neutral"
+            (click)="openAllocation(element, 'manual')"
+          >
+            تسكين يدوي
+          </button>
+          }
+        </td>
+      </ng-container>
       <ng-container matColumnDef="actions">
         <th mat-header-cell mat-sort-header *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let element">
           <span class="flex gap-2">
-            <button class="btn btn-xs btn-neutral">تسكين يدوي</button>
             <button
               class="btn btn-xs bg-blue-100 text-primary hover:bg-primary hover:text-blue-200"
               (click)="openAllocation(element, 'switch')"
