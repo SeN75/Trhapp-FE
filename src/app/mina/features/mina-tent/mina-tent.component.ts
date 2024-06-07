@@ -7,11 +7,17 @@ import { RouterLink } from '@angular/router';
 import { MinaState } from '@/mina/utils/types/mina.type';
 import { MinaAction } from '@/mina/data-access/store/mina.action';
 import { MinaAllocationStatusComponent } from '@/mina/ui/mina-allocation-status/mina-allocation-status.component';
+import { MinaPack1StepperComponent } from '@/mina/ui/mina-pack1-stepper/mina-pack1-stepper.component';
 
 @Component({
   selector: 'app-mina-tent',
   standalone: true,
-  imports: [MinaTentTableComponent, RouterLink, MinaAllocationStatusComponent],
+  imports: [
+    MinaTentTableComponent,
+    RouterLink,
+    MinaAllocationStatusComponent,
+    MinaPack1StepperComponent,
+  ],
   templateUrl: './mina-tent.component.html',
   styleUrl: './mina-tent.component.scss',
 })

@@ -27,6 +27,7 @@ import { LoungeArafah } from '@/shared/types/base.type';
 import { ArafahState } from '@/arafah/utils/types/arafah.type';
 import { ArafahAction } from '../../data-access/store/arafah.action';
 import { ArafahAllocationStatusComponent } from '@/arafah/ui/arafah-allocation-status/arafah-allocation-status.component';
+import { ArafaPack1StepperComponent } from '@/arafah/ui/arafa-pack1-stepper/arafa-pack1-stepper.component';
 
 @Component({
   selector: 'app-arafah-tent',
@@ -39,6 +40,7 @@ import { ArafahAllocationStatusComponent } from '@/arafah/ui/arafah-allocation-s
     AsyncPipe,
     MaterialModule,
     ArafahAllocationStatusComponent,
+    ArafaPack1StepperComponent,
   ],
   templateUrl: './arafah-tent.component.html',
   styleUrl: './arafah-tent.component.scss',

@@ -1,0 +1,149 @@
+@if (!loaded) {
+<mat-stepper orientation="vertical">
+  <mat-step>
+    <ng-template matStepLabel>{{
+      selectedSuite ? "الجناح " + selectedSuite.number : "اختيار الجناح"
+    }}</ng-template>
+    <ng-template matStepContent>
+      <div class="flex flex-wrap gap-4">
+        @for (suite of sutite$ | async; track $index) {
+        <div
+          class="card shadow-md"
+          [ngClass]="{
+            'bg-primary-A200': selectedSuite === suite
+          }"
+          (click)="selectSuite(suite)"
+        >
+          <div class="card-body">
+            <div class="flex gap-4 text-2xl font-bold text-black">
+              <mat-icon
+                [ngClass]="{
+                  'text-pink-500': !suite.is_male_accommodation,
+                  'text-primary': suite.is_male_accommodation
+                }"
+                >{{ suite.is_male_accommodation ? "man" : "woman" }}</mat-icon
+              >
+              {{ suite.number }} رقم الجناح
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- <button mat-button matStepperNext>Next</button> -->
+    </ng-template>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>
+      {{ selectedLounge ? "الصالة " + selectedLounge.number : "اختيار الصالة" }}
+    </ng-template>
+    <ng-template matStepContent>
+      <div class="flex flex-wrap gap-4">
+        @for (lounge of selectedSuite?.lounges; track $index) {
+        <div
+          class="card shadow-md"
+          [ngClass]="{
+            'bg-primary-A200': selectedLounge === lounge
+          }"
+          (click)="selectLounge(lounge)"
+        >
+          <div class="card-body">
+            <div class="flex gap-4 text-2xl font-bold text-black">
+              <mat-icon
+                [ngClass]="{
+                  'text-pink-500': !selectedSuite?.is_male_accommodation,
+                  'text-primary': selectedSuite?.is_male_accommodation
+                }"
+                >{{
+                  selectedSuite?.is_male_accommodation ? "man" : "woman"
+                }}</mat-icon
+              >
+              {{ lounge.number }} رقم الصالة
+            </div>
+            <div class="stat-value text-black">
+              {{ lounge.current_capacity! }}
+              <span class="text-xl text-gray-400">
+                / {{ lounge.max_capacity! }} السعة
+              </span>
+            </div>
+            <div
+              class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5"
+            >
+              <div
+                class="bg-blue-600 h-2.5 rounded-full"
+                [style.width.%]="
+                  (lounge.current_capacity! / lounge.max_capacity!) * 100
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </ng-template>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>{{
+      selectedBed ? "السرير " + selectedBed.id : "اختيار السرير"
+    }}</ng-template>
+    <div class="grid grid-cols-4 gap-4">
+      @for (bed of bedObs | async; track $index) {
+      <div
+        class="card shadow-md"
+        [ngClass]="{
+          'bg-primary-A200': selectedBed === bed
+        }"
+        (click)="selectBed(bed)"
+      >
+        <div class="card-body">
+          <div class="flex gap-4 text-2xl font-bold text-black">
+            <mat-icon
+              [ngClass]="{
+                'text-pink-500': !selectedSuite?.is_male_accommodation,
+                'text-primary': selectedSuite?.is_male_accommodation
+              }"
+              >{{
+                selectedSuite?.is_male_accommodation ? "man" : "woman"
+              }}</mat-icon
+            >
+            {{ bed.id }} رقم السرير
+          </div>
+          @if (bed.pilgrim) {
+          <div class="text-xl text-black">
+            <strong>{{ bed.pilgrim.is_male ? "الحاج" : "الحاجه" }}: </strong
+            ><span class="text-gray-400">{{ bed.pilgrim.name }}</span> <br />
+            <strong>الهوية: </strong>
+            <span class="text-gray-400">{{ bed.pilgrim.national_id }}</span>
+          </div>
+          } @else {
+          <div class="text-xl text-black text-center">
+            {{
+              selectedSuite?.is_male_accommodation
+                ? "لا يوجد حاج"
+                : "لا يوجد حاجه"
+            }}
+          </div>
+          }
+        </div>
+      </div>
+      }
+    </div>
+    <mat-paginator
+      [length]="bedDataSource.data.length"
+      [pageSize]="30"
+      [pageSizeOptions]="[30, 60, 90, 120]"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </mat-step>
+</mat-stepper>
+
+} @else {
+<ng-container>
+  <div class="card bg-white shadow-lg">
+    <div class="h-[200px] flex justify-center items-center">
+      <span class="loading loading-dots loading-lg"></span>
+    </div>
+  </div>
+</ng-container>
+}

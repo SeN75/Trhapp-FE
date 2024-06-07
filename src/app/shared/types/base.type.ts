@@ -6,8 +6,11 @@ export type Suite = {
 };
 export type LoungeMina = {
   name: string;
+  number: number;
   suiteId: Suite['id']; // fk
   id: string;
+  max_capacity?: number;
+  current_capacity?: number;
   beds: BedTentMina[] | null;
 };
 
@@ -98,6 +101,7 @@ export type BedTentArafah = {
   code: string;
   pilgrim?: Pilgrim | null;
   lounge?: LoungeArafah[];
+  number: number;
   loungeArafahId: LoungeArafah['id']; // fk
   info?: {
     place: string;
@@ -110,10 +114,12 @@ export type BedTentArafah = {
 export type LoungeArafah = {
   id: string;
   name: string;
+  number: number;
   lounge_number: number;
   max_capacity: number;
   current_capacity: number;
   is_male_accmidations: boolean;
+  is_male_accommodation: boolean;
   beds: BedTentArafah[] | null;
 };
 

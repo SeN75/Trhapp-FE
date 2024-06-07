@@ -14,6 +14,7 @@ import { Building } from '@/shared/types/base.type';
 import { MinaState } from '@/mina/utils/types/mina.type';
 import { MinaAction } from '@/mina/data-access/store/mina.action';
 import { MinaAllocationStatusComponent } from '@/mina/ui/mina-allocation-status/mina-allocation-status.component';
+import { MinaPack4StepperComponent } from '@/mina/ui/mina-pack4-stepper/mina-pack4-stepper.component';
 @Component({
   selector: 'app-mina-building',
   standalone: true,
@@ -24,6 +25,7 @@ import { MinaAllocationStatusComponent } from '@/mina/ui/mina-allocation-status/
     MinaBuildingCardComponent,
     AsyncPipe,
     MinaAllocationStatusComponent,
+    MinaPack4StepperComponent,
   ],
   templateUrl: './mina-building.component.html',
   styleUrl: './mina-building.component.scss',
