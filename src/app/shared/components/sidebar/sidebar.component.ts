@@ -66,11 +66,11 @@ export class SidebarComponent {
       link: ['/', 'l', 'buses'],
     },
 
-    // {
-    //   text: 'بطاقة الحاج',
-    //   icon: 'tp-card',
-    //   link: ['/', 'l', 'cards'],
-    // },
+    {
+      text: 'بطائق الحجاج',
+      icon: 'tp-card',
+      link: ['/', 'l', 'cards'],
+    },
   ];
 
   uploadFile() {

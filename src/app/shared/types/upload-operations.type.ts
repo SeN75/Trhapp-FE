@@ -13,3 +13,9 @@ export const initialUploadOpsState: UploadOpsState = {
   data: null,
   status: 'prompt',
 };
+
+export type BatchesRes = {
+  total_pilgrims: number;
+  total_batches: number;
+  batch_links: { batch_number: number; is_sent: boolean }[];
+};

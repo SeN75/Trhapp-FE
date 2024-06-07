@@ -1,9 +1,127 @@
 <section class="page-content">
   <h1 class="page-title">بطاقة الحاج</h1>
-  <div class="grid grid-cols-4 gap-4">
-    <tp-state-card text="الصالات المتاحة" icon="tp-weekend" [isActive]="true" />
-    <tp-state-card text="الحجاج الغير مسكنين" icon="tp-group" />
-    <tp-state-card text="فئات الحجاج " icon="tp-category" />
-    <tp-state-card text="أصناف الأثاث المتاحة" icon="tp-dresser" />
+  <ng-container *ngTemplateOutlet="state"></ng-container>
+  <div class="card shadow-xl bg-white relative">
+    <div class="card-body">
+      <h2 class="card-title">طباعة البطائق</h2>
+      @if (isLoading) {
+      <ng-container>
+        <div class="h-[200px] flex justify-center items-center">
+          <span class="loading loading-dots loading-lg"></span>
+        </div>
+      </ng-container>
+      } @else {
+
+      <ng-container *ngTemplateOutlet="formTemp"></ng-container>
+      <ng-container *ngTemplateOutlet="batchestemp"></ng-container>
+      }
+    </div>
   </div>
 </section>
+
+<ng-template #batchestemp>
+  <div class="flex flex-wrap gap-4">
+    @for (item of batches; track $index) {
+
+    <div
+      matRipple
+      class="card bg-bg cursor-pointer shadow-md"
+      [ngClass]="{
+        'bg-primary-A200': item.is_sent
+      }"
+      (click)="send(item)"
+    >
+      <div class="card-body">
+        <h4 class="card-title">حزمة البطائق {{ item.batch_number }}</h4>
+      </div>
+    </div>
+    }
+  </div>
+</ng-template>
+
+<ng-template #formTemp>
+  <div class="flex flex-col max-w-md" [formGroup]="form">
+    <div class="tp-control">
+      <label>الباقة </label>
+
+      <select
+        class="select select-bordered w-full"
+        formControlName="package_name"
+        [ngClass]="{
+          'select-error':
+            controls.package_name.touched && controls.package_name.errors
+        }"
+      >
+        <option value="باقة (1)">باقة (1)</option>
+        <option value="باقة (4)">باقة (4)</option>
+      </select>
+      @if(controls.package_name.touched && controls.package_name.errors) {
+      <small> حدث خطا </small>
+      }
+    </div>
+    <div class="tp-control">
+      <label> العنوان </label>
+
+      <select
+        class="select select-bordered w-full"
+        formControlName="city"
+        [ngClass]="{
+          'select-error': controls.city.touched && controls.city.errors
+        }"
+      >
+        @for (l of cities$ | async; track $index) {
+        <option [value]="l.name">{{ l.name }}</option>
+        }
+      </select>
+      @if(controls.city.touched && controls.city.errors) {
+      <small> حدث خطا </small>
+      }
+    </div>
+    <button class="button-primary mt-4" (click)="action()">انشاء</button>
+  </div>
+</ng-template>
+
+<ng-template #state>
+  <div class="stats shadow bg-white w-full">
+    <div class="stat">
+      <div class="stat-figure text-primary">
+        <mat-icon>package</mat-icon>
+      </div>
+      <div class="stat-title">الحزم</div>
+      <div class="stat-value text-black">
+        {{ total_batches_not_complete }}
+        <span class="text-xl text-gray-400">
+          / {{ total_batches }} عدد الحزم
+        </span>
+      </div>
+      <div class="stat-desc"></div>
+      <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5">
+        <div
+          class="bg-blue-600 h-2.5 rounded-full"
+          [style.width.%]="(total_batches_not_complete / total_batches) * 100"
+        ></div>
+      </div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-figure text-primary">
+        <mat-icon>man</mat-icon>
+      </div>
+      <div class="stat-title">الحجاج</div>
+      <div class="stat-value text-black">
+        {{ total_pilgrims }}
+        <span class="text-xl text-gray-400">
+          <!-- / {{ obs.mina.males.total }} عدد الأسرة -->
+        </span>
+      </div>
+      <!-- <div
+        class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5"
+      >
+        <div
+          class="bg-blue-600 h-2.5 rounded-full"
+          [style.width.%]="(obs.mina.males.beds.created / 1000) * 100"
+        ></div>
+      </div> -->
+    </div>
+  </div>
+</ng-template>
