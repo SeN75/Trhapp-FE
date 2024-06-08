@@ -1,16 +1,34 @@
 <section class="page-content">
   <h1 class="page-title">سكن منى - باقة 1</h1>
-  <tp-mina-allocation-status pack="package1" />
-  <div class="flex w-full justify-end gap-2">
-    <button (click)="allocate()" class="btn btn-primary">تسكين الحجاج</button>
+  @if (isLoading$ | async) {
+  <ng-container>
+    <div class="shadow-xl card bg-white">
+      <div class="h-[200px] flex justify-center items-center">
+        <span class="loading loading-dots loading-lg"></span> جاري الارسال
+      </div>
+    </div>
+  </ng-container>
+  } @else {
 
+  <tp-mina-allocation-status pack="package1" />
+  <div class="flex w-full justify-start gap-2" *ngIf="avaData$ | async as data">
     <div>
-      <button class="btn btn-primary" [routerLink]="['create']">
+      <button class="btn btn-sm btn-primary" [routerLink]="['create']">
         انشاء سكن جديد
       </button>
     </div>
+    <button
+      (click)="allocate()"
+      class="btn btn-sm btn-accent"
+      [ngClass]="{
+        disabled: data.beds.created < data.total
+      }"
+    >
+      تسكين الحجاج
+    </button>
   </div>
 
   <!-- <tp-mina-tent-table /> -->
   <tp-mina-pack1-stepper />
+  }
 </section>

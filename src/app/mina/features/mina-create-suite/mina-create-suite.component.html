@@ -3,7 +3,7 @@
 
   <tp-mina-allocation-status pack="package1" />
 
-  <div class="card shadow-sm relative bg-white">
+  <div class="card shadow-lg relative bg-white">
     <div class="card-body flex flex-col gap-8">
       <ng-container *ngIf="data$ | async as obs">
         @if(obs.isLoading) {
@@ -52,6 +52,7 @@
                 class="w-full"
                 maxlength="100"
                 placeholder="100"
+                max="20"
                 formControlName="no_lounges"
               />
             </label>
@@ -176,3 +177,5 @@
     </div>
   </div>
 </section>
+
+<ng-container *ngIf="avaData$ | async"></ng-container>

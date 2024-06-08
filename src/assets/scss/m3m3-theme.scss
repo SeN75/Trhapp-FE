@@ -35,10 +35,18 @@ html {
     @include mat.button-color($dark-theme);
   }
 }
-
 .mat-stepper-vertical {
   @apply card shadow-lg;
   background-color: white !important;
+}
+.mat-step-icon-selected {
+  background-color: #1a46cd !important;
+  color: white !important;
+}
+.mat-mdc-standard-chip.mdc-evolution-chip--selected:not(
+    .mdc-evolution-chip--disabled
+  ) {
+  background-color: #dde5ff !important;
 }
 // Note: Color palettes are generated from primary: #1A46cd, secondary: #20862B
 // $_palettes: (

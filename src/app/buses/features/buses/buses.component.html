@@ -1,11 +1,120 @@
 <section class="page-content">
   <h1 class="page-title">تسكين الباصات</h1>
-  <div class="grid grid-cols-4 gap-4">
-    <tp-state-card text="الصالات المتاحة" icon="tp-weekend" [isActive]="true" />
-    <tp-state-card text="الحجاج الغير مسكنين" icon="tp-group" />
-    <tp-state-card text="فئات الحجاج " icon="tp-category" />
-    <tp-state-card text="أصناف الأثاث المتاحة" icon="tp-dresser" />
-  </div>
-
+  <ng-container *ngTemplateOutlet="stateTemp"></ng-container>
+  @if(isLoading$ | async) {
+  <ng-container>
+    <div class="shadow-xl card bg-white">
+      <div class="h-[200px] flex justify-center items-center">
+        <span class="loading loading-dots loading-lg"></span> جاري التحميل
+      </div>
+    </div>
+  </ng-container>
+  } @else {
   <tp-buses-table />
+  }
 </section>
+
+<ng-template #stateTemp>
+  <ng-container *ngIf="data$ | async as obs">
+    <div class="flex flex-col">
+      <div class="flex gap-4 pb-4" [formGroup]="form">
+        <div class="flex flex-col">
+          <h4>الباقات</h4>
+          <div class="flex gap-2">
+            <mat-chip-listbox formControlName="package_name">
+              <mat-chip-option selected color="primary" value="package1"
+                >باقة (1)</mat-chip-option
+              >
+              <mat-chip-option color="primary" value="package4"
+                >باقة (4)</mat-chip-option
+              >
+            </mat-chip-listbox>
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <h4>المدينة</h4>
+          <div class="flex gap-2">
+            <mat-chip-listbox formControlName="city">
+              <mat-chip-option selected color="primary" value="مكة المكرمة"
+                >مكة المكرمة</mat-chip-option
+              >
+              <mat-chip-option color="primary" value="جدة">جدة</mat-chip-option>
+              <mat-chip-option color="primary" value="الطائف"
+                >الطائف</mat-chip-option
+              >
+            </mat-chip-listbox>
+          </div>
+        </div>
+      </div>
+      <div class="stats shadow bg-white w-full">
+        <div class="stat">
+          <div class="stat-figure text-primary">
+            <mat-icon>man</mat-icon>
+          </div>
+          <div class="stat-title">الباصات</div>
+          <div class="stat-value text-black">
+            {{ obs.bus.created }}
+            <span class="text-xl text-gray-400">
+              / {{ obs.bus.required }} المطلوب
+            </span>
+          </div>
+          <div class="stat-desc"></div>
+          <div
+            class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5"
+          >
+            <div
+              class="bg-blue-600 h-2.5 rounded-full"
+              [style.width.%]="(obs.bus.created / obs.bus.required) * 100"
+            ></div>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-figure text-primary">
+            <mat-icon>man</mat-icon>
+          </div>
+          <div class="stat-title">الباصات المسكنة</div>
+          <div class="stat-value text-black">
+            {{ obs.pilgrims.allocated }}
+            <span class="text-xl text-gray-400">
+              / {{ obs.pilgrims.total }} عدد الحجاج
+            </span>
+          </div>
+          <div class="stat-desc"></div>
+          <div
+            class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5"
+          >
+            <div
+              class="bg-blue-600 h-2.5 rounded-full"
+              [style.width.%]="
+                (obs.pilgrims.allocated / obs.pilgrims.total) * 100
+              "
+            ></div>
+          </div>
+        </div>
+        <div class="stat">
+          <div class="stat-figure text-primary">
+            <mat-icon>man</mat-icon>
+          </div>
+          <div class="stat-title">المشرفين</div>
+          <div class="stat-value text-black">
+            {{ obs.supervisor.allocated }}
+            <span class="text-xl text-gray-400">
+              / {{ obs.supervisor.required }} المطلوب
+            </span>
+          </div>
+          <div class="stat-desc"></div>
+          <div
+            class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5"
+          >
+            <div
+              class="bg-blue-600 h-2.5 rounded-full"
+              [style.width.%]="
+                (obs.supervisor.allocated / obs.supervisor.required) * 100
+              "
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

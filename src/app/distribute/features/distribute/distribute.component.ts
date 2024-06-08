@@ -7,6 +7,7 @@ import { switchMap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { DistributeState } from '@/distribute/utils/types/distribute.type';
 import {
+  selectIsLoading,
   selectPack1Read,
   selectPack4Read,
 } from '@/distribute/data-access/store/distribution.reducer';
@@ -23,6 +24,7 @@ import { DistributionAction } from '@/distribute/data-access/store/distribution.
 })
 export class DistributeComponent implements OnInit {
   private store = inject(Store<{ distribute: DistributeState }>);
+  isLoading$ = this.store.select(selectIsLoading);
   ngOnInit(): void {
     this.aRouter.params.subscribe((params) => {
       this.pack = params['pack'] === 'package1' ? 'package1' : 'package4';

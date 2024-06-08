@@ -11,6 +11,9 @@ import { SuitesAction } from './suites.action';
 import { Suite } from '@/shared/types/base.type';
 import { BuildingState } from '@/building/utils/types/building.type';
 import { BuildingAction } from '@/building/data-access/store/building.action';
+import { ToasterService } from '@/shared/service/toaster.service';
+import { AvailabiltyState } from '@/shared/types/availabilty.type';
+import { AvailabiltyActions } from '@/shared/store/availavilty/availavilty.action';
 
 export const getBusesEffects = createEffect(
   (
@@ -53,13 +56,20 @@ export const allocateMinaEffects = createEffect(
   (
     actions = inject(Actions),
     service = inject(MinaService),
-    logger = inject(LoggerService)
+    logger = inject(LoggerService),
+    toaster = inject(ToasterService),
+    avaStore = inject(Store<{ availavilty: AvailabiltyState }>)
   ) =>
     actions.pipe(
       ofType(MinaAction.allocate),
       switchMap(({ pack }) => service.allocate(pack).pipe(map(() => pack))),
       map((pack) => MinaAction.success({ pack })),
+      tap(({ pack }) =>
+        toaster.success('تم تسكين منى باقة ' + pack + ' بنجاح')
+      ),
+      tap(({ pack }) => avaStore.dispatch(AvailabiltyActions.get())),
       catchError((error) => {
+        toaster.error('خطأ في تسكين منى');
         logger.error('[createMinaEffects erorr]', error);
         return of(MinaAction.error({ error }));
       })
@@ -72,7 +82,8 @@ export const createEffectSuccess = createEffect(
     actions = inject(Actions),
     logger = inject(LoggerService),
     store = inject(Store<{ suites: SuiteState }>),
-    storeBuilding = inject(Store<{ buildings: BuildingState }>)
+    storeBuilding = inject(Store<{ buildings: BuildingState }>),
+    avaStore = inject(Store<{ availavilty: AvailabiltyState }>)
   ) =>
     actions.pipe(
       ofType(MinaAction.success),
@@ -80,7 +91,8 @@ export const createEffectSuccess = createEffect(
         pack === 'package1'
           ? store.dispatch(SuitesAction.get())
           : storeBuilding.dispatch(BuildingAction.get())
-      )
+      ),
+      tap(() => avaStore.dispatch(AvailabiltyActions.get()))
     ),
   { functional: true, dispatch: false }
 );

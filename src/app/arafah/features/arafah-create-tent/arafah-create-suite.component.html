@@ -6,7 +6,7 @@
   <tp-arafah-allocation-status
     [pack]="pack === 'package1' ? 'package1' : 'package4'"
   />
-  <div class="card shadow-sm">
+  <div class="card shadow-lg bg-white">
     <div class="card-body flex flex-col gap-8">
       <ng-container *ngIf="data$ | async as obs">
         @if(obs.isLoading) {
@@ -156,3 +156,5 @@
     </div>
   </div>
 </section>
+
+<ng-container *ngIf="avaData$ | async as obs"></ng-container>

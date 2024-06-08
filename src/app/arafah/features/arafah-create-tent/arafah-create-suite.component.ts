@@ -8,7 +8,7 @@ import {
 } from '@/arafah/utils/types/arafah.type';
 import { Store } from '@ngrx/store';
 import { ArafahAction } from '../../data-access/store/arafah.action';
-import { combineLatest } from 'rxjs';
+import { combineLatest, filter, map, tap } from 'rxjs';
 import {
   selectErrors,
   selectIsLoading,
@@ -16,6 +16,8 @@ import {
 } from '@/arafah/data-access/store/arafah.reducer';
 import { ArafahAllocationStatusComponent } from '@/arafah/ui/arafah-allocation-status/arafah-allocation-status.component';
 import { ActivatedRoute } from '@angular/router';
+import { selectData } from '@/shared/store/availavilty/availavilty.reducer';
+import { AvailabiltyState } from '@/shared/types/availabilty.type';
 
 @Component({
   selector: 'app-arafah-create-suite',
@@ -27,8 +29,20 @@ import { ActivatedRoute } from '@angular/router';
 export class ArafahCreateSuiteComponent implements OnInit {
   private store = inject(Store<{ arafah: ArafahState }>);
   private aRouter = inject(ActivatedRoute);
-  pack = this.aRouter.snapshot.params['pack'] || 'package1';
-
+  private avaStore = inject(Store<{ availavilty: AvailabiltyState }>);
+  pack: 'package1' | 'package4' =
+    this.aRouter.snapshot.params['pack'] === 'package1'
+      ? 'package1'
+      : 'package4';
+  last_lounge = 0;
+  avaData$ = this.avaStore.select(selectData).pipe(
+    filter((data) => !!data),
+    map((data) => data![this.pack || 'package1'].arafah),
+    tap((v) => {
+      this.last_lounge = v?.last_created_lounge || 0;
+      console.log({ v, dd: this.last_lounge });
+    })
+  );
   data$ = combineLatest({
     status: this.store.select(selectStatus),
     isLoading: this.store.select(selectIsLoading),
@@ -37,12 +51,13 @@ export class ArafahCreateSuiteComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(ArafahAction.reset());
     this.controls.no_lounges.valueChanges.pipe().subscribe((v) => {
+      this.form.setControl('lounges', new FormArray<FormGroup>([]));
+
       if (v) {
-        for (let i = 0; i < this.controls.lounges.controls.length; i++) {
-          this.controls.lounges.removeAt(i);
-        }
         for (let i = 0; i < v; i++) {
-          this.controls.lounges.push(this.initalLounge(i));
+          this.controls.lounges.push(
+            this.initalLounge(i + this.last_lounge + 1)
+          );
         }
       }
     });

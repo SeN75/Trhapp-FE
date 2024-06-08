@@ -1,7 +1,8 @@
-<div class="flex justify-end items-center py-4">
-  <button class="btn btn-primary" (click)="openDialog()">
+<div class="flex justify-start gap-4 items-center py-4">
+  <button class="btn btn-sm btn-primary" (click)="openDialog()">
     انشاء حافلة جديدة
   </button>
+  <button matRipple class="btn btn-sm btn-accent">تصدير ملف CSV</button>
 </div>
 
 <section class="table-container">
@@ -49,16 +50,18 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr class="mat-row" *matNoDataRow class="text-center">
+      <td colspan="30" class="mat-cell py-6">لايوجد بيانات</td>
+    </tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
   </table>
-  <div class="flex justify-between items-center pt-4">
-    <button matRipple class="button-primary">تسكين الكل</button>
+  <div class="flex justify-center items-center pt-4">
     <mat-paginator
       appTpPaginator
       [appCustomLength]="dataSource.data.length"
       [length]="dataSource.data.length"
       [pageSize]="10"
+      [pageSizeOptions]="[10, 20, 50, 100]"
     ></mat-paginator>
-    <button matRipple class="button-primary-tint">تصدير ملف CSV</button>
   </div>
 </section>

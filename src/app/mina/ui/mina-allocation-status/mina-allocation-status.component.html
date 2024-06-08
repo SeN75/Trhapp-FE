@@ -17,9 +17,9 @@
           class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5"
         >
           <div
-            class="bg-blue-600 h-2.5 rounded-full"
+            class="bg-primary h-2.5 rounded-full"
             [style.width.%]="
-              (obs.mina.males.beds.required / obs.mina.males.total) * 100
+              (obs.mina.males.beds.created / obs.mina.males.total) * 100
             "
           ></div>
         </div>
@@ -31,16 +31,16 @@
         </div>
         <div class="stat-title">التسكين</div>
         <div class="stat-value text-black">
-          {{ obs.mina.males.beds.allocated }}
+          {{ obs.mina.males.beds.available }}
           <span class="text-xl text-gray-400">
-            / {{ obs.mina.males.beds.available }} عدد الأسرة
+            / {{ obs.mina.males.beds.required }} عدد الأسرة المطلوبة
           </span>
         </div>
         <div
           class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5"
         >
           <div
-            class="bg-blue-600 h-2.5 rounded-full"
+            class="bg-primary h-2.5 rounded-full"
             [style.width.%]="
               (obs.mina.males.beds.allocated / obs.mina.males.total) * 100
             "
@@ -64,8 +64,10 @@
           class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5"
         >
           <div
-            class="bg-blue-600 h-2.5 rounded-full"
-            [style.width.%]="(obs.mina.females.total / 1000) * 100"
+            class="bg-primary h-2.5 rounded-full"
+            [style.width.%]="
+              (obs.mina.females.beds.created / obs.mina.females.total) * 100
+            "
           ></div>
         </div>
       </div>
@@ -76,17 +78,19 @@
         </div>
         <div class="stat-title">التسكين</div>
         <div class="stat-value text-black">
-          {{ obs.mina.females.beds.created }}
+          {{ obs.mina.females.beds.available }}
           <span class="text-xl text-gray-400">
-            / {{ obs.mina.females.total }} عدد الأسرة
+            / {{ obs.mina.females.beds.required }} عدد الأسرة المطلوبة
           </span>
         </div>
         <div
           class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5"
         >
           <div
-            class="bg-blue-600 h-2.5 rounded-full"
-            [style.width.%]="(obs.mina.females.beds.created / 1000) * 100"
+            class="bg-primary h-2.5 rounded-full"
+            [style.width.%]="
+              (obs.mina.females.beds.allocated / obs.mina.females.total) * 100
+            "
           ></div>
         </div>
       </div>

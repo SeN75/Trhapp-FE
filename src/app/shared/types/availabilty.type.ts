@@ -11,7 +11,7 @@ export type Availabilty = {
     total_pilgrims: number;
   };
   package4: {
-    arafah: AvailabiltyInfo;
+    arafah: AvailabiltyInfo & { last_created_lounge: number };
     bus: AvailabiltyInfoBus;
     mina: AvailabiltyInfo & {
       last_created_floor: number;

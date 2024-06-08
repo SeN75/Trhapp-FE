@@ -58,6 +58,8 @@ export class MinaPack1StepperComponent implements AfterViewInit {
   selectLounge(lounge: LoungeMina) {
     this.selectedLounge = lounge;
     this.bedDataSource.data = lounge.beds || [];
+    this.bedDataSource.paginator = this.paginator;
+
     this.selectedBed = null;
 
     this.stepper.next();

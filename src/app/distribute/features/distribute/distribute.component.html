@@ -1,12 +1,26 @@
 <section class="page-content">
-  <h1 class="page-title">توزيعات باقة {{ pack }}</h1>
+  <h1 class="page-title">توزيعات باقة {{ pack === "package1" ? "1" : "4" }}</h1>
   <div class="grid grid-cols-4 gap-4"></div>
-  <div class="flex justify-end">
-    <button class="btn btn-primary" (click)="openDialog()">انشاط توزيع</button>
+  <div class="flex justify-start">
+    <button class="btn btn-sm btn-primary" (click)="openDialog()">
+      انشاء توزيع
+    </button>
   </div>
+  @if (isLoading$ | async) {
+  <ng-container>
+    <div class="shadow-xl card bg-white">
+      <div class="h-[200px] flex justify-center items-center">
+        <span class="loading loading-dots loading-lg"></span> جاري التحميل
+      </div>
+    </div>
+  </ng-container>
+  } @else {
+
   <div class="block">
-    <div role="tablist" class="tabs tabs-boxed bg-white shadow-lg">
-      <ng-container *ngIf="list$ | async as list">
+    <ng-container *ngIf="list$ | async as list">
+      @if(list.length > 0){
+
+      <div role="tablist" class="tabs tabs-boxed bg-white shadow-lg">
         @for (item of list; track $index) {
         <input
           type="radio"
@@ -29,7 +43,13 @@
           </div>
         </div>
         }
-      </ng-container>
-    </div>
+      </div>
+      } @else {
+      <p class="text-center py-8 text-gray-500 card bg-white shadow-lg">
+        لايوجد توزيعات
+      </p>
+      }
+    </ng-container>
   </div>
+  }
 </section>

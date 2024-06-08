@@ -10,22 +10,36 @@ import {
   MinaState,
 } from '@/mina/utils/types/mina.type';
 import { MinaAction } from '@/mina/data-access/store/mina.action';
-import { combineLatest } from 'rxjs';
+import { combineLatest, map, tap } from 'rxjs';
 import {
   selectStatus,
   selectErrors,
   selectIsLoading,
 } from '@/mina/data-access/store/mina.reducer';
+import { MinaAllocationStatusComponent } from '@/mina/ui/mina-allocation-status/mina-allocation-status.component';
+import { selectData } from '@/shared/store/availavilty/availavilty.reducer';
+import { AvailabiltyState } from '@/shared/types/availabilty.type';
+import { AvailabiltyActions } from '@/shared/store/availavilty/availavilty.action';
 
 @Component({
   selector: 'app-mina-create-building',
   standalone: true,
-  imports: [CommonModule, MaterialModule],
+  imports: [CommonModule, MaterialModule, MinaAllocationStatusComponent],
   templateUrl: './mina-create-building.component.html',
   styleUrl: './mina-create-building.component.scss',
 })
 export class MinaCreateBuildingComponent implements OnInit {
   private store = inject(Store<{ mina: MinaState }>);
+  private avaStore = inject(Store<{ availavilty: AvailabiltyState }>);
+  last_floor = 0;
+  last_room = 0;
+  avaData$ = this.avaStore.select(selectData).pipe(
+    map((data) => data?.package4.mina),
+    tap((v) => {
+      this.last_floor = v?.last_created_floor || 0;
+      this.last_room = v?.last_created_room || 0;
+    })
+  );
   data$ = combineLatest({
     status: this.store.select(selectStatus),
     error: this.store.select(selectErrors),
@@ -34,7 +48,7 @@ export class MinaCreateBuildingComponent implements OnInit {
 
   initalFloor = (i = 0) =>
     new FormGroup({
-      floor_number: new FormControl(i),
+      floor_number: new FormControl(i + this.last_floor + 1),
       no_of_rooms: new FormControl(0),
       rooms: new FormArray<
         FormGroup<{
@@ -47,7 +61,7 @@ export class MinaCreateBuildingComponent implements OnInit {
 
   initalRoom = (i = 0, capacity = 0) =>
     new FormGroup({
-      room_number: new FormControl(i),
+      room_number: new FormControl(i + this.last_room + 1),
       is_male_accommodation: new FormControl(false),
       max_capacity: new FormControl(capacity),
     });
@@ -73,25 +87,20 @@ export class MinaCreateBuildingComponent implements OnInit {
     return this.form.controls;
   }
   ngOnInit(): void {
+    this.avaStore.dispatch(AvailabiltyActions.reset());
     this.form.controls.no_of_floors.valueChanges.pipe().subscribe((v) => {
       if (v) {
-        for (let i = 0; i < this.form.controls.floors.controls.length; i++) {
-          this.form.controls.floors.removeAt(i);
-        }
+        this.form.setControl('floors', new FormArray<FormGroup>([]));
         for (let i = 0; i < v; i++) {
           this.form.controls.floors.push(this.initalFloor(i));
           this.form.controls.floors.controls[
             i
           ].controls.no_of_rooms.valueChanges.subscribe((v2) => {
             if (v2) {
-              for (
-                let j = 0;
-                j <=
-                this.controls.floors.controls[i].controls.rooms.controls.length;
-                j++
-              ) {
-                this.controls.floors.controls[i].controls.rooms.removeAt(j);
-              }
+              this.controls.floors.controls[i].setControl(
+                'rooms',
+                new FormArray<FormGroup>([])
+              );
               for (let j = 0; j < v2; j++) {
                 this.controls.floors.controls[i].controls.rooms.push(
                   this.initalRoom(j, v2)
