@@ -32,6 +32,8 @@ import { selectData } from '@/shared/store/availavilty/availavilty.reducer';
 import { AvailabiltyState } from '@/shared/types/availabilty.type';
 import { map, switchMap, tap } from 'rxjs';
 import { selectIsLoading } from '@/arafah/data-access/store/arafah.reducer';
+import { LoungeArafahAction } from '@/arafah/data-access/store/lounge-arafah.action';
+import { ArafaPick4StepperComponent } from '@/arafah/ui/arafa-pick4-stepper/arafa-pick4-stepper.component';
 
 @Component({
   selector: 'app-arafah-tent',
@@ -45,6 +47,7 @@ import { selectIsLoading } from '@/arafah/data-access/store/arafah.reducer';
     MaterialModule,
     ArafahAllocationStatusComponent,
     ArafaPack1StepperComponent,
+    ArafaPick4StepperComponent,
     CommonModule,
   ],
   templateUrl: './arafah-tent.component.html',

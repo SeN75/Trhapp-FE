@@ -1,10 +1,11 @@
 import { LoungeArafahAction } from '@/arafah/data-access/store/lounge-arafah.action';
 import {
   selectLounges_arafah,
-  selectIsLoading,
+  selectLounges_building_arafah,
 } from '@/arafah/data-access/store/lounge-arafah.reducer';
 import { LoungeArafahState } from '@/arafah/utils/types/lounges-arafah.type';
 import { MaterialModule } from '@/shared/module/material.module';
+import { selectIsLoading } from '@/shared/store/upload-operation/upload-operation.reducer';
 import { BedTentArafah, LoungeArafah } from '@/shared/types/base.type';
 import { CommonModule } from '@angular/common';
 import {
@@ -23,18 +24,18 @@ import { Store } from '@ngrx/store';
 import { tap } from 'rxjs';
 
 @Component({
-  selector: 'tp-arafa-pack1-stepper',
+  selector: 'tp-arafa-pick4-stepper',
   standalone: true,
   imports: [MaterialModule, CommonModule],
-  templateUrl: './arafa-pack1-stepper.component.html',
-  styleUrl: './arafa-pack1-stepper.component.scss',
+  templateUrl: './arafa-pick4-stepper.component.html',
+  styleUrl: './arafa-pick4-stepper.component.scss',
 })
-export class ArafaPack1StepperComponent {
+export class ArafaPick4StepperComponent {
   // private aRouter = inject(ActivatedRoute);
   private store = inject(Store<{ lounges_arafah: LoungeArafahState }>);
   private aRouter = inject(ActivatedRoute);
 
-  lounges$ = this.store.select(selectLounges_arafah);
+  lounges$ = this.store.select(selectLounges_building_arafah);
   isLoading$ = this.store.select(selectIsLoading);
   loaded = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -53,7 +54,7 @@ export class ArafaPack1StepperComponent {
     });
     this.store.dispatch(
       LoungeArafahAction.get({
-        pack: 'package1',
+        pack: 'package4',
       })
     );
   }

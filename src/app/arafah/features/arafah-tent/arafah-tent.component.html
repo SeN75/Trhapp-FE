@@ -29,8 +29,12 @@
       تسكين الحجاج
     </button>
   </div>
-
+  @if (pack === 'package1') {
   <tp-arafa-pack1-stepper />
+
+  } @else {
+  <tp-arafa-pick4-stepper />
+  }
   <!-- <div
     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
   >

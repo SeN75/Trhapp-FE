@@ -23,6 +23,7 @@ import { AllocationAction } from '../../data-access/store/allocation.action';
 import { MinaPack1StepperComponent } from '@/mina/ui/mina-pack1-stepper/mina-pack1-stepper.component';
 import { MinaPack4StepperComponent } from '@/mina/ui/mina-pack4-stepper/mina-pack4-stepper.component';
 import { ArafaPack1StepperComponent } from '@/arafah/ui/arafa-pack1-stepper/arafa-pack1-stepper.component';
+import { ArafaPick4StepperComponent } from '@/arafah/ui/arafa-pick4-stepper/arafa-pick4-stepper.component';
 
 @Component({
   selector: 'app-pilgrim-allocation',
@@ -36,6 +37,7 @@ import { ArafaPack1StepperComponent } from '@/arafah/ui/arafa-pack1-stepper/araf
     MinaPack1StepperComponent,
     MinaPack4StepperComponent,
     ArafaPack1StepperComponent,
+    ArafaPick4StepperComponent,
   ],
   templateUrl: './pilgrim-allocation.component.html',
   styleUrl: './pilgrim-allocation.component.scss',

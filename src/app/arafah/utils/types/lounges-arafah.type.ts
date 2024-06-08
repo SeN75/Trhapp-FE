@@ -6,6 +6,7 @@ export type LoungesArafah = LoungeArafah[];
 
 export type LoungeArafahState = {
   lounges_arafah: LoungesArafah | null;
+  lounges_building_arafah: LoungesArafah | null;
   isLoading: boolean | null;
   errors: string | null;
   selectedLoungeArafah: LoungeArafah | null;
@@ -14,6 +15,7 @@ export type LoungeArafahState = {
 };
 export const initialLoungeArafahState: LoungeArafahState = {
   lounges_arafah: null,
+  lounges_building_arafah: null,
   isLoading: null,
   errors: null,
   selectedLoungeArafah: null,

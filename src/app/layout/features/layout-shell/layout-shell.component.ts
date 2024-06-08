@@ -42,6 +42,7 @@ export class LayoutShellComponent {
   private loungeArafahStore = inject(
     Store<{ lounges_arafah: LoungeArafahState }>
   );
+
   private pligrmStore = inject(Store<{ pligrms: PilgrimState }>);
   private locationStore = inject(Store<{ locations: LocationState }>);
   private busStore = inject(Store<{ buses: BusState }>);
@@ -51,8 +52,8 @@ export class LayoutShellComponent {
     this.buildingStore.dispatch(BuildingAction.get());
     this.suitesStore.dispatch(SuitesAction.get());
     this.cityStore.dispatch(CityAction.get());
-    // this.supervisorStore.dispatch(SupervisorAction.get());
-    this.loungeArafahStore.dispatch(LoungeArafahAction.get());
+    this.supervisorStore.dispatch(SupervisorAction.get());
+    // this.loungeArafahStore.dispatch(LoungeArafahAction.get());
     // this.pligrmStore.dispatch(PilgrimAction.get());
     this.locationStore.dispatch(LocationAction.get());
     this.busStore.dispatch(BusesAction.get());

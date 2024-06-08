@@ -122,7 +122,7 @@ export type LoungeArafah = {
   is_male_accommodation: boolean;
   beds: BedTentArafah[] | null;
 };
-
+export type LoungeBuildingArafah = LoungeArafah;
 export type Pilgrim = {
   id: string;
   mina_tent_accommodation?: BedTentMina; //fk

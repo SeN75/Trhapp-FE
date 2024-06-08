@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { LoggerService } from '@/shared/service/logger.service';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, combineLatest, map, of, switchMap, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { LoungeArafahService } from '../service/lounge-arafah.service';
 import { LoungeArafahState } from '@/arafah/utils/types/lounges-arafah.type';
@@ -15,9 +15,9 @@ export const getloungeArafahEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(LoungeArafahAction.get),
-      switchMap(() => service.get()),
-      map((lounges_arafah) =>
-        LoungeArafahAction.getSuccess({ lounges_arafah })
+      switchMap(({ pack }) => combineLatest([service.get(pack), of(pack)])),
+      map(([lounges_arafah, pack]) =>
+        LoungeArafahAction.getSuccess({ lounges_arafah, pack })
       ),
       catchError((error) => {
         logger.error('[getloungeArafahEffects erorr]', error);
@@ -26,23 +26,23 @@ export const getloungeArafahEffects = createEffect(
     ),
   { functional: true }
 );
-export const createloungeArafahEffects = createEffect(
-  (
-    actions = inject(Actions),
-    service = inject(LoungeArafahService),
-    logger = inject(LoggerService)
-  ) =>
-    actions.pipe(
-      ofType(LoungeArafahAction.create),
-      switchMap(({ lounge_arafah }) => service.create(lounge_arafah)),
-      map((loungeArafah) => LoungeArafahAction.success()),
-      catchError((error) => {
-        logger.error('[createloungeArafahEffects erorr]', error);
-        return of(LoungeArafahAction.error({ error }));
-      })
-    ),
-  { functional: true }
-);
+// export const createloungeArafahEffects = createEffect(
+//   (
+//     actions = inject(Actions),
+//     service = inject(LoungeArafahService),
+//     logger = inject(LoggerService)
+//   ) =>
+//     actions.pipe(
+//       ofType(LoungeArafahAction.create),
+//       switchMap(({ lounge_arafah }) => service.create(lounge_arafah)),
+//       map((loungeArafah) => LoungeArafahAction.success()),
+//       catchError((error) => {
+//         logger.error('[createloungeArafahEffects erorr]', error);
+//         return of(LoungeArafahAction.error({ error }));
+//       })
+//     ),
+//   { functional: true }
+// );
 
 export const updateloungeArafahEffects = createEffect(
   (
@@ -52,8 +52,10 @@ export const updateloungeArafahEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(LoungeArafahAction.update),
-      switchMap(({ updateLoungeArafah }) => service.update(updateLoungeArafah)),
-      map((loungeArafah) => LoungeArafahAction.success()),
+      switchMap(({ updateLoungeArafah, pack }) =>
+        combineLatest([service.update(updateLoungeArafah), of(pack)])
+      ),
+      map(([data, pack]) => LoungeArafahAction.success({ pack })),
       catchError((error) => {
         logger.error('[updateloungeArafahEffects erorr]', error);
         return of(LoungeArafahAction.error({ error }));
@@ -70,8 +72,10 @@ export const deleteloungeArafahEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(LoungeArafahAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((loungeArafah) => LoungeArafahAction.success()),
+      switchMap(({ id, pack }) =>
+        combineLatest([service.delete(id), of(pack)])
+      ),
+      map(([data, pack]) => LoungeArafahAction.success({ pack })),
       catchError((error) => {
         logger.error('[deleteloungeArafahEffects erorr]', error);
         return of(LoungeArafahAction.error({ error }));
@@ -88,7 +92,7 @@ export const getDataEffect = createEffect(
   ) =>
     actions.pipe(
       ofType(LoungeArafahAction.success),
-      tap(() => store.dispatch(LoungeArafahAction.get()))
+      tap(({ pack }) => store.dispatch(LoungeArafahAction.get({ pack })))
     ),
   { functional: true }
 );

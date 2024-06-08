@@ -12,10 +12,21 @@ export const LoungeArafahFeature = createFeature({
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(LoungeArafahAction.getSuccess, (state, { lounges_arafah }) => ({
+    on(LoungeArafahAction.getSuccess, (state, { lounges_arafah, pack }) => ({
       ...state,
       isLoading: false,
-      lounges_arafah,
+      lounges_arafah:
+        pack === 'package1'
+          ? lounges_arafah
+          : state!.lounges_arafah
+          ? [...state?.lounges_arafah]
+          : [],
+      lounges_building_arafah:
+        pack === 'package4'
+          ? lounges_arafah
+          : state!.lounges_building_arafah
+          ? [...state?.lounges_building_arafah]
+          : [],
       status: 'success' as TPState,
     })),
     on(LoungeArafahAction.success, (state) => ({
@@ -57,6 +68,7 @@ export const {
   name: LoungeArafahFeatureKey,
   reducer: LoungeArafahReducer,
   selectSelectedLoungeArafah,
+  selectLounges_building_arafah,
   selectIsLoading,
   selectErrors,
   selectLounges_arafah,

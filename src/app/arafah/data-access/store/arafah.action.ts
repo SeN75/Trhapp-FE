@@ -7,7 +7,10 @@ export const ArafahAction = {
     '[Arafah] get accommodations data success',
     props<{ data: any }>()
   ),
-  success: createAction('[Arafah] success'),
+  success: createAction(
+    '[Arafah] success',
+    props<{ pack: 'package1' | 'package4' }>()
+  ),
   create: createAction(
     '[Arafah] create Accommodation',
     props<{ payload: CreateArafahPack1; pack: 'package1' | 'package4' }>()

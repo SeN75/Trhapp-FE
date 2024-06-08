@@ -19,8 +19,12 @@ export class LoungeArafahService {
   private logger = inject(LoggerService);
   constructor() {}
 
-  get(): Observable<LoungesArafah> {
-    return this.http.get<LoungesArafah>(this.url);
+  get(pack: 'package1' | 'package4'): Observable<LoungesArafah> {
+    return this.http.get<LoungesArafah>(
+      pack === 'package1'
+        ? this.url
+        : this.url.replace('lounges-arafah', 'lounges-building-arafah')
+    );
   }
 
   getById(id: string): Observable<LoungeArafah> {
