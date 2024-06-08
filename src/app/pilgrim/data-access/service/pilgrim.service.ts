@@ -8,6 +8,7 @@ import {
   Pilgrims,
   UpdatePilgrim,
   CreatePilgrim,
+  PilgrimDataTable,
 } from '@/pilgrim/utils/types/pilgrim.type';
 
 @Injectable({
@@ -20,8 +21,9 @@ export class PilgrimService {
   private logger = inject(LoggerService);
   constructor() {}
 
-  get(): Observable<Pilgrims> {
-    return this.http.get<Pilgrims>(this.url);
+  get(page?: string): Observable<PilgrimDataTable> {
+    const url = page ? `${this.url}?page=${+page + 1}` : this.url;
+    return this.http.get<PilgrimDataTable>(url);
   }
 
   getById(id: string): Observable<Pilgrim> {

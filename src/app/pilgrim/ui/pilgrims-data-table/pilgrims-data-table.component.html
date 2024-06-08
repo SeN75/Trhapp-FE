@@ -108,7 +108,7 @@
         <td mat-cell *matCellDef="let element">{{ element.package_name }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="city">
+      <!-- <ng-container matColumnDef="city">
         <th mat-header-cell mat-sort-header *matHeaderCellDef>
           <button
             mat-button
@@ -127,7 +127,7 @@
           </mat-menu>
         </th>
         <td mat-cell *matCellDef="let element">{{ element.city.name }}</td>
-      </ng-container>
+      </ng-container> -->
       <ng-container matColumnDef="nationality">
         <th mat-header-cell mat-sort-header *matHeaderCellDef>
           @if (!searchActive['nationality']) {
@@ -268,9 +268,5 @@
     'opacity-0': loaded
   }"
 >
-  <mat-paginator
-    [length]="dataSource.data.length"
-    [pageSize]="50"
-    [pageSizeOptions]="[50, 100]"
-  ></mat-paginator>
+  <mat-paginator [length]="count" [pageSize]="100"></mat-paginator>
 </div>

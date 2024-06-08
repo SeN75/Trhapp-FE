@@ -1,16 +1,17 @@
 import { createAction, props } from '@ngrx/store';
 import {
   CreatePilgrim,
-  Pilgrims,
+  PilgrimDataTable,
   UpdatePilgrim,
 } from '@/pilgrim/utils/types/pilgrim.type';
 
 export const PilgrimAction = {
-  get: createAction('[Pilgrim] get Pilgrim'),
+  get: createAction('[Pilgrim] get Pilgrim', props<{ page?: string }>()),
   getSuccess: createAction(
     '[Pilgrim] get Pilgrim success',
-    props<{ pilgrims: Pilgrims }>()
+    props<{ pilgrims: PilgrimDataTable }>()
   ),
+
   create: createAction(
     '[Pilgrim] create Pilgrim',
     props<{ pilgrim: CreatePilgrim }>()

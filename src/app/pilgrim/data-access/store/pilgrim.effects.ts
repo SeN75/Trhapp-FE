@@ -15,7 +15,7 @@ export const getPilgrimEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(PilgrimAction.get),
-      switchMap(() => service.get()),
+      switchMap(({ page = '' }) => service.get(page)),
       // map((pilgrims) => pilgrims.sort((a, b) => +a.id - +b.id)),
       tap((pilgrims) => console.log(pilgrims)),
       map((pilgrims) => PilgrimAction.getSuccess({ pilgrims })),
@@ -105,7 +105,7 @@ export const getDataEffect = createEffect(
   ) =>
     actions.pipe(
       ofType(PilgrimAction.success),
-      tap(() => store.dispatch(PilgrimAction.get()))
+      tap(() => store.dispatch(PilgrimAction.get({ page: '0' })))
     ),
   { functional: true }
 );

@@ -17,6 +17,6 @@ export class PilgrimDataComponent implements OnInit {
   private storeAva = inject(Store<{ availability: AvailabiltyState }>);
   private store = inject(Store<{ pligrms: PilgrimState }>);
   ngOnInit(): void {
-    this.store.dispatch(PilgrimAction.get());
+    this.store.dispatch(PilgrimAction.get({ page: '0' }));
   }
 }

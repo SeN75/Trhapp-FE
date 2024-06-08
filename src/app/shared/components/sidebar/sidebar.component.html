@@ -1,4 +1,7 @@
-<section class="sidebar-container">
+<section
+  class="sidebar-container"
+  [@containerAnimation]="open ? 'open' : 'closed'"
+>
   <nav>
     <div class="logo">
       <logo />
@@ -11,6 +14,7 @@
       </li>
       }
     </ul>
+    <!-- <mat-icon (click)="open = !open">arrow_back</mat-icon> -->
   </nav>
   <main class="">
     <ng-content></ng-content>

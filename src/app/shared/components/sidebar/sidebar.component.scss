@@ -1,5 +1,6 @@
 .sidebar-container {
   @apply grid grid-cols-[200px_1fr] min-h-screen  bg-primary;
+
   & .logo {
     @apply w-[124px] h-auto;
   }

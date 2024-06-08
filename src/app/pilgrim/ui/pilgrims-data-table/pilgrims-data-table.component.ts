@@ -30,11 +30,12 @@ import { PilgrimAllocationComponent } from '../../features/pilgrim-allocation/pi
 import { AllocationState } from '@/pilgrim/utils/types/allocation.type';
 import { AllocationAction } from '../../data-access/store/allocation.action';
 import { GeneratePdfService } from '@/shared/service/generate-pdf.service';
-import { first, map, switchMap, tap } from 'rxjs';
+import { delay, first, map, switchMap, tap } from 'rxjs';
 import { UploadOperationsComponent } from '@/shared/components/upload-operations/upload-operations.component';
 import { UploadOperationActions } from '@/shared/store/upload-operation/upload-operation.action';
 import { selectStatus } from '@/shared/store/upload-operation/upload-operation.reducer';
 import { selectIsLoading } from '@/pilgrim/data-access/store/pilgrim.reducer';
+import { PilgrimAction } from '@/pilgrim/data-access/store/pilgrim.action';
 @Component({
   selector: 'tp-pilgrims-data-table',
   standalone: true,
@@ -62,15 +63,21 @@ export class PilgrimsDataTableComponent
   cities$ = this.citiesStore.select(selectCities);
   pilgrims$ = this.store.select(selectPilgrims);
   loaded = false;
-  dataSource = new MatTableDataSource<PilgrimDataTable>([]);
-  batchesData: PilgrimDataTable[][] = [];
+  dataSource = new MatTableDataSource<PilgrimDataTable['results'][0]>([]);
+  batchesData: PilgrimDataTable['results'][] = [];
+  links: PilgrimDataTable['links'] = {
+    next: '',
+    prev: '',
+  };
+  currentPage = 0;
+  total_page: PilgrimDataTable['total_pages'] = 0;
+  count: PilgrimDataTable['count'] = 0;
   displayedColumns: string[] = [
     'id',
     'name',
     'package_name',
     'phone_number',
     'national_id',
-    'city',
     'nationality',
     'booking_reference',
     'mina',
@@ -109,32 +116,26 @@ export class PilgrimsDataTableComponent
     this.pilgrims$
       .pipe(
         takeUntilDestroyed(),
-        map((data) =>
-          data?.map((v) => {
-            const d: PilgrimDataTable = {
-              id: v?.id || '',
-              name: v?.name || '',
-              package_name: v?.package_name || '',
-              phone_number: v?.phone_number || '',
-              national_id: v?.national_id || '',
-              city: v?.city || '',
-              nationality: v?.nationality || '',
-              booking_reference: v?.booking_reference || '',
-              arafah:
-                v?.arafah_accommodation !== null ||
-                v?.arafah_tent_accommodation !== null,
-              mian:
-                v?.mina_building_accommodation !== null ||
-                v?.mina_tent_accommodation !== null,
-              is_male: v?.is_male || false,
-            };
-            return d;
-          })
-        )
+        tap((data) => {
+          if (data) {
+            const { count, results, links, total_pages } = data;
+            this.links = links;
+            this.count = count;
+            this.total_page = total_pages;
+          }
+        }),
+        tap((p) => {
+          if (p) {
+            this.dataSource.data = p['results'] || [];
+          }
+        }),
+        delay(500)
       )
       .subscribe((data) => {
         if (data) {
-          this.dataSource.data = data;
+          this.paginator.length = data['count'];
+          this.paginator.pageIndex = this.currentPage;
+          console.log(this.paginator.length, data['count']);
         }
       });
     Object.keys(this.filterCtrl.controls).forEach((key) => {
@@ -147,9 +148,7 @@ export class PilgrimsDataTableComponent
     this.dataSource.data = [];
     console.log(this.dataSource.data);
   }
-  setPage(pageIndex: number) {
-    this.dataSource.data = this.batchesData[pageIndex] || [];
-  }
+  setPage(pageIndex: number) {}
   private divideListIntoBatches<T>(list: T[], batchSize: number): T[][] {
     const batches: T[][] = [];
     for (let i = 0; i < list.length; i += batchSize) {
@@ -199,8 +198,14 @@ export class PilgrimsDataTableComponent
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    console.log('data ==>', this.dataSource.paginator);
-    console.log('paginator ==>', this.paginator);
+    this.paginator.page.subscribe((p) => {
+      if (p.pageIndex !== this.currentPage) {
+        this.currentPage = p.pageIndex;
+        this.store.dispatch(
+          PilgrimAction.get({ page: p.pageIndex.toString() })
+        );
+      }
+    });
   }
   uploadFile() {
     this.dialog
