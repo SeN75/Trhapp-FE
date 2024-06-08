@@ -1,22 +1,27 @@
-@defer (when true ){
+@if (isLoading$ | async) {
+<div class="shadow-xl card bg-white">
+  <div class="h-[200px] flex justify-center items-center">
+    <span class="loading loading-dots loading-lg"></span>
+  </div>
+</div>
+} @else {
 <div class="flex gap-2 pb-4">
   <button class="btn btn-primary btn-sm">تسكين الكل</button>
   <button class="btn btn-accent btn-sm" (click)="exportData()">
     تصدير ملف CSV
   </button>
+  <button class="btn btn-accent btn-sm" (click)="uploadFile()">
+    استخراج معلومات الحجاج
+  </button>
 </div>
 <section class="table-container shadow-xl">
   <table matSort mat-table [dataSource]="dataSource">
     <ng-container [formGroup]="filterCtrl">
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-
       <ng-container matColumnDef="id">
-        <th mat-header-cell mat-sort-header *matHeaderCellDef>التسلسل</th>
+        <th mat-header-cell *matHeaderCellDef>التسلسل</th>
         <td mat-cell *matCellDef="let element">{{ element.id }}</td>
       </ng-container>
 
-      <!-- Name Column -->
       <ng-container matColumnDef="name">
         <th mat-header-cell mat-sort-header *matHeaderCellDef>
           @if (!searchActive['name']) {
@@ -53,7 +58,6 @@
         </td>
       </ng-container>
 
-      <!-- Phone number Column -->
       <ng-container matColumnDef="phone_number">
         <th mat-header-cell mat-sort-header *matHeaderCellDef>
           @if (!searchActive['phone_number']) {
@@ -80,7 +84,6 @@
         <td mat-cell *matCellDef="let element">{{ element.phone_number }}</td>
       </ng-container>
 
-      <!-- Package name Column -->
       <ng-container matColumnDef="package_name">
         <th mat-header-cell mat-sort-header *matHeaderCellDef>
           <button
@@ -105,7 +108,6 @@
         <td mat-cell *matCellDef="let element">{{ element.package_name }}</td>
       </ng-container>
 
-      <!-- Package number Column -->
       <ng-container matColumnDef="city">
         <th mat-header-cell mat-sort-header *matHeaderCellDef>
           <button
@@ -203,8 +205,7 @@
       <ng-container matColumnDef="mina">
         <th mat-header-cell mat-sort-header *matHeaderCellDef>تسكين منى</th>
         <td mat-cell *matCellDef="let element">
-          @if ( element.mina_building_accommodation !== null ||
-          element.mina_tent_accommodation !== null) {
+          @if (element.mian) {
           <div class="badge bg-success-A200 text-success">تم</div>
 
           } @else {
@@ -220,8 +221,7 @@
       <ng-container matColumnDef="arafah">
         <th mat-header-cell mat-sort-header *matHeaderCellDef>تسكين عرفة</th>
         <td mat-cell *matCellDef="let element">
-          @if ( element.arafah_accommodation !== null ||
-          element.arafah_tent_accommodation !== null) {
+          @if ( element.arafah) {
           <div class="badge bg-success-A200 text-success">تم</div>
 
           } @else {
@@ -254,18 +254,23 @@
         </td>
       </ng-container>
 
-      <!-- Arafah accommodation Column -->
-
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </ng-container>
   </table>
-  <div class="bg-bg border-solid border border-primary border-t-0 rounded-b-xl">
-    <mat-paginator
-      [length]="dataSource.data.length"
-      [pageSize]="[20, 50, 100]"
-    ></mat-paginator>
-  </div>
 </section>
 
 }
+
+<div
+  class="bg-bg border-solid border border-primary border-t-0 rounded-b-xl bg-white"
+  [ngClass]="{
+    'opacity-0': loaded
+  }"
+>
+  <mat-paginator
+    [length]="dataSource.data.length"
+    [pageSize]="50"
+    [pageSizeOptions]="[50, 100]"
+  ></mat-paginator>
+</div>

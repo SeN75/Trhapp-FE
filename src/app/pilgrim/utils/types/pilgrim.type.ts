@@ -12,6 +12,19 @@ export type PilgrimState = {
   selectedPilgrimIndex: number | null;
   status: TPState;
 };
+
+export type PilgrimDataTable = Pick<
+  Pilgrim,
+  | 'id'
+  | 'name'
+  | 'city'
+  | 'national_id'
+  | 'package_name'
+  | 'nationality'
+  | 'booking_reference'
+  | 'phone_number'
+  | 'is_male'
+> & { mian: boolean; arafah: boolean };
 export const initialPilgrimState: PilgrimState = {
   pilgrims: null,
   isLoading: null,

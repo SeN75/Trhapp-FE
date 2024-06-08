@@ -53,7 +53,7 @@ export class LayoutShellComponent {
     this.cityStore.dispatch(CityAction.get());
     // this.supervisorStore.dispatch(SupervisorAction.get());
     this.loungeArafahStore.dispatch(LoungeArafahAction.get());
-    this.pligrmStore.dispatch(PilgrimAction.get());
+    // this.pligrmStore.dispatch(PilgrimAction.get());
     this.locationStore.dispatch(LocationAction.get());
     this.busStore.dispatch(BusesAction.get());
     this.availabilityStore.dispatch(AvailabiltyActions.get());

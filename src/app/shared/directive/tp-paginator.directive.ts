@@ -106,11 +106,12 @@ export class TpPaginatorDirective implements AfterViewInit {
     const previouslyActive = this.buttonsRef[previousIndex];
     const currentActive = this.buttonsRef[newIndex];
     console.log(this.ren);
-    // remove active style from previously active button
-    this.ren.removeClass(previouslyActive, 'g-bubble__active');
-
-    // add active style to new active button
-    this.ren.addClass(currentActive, 'g-bubble__active');
+    if (previouslyActive)
+      // remove active style from previously active button
+      this.ren.removeClass(previouslyActive, 'g-bubble__active');
+    if (currentActive)
+      // add active style to new active button
+      this.ren.addClass(currentActive, 'g-bubble__active');
 
     // hide all buttons
     this.buttonsRef.forEach((button) =>
@@ -222,13 +223,16 @@ export class TpPaginatorDirective implements AfterViewInit {
     const neededButtons = Math.ceil(
       this.appCustomLength / this.matPag.pageSize
     );
-
+    const fiveBtn =
+      this.matPag.pageIndex + 5 <= neededButtons
+        ? this.matPag.pageIndex + 5
+        : neededButtons - 5;
     // if there is only one page, do not render buttons
     if (neededButtons === 1) {
       this.ren.setStyle(this.elementRef.nativeElement, 'display', 'none');
       return;
     }
-
+    console.log(neededButtons);
     // create first button
     this.buttonsRef = [this.createButton(0)];
 
@@ -236,7 +240,7 @@ export class TpPaginatorDirective implements AfterViewInit {
     this.dotsStartRef = this.createDotsElement();
 
     // create all buttons needed for navigation (except the first & last one)
-    for (let index = 1; index < neededButtons - 1; index++) {
+    for (let index = 1; index < fiveBtn; index++) {
       this.buttonsRef = [...this.buttonsRef, this.createButton(index)];
     }
 

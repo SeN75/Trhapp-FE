@@ -72,23 +72,4 @@ export class SidebarComponent {
       link: ['/', 'l', 'cards'],
     },
   ];
-
-  uploadFile() {
-    this.dialog
-      .open(UploadOperationsComponent, {
-        width: '500px',
-        panelClass: ['modal-box', 'p-2', 'bg-white'],
-        data: null,
-      })
-      .afterClosed()
-      .pipe(
-        switchMap(() => this.status$),
-        tap((status) => {
-          if (status === 'success')
-            this.store.dispatch(UploadOperationActions.reset());
-        }),
-        first()
-      )
-      .subscribe();
-  }
 }

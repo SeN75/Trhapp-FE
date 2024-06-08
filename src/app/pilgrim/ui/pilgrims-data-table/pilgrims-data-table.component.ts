@@ -1,6 +1,8 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
+  OnDestroy,
   OnInit,
   ViewChild,
   inject,
@@ -11,7 +13,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { TpPaginatorDirective } from '@/shared/directive/tp-paginator.directive';
 import { Pilgrim } from '@/shared/types/base.type';
 import { Store } from '@ngrx/store';
-import { PilgrimState } from '@/pilgrim/utils/types/pilgrim.type';
+import {
+  PilgrimDataTable,
+  PilgrimState,
+} from '@/pilgrim/utils/types/pilgrim.type';
 import { selectPilgrims } from '../../data-access/store/pilgrim.reducer';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AsyncPipe, NgClass } from '@angular/common';
@@ -25,16 +30,22 @@ import { PilgrimAllocationComponent } from '../../features/pilgrim-allocation/pi
 import { AllocationState } from '@/pilgrim/utils/types/allocation.type';
 import { AllocationAction } from '../../data-access/store/allocation.action';
 import { GeneratePdfService } from '@/shared/service/generate-pdf.service';
-import { map } from 'rxjs';
-
+import { first, map, switchMap, tap } from 'rxjs';
+import { UploadOperationsComponent } from '@/shared/components/upload-operations/upload-operations.component';
+import { UploadOperationActions } from '@/shared/store/upload-operation/upload-operation.action';
+import { selectStatus } from '@/shared/store/upload-operation/upload-operation.reducer';
+import { selectIsLoading } from '@/pilgrim/data-access/store/pilgrim.reducer';
 @Component({
   selector: 'tp-pilgrims-data-table',
   standalone: true,
-  imports: [NgClass, MaterialModule, AsyncPipe],
+  imports: [NgClass, MaterialModule, AsyncPipe, TpPaginatorDirective],
   templateUrl: './pilgrims-data-table.component.html',
   styleUrl: './pilgrims-data-table.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PilgrimsDataTableComponent implements AfterViewInit, OnInit {
+export class PilgrimsDataTableComponent
+  implements AfterViewInit, OnInit, OnDestroy
+{
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   private gPdf = inject(GeneratePdfService);
@@ -42,15 +53,17 @@ export class PilgrimsDataTableComponent implements AfterViewInit, OnInit {
   private store = inject(Store<{ pilgrims: PilgrimState }>);
   private citiesStore = inject(Store<{ cities: CityState }>);
   private alloctionStore = inject(Store<{ allocation: AllocationState }>);
+  private status$ = this.store.select(selectStatus);
+  private readonly BATCH_SIZE = 100;
+
+  isLoading$ = this.store
+    .select(selectIsLoading)
+    .pipe(tap((v) => (this.loaded = v || false)));
   cities$ = this.citiesStore.select(selectCities);
   pilgrims$ = this.store.select(selectPilgrims);
-
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-  // dataSource!: MatTableDataSource<any>;
-
+  loaded = false;
+  dataSource = new MatTableDataSource<PilgrimDataTable>([]);
+  batchesData: PilgrimDataTable[][] = [];
   displayedColumns: string[] = [
     'id',
     'name',
@@ -64,7 +77,7 @@ export class PilgrimsDataTableComponent implements AfterViewInit, OnInit {
     'arafah',
     'actions',
   ];
-  dataSource = new MatTableDataSource<Pilgrim>([]);
+
   searchActive: { [k: string]: boolean } = this.displayedColumns
     .map((k) => ({ [k]: false }))
     .reduce((a, b) => ({ ...a, ...b }), {});
@@ -78,29 +91,73 @@ export class PilgrimsDataTableComponent implements AfterViewInit, OnInit {
     national_id: new FormControl(''),
     booking_reference: new FormControl(''),
   });
+
+  // dataSource!: MatTableDataSource<any>;
+
   filter(value: string, key: string) {
-    this.dataSource.filterPredicate = (data, filter) => {
-      return ((data as unknown as Record<string, string>)[key] + '')
-        .toLowerCase()
-        .includes(filter + '');
-    };
-    this.dataSource.filter = (value + '').trim().toLowerCase();
-    this.searchActive[key] = !!value;
+    if (value.length > 4 || value.length === 0) {
+      this.dataSource.filterPredicate = (data, filter) => {
+        return ((data as unknown as Record<string, string>)[key] + '')
+          .toLowerCase()
+          .includes(filter + '');
+      };
+      this.dataSource.filter = (value + '').trim().toLowerCase();
+      this.searchActive[key] = !!value;
+    }
   }
   constructor() {
-    this.pilgrims$.pipe(takeUntilDestroyed()).subscribe((data) => {
-      this.dataSource.data = data || [];
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
-  }
-  ngOnInit(): void {
+    this.pilgrims$
+      .pipe(
+        takeUntilDestroyed(),
+        map((data) =>
+          data?.map((v) => {
+            const d: PilgrimDataTable = {
+              id: v?.id || '',
+              name: v?.name || '',
+              package_name: v?.package_name || '',
+              phone_number: v?.phone_number || '',
+              national_id: v?.national_id || '',
+              city: v?.city || '',
+              nationality: v?.nationality || '',
+              booking_reference: v?.booking_reference || '',
+              arafah:
+                v?.arafah_accommodation !== null ||
+                v?.arafah_tent_accommodation !== null,
+              mian:
+                v?.mina_building_accommodation !== null ||
+                v?.mina_tent_accommodation !== null,
+              is_male: v?.is_male || false,
+            };
+            return d;
+          })
+        )
+      )
+      .subscribe((data) => {
+        if (data) {
+          this.dataSource.data = data;
+        }
+      });
     Object.keys(this.filterCtrl.controls).forEach((key) => {
-      (this.filterCtrl.controls as any)[key].valueChanges.subscribe(
-        (v: string) => this.filter(v || '', key)
-      );
+      (this.filterCtrl.controls as any)[key].valueChanges
+        .pipe(takeUntilDestroyed())
+        .subscribe((v: string) => this.filter(v || '', key));
     });
   }
+  ngOnDestroy(): void {
+    this.dataSource.data = [];
+    console.log(this.dataSource.data);
+  }
+  setPage(pageIndex: number) {
+    this.dataSource.data = this.batchesData[pageIndex] || [];
+  }
+  private divideListIntoBatches<T>(list: T[], batchSize: number): T[][] {
+    const batches: T[][] = [];
+    for (let i = 0; i < list.length; i += batchSize) {
+      batches.push(list.slice(i, i + batchSize));
+    }
+    return batches;
+  }
+  ngOnInit(): void {}
   exportData() {
     const cols = [
       'name',
@@ -138,5 +195,29 @@ export class PilgrimsDataTableComponent implements AfterViewInit, OnInit {
         pilgrim,
       },
     });
+  }
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    console.log('data ==>', this.dataSource.paginator);
+    console.log('paginator ==>', this.paginator);
+  }
+  uploadFile() {
+    this.dialog
+      .open(UploadOperationsComponent, {
+        width: '500px',
+        panelClass: ['modal-box', 'p-2', 'bg-white'],
+        data: null,
+      })
+      .afterClosed()
+      .pipe(
+        switchMap(() => this.status$),
+        tap((status) => {
+          if (status === 'success')
+            this.store.dispatch(UploadOperationActions.reset());
+        }),
+        first()
+      )
+      .subscribe();
   }
 }
