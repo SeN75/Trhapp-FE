@@ -12,8 +12,9 @@ export const UploadOpsFeature = createFeature({
       isLoading: true,
       status: 'sending' as TPState,
     })),
-    on(UploadOperationActions.success, (state) => ({
+    on(UploadOperationActions.success, (state, { res }) => ({
       ...state,
+      res,
       isLoading: false,
       status: 'success' as TPState,
     })),
@@ -39,4 +40,5 @@ export const {
   selectErrors,
   selectIsLoading,
   selectStatus,
+  selectRes,
 } = UploadOpsFeature;

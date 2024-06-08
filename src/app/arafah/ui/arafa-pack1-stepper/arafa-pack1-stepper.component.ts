@@ -34,7 +34,9 @@ export class ArafaPack1StepperComponent {
   private store = inject(Store<{ lounges_arafah: LoungeArafahState }>);
   private aRouter = inject(ActivatedRoute);
 
-  lounges$ = this.store.select(selectLounges_arafah);
+  lounges$ = this.store
+    .select(selectLounges_arafah)
+    .pipe(tap((v) => (this.isEmpty = v !== null && v.length === 0)));
   isLoading$ = this.store.select(selectIsLoading);
   loaded = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -47,6 +49,7 @@ export class ArafaPack1StepperComponent {
   selectedLounge: LoungeArafah | null = null;
   beds: BedTentArafah[] = [];
   selectedBed: BedTentArafah | null = null;
+  isEmpty = false;
   constructor() {
     this.isLoading$.pipe(takeUntilDestroyed()).subscribe((s) => {
       this.loaded = s || false;

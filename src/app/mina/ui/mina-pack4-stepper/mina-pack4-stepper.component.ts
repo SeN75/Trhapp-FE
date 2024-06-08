@@ -24,6 +24,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatStepper } from '@angular/material/stepper';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'tp-mina-pack4-stepper',
@@ -43,8 +44,10 @@ export class MinaPack4StepperComponent {
   @Output() value = new EventEmitter<BedBuidingMina>();
   bedDataSource = new MatTableDataSource<BedBuidingMina>();
   bedObs = this.bedDataSource.connect();
-  building$ = this.store.select(selectBuildings);
-
+  building$ = this.store
+    .select(selectBuildings)
+    .pipe(tap((s) => (this.isEmpty = s !== null && s.length === 0)));
+  isEmpty = false;
   selectedBuilding: Building | null = null;
   selectedFloor: Floor | null = null;
   selectedRoom: Room | null = null;

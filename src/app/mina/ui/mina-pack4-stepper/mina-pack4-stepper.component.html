@@ -1,4 +1,4 @@
-@if (!loaded) {
+@if (!loaded) { @if(!isEmpty){
 <mat-stepper orientation="vertical">
   <mat-step>
     <ng-template matStepLabel>{{
@@ -152,8 +152,11 @@
     </mat-paginator>
   </mat-step>
 </mat-stepper>
-
 } @else {
+<div class="card bg-white shadow-lg py-6">
+  <div class="text-center text-2xl font-bold text-gray-500">لا توجد نتائج</div>
+</div>
+} } @else {
 <ng-container>
   <div class="card bg-white shadow-lg">
     <div class="h-[200px] flex justify-center items-center">

@@ -9,6 +9,7 @@ import { combineLatest } from 'rxjs';
 import {
   selectErrors,
   selectIsLoading,
+  selectRes,
   selectStatus,
 } from '../../store/upload-operation/upload-operation.reducer';
 import { UploadOperationActions } from '../../store/upload-operation/upload-operation.action';
@@ -28,7 +29,7 @@ export class UploadOperationsComponent {
     isLoading: this.store.select(selectIsLoading),
   });
   fileCtrl = new FormControl<File | null>(null, [Validators.required]);
-
+  res$ = this.store.select(selectRes);
   onClick() {
     const file = this.fileCtrl.value;
     console.log({ file });

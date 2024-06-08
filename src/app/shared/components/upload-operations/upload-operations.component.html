@@ -15,6 +15,7 @@
       >
       <h3 class="py-4 text-lg font-semibold">تم استخراج بيانات الحجاج بنجاح</h3>
     </div>
+    <ng-container *ngTemplateOutlet="resTemp"></ng-container>
     } @else if (obs.status === 'error') {
     <div class="flex gap-4 items-center">
       <mat-icon class="text-error !w-10 !h-10 !text-[40px] !leading-10"
@@ -54,3 +55,7 @@
   </mat-dialog-actions>
   }
 </ng-container>
+
+<ng-template #resTemp>
+  <ng-container *ngIf="res$ | async as res"> </ng-container>
+</ng-template>

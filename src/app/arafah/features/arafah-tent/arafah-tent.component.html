@@ -22,9 +22,7 @@
     <button
       (click)="allocate()"
       class="btn btn-sm btn-accent"
-      [ngClass]="{
-        disabled: data.males.beds.created < data.males.total
-      }"
+      [disabled]="data.males.beds.created < data.males.total"
     >
       تسكين الحجاج
     </button>

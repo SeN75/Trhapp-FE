@@ -4,7 +4,7 @@ import { environment } from '@env/environment.development';
 import { catchError, map, switchMap, tap } from 'rxjs';
 import { LoggerService } from './logger.service';
 import { City } from '../types/base.type';
-import { BatchesRes } from '../types/upload-operations.type';
+import { BatchesRes, UploadOpsRes } from '../types/upload-operations.type';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +16,7 @@ export class UploadOpsService {
   upload(file: File) {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post<any>(this.url, formData).pipe(
+    return this.http.post<UploadOpsRes>(this.url, formData).pipe(
       tap((res) => this.logger.log('[upload res] => ', res)),
       catchError((error) => {
         this.logger.error('[upload res error] => ', error);

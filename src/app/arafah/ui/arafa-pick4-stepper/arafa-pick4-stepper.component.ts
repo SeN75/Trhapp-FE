@@ -35,9 +35,12 @@ export class ArafaPick4StepperComponent {
   private store = inject(Store<{ lounges_arafah: LoungeArafahState }>);
   private aRouter = inject(ActivatedRoute);
 
-  lounges$ = this.store.select(selectLounges_building_arafah);
+  lounges$ = this.store
+    .select(selectLounges_building_arafah)
+    .pipe(tap((v) => (this.isEmpty = v !== null && v.length === 0)));
   isLoading$ = this.store.select(selectIsLoading);
   loaded = false;
+  isEmpty = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatStepper) stepper!: MatStepper;
 
