@@ -57,5 +57,16 @@
 </ng-container>
 
 <ng-template #resTemp>
-  <ng-container *ngIf="res$ | async as res"> </ng-container>
+  <ng-container *ngIf="res$ | async as res">
+    <div>
+      <p>عدد الحجاج الكلي في الملف: {{ res.total_pilgrims_count_in_file }}</p>
+      <p>الحجاج الذين ليس لديهم تصريح: {{ res.pilgrims_without_permit }}</p>
+      <p>عدد الحجاج المضافين للمنصة: {{ res.new_pilgrims_added }}</p>
+      <p>المدن المضافة بعد التحديث: 
+        <div *ngFor="let city of res.new_cities">{{ city }}</div>
+      </p>
+      <p>المواقع المضافة بعد التحديث:</p>
+      <div *ngFor="let location of res.new_locations_added">{{ location }}</div>
+    </div>
+  </ng-container>
 </ng-template>
