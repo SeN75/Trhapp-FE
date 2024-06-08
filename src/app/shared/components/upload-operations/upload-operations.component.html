@@ -62,9 +62,9 @@
       <p>عدد الحجاج الكلي في الملف: {{ res.total_pilgrims_count_in_file }}</p>
       <p>الحجاج الذين ليس لديهم تصريح: {{ res.pilgrims_without_permit }}</p>
       <p>عدد الحجاج المضافين للمنصة: {{ res.new_pilgrims_added }}</p>
-      <p>المدن المضافة بعد التحديث: 
-        <div *ngFor="let city of res.new_cities">{{ city }}</div>
-      </p>
+      <div>المدن المضافة بعد التحديث: 
+        <div *ngFor="let city of res.new_cities_added">{{ city }}</div>
+      </div>
       <p>المواقع المضافة بعد التحديث:</p>
       <div *ngFor="let location of res.new_locations_added">{{ location }}</div>
     </div>
