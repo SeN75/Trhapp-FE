@@ -66,7 +66,7 @@ export class UploadOpsService {
 
         switchMap((payload: any) =>
           this.http.post(
-            'http://164.92.227.93:120/api/report',
+            'https://report-alelyani.trhapp.net/api/report',
             {
               ...payload.payload,
             },
