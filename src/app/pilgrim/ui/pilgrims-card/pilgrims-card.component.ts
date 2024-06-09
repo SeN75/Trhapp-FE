@@ -3,7 +3,7 @@ import { PilgrimUploadImageComponent } from '@/pilgrim/features/pilgrim-upload-i
 import { PilgrimState } from '@/pilgrim/utils/types/pilgrim.type';
 import { Pilgrim } from '@/shared/types/base.type';
 import { CommonModule } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 
@@ -15,6 +15,8 @@ import { Store } from '@ngrx/store';
   styleUrl: './pilgrims-card.component.scss',
 })
 export class PilgrimsCardComponent {
+  @ViewChild('headline') h?: ElementRef<HTMLElement>;
+  @ViewChild('imageContainer') imageCtr?: ElementRef<HTMLElement>;
   @Input() isEditMode = false;
   @Input({ required: true }) data: Pilgrim = {
     id: '123456',

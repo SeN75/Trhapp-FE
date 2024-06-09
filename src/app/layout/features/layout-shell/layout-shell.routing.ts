@@ -9,7 +9,7 @@ export const layoutShellRouting: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'mina',
+        redirectTo: 'pilgrims',
         pathMatch: 'full',
       },
       {

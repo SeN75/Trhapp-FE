@@ -96,6 +96,6 @@ export class ArafahTentComponent implements AfterViewInit {
   createPlace() {}
 
   allocate() {
-    this.arafahStore.dispatch(ArafahAction.allocate({ pack: 'package1' }));
+    this.arafahStore.dispatch(ArafahAction.allocate({ pack: this.pack }));
   }
 }

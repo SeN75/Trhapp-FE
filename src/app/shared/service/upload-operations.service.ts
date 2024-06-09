@@ -46,6 +46,34 @@ export class UploadOpsService {
         })
       );
   }
+  exportPack4() {
+    return this.http
+      .get(`${this.url.replace('upload', 'export-package4')}`, {
+        responseType: 'blob',
+      })
+      .pipe(
+        tap((res) => this.logger.log('[upload res] => ', res)),
+        tap((res) => {
+          const a = document.createElement('a');
+          const objectUrl = URL.createObjectURL(res);
+          const now = new Date();
+          const day = String(now.getDate()).padStart(2, '0');
+          const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+          const year = now.getFullYear();
+          const hours = String(now.getHours()).padStart(2, '0');
+          const minutes = String(now.getMinutes()).padStart(2, '0');
+          a.href = objectUrl;
+          a.download = `pilgrim-data-package4-${day}-${month}-${year}-${hours}:${minutes}.xlsx`;
+          a.click();
+          URL.revokeObjectURL(objectUrl);
+        }),
+        map((data) => data),
+        catchError((error) => {
+          this.logger.error('[upload res error] => ', error);
+          throw error;
+        })
+      );
+  }
   sendBatchReqeust({
     package_name,
     city,

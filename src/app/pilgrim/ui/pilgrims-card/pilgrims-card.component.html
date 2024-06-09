@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card lg:!flex !hidden">
   <div
     class="card-header"
     style="background: url('../../../../assets/images/{{
@@ -100,3 +100,143 @@
     <p>حاج - {{ data.package_name || "لا يوجد" }}</p>
   </div>
 </div>
+
+<section class="md:hidden flex justify-center items-center">
+  <div class="card-container">
+    <div class="w-full flex flex-col items-center">
+      <header
+        class="bg-red-400 flex items-center flex-col w-[90%]"
+        [ngClass]="{
+          'bg-[#7f3119]': data.package_name === 'باقة (1)',
+          'bg-[#d2ad78]': data.package_name === 'باقة (4)'
+        }"
+        #headline
+      >
+        <img
+          src="../../../../assets/images/allyaniy.svg"
+          class="w-4/5 h-auto"
+        />
+        <div
+          class="w-3/5 rounded-full bg-green-400 aspect-square"
+          #imageContainer
+          [style]="'height:' + imageCtr?.nativeElement?.offsetWidth + 'px'"
+        >
+          <img
+            [src]="
+              data.image
+                ? data.image
+                : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png'
+            "
+            class="w-full h-full rounded-full object-cover"
+            (click)="isEditMode ? openDialog() : ''"
+          />
+        </div>
+      </header>
+      <div
+        class="w-[90%] h-0 border-l-transparent border-r-transparent border-t-[78px] border-t-red-400"
+        [ngClass]="{
+          'border-t-[#7f3119]': data.package_name === 'باقة (1)',
+          'border-t-[#d2ad78]': data.package_name === 'باقة (4)'
+        }"
+        [style]="
+          'border-left-width: calc(' +
+          (h?.nativeElement?.offsetWidth || 100) / 2 +
+          'px );border-right-width: calc(' +
+          (h?.nativeElement?.offsetWidth || 100) / 2 +
+          'px );'
+        "
+      ></div>
+    </div>
+
+    <h1 class="text-neutral-600 text-center font-bold text-4xl pt-8 pb-4">
+      {{ data.name }}
+    </h1>
+    <div class="card-content">
+      <p>
+        <strong>رقم الهوية</strong>
+        <span id="national_id_1">{{ data.national_id }}</span>
+      </p>
+      <p>
+        <strong>رقم الحـــاج</strong>
+        <span id="pilgrim_number_1">{{ data.booking_reference }}</span>
+      </p>
+      <p>
+        <strong>البرنــامــــــج</strong>
+        <span id="program_1"
+          >{{ data.package_number }}
+          {{
+            data.distribution_identifier
+              ? "رمز الظرف (" + data.distribution_identifier + ")"
+              : ""
+          }}</span
+        >
+      </p>
+      @if (data.bus_accommodation) {
+      <p>
+        <strong>البــــــــــــاص</strong>
+        <span id="bus_1">
+          الرمز ({{ data.bus_accommodation.bus_code }})، اللوحة ({{
+            data.bus_accommodation.bus_plate
+          }})
+        </span>
+      </p>
+      } @if (data.bus_accommodation && data.bus_accommodation.start_location) {
+      <p>
+        <strong>نقطة التجمع</strong>
+        <span id="start_location_1">
+          {{ data.bus_accommodation.start_location.name }}
+        </span>
+      </p>
+      } @if (data.bus_accommodation &&
+      data.bus_accommodation.destination_location) {
+      <p>
+        <strong>نقطة الوصول</strong>
+        <span id="destination_location_1">
+          {{ data.bus_accommodation.destination_location.name }}
+        </span>
+      </p>
+      } @if (data.bus_accommodation && data.bus_accommodation.supervisor) {
+      <p>
+        <strong>المشــــرف</strong>
+        <span id="destination_location_1">
+          {{ data.bus_accommodation.supervisor.name }} -
+          {{ data.bus_accommodation.supervisor.phone_number }}
+        </span>
+      </p>
+      }
+
+      <p>
+        <strong>سكن منـى</strong>
+        @if (data.mina_tent_accommodation) {
+        <span id="mina_accommodation_1"
+          >جناح ({{ data.mina_tent_accommodation.info?.suite_number }}) صالة ({{
+            data.mina_tent_accommodation.info?.lounge_number
+          }}) سرير ({{ data.mina_tent_accommodation.info?.bed_number }})</span
+        >
+        } @else if (data.mina_building_accommodation) { }
+      </p>
+      <p>
+        <strong>سكن عرفة</strong>
+        @if (data.arafah_tent_accommodation) {
+        <span id="mina_accommodation_1"
+          >صالة ({{ data.arafah_tent_accommodation.info?.lounge_number }}) مقعد
+          ({{ data.arafah_tent_accommodation.info?.bed_number }})</span
+        >
+
+        }
+      </p>
+    </div>
+
+    <div
+      class="w-[90%] bg-red-400 text-center p-4 mx-auto"
+      [ngClass]="{
+        'bg-[#7f3119]': data.package_name === 'باقة (1)',
+        'bg-[#d2ad78]': data.package_name === 'باقة (4)'
+      }"
+    >
+      <p class="text-white text-3xl">
+        حاج - {{ data.package_name || "لا يوجد" }}
+      </p>
+    </div>
+  </div>
+</section>

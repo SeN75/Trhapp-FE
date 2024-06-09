@@ -17,9 +17,12 @@
   font-style: normal;
 }
 @page {
-  size: A4;
-  margin: 0;
+  @screen lg {
+    size: A4;
+    margin: 0;
+  }
 }
+
 body {
   font-family: "Montserrat", Arial !important;
   direction: rtl;
@@ -83,7 +86,12 @@ body {
 }
 .card-content {
   text-align: center;
-  width: 60%;
+  @screen lg {
+    width: 60%;
+  }
+  width: 80%;
+  margin: auto;
+  font-size: 10px;
 }
 
 .p_data {
@@ -91,13 +99,17 @@ body {
 }
 .card-content p {
   margin: 8px 0;
-  font-size: 26px;
   display: flex;
   text-align: right;
   justify-content: right;
   gap: 30px;
   color: #606161;
   font-weight: 400;
+  font-size: 1.4rem;
+
+  @screen md {
+    font-size: 1.8rem;
+  }
 }
 p.name {
   font-weight: 600;
@@ -135,3 +147,16 @@ p.name {
     // bottom: 0;
   }
 }
+
+// nav {
+//   @apply flex flex-col w-[80%] items-start px-4 py-8 gap-3;
+//   dl {
+//     @apply flex gap-2;
+//     dt {
+//       @apply text-2xl font-bold text-neutral-600;
+//     }
+//     dd {
+//       @apply text-neutral-500 text-2xl;
+//     }
+//   }
+// }

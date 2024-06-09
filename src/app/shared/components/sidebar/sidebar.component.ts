@@ -54,19 +54,9 @@ export class SidebarComponent {
       link: ['/', 'l', 'mina', 'pack1'],
     },
     {
-      text: 'تسكين منى باقة 4',
-      icon: 'tp-bed',
-      link: ['/', 'l', 'mina', 'pack4'],
-    },
-    {
       text: 'تسكين عرفة باقة 1',
       icon: 'tp-camping',
       link: ['/', 'l', 'arafah', 'package1'],
-    },
-    {
-      text: 'تسكين عرفة باقة 4',
-      icon: 'tp-camping',
-      link: ['/', 'l', 'arafah', 'package4'],
     },
     {
       text: 'توزيعات باقة 1',
@@ -74,20 +64,29 @@ export class SidebarComponent {
       link: ['/', 'l', 'distribute', 'package1'],
     },
     {
+      text: 'تسكين منى باقة 4',
+      icon: 'tp-bed',
+      link: ['/', 'l', 'mina', 'pack4'],
+    },
+    {
+      text: 'تسكين عرفة باقة 4',
+      icon: 'tp-camping',
+      link: ['/', 'l', 'arafah', 'package4'],
+    },
+    {
       text: 'توزيعات باقة 4',
       icon: 'tp-camping',
       link: ['/', 'l', 'distribute', 'package4'],
     },
     {
-      text: 'تسكين الباصات',
-      icon: 'tp-bus',
-      link: ['/', 'l', 'buses'],
-    },
-
-    {
       text: 'بطائق الحجاج',
       icon: 'tp-card',
       link: ['/', 'l', 'cards'],
+    },
+    {
+      text: 'تسكين الباصات',
+      icon: 'tp-bus',
+      link: ['/', 'l', 'buses'],
     },
   ];
 }

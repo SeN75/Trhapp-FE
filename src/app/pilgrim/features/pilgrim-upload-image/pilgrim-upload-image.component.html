@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>تحديث صورة الحاج</h2>
 <ng-container *ngIf="data$ | async as obs">
-  @if(obs.isLoading) {
+  @if(obs.isLoading || isLoaidng) {
   <ng-container>
     <div class="h-[200px] flex justify-center items-center">
       <span class="loading loading-dots loading-lg"></span>
@@ -8,14 +8,14 @@
   </ng-container>
   } @else{
   <mat-dialog-content>
-    @if (obs.status === 'success') {
+    @if (obs.status === 'success' || status === 'success') {
     <div class="flex gap-4 items-center">
       <mat-icon class="text-success !w-10 !h-10 !text-[40px] !leading-10"
         >check</mat-icon
       >
       <h3 class="py-4 text-lg font-semibold">تم تحديث صورة الحاج بنجاح</h3>
     </div>
-    } @else if (obs.status === 'error') {
+    } @else if (obs.status === 'error' || status === 'error') {
     <div class="flex gap-4 items-center">
       <mat-icon class="text-error !w-10 !h-10 !text-[40px] !leading-10"
         >warning</mat-icon
@@ -23,6 +23,9 @@
       <h3 class="py-4 text-lg font-semibold">فشل تحديث صورة الحاج</h3>
     </div>
     } @else{
+    <div class="flex justify-center items-center w-40 h-40" *ngIf="img">
+      <img [src]="img" class="w-full h-full object-cover" />
+    </div>
     <label class="form-control w-full max-w-xs">
       <div class="label">
         <span class="label-text">اختر ملف</span>
@@ -41,7 +44,7 @@
     }
   </mat-dialog-content>
   <mat-dialog-actions class="flex gap-1 !justify-end">
-    @if (obs.status === 'prompt') {
+    @if ( status === 'prompt') {
     <button
       class="btn btn-primary"
       (click)="onClick()"

@@ -13,6 +13,7 @@
   } @else {
 
   <tp-arafah-allocation-status [pack]="pack" />
+  {{ pack }}
   <div class="flex w-full justify-start gap-2" *ngIf="avaData$ | async as data">
     <div>
       <button class="btn btn-sm btn-primary" [routerLink]="['create']">

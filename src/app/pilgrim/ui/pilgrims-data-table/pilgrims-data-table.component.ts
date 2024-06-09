@@ -36,6 +36,7 @@ import { UploadOperationActions } from '@/shared/store/upload-operation/upload-o
 import { selectStatus } from '@/shared/store/upload-operation/upload-operation.reducer';
 import { selectIsLoading } from '@/pilgrim/data-access/store/pilgrim.reducer';
 import { PilgrimAction } from '@/pilgrim/data-access/store/pilgrim.action';
+import { UploadOpsService } from '@/shared/service/upload-operations.service';
 @Component({
   selector: 'tp-pilgrims-data-table',
   standalone: true,
@@ -49,14 +50,14 @@ export class PilgrimsDataTableComponent
 {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  private gPdf = inject(GeneratePdfService);
+  private uploadSrv = inject(UploadOpsService);
   private dialog = inject(MatDialog);
   private store = inject(Store<{ pilgrims: PilgrimState }>);
   private citiesStore = inject(Store<{ cities: CityState }>);
   private alloctionStore = inject(Store<{ allocation: AllocationState }>);
   private status$ = this.store.select(selectStatus);
   private readonly BATCH_SIZE = 100;
-
+  isLoadingExport = false;
   isLoading$ = this.store
     .select(selectIsLoading)
     .pipe(tap((v) => (this.loaded = v || false)));
@@ -158,28 +159,10 @@ export class PilgrimsDataTableComponent
   }
   ngOnInit(): void {}
   exportData() {
-    const cols = [
-      'name',
-      'booking_reference',
-      'phone_number',
-      'national_id',
-      'nationality',
-      'package_name',
-      'permit_status',
-    ];
-    const row = this.dataSource.data as unknown as { [k: string]: string }[];
-
-    const data = row.map((v) => {
-      return cols
-        .map((k) => {
-          return { [k]: v[k] };
-        })
-        .reduce((a, b) => ({ ...a, ...b }), {});
-    });
-    this.gPdf.generatePdf({
-      file_name: 'pilgrims-' + new Date().getTime(),
-      data,
-    });
+    this.isLoadingExport = true;
+    this.uploadSrv
+      .exportPack4()
+      .subscribe(() => (this.isLoadingExport = false));
   }
   openAllocation(pilgrim: Pilgrim, type: 'switch' | 'delete' | 'manual') {
     this.alloctionStore.dispatch(AllocationAction.reset());

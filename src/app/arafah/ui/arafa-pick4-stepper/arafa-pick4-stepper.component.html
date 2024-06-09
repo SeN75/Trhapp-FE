@@ -64,8 +64,8 @@
           <div class="flex gap-4 text-2xl font-bold text-black">
             <mat-icon
               [ngClass]="{
-                'text-pink-500': !selectedLounge?.is_male_accommodation,
-                'text-primary': selectedLounge?.is_male_accommodation
+                'text-pink-500': bed.info?.gender === 'females',
+                'text-primary': bed.info?.gender === 'males'
               }"
               >{{
                 selectedLounge?.is_male_accommodation ? "man" : "woman"

@@ -66,15 +66,19 @@ export class PilgrimService {
     );
   }
   uploadImage(id: string, file: File) {
+    console.log();
     const formData = new FormData();
     formData.append('image', file);
-    return this.http.put(`${this.pUrl}${id}/update_picture/`, formData).pipe(
-      tap((res) => this.logger.log('[uploadImage success]', res)),
-      catchError((error) => {
-        this.logger.error('[uploadImage error]', error);
-        throw error;
-      })
-    );
+    return this.http
+      .put<any>(`${this.pUrl}${id}/update_picture/`, formData)
+      .pipe(
+        map((res) => res),
+        tap((res) => this.logger.log('[uploadImage success]', res)),
+        catchError((error) => {
+          this.logger.error('[uploadImage error]', error);
+          throw error;
+        })
+      );
   }
 
   login({ national_id }: { national_id: string }) {

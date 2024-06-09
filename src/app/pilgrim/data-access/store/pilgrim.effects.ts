@@ -87,6 +87,7 @@ export const updateProfilePilgrimEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(PilgrimAction.updateImage),
+      tap((data) => logger.log('[updateProfilePilgrimEffects]', data)),
       switchMap(({ id, file }) => service.uploadImage(id, file)),
       map((Pilgrim) => PilgrimAction.success()),
       catchError((error) => {

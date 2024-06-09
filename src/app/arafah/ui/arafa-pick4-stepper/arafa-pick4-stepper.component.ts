@@ -37,7 +37,7 @@ export class ArafaPick4StepperComponent {
 
   lounges$ = this.store
     .select(selectLounges_building_arafah)
-    .pipe(tap((v) => (this.isEmpty = v !== null && v.length === 0)));
+    .pipe(tap((v) => (this.isEmpty = v === null || v.length === 0)));
   isLoading$ = this.store.select(selectIsLoading);
   loaded = false;
   isEmpty = false;

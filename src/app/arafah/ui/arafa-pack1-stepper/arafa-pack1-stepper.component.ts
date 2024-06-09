@@ -36,7 +36,7 @@ export class ArafaPack1StepperComponent {
 
   lounges$ = this.store
     .select(selectLounges_arafah)
-    .pipe(tap((v) => (this.isEmpty = v !== null && v.length === 0)));
+    .pipe(tap((v) => (this.isEmpty = v === null || v.length === 0)));
   isLoading$ = this.store.select(selectIsLoading);
   loaded = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
