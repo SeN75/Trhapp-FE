@@ -15,14 +15,17 @@ export const getBedTentArafahEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BedTentArafahAction.get),
-      switchMap(() => service.get()),
-      map((beds_tent_arafah) =>
-        BedTentArafahAction.getSuccess({ beds_tent_arafah })
-      ),
-      catchError((error) => {
-        logger.error('[getBedTentArafahEffects erorr]', error);
-        return of(BedTentArafahAction.error({ error }));
-      })
+      switchMap(() =>
+        service.get().pipe(
+          map((beds_tent_arafah) =>
+            BedTentArafahAction.getSuccess({ beds_tent_arafah })
+          ),
+          catchError((error) => {
+            logger.error('[getBedTentArafahEffects erorr]', error);
+            return of(BedTentArafahAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -34,12 +37,15 @@ export const createBedTentArafahEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BedTentArafahAction.create),
-      switchMap(({ bed_tent_arafah }) => service.create(bed_tent_arafah)),
-      map((bedTentArafah) => BedTentArafahAction.success()),
-      catchError((error) => {
-        logger.error('[createBedTentArafahEffects erorr]', error);
-        return of(BedTentArafahAction.error({ error }));
-      })
+      switchMap(({ bed_tent_arafah }) =>
+        service.create(bed_tent_arafah).pipe(
+          map((bedTentArafah) => BedTentArafahAction.success()),
+          catchError((error) => {
+            logger.error('[createBedTentArafahEffects erorr]', error);
+            return of(BedTentArafahAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -53,13 +59,14 @@ export const updateBedTentArafahEffects = createEffect(
     actions.pipe(
       ofType(BedTentArafahAction.update),
       switchMap(({ updateBedTentArafah }) =>
-        service.update(updateBedTentArafah)
-      ),
-      map((bedTentArafah) => BedTentArafahAction.success()),
-      catchError((error) => {
-        logger.error('[updateBedTentArafahEffects erorr]', error);
-        return of(BedTentArafahAction.error({ error }));
-      })
+        service.update(updateBedTentArafah).pipe(
+          map((bedTentArafah) => BedTentArafahAction.success()),
+          catchError((error) => {
+            logger.error('[updateBedTentArafahEffects erorr]', error);
+            return of(BedTentArafahAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -72,12 +79,15 @@ export const deleteBedTentArafahEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BedTentArafahAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((bedTentArafah) => BedTentArafahAction.success()),
-      catchError((error) => {
-        logger.error('[deleteBedTentArafahEffects erorr]', error);
-        return of(BedTentArafahAction.error({ error }));
-      })
+      switchMap(({ id }) =>
+        service.delete(id).pipe(
+          map((bedTentArafah) => BedTentArafahAction.success()),
+          catchError((error) => {
+            logger.error('[deleteBedTentArafahEffects erorr]', error);
+            return of(BedTentArafahAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

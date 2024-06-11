@@ -15,12 +15,15 @@ export const getlocationEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(LocationAction.get),
-      switchMap(() => service.get()),
-      map((locations) => LocationAction.getSuccess({ locations })),
-      catchError((error) => {
-        logger.error('[getlocationEffects erorr]', error);
-        return of(LocationAction.error({ error }));
-      })
+      switchMap(() =>
+        service.get().pipe(
+          map((locations) => LocationAction.getSuccess({ locations })),
+          catchError((error) => {
+            logger.error('[getlocationEffects erorr]', error);
+            return of(LocationAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -32,12 +35,15 @@ export const createlocationEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(LocationAction.create),
-      switchMap(({ location }) => service.create(location)),
-      map((location) => LocationAction.success()),
-      catchError((error) => {
-        logger.error('[createlocationEffects erorr]', error);
-        return of(LocationAction.error({ error }));
-      })
+      switchMap(({ location }) =>
+        service.create(location).pipe(
+          map((location) => LocationAction.success()),
+          catchError((error) => {
+            logger.error('[createlocationEffects erorr]', error);
+            return of(LocationAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -50,12 +56,15 @@ export const updatelocationEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(LocationAction.update),
-      switchMap(({ updateLocation }) => service.update(updateLocation)),
-      map((location) => LocationAction.success()),
-      catchError((error) => {
-        logger.error('[updatelocationEffects erorr]', error);
-        return of(LocationAction.error({ error }));
-      })
+      switchMap(({ updateLocation }) =>
+        service.update(updateLocation).pipe(
+          map((location) => LocationAction.success()),
+          catchError((error) => {
+            logger.error('[updatelocationEffects erorr]', error);
+            return of(LocationAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -68,12 +77,15 @@ export const deletelocationEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(LocationAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((location) => LocationAction.success()),
-      catchError((error) => {
-        logger.error('[deletelocationEffects erorr]', error);
-        return of(LocationAction.error({ error }));
-      })
+      switchMap(({ id }) =>
+        service.delete(id).pipe(
+          map((location) => LocationAction.success()),
+          catchError((error) => {
+            logger.error('[deletelocationEffects erorr]', error);
+            return of(LocationAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

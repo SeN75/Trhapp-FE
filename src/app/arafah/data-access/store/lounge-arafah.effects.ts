@@ -15,14 +15,17 @@ export const getloungeArafahEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(LoungeArafahAction.get),
-      switchMap(({ pack }) => combineLatest([service.get(pack), of(pack)])),
-      map(([lounges_arafah, pack]) =>
-        LoungeArafahAction.getSuccess({ lounges_arafah, pack })
-      ),
-      catchError((error) => {
-        logger.error('[getloungeArafahEffects erorr]', error);
-        return of(LoungeArafahAction.error({ error }));
-      })
+      switchMap(({ pack }) =>
+        combineLatest([service.get(pack), of(pack)]).pipe(
+          map(([lounges_arafah, pack]) =>
+            LoungeArafahAction.getSuccess({ lounges_arafah, pack })
+          ),
+          catchError((error) => {
+            logger.error('[getloungeArafahEffects erorr]', error);
+            return of(LoungeArafahAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -53,13 +56,14 @@ export const updateloungeArafahEffects = createEffect(
     actions.pipe(
       ofType(LoungeArafahAction.update),
       switchMap(({ updateLoungeArafah, pack }) =>
-        combineLatest([service.update(updateLoungeArafah), of(pack)])
-      ),
-      map(([data, pack]) => LoungeArafahAction.success({ pack })),
-      catchError((error) => {
-        logger.error('[updateloungeArafahEffects erorr]', error);
-        return of(LoungeArafahAction.error({ error }));
-      })
+        combineLatest([service.update(updateLoungeArafah), of(pack)]).pipe(
+          map(([data, pack]) => LoungeArafahAction.success({ pack })),
+          catchError((error) => {
+            logger.error('[updateloungeArafahEffects erorr]', error);
+            return of(LoungeArafahAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -73,13 +77,14 @@ export const deleteloungeArafahEffects = createEffect(
     actions.pipe(
       ofType(LoungeArafahAction.delete),
       switchMap(({ id, pack }) =>
-        combineLatest([service.delete(id), of(pack)])
-      ),
-      map(([data, pack]) => LoungeArafahAction.success({ pack })),
-      catchError((error) => {
-        logger.error('[deleteloungeArafahEffects erorr]', error);
-        return of(LoungeArafahAction.error({ error }));
-      })
+        combineLatest([service.delete(id), of(pack)]).pipe(
+          map(([data, pack]) => LoungeArafahAction.success({ pack })),
+          catchError((error) => {
+            logger.error('[deleteloungeArafahEffects erorr]', error);
+            return of(LoungeArafahAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

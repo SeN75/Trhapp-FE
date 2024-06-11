@@ -15,12 +15,17 @@ export const getBedTentMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BedTentMinaAction.get),
-      switchMap(() => service.get()),
-      map((beds_tent_mina) => BedTentMinaAction.getSuccess({ beds_tent_mina })),
-      catchError((error) => {
-        logger.error('[getBedTentMinaEffects erorr]', error);
-        return of(BedTentMinaAction.error({ error }));
-      })
+      switchMap(() =>
+        service.get().pipe(
+          map((beds_tent_mina) =>
+            BedTentMinaAction.getSuccess({ beds_tent_mina })
+          ),
+          catchError((error) => {
+            logger.error('[getBedTentMinaEffects erorr]', error);
+            return of(BedTentMinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -32,12 +37,15 @@ export const createBedTentMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BedTentMinaAction.create),
-      switchMap(({ bed_tent_mina }) => service.create(bed_tent_mina)),
-      map((bedTentMina) => BedTentMinaAction.success()),
-      catchError((error) => {
-        logger.error('[createBedTentMinaEffects erorr]', error);
-        return of(BedTentMinaAction.error({ error }));
-      })
+      switchMap(({ bed_tent_mina }) =>
+        service.create(bed_tent_mina).pipe(
+          map((bedTentMina) => BedTentMinaAction.success()),
+          catchError((error) => {
+            logger.error('[createBedTentMinaEffects erorr]', error);
+            return of(BedTentMinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -50,12 +58,15 @@ export const updateBedTentMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BedTentMinaAction.update),
-      switchMap(({ updateBedTentMina }) => service.update(updateBedTentMina)),
-      map((bedTentMina) => BedTentMinaAction.success()),
-      catchError((error) => {
-        logger.error('[updateBedTentMinaEffects erorr]', error);
-        return of(BedTentMinaAction.error({ error }));
-      })
+      switchMap(({ updateBedTentMina }) =>
+        service.update(updateBedTentMina).pipe(
+          map((bedTentMina) => BedTentMinaAction.success()),
+          catchError((error) => {
+            logger.error('[updateBedTentMinaEffects erorr]', error);
+            return of(BedTentMinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -68,12 +79,15 @@ export const deleteBedTentMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BedTentMinaAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((bedTentMina) => BedTentMinaAction.success()),
-      catchError((error) => {
-        logger.error('[deleteBedTentMinaEffects erorr]', error);
-        return of(BedTentMinaAction.error({ error }));
-      })
+      switchMap(({ id }) =>
+        service.delete(id).pipe(
+          map((bedTentMina) => BedTentMinaAction.success()),
+          catchError((error) => {
+            logger.error('[deleteBedTentMinaEffects erorr]', error);
+            return of(BedTentMinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

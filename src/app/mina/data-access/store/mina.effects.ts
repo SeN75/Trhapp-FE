@@ -42,13 +42,15 @@ export const createMinaEffects = createEffect(
       ofType(MinaAction.create),
       tap((data) => logger.log('[createMinaEffects]', data)),
       switchMap(({ payload, pack }) =>
-        service.create(payload, pack).pipe(map(() => pack))
-      ),
-      map((pack) => MinaAction.success({ pack })),
-      catchError((error) => {
-        logger.error('[createMinaEffects erorr]', error);
-        return of(MinaAction.error({ error }));
-      })
+        service.create(payload, pack).pipe(
+          map(() => pack),
+          map((pack) => MinaAction.success({ pack })),
+          catchError((error) => {
+            logger.error('[createMinaEffects erorr]', error);
+            return of(MinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -62,17 +64,21 @@ export const allocateMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(MinaAction.allocate),
-      switchMap(({ pack }) => service.allocate(pack).pipe(map(() => pack))),
-      map((pack) => MinaAction.success({ pack })),
-      tap(({ pack }) =>
-        toaster.success('تم تسكين منى باقة ' + pack + ' بنجاح')
-      ),
-      tap(({ pack }) => avaStore.dispatch(AvailabiltyActions.get())),
-      catchError((error) => {
-        toaster.error('خطأ في تسكين منى');
-        logger.error('[createMinaEffects erorr]', error);
-        return of(MinaAction.error({ error }));
-      })
+      switchMap(({ pack }) =>
+        service.allocate(pack).pipe(
+          map(() => pack),
+          map((pack) => MinaAction.success({ pack })),
+          tap(({ pack }) =>
+            toaster.success('تم تسكين منى باقة ' + pack + ' بنجاح')
+          ),
+          tap(({ pack }) => avaStore.dispatch(AvailabiltyActions.get())),
+          catchError((error) => {
+            toaster.error('خطأ في تسكين منى');
+            logger.error('[createMinaEffects erorr]', error);
+            return of(MinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

@@ -15,12 +15,15 @@ export const getloungeMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(LoungeMinaAction.get),
-      switchMap(() => service.get()),
-      map((lounges_mina) => LoungeMinaAction.getSuccess({ lounges_mina })),
-      catchError((error) => {
-        logger.error('[getloungeMinaEffects erorr]', error);
-        return of(LoungeMinaAction.error({ error }));
-      })
+      switchMap(() =>
+        service.get().pipe(
+          map((lounges_mina) => LoungeMinaAction.getSuccess({ lounges_mina })),
+          catchError((error) => {
+            logger.error('[getloungeMinaEffects erorr]', error);
+            return of(LoungeMinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -32,12 +35,15 @@ export const createloungeMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(LoungeMinaAction.create),
-      switchMap(({ lounge_mina }) => service.create(lounge_mina)),
-      map((loungeMina) => LoungeMinaAction.success()),
-      catchError((error) => {
-        logger.error('[createloungeMinaEffects erorr]', error);
-        return of(LoungeMinaAction.error({ error }));
-      })
+      switchMap(({ lounge_mina }) =>
+        service.create(lounge_mina).pipe(
+          map((loungeMina) => LoungeMinaAction.success()),
+          catchError((error) => {
+            logger.error('[createloungeMinaEffects erorr]', error);
+            return of(LoungeMinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -50,12 +56,15 @@ export const updateloungeMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(LoungeMinaAction.update),
-      switchMap(({ updateLoungeMina }) => service.update(updateLoungeMina)),
-      map((loungeMina) => LoungeMinaAction.success()),
-      catchError((error) => {
-        logger.error('[updateloungeMinaEffects erorr]', error);
-        return of(LoungeMinaAction.error({ error }));
-      })
+      switchMap(({ updateLoungeMina }) =>
+        service.update(updateLoungeMina).pipe(
+          map((loungeMina) => LoungeMinaAction.success()),
+          catchError((error) => {
+            logger.error('[updateloungeMinaEffects erorr]', error);
+            return of(LoungeMinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -68,12 +77,15 @@ export const deleteloungeMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(LoungeMinaAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((loungeMina) => LoungeMinaAction.success()),
-      catchError((error) => {
-        logger.error('[deleteloungeMinaEffects erorr]', error);
-        return of(LoungeMinaAction.error({ error }));
-      })
+      switchMap(({ id }) =>
+        service.delete(id).pipe(
+          map((loungeMina) => LoungeMinaAction.success()),
+          catchError((error) => {
+            logger.error('[deleteloungeMinaEffects erorr]', error);
+            return of(LoungeMinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

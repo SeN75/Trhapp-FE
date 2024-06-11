@@ -15,13 +15,16 @@ export const getBuildingEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BuildingAction.get),
-      switchMap(() => service.get()),
-      tap((res) => logger.log('[getBuildingEffects success]', res)),
-      map((buildings) => BuildingAction.getSuccess({ buildings })),
-      catchError((error) => {
-        logger.error('[getBuildingEffects erorr]', error);
-        return of(BuildingAction.error({ error }));
-      })
+      switchMap(() =>
+        service.get().pipe(
+          tap((res) => logger.log('[getBuildingEffects success]', res)),
+          map((buildings) => BuildingAction.getSuccess({ buildings })),
+          catchError((error) => {
+            logger.error('[getBuildingEffects erorr]', error);
+            return of(BuildingAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -33,12 +36,15 @@ export const createBuildingEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BuildingAction.create),
-      switchMap(({ building }) => service.create(building)),
-      map((Building) => BuildingAction.success()),
-      catchError((error) => {
-        logger.error('[createBuildingEffects erorr]', error);
-        return of(BuildingAction.error({ error }));
-      })
+      switchMap(({ building }) =>
+        service.create(building).pipe(
+          map((Building) => BuildingAction.success()),
+          catchError((error) => {
+            logger.error('[createBuildingEffects erorr]', error);
+            return of(BuildingAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -51,12 +57,15 @@ export const updateBuildingEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BuildingAction.update),
-      switchMap(({ updateBuilding }) => service.update(updateBuilding)),
-      map((Building) => BuildingAction.success()),
-      catchError((error) => {
-        logger.error('[updateBuildingEffects erorr]', error);
-        return of(BuildingAction.error({ error }));
-      })
+      switchMap(({ updateBuilding }) =>
+        service.update(updateBuilding).pipe(
+          map((Building) => BuildingAction.success()),
+          catchError((error) => {
+            logger.error('[updateBuildingEffects erorr]', error);
+            return of(BuildingAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -69,12 +78,15 @@ export const deleteBuildingEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BuildingAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((Building) => BuildingAction.success()),
-      catchError((error) => {
-        logger.error('[deleteBuildingEffects erorr]', error);
-        return of(BuildingAction.error({ error }));
-      })
+      switchMap(({ id }) =>
+        service.delete(id).pipe(
+          map((Building) => BuildingAction.success()),
+          catchError((error) => {
+            logger.error('[deleteBuildingEffects erorr]', error);
+            return of(BuildingAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

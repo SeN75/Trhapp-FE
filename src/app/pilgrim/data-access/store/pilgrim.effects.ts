@@ -15,14 +15,17 @@ export const getPilgrimEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(PilgrimAction.get),
-      switchMap(({ page = '' }) => service.get(page)),
+      switchMap(({ page = '' }) =>
+        service.get(page).pipe(
+          tap((pilgrims) => console.log(pilgrims)),
+          map((pilgrims) => PilgrimAction.getSuccess({ pilgrims })),
+          catchError((error) => {
+            logger.error('[getPilgrimEffects erorr]', error);
+            return of(PilgrimAction.error({ error }));
+          })
+        )
+      )
       // map((pilgrims) => pilgrims.sort((a, b) => +a.id - +b.id)),
-      tap((pilgrims) => console.log(pilgrims)),
-      map((pilgrims) => PilgrimAction.getSuccess({ pilgrims })),
-      catchError((error) => {
-        logger.error('[getPilgrimEffects erorr]', error);
-        return of(PilgrimAction.error({ error }));
-      })
     ),
   { functional: true }
 );
@@ -34,12 +37,15 @@ export const createPilgrimEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(PilgrimAction.create),
-      switchMap(({ pilgrim }) => service.create(pilgrim)),
-      map((Pilgrim) => PilgrimAction.success()),
-      catchError((error) => {
-        logger.error('[createPilgrimEffects erorr]', error);
-        return of(PilgrimAction.error({ error }));
-      })
+      switchMap(({ pilgrim }) =>
+        service.create(pilgrim).pipe(
+          map((Pilgrim) => PilgrimAction.success()),
+          catchError((error) => {
+            logger.error('[createPilgrimEffects erorr]', error);
+            return of(PilgrimAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -52,12 +58,15 @@ export const updatePilgrimEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(PilgrimAction.update),
-      switchMap(({ updatePilgrim }) => service.update(updatePilgrim)),
-      map((Pilgrim) => PilgrimAction.success()),
-      catchError((error) => {
-        logger.error('[updatePilgrimEffects erorr]', error);
-        return of(PilgrimAction.error({ error }));
-      })
+      switchMap(({ updatePilgrim }) =>
+        service.update(updatePilgrim).pipe(
+          map((Pilgrim) => PilgrimAction.success()),
+          catchError((error) => {
+            logger.error('[updatePilgrimEffects erorr]', error);
+            return of(PilgrimAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -70,12 +79,15 @@ export const deletePilgrimEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(PilgrimAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((Pilgrim) => PilgrimAction.success()),
-      catchError((error) => {
-        logger.error('[deletePilgrimEffects erorr]', error);
-        return of(PilgrimAction.error({ error }));
-      })
+      switchMap(({ id }) =>
+        service.delete(id).pipe(
+          map((Pilgrim) => PilgrimAction.success()),
+          catchError((error) => {
+            logger.error('[deletePilgrimEffects erorr]', error);
+            return of(PilgrimAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -88,12 +100,15 @@ export const updateProfilePilgrimEffects = createEffect(
     actions.pipe(
       ofType(PilgrimAction.updateImage),
       tap((data) => logger.log('[updateProfilePilgrimEffects]', data)),
-      switchMap(({ id, file }) => service.uploadImage(id, file)),
-      map((Pilgrim) => PilgrimAction.success()),
-      catchError((error) => {
-        logger.error('[updateProfilePilgrimEffects erorr]', error);
-        return of(PilgrimAction.error({ error }));
-      })
+      switchMap(({ id, file }) =>
+        service.uploadImage(id, file).pipe(
+          map((Pilgrim) => PilgrimAction.success()),
+          catchError((error) => {
+            logger.error('[updateProfilePilgrimEffects erorr]', error);
+            return of(PilgrimAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

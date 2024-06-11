@@ -16,17 +16,18 @@ export const readDistributionEffects = createEffect(
     actions.pipe(
       ofType(DistributionAction.read),
       switchMap(({ pack }) =>
-        combineLatest({ data: service.read(pack), pack })
-      ),
-      map(({ data, pack }) =>
-        pack.includes('1')
-          ? DistributionAction.readPack1Success({ pack1Read: data })
-          : DistributionAction.readPack4Success({ pack4Read: data })
-      ),
-      catchError((error) => {
-        logger.error('[readDistributionEffects erorr]', error);
-        return of(DistributionAction.error({ error }));
-      })
+        combineLatest({ data: service.read(pack), pack }).pipe(
+          map(({ data, pack }) =>
+            pack.includes('1')
+              ? DistributionAction.readPack1Success({ pack1Read: data })
+              : DistributionAction.readPack4Success({ pack4Read: data })
+          ),
+          catchError((error) => {
+            logger.error('[readDistributionEffects erorr]', error);
+            return of(DistributionAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -43,18 +44,19 @@ export const peekDistributionEffects = createEffect(
         combineLatest({
           data: service.peak({ num_employees, city }, pack),
           pack,
-        })
-      ),
-      tap((res) => console.log(res)),
-      map(({ data, pack }) =>
-        pack.includes('1')
-          ? DistributionAction.peekPack1Success({ pack1Peek: data })
-          : DistributionAction.peekPack4Success({ pack4Peek: data })
-      ),
-      catchError((error) => {
-        logger.error('[peakDistributionEffects erorr]', error);
-        return of(DistributionAction.error({ error }));
-      })
+        }).pipe(
+          tap((res) => console.log(res)),
+          map(({ data, pack }) =>
+            pack.includes('1')
+              ? DistributionAction.peekPack1Success({ pack1Peek: data })
+              : DistributionAction.peekPack4Success({ pack4Peek: data })
+          ),
+          catchError((error) => {
+            logger.error('[peakDistributionEffects erorr]', error);
+            return of(DistributionAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -70,16 +72,19 @@ export const updateDistributionEffects = createEffect(
         combineLatest({
           data: service.update({ num_employees, city }, pack),
           pack,
-        })
-      ),
-      tap((res) => console.log(res)),
-      map(({ data, pack }) =>
-        DistributionAction.success({ pack: pack as 'package1' | 'package4' })
-      ),
-      catchError((error) => {
-        logger.error('[updateDistributionEffects erorr]', error);
-        return of(DistributionAction.error({ error }));
-      })
+        }).pipe(
+          tap((res) => console.log(res)),
+          map(({ data, pack }) =>
+            DistributionAction.success({
+              pack: pack as 'package1' | 'package4',
+            })
+          ),
+          catchError((error) => {
+            logger.error('[updateDistributionEffects erorr]', error);
+            return of(DistributionAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

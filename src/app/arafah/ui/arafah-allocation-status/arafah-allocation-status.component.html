@@ -1,5 +1,4 @@
 <ng-container *ngIf="data$ | async as obs">
-  {{ pack }}
   <section class="">
     <div class="stats shadow bg-white w-full">
       <div class="stat">
@@ -20,12 +19,37 @@
           <div
             class="bg-blue-600 h-2.5 rounded-full"
             [style.width.%]="
-              (obs.arafah.males.beds.created / obs.arafah.males.total) * 100
+              (obs.arafah.males.beds.created / obs.arafah.males.total || 0) *
+              100
             "
           ></div>
         </div>
       </div>
 
+      <div class="stat">
+        <div class="stat-figure text-pink-600">
+          <mat-icon class="text-pink-600">woman</mat-icon>
+        </div>
+        <div class="stat-title">الاسرة</div>
+        <div class="stat-value text-black">
+          {{ obs.arafah.females.beds.created }}
+          <span class="text-xl text-gray-400">
+            / {{ obs.arafah.females.total }} عدد النساء
+          </span>
+        </div>
+        <div class="stat-desc"></div>
+        <div
+          class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5"
+        >
+          <div
+            class="bg-blue-600 h-2.5 rounded-full"
+            [style.width.%]="
+              (obs.arafah.females.beds.created / obs.arafah.females.total ||
+                0) * 100
+            "
+          ></div>
+        </div>
+      </div>
       <div class="stat">
         <div class="stat-figure text-primary">
           <mat-icon>man</mat-icon><mat-icon>home</mat-icon>
@@ -44,32 +68,7 @@
             class="bg-blue-600 h-2.5 rounded-full"
             [style.width.%]="
               (obs.arafah.males.beds.allocated /
-                obs.arafah.males.beds.created) *
-              100
-            "
-          ></div>
-        </div>
-      </div>
-
-      <div class="stat">
-        <div class="stat-figure text-primary">
-          <mat-icon class="text-pink-600">woman</mat-icon>
-        </div>
-        <div class="stat-title">الاسرة</div>
-        <div class="stat-value text-black">
-          {{ obs.arafah.females.beds.created }}
-          <span class="text-xl text-gray-400">
-            / {{ obs.arafah.females.total }} عدد النساء
-          </span>
-        </div>
-        <div class="stat-desc"></div>
-        <div
-          class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5"
-        >
-          <div
-            class="bg-blue-600 h-2.5 rounded-full"
-            [style.width.%]="
-              (obs.arafah.females.beds.created / obs.arafah.females.total) * 100
+                obs.arafah.males.beds.created || 0) * 100
             "
           ></div>
         </div>
@@ -91,7 +90,10 @@
         >
           <div
             class="bg-blue-600 h-2.5 rounded-full"
-            [style.width.%]="(obs.arafah.females.beds.allocated / 1000) * 100"
+            [style.width.%]="
+              (obs.arafah.females.beds.allocated / obs.arafah.females.total ||
+                0) * 100
+            "
           ></div>
         </div>
       </div>

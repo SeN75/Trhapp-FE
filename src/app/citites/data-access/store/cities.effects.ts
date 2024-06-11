@@ -15,12 +15,15 @@ export const getcityEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(CityAction.get),
-      switchMap(() => service.get()),
-      map((cities) => CityAction.getSuccess({ cities })),
-      catchError((error) => {
-        logger.error('[getcityEffects erorr]', error);
-        return of(CityAction.error({ error }));
-      })
+      switchMap(() =>
+        service.get().pipe(
+          map((cities) => CityAction.getSuccess({ cities })),
+          catchError((error) => {
+            logger.error('[getcityEffects erorr]', error);
+            return of(CityAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -32,12 +35,15 @@ export const createcityEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(CityAction.create),
-      switchMap(({ city }) => service.create(city)),
-      map((city) => CityAction.success()),
-      catchError((error) => {
-        logger.error('[createcityEffects erorr]', error);
-        return of(CityAction.error({ error }));
-      })
+      switchMap(({ city }) =>
+        service.create(city).pipe(
+          map((city) => CityAction.success()),
+          catchError((error) => {
+            logger.error('[createcityEffects erorr]', error);
+            return of(CityAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -50,12 +56,15 @@ export const updatecityEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(CityAction.update),
-      switchMap(({ updateCity }) => service.update(updateCity)),
-      map((city) => CityAction.success()),
-      catchError((error) => {
-        logger.error('[updatecityEffects erorr]', error);
-        return of(CityAction.error({ error }));
-      })
+      switchMap(({ updateCity }) =>
+        service.update(updateCity).pipe(
+          map((city) => CityAction.success()),
+          catchError((error) => {
+            logger.error('[updatecityEffects erorr]', error);
+            return of(CityAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -68,12 +77,15 @@ export const deletecityEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(CityAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((city) => CityAction.success()),
-      catchError((error) => {
-        logger.error('[deletecityEffects erorr]', error);
-        return of(CityAction.error({ error }));
-      })
+      switchMap(({ id }) =>
+        service.delete(id).pipe(
+          map((city) => CityAction.success()),
+          catchError((error) => {
+            logger.error('[deletecityEffects erorr]', error);
+            return of(CityAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

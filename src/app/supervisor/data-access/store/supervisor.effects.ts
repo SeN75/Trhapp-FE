@@ -15,12 +15,15 @@ export const getsupervisorEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(SupervisorAction.get),
-      switchMap(() => service.get()),
-      map((supervisors) => SupervisorAction.getSuccess({ supervisors })),
-      catchError((error) => {
-        logger.error('[getsupervisorEffects erorr]', error);
-        return of(SupervisorAction.error({ error }));
-      })
+      switchMap(() =>
+        service.get().pipe(
+          map((supervisors) => SupervisorAction.getSuccess({ supervisors })),
+          catchError((error) => {
+            logger.error('[getsupervisorEffects erorr]', error);
+            return of(SupervisorAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -32,12 +35,15 @@ export const createsupervisorEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(SupervisorAction.create),
-      switchMap(({ supervisor }) => service.create(supervisor)),
-      map((supervisor) => SupervisorAction.success()),
-      catchError((error) => {
-        logger.error('[createsupervisorEffects erorr]', error);
-        return of(SupervisorAction.error({ error }));
-      })
+      switchMap(({ supervisor }) =>
+        service.create(supervisor).pipe(
+          map((supervisor) => SupervisorAction.success()),
+          catchError((error) => {
+            logger.error('[createsupervisorEffects erorr]', error);
+            return of(SupervisorAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -50,12 +56,15 @@ export const updatesupervisorEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(SupervisorAction.update),
-      switchMap(({ updateSupervisor }) => service.update(updateSupervisor)),
-      map((supervisor) => SupervisorAction.success()),
-      catchError((error) => {
-        logger.error('[updatesupervisorEffects erorr]', error);
-        return of(SupervisorAction.error({ error }));
-      })
+      switchMap(({ updateSupervisor }) =>
+        service.update(updateSupervisor).pipe(
+          map((supervisor) => SupervisorAction.success()),
+          catchError((error) => {
+            logger.error('[updatesupervisorEffects erorr]', error);
+            return of(SupervisorAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -68,12 +77,15 @@ export const deletesupervisorEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(SupervisorAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((supervisor) => SupervisorAction.success()),
-      catchError((error) => {
-        logger.error('[deletesupervisorEffects erorr]', error);
-        return of(SupervisorAction.error({ error }));
-      })
+      switchMap(({ id }) =>
+        service.delete(id).pipe(
+          map((supervisor) => SupervisorAction.success()),
+          catchError((error) => {
+            logger.error('[deletesupervisorEffects erorr]', error);
+            return of(SupervisorAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

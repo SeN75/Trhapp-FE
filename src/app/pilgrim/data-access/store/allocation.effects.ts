@@ -15,12 +15,15 @@ export const deleteAllocationEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(AllocationAction.delete),
-      switchMap(({ _delete }) => service.delete(_delete)),
-      map(() => AllocationAction.success()),
-      catchError((error) => {
-        logger.error('[deleteAllocationEffects erorr]', error);
-        return of(AllocationAction.error({ error }));
-      })
+      switchMap(({ _delete }) =>
+        service.delete(_delete).pipe(
+          map(() => AllocationAction.success()),
+          catchError((error) => {
+            logger.error('[deleteAllocationEffects erorr]', error);
+            return of(AllocationAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -33,12 +36,15 @@ export const switchAllocationEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(AllocationAction.switch),
-      switchMap(({ _switch }) => service.switchAlocation(_switch)),
-      map(() => AllocationAction.success()),
-      catchError((error) => {
-        logger.error('[switchAllocationEffects erorr]', error);
-        return of(AllocationAction.error({ error }));
-      })
+      switchMap(({ _switch }) =>
+        service.switchAlocation(_switch).pipe(
+          map(() => AllocationAction.success()),
+          catchError((error) => {
+            logger.error('[switchAllocationEffects erorr]', error);
+            return of(AllocationAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -51,12 +57,15 @@ export const manualAllocationEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(AllocationAction.manual),
-      switchMap(({ _manual }) => service.manual(_manual)),
-      map(() => AllocationAction.success()),
-      catchError((error) => {
-        logger.error('[manualAllocationEffects erorr]', error);
-        return of(AllocationAction.error({ error }));
-      })
+      switchMap(({ _manual }) =>
+        service.manual(_manual).pipe(
+          map(() => AllocationAction.success()),
+          catchError((error) => {
+            logger.error('[manualAllocationEffects erorr]', error);
+            return of(AllocationAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

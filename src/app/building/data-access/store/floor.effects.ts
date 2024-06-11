@@ -15,12 +15,15 @@ export const getFloorEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(FloorAction.get),
-      switchMap(() => service.get()),
-      map((floors) => FloorAction.getSuccess({ floors })),
-      catchError((error) => {
-        logger.error('[getFloorEffects erorr]', error);
-        return of(FloorAction.error({ error }));
-      })
+      switchMap(() =>
+        service.get().pipe(
+          map((floors) => FloorAction.getSuccess({ floors })),
+          catchError((error) => {
+            logger.error('[getFloorEffects erorr]', error);
+            return of(FloorAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -32,12 +35,15 @@ export const createFloorEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(FloorAction.create),
-      switchMap(({ floor }) => service.create(floor)),
-      map((Floor) => FloorAction.success()),
-      catchError((error) => {
-        logger.error('[createFloorEffects erorr]', error);
-        return of(FloorAction.error({ error }));
-      })
+      switchMap(({ floor }) =>
+        service.create(floor).pipe(
+          map((Floor) => FloorAction.success()),
+          catchError((error) => {
+            logger.error('[createFloorEffects erorr]', error);
+            return of(FloorAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -50,12 +56,15 @@ export const updateFloorEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(FloorAction.update),
-      switchMap(({ updateFloor }) => service.update(updateFloor)),
-      map((Floor) => FloorAction.success()),
-      catchError((error) => {
-        logger.error('[updateFloorEffects erorr]', error);
-        return of(FloorAction.error({ error }));
-      })
+      switchMap(({ updateFloor }) =>
+        service.update(updateFloor).pipe(
+          map((Floor) => FloorAction.success()),
+          catchError((error) => {
+            logger.error('[updateFloorEffects erorr]', error);
+            return of(FloorAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -68,12 +77,15 @@ export const deleteFloorEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(FloorAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((Floor) => FloorAction.success()),
-      catchError((error) => {
-        logger.error('[deleteFloorEffects erorr]', error);
-        return of(FloorAction.error({ error }));
-      })
+      switchMap(({ id }) =>
+        service.delete(id).pipe(
+          map((Floor) => FloorAction.success()),
+          catchError((error) => {
+            logger.error('[deleteFloorEffects erorr]', error);
+            return of(FloorAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

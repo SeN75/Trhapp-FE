@@ -36,13 +36,14 @@ export const createArafahEffects = createEffect(
     actions.pipe(
       ofType(ArafahAction.create),
       switchMap(({ payload, pack }) =>
-        combineLatest([service.create(payload, pack), of(pack)])
-      ),
-      map(([data, pack]) => ArafahAction.success({ pack })),
-      catchError((error) => {
-        logger.error('[createArafahEffects erorr]', error);
-        return of(ArafahAction.error({ error }));
-      })
+        combineLatest([service.create(payload, pack), of(pack)]).pipe(
+          map(([data, pack]) => ArafahAction.success({ pack })),
+          catchError((error) => {
+            logger.error('[createArafahEffects erorr]', error);
+            return of(ArafahAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -55,13 +56,14 @@ export const allocateArafahEffects = createEffect(
     actions.pipe(
       ofType(ArafahAction.allocate),
       switchMap(({ pack }) =>
-        combineLatest([service.allocate(pack), of(pack)])
-      ),
-      map(([data, pack]) => ArafahAction.success({ pack })),
-      catchError((error) => {
-        logger.error('[createArafahEffects erorr]', error);
-        return of(ArafahAction.error({ error }));
-      })
+        combineLatest([service.allocate(pack), of(pack)]).pipe(
+          map(([data, pack]) => ArafahAction.success({ pack })),
+          catchError((error) => {
+            logger.error('[createArafahEffects erorr]', error);
+            return of(ArafahAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

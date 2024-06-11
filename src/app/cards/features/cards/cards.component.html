@@ -10,8 +10,17 @@
           <span class="loading loading-dots loading-lg"></span>
         </div>
       </ng-container>
-      } @else {
-
+      } @else { @if(status === 'error') {
+      <div class="flex gap-4 items-center">
+        <mat-icon class="text-error !w-10 !h-10 !text-[40px] !leading-10"
+          >warning</mat-icon
+        >
+        <h3 class="py-4 text-lg font-semibold">
+          {{ "خطأ في استخراج البطائق" }}
+        </h3>
+        <p>{{ errorMsg }}</p>
+      </div>
+      }
       <ng-container *ngTemplateOutlet="formTemp"></ng-container>
       <ng-container *ngTemplateOutlet="batchestemp"></ng-container>
       }

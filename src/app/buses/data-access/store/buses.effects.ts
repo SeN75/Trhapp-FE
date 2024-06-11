@@ -15,12 +15,15 @@ export const getBusesEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BusesAction.get),
-      switchMap(() => service.get()),
-      map((buses) => BusesAction.getSuccess({ buses })),
-      catchError((error) => {
-        logger.error('[getBusesEffects erorr]', error);
-        return of(BusesAction.error({ error }));
-      })
+      switchMap(() =>
+        service.get().pipe(
+          map((buses) => BusesAction.getSuccess({ buses })),
+          catchError((error) => {
+            logger.error('[getBusesEffects erorr]', error);
+            return of(BusesAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -32,12 +35,15 @@ export const createBusEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BusesAction.create),
-      switchMap(({ bus }) => service.create(bus)),
-      map((buses) => BusesAction.success()),
-      catchError((error) => {
-        logger.error('[createBusEffects erorr]', error);
-        return of(BusesAction.error({ error }));
-      })
+      switchMap(({ bus }) =>
+        service.create(bus).pipe(
+          map((buses) => BusesAction.success()),
+          catchError((error) => {
+            logger.error('[createBusEffects erorr]', error);
+            return of(BusesAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -50,12 +56,15 @@ export const updateBusEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BusesAction.update),
-      switchMap(({ updateBus }) => service.update(updateBus)),
-      map((buses) => BusesAction.success()),
-      catchError((error) => {
-        logger.error('[updateBusEffects erorr]', error);
-        return of(BusesAction.error({ error }));
-      })
+      switchMap(({ updateBus }) =>
+        service.update(updateBus).pipe(
+          map((buses) => BusesAction.success()),
+          catchError((error) => {
+            logger.error('[updateBusEffects erorr]', error);
+            return of(BusesAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -68,12 +77,15 @@ export const deleteBusEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BusesAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((buses) => BusesAction.success()),
-      catchError((error) => {
-        logger.error('[deleteBusEffects erorr]', error);
-        return of(BusesAction.error({ error }));
-      })
+      switchMap(({ id }) =>
+        service.delete(id).pipe(
+          map((buses) => BusesAction.success()),
+          catchError((error) => {
+            logger.error('[deleteBusEffects erorr]', error);
+            return of(BusesAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

@@ -8,8 +8,9 @@ import { CityState } from '@/citites/utils/types/cities.type';
 import { selectCities } from '@/citites/data-access/store/cities.reducer';
 import { UploadOperationsComponent } from '@/shared/components/upload-operations/upload-operations.component';
 import { UploadOpsService } from '@/shared/service/upload-operations.service';
-import { tap } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { BatchesRes } from '@/shared/types/upload-operations.type';
+import { TPState } from '@/shared/types/base.type';
 
 @Component({
   selector: 'app-cards',
@@ -27,7 +28,8 @@ export class CardsComponent {
   total_pilgrims: BatchesRes['total_pilgrims'] = 0;
   total_batches_not_complete = 0;
   isLoading = false;
-
+  status: TPState = 'sending';
+  errorMsg = '';
   form = new FormGroup({
     package_name: new FormControl(),
     city: new FormControl(),
@@ -38,6 +40,7 @@ export class CardsComponent {
   }
   send(batch: BatchesRes['batch_links'][0]) {
     this.isLoading = true;
+    this.status = 'sending';
     const { package_name, city } = this.form.value;
     this.service
       .sendBatchReqeust({
@@ -47,13 +50,22 @@ export class CardsComponent {
       })
       .pipe(
         tap((res) => {
+          this.status = 'success';
           this.isLoading = false;
+        }),
+        catchError((error) => {
+          this.status = 'error';
+          this.isLoading = false;
+          this.errorMsg = error;
+          return of(error);
         })
       )
       .subscribe();
   }
   action() {
     this.isLoading = true;
+    this.status = 'sending';
+    this.errorMsg = '';
     const { package_name, city } = this.form.value;
     this.service
       .cardBatches({ package_name, city: { name: city } })
@@ -65,9 +77,17 @@ export class CardsComponent {
           this.batches = batch_links;
           this.total_batches = total_batches;
           this.total_pilgrims = total_pilgrims;
+          this.isLoading = false;
+          this.status = 'success';
+        }),
+        catchError((error) => {
+          this.status = 'error';
+          this.isLoading = false;
+          console.log(error);
+          this.errorMsg = error.error.error;
+          return of(error);
         })
       )
-      .pipe(tap((res) => (this.isLoading = false)))
       .subscribe();
   }
 }

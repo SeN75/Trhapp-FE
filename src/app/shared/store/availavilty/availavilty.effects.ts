@@ -13,12 +13,15 @@ export const availabiltyEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(AvailabiltyActions.get),
-      switchMap(({}) => service.get()),
-      map((data) => AvailabiltyActions.success({ data })),
-      catchError((error) => {
-        logger.error('[availabiltyEffects erorr]', error);
-        return of(AvailabiltyActions.error({ error }));
-      })
+      switchMap(({}) =>
+        service.get().pipe(
+          map((data) => AvailabiltyActions.success({ data })),
+          catchError((error) => {
+            logger.error('[availabiltyEffects erorr]', error);
+            return of(AvailabiltyActions.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

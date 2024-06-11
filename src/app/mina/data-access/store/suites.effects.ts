@@ -15,12 +15,15 @@ export const getSuiteEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(SuitesAction.get),
-      switchMap(() => service.get()),
-      map((suites) => SuitesAction.getSuccess({ suites })),
-      catchError((error) => {
-        logger.error('[getSuiteEffects erorr]', error);
-        return of(SuitesAction.error({ error }));
-      })
+      switchMap(() =>
+        service.get().pipe(
+          map((suites) => SuitesAction.getSuccess({ suites })),
+          catchError((error) => {
+            logger.error('[getSuiteEffects erorr]', error);
+            return of(SuitesAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -32,12 +35,15 @@ export const createSuiteEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(SuitesAction.create),
-      switchMap(({ suite }) => service.create(suite)),
-      map((suite) => SuitesAction.success()),
-      catchError((error) => {
-        logger.error('[createSuiteEffects erorr]', error);
-        return of(SuitesAction.error({ error }));
-      })
+      switchMap(({ suite }) =>
+        service.create(suite).pipe(
+          map((suite) => SuitesAction.success()),
+          catchError((error) => {
+            logger.error('[createSuiteEffects erorr]', error);
+            return of(SuitesAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -50,12 +56,15 @@ export const updateSuiteEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(SuitesAction.update),
-      switchMap(({ updateSuites }) => service.update(updateSuites)),
-      map((suite) => SuitesAction.success()),
-      catchError((error) => {
-        logger.error('[updateSuiteEffects erorr]', error);
-        return of(SuitesAction.error({ error }));
-      })
+      switchMap(({ updateSuites }) =>
+        service.update(updateSuites).pipe(
+          map((suite) => SuitesAction.success()),
+          catchError((error) => {
+            logger.error('[updateSuiteEffects erorr]', error);
+            return of(SuitesAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -68,12 +77,15 @@ export const deleteSuiteEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(SuitesAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((suite) => SuitesAction.success()),
-      catchError((error) => {
-        logger.error('[deleteSuiteEffects erorr]', error);
-        return of(SuitesAction.error({ error }));
-      })
+      switchMap(({ id }) =>
+        service.delete(id).pipe(
+          map((suite) => SuitesAction.success()),
+          catchError((error) => {
+            logger.error('[deleteSuiteEffects erorr]', error);
+            return of(SuitesAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

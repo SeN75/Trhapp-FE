@@ -15,14 +15,17 @@ export const getBedBuildingMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BedBulidingMinaAction.get),
-      switchMap(() => service.get()),
-      map((beds_building_mina) =>
-        BedBulidingMinaAction.getSuccess({ beds_building_mina })
-      ),
-      catchError((error) => {
-        logger.error('[getBedBuildingMinaEffects erorr]', error);
-        return of(BedBulidingMinaAction.error({ error }));
-      })
+      switchMap(() =>
+        service.get().pipe(
+          map((beds_building_mina) =>
+            BedBulidingMinaAction.getSuccess({ beds_building_mina })
+          ),
+          catchError((error) => {
+            logger.error('[getBedBuildingMinaEffects erorr]', error);
+            return of(BedBulidingMinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -34,12 +37,15 @@ export const createBedBuildingMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BedBulidingMinaAction.create),
-      switchMap(({ bed_building_mina }) => service.create(bed_building_mina)),
-      map((bedBuildingMina) => BedBulidingMinaAction.success()),
-      catchError((error) => {
-        logger.error('[createBedBuildingMinaEffects erorr]', error);
-        return of(BedBulidingMinaAction.error({ error }));
-      })
+      switchMap(({ bed_building_mina }) =>
+        service.create(bed_building_mina).pipe(
+          map((bedBuildingMina) => BedBulidingMinaAction.success()),
+          catchError((error) => {
+            logger.error('[createBedBuildingMinaEffects erorr]', error);
+            return of(BedBulidingMinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -53,13 +59,14 @@ export const updateBedBuildingMinaEffects = createEffect(
     actions.pipe(
       ofType(BedBulidingMinaAction.update),
       switchMap(({ updateBedBulidingMina }) =>
-        service.update(updateBedBulidingMina)
-      ),
-      map((bedBuildingMina) => BedBulidingMinaAction.success()),
-      catchError((error) => {
-        logger.error('[updateBedBuildingMinaEffects erorr]', error);
-        return of(BedBulidingMinaAction.error({ error }));
-      })
+        service.update(updateBedBulidingMina).pipe(
+          map((bedBuildingMina) => BedBulidingMinaAction.success()),
+          catchError((error) => {
+            logger.error('[updateBedBuildingMinaEffects erorr]', error);
+            return of(BedBulidingMinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -72,12 +79,15 @@ export const deleteBedBuildingMinaEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(BedBulidingMinaAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((bedBuildingMina) => BedBulidingMinaAction.success()),
-      catchError((error) => {
-        logger.error('[deleteBedBuildingMinaEffects erorr]', error);
-        return of(BedBulidingMinaAction.error({ error }));
-      })
+      switchMap(({ id }) =>
+        service.delete(id).pipe(
+          map((bedBuildingMina) => BedBulidingMinaAction.success()),
+          catchError((error) => {
+            logger.error('[deleteBedBuildingMinaEffects erorr]', error);
+            return of(BedBulidingMinaAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

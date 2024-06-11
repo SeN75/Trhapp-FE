@@ -201,8 +201,7 @@ export class PilgrimsDataTableComponent
       .pipe(
         switchMap(() => this.status$),
         tap((status) => {
-          if (status === 'success')
-            this.store.dispatch(UploadOperationActions.reset());
+          this.store.dispatch(UploadOperationActions.reset());
         }),
         first()
       )

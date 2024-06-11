@@ -15,12 +15,15 @@ export const getRoomEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(RoomAction.get),
-      switchMap(() => service.get()),
-      map((rooms) => RoomAction.getSuccess({ rooms })),
-      catchError((error) => {
-        logger.error('[getRoomEffects erorr]', error);
-        return of(RoomAction.error({ error }));
-      })
+      switchMap(() =>
+        service.get().pipe(
+          map((rooms) => RoomAction.getSuccess({ rooms })),
+          catchError((error) => {
+            logger.error('[getRoomEffects erorr]', error);
+            return of(RoomAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -32,12 +35,15 @@ export const createRoomEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(RoomAction.create),
-      switchMap(({ room }) => service.create(room)),
-      map((Room) => RoomAction.success()),
-      catchError((error) => {
-        logger.error('[createRoomEffects erorr]', error);
-        return of(RoomAction.error({ error }));
-      })
+      switchMap(({ room }) =>
+        service.create(room).pipe(
+          map((Room) => RoomAction.success()),
+          catchError((error) => {
+            logger.error('[createRoomEffects erorr]', error);
+            return of(RoomAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -50,12 +56,15 @@ export const updateRoomEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(RoomAction.update),
-      switchMap(({ updateRoom }) => service.update(updateRoom)),
-      map((Room) => RoomAction.success()),
-      catchError((error) => {
-        logger.error('[updateRoomEffects erorr]', error);
-        return of(RoomAction.error({ error }));
-      })
+      switchMap(({ updateRoom }) =>
+        service.update(updateRoom).pipe(
+          map((Room) => RoomAction.success()),
+          catchError((error) => {
+            logger.error('[updateRoomEffects erorr]', error);
+            return of(RoomAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );
@@ -68,12 +77,15 @@ export const deleteRoomEffects = createEffect(
   ) =>
     actions.pipe(
       ofType(RoomAction.delete),
-      switchMap(({ id }) => service.delete(id)),
-      map((Room) => RoomAction.success()),
-      catchError((error) => {
-        logger.error('[deleteRoomEffects erorr]', error);
-        return of(RoomAction.error({ error }));
-      })
+      switchMap(({ id }) =>
+        service.delete(id).pipe(
+          map((Room) => RoomAction.success()),
+          catchError((error) => {
+            logger.error('[deleteRoomEffects erorr]', error);
+            return of(RoomAction.error({ error }));
+          })
+        )
+      )
     ),
   { functional: true }
 );

@@ -87,7 +87,7 @@ export class MinaCreateBuildingComponent implements OnInit {
     return this.form.controls;
   }
   ngOnInit(): void {
-    this.avaStore.dispatch(AvailabiltyActions.reset());
+    this.store.dispatch(MinaAction.reset());
     this.form.controls.no_of_floors.valueChanges.pipe().subscribe((v) => {
       if (v) {
         this.form.setControl('floors', new FormArray<FormGroup>([]));
