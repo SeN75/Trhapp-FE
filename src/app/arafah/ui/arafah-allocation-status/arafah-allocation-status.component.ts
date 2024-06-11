@@ -19,4 +19,7 @@ export class ArafahAllocationStatusComponent {
   @Input() pack: 'package1' | 'package4' = 'package1';
 
   data$ = this.store.select(selectData).pipe(map((data) => data?.[this.pack]));
+  max(value: number) {
+    return Math.min(value, 100);
+  }
 }

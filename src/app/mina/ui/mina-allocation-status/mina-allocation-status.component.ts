@@ -27,4 +27,7 @@ export class MinaAllocationStatusComponent implements OnInit {
       })
     );
   }
+  max(value: number) {
+    return Math.min(value, 100);
+  }
 }

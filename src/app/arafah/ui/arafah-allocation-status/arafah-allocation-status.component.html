@@ -19,8 +19,10 @@
           <div
             class="bg-blue-600 h-2.5 rounded-full"
             [style.width.%]="
-              (obs.arafah.males.beds.created / obs.arafah.males.total || 0) *
-              100
+              max(
+                (obs.arafah.males.beds.created / obs.arafah.males.total || 0) *
+                  100
+              )
             "
           ></div>
         </div>
@@ -44,8 +46,10 @@
           <div
             class="bg-blue-600 h-2.5 rounded-full"
             [style.width.%]="
-              (obs.arafah.females.beds.created / obs.arafah.females.total ||
-                0) * 100
+              max(
+                (obs.arafah.females.beds.created / obs.arafah.females.total ||
+                  0) * 100
+              )
             "
           ></div>
         </div>
@@ -67,8 +71,10 @@
           <div
             class="bg-blue-600 h-2.5 rounded-full"
             [style.width.%]="
-              (obs.arafah.males.beds.allocated /
-                obs.arafah.males.beds.created || 0) * 100
+              max(
+                (obs.arafah.males.beds.allocated / obs.arafah.males.total ||
+                  0) * 100
+              )
             "
           ></div>
         </div>
@@ -91,8 +97,10 @@
           <div
             class="bg-blue-600 h-2.5 rounded-full"
             [style.width.%]="
-              (obs.arafah.females.beds.allocated / obs.arafah.females.total ||
-                0) * 100
+              max(
+                (obs.arafah.females.beds.allocated / obs.arafah.females.total ||
+                  0) * 100
+              )
             "
           ></div>
         </div>

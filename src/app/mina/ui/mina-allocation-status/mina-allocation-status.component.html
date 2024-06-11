@@ -19,35 +19,11 @@
           <div
             class="bg-primary h-2.5 rounded-full"
             [style.width.%]="
-              (obs.mina.males.beds.created / obs.mina.males.total) * 100
+              max((obs.mina.males.beds.created / obs.mina.males.total) * 100)
             "
           ></div>
         </div>
       </div>
-
-      <div class="stat">
-        <div class="stat-figure text-primary">
-          <mat-icon>man</mat-icon><mat-icon>home</mat-icon>
-        </div>
-        <div class="stat-title">التسكين</div>
-        <div class="stat-value text-black">
-          {{ obs.mina.males.beds.allocated }}
-          <span class="text-xl text-gray-400">
-            / {{ obs.mina.males.total }} عدد الرجال
-          </span>
-        </div>
-        <div
-          class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5"
-        >
-          <div
-            class="bg-primary h-2.5 rounded-full"
-            [style.width.%]="
-              (obs.mina.males.beds.allocated / obs.mina.males.total) * 100
-            "
-          ></div>
-        </div>
-      </div>
-
       <div class="stat">
         <div class="stat-figure text-primary">
           <mat-icon class="text-pink-600">woman</mat-icon>
@@ -66,7 +42,31 @@
           <div
             class="bg-primary h-2.5 rounded-full"
             [style.width.%]="
-              (obs.mina.females.beds.created / obs.mina.females.total) * 100
+              max(
+                (obs.mina.females.beds.created / obs.mina.females.total) * 100
+              )
+            "
+          ></div>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="stat-figure text-primary">
+          <mat-icon>man</mat-icon><mat-icon>home</mat-icon>
+        </div>
+        <div class="stat-title">التسكين</div>
+        <div class="stat-value text-black">
+          {{ obs.mina.males.beds.allocated }}
+          <span class="text-xl text-gray-400">
+            / {{ obs.mina.males.total }} عدد الرجال
+          </span>
+        </div>
+        <div
+          class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mt-5"
+        >
+          <div
+            class="bg-primary h-2.5 rounded-full"
+            [style.width.%]="
+              max((obs.mina.males.beds.allocated / obs.mina.males.total) * 100)
             "
           ></div>
         </div>
@@ -89,7 +89,9 @@
           <div
             class="bg-primary h-2.5 rounded-full"
             [style.width.%]="
-              (obs.mina.females.beds.allocated / obs.mina.females.total) * 100
+              max(
+                (obs.mina.females.beds.allocated / obs.mina.females.total) * 100
+              )
             "
           ></div>
         </div>
